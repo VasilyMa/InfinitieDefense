@@ -17,9 +17,8 @@ namespace Client {
             _systems = new EcsSystems (_world);
             _systems
                 .Add(new PlayerInitSystem())
-                .Add(new TestGuiInitSystem())
                 .Add(new UserInputSystem())
-                .Add(new TestGuiRunSystem())
+                //.Add(new UserInputSystem())
                 // register your systems here, for example:
                 // .Add (new TestSystem1 ())
                 // .Add (new TestSystem2 ())
@@ -33,8 +32,9 @@ namespace Client {
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(Idents.Worlds.Events))
 #endif
-                .InjectUgui(_uguiEmitter, Idents.Worlds.Events)
+                
                 .Inject()
+                .InjectUgui(_uguiEmitter, Idents.Worlds.Events)
                 .Init ();
         }
 

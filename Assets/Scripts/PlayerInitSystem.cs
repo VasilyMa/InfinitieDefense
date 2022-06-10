@@ -7,8 +7,10 @@ namespace Client {
         readonly EcsPoolInject<Player> _playerPool = default;
         public void Init (EcsSystems systems) 
         {
+            var world = systems.GetWorld ();
             var playerEntity = _playerPool.Value.GetWorld().NewEntity();
-            ref var player = ref _playerPool.Value.Add(playerEntity);
+            ref var player = ref world.GetPool<Player>().Add (playerEntity);
+
 
             var PlayerPrefab = Resources.Load("Player");
             var PlayerGo = (GameObject)Object.Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);

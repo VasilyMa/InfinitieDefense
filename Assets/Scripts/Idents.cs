@@ -18,6 +18,7 @@ namespace Client
 
         public static class Ui
         {
+            public const string Forward = "Forward";
             public const string TouchListener = "TouchListener";
         }
     }
