@@ -10,28 +10,33 @@ namespace Client {
 
         [Preserve]
         [EcsUguiDragStartEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
-        void OnDownTouchListner(in EcsUguiDragStartEvent e)
+        void OnDownTouchListner(in EcsUguiDragStartEvent evt)
         {
-            Debug.Log("Down");
+            Debug.Log("Down", evt.Sender);
         }
         [Preserve]
         [EcsUguiDownEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
-        void OnDownListner(in EcsUguiDownEvent e)
+        void OnDownListner(in EcsUguiDownEvent evt)
         {
-            Debug.Log("Input");
+            Debug.Log("Input", evt.Sender);
         }
-
+        [Preserve]
         [EcsUguiDragMoveEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
-        void OnDragTouchListner(in EcsUguiDragMoveEvent e)
+        void OnDragTouchListner(in EcsUguiDragMoveEvent evt)
         {
-            Debug.Log("Drag");
+            Debug.Log("Drag", evt.Sender);
         }
-
         [Preserve]
         [EcsUguiDragEndEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
-        void OnUpTouchListner(in EcsUguiDragEndEvent e)
+        void OnUpTouchListner(in EcsUguiDragEndEvent evt)
         {
-            Debug.Log("Up");
+            Debug.Log("Up", evt.Sender);
+        }
+        [Preserve] 
+        [EcsUguiClickEvent("AnyButton")]
+        void OnAnyClick(in EcsUguiClickEvent evt)
+        {
+            Debug.Log("Im clicked!", evt.Sender);
         }
     }
 }

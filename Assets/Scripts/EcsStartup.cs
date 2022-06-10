@@ -17,7 +17,9 @@ namespace Client {
             _systems = new EcsSystems (_world);
             _systems
                 .Add(new PlayerInitSystem())
+                .Add(new TestGuiInitSystem())
                 .Add(new UserInputSystem())
+                .Add(new TestGuiRunSystem())
                 // register your systems here, for example:
                 // .Add (new TestSystem1 ())
                 // .Add (new TestSystem2 ())
