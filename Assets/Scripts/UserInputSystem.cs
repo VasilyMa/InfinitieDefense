@@ -6,8 +6,6 @@ using UnityEngine.Scripting;
 namespace Client {
     sealed class UserInputSystem : EcsUguiCallbackSystem
     {
-        //readonly EcsFilterInject<Inc<EcsUguiClickEvent>> _filter = default;
-        
         [Preserve]
         [EcsUguiClickEvent(Idents.Ui.Forward, Idents.Worlds.Events)]
         void OnClickForward(in EcsUguiClickEvent evt)
