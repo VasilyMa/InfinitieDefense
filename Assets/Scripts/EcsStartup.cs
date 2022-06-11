@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Leopotam.EcsLite.Unity.Ugui;
 using Leopotam.EcsLite.ExtendedSystems;
 using Leopotam.EcsLite.Unity;
 using Leopotam.EcsLite.UnityEditor;
@@ -9,6 +10,7 @@ namespace Client
 {
     sealed class EcsStartup : MonoBehaviour
     {
+        [SerializeField] EcsUguiEmitter _uguiEmitter;
         EcsSystems _systems;
         EcsWorld _world = null;
         GameState _gameState = null;
@@ -19,15 +21,21 @@ namespace Client
             _gameState = new GameState(_world);
             _systems = new EcsSystems (_world, _gameState);
             _systems
-                .Add (new InitEnemyUnits())
-                .Add (new InitMainTower())
-                .Add (new EnemyTargetingSystem())
-                .Add (new EnemyMovingSystem())
+                //.Add(new PlayerInitSystem())
+                //.Add(new UserInputSystem())
+                .Add(new InitEnemyUnits())
+                .Add(new InitMainTower())
+                .Add(new EnemyTargetingSystem())
+                .Add(new EnemyMovingSystem())
+
+                //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
 
 #if UNITY_EDITOR
-                .Add (new EcsWorldDebugSystem())
+                .Add(new EcsWorldDebugSystem())
+                //.Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
 #endif
                 .Inject()
+                //.InjectUgui(_uguiEmitter, Idents.Worlds.Events)
                 .Init();
         }
 
