@@ -6,27 +6,23 @@ namespace Client
 {
     sealed class InitMainTower : IEcsInitSystem
     {
-        readonly EcsSharedInject<GameState> _gameState;
-
-        string MainTower;
+        readonly EcsSharedInject<GameState> _state;
+        readonly EcsWorldInject _world = default;
+        readonly EcsPoolInject<MainTowerTag> _towerPool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
 
         public void Init (EcsSystems systems)
         {
-            var allMainTowers = GameObject.FindGameObjectsWithTag(nameof(MainTower));
+            var mainTowerEntity = _world.Value.NewEntity();
+            _state.Value.EntityMainTower = mainTowerEntity;
 
-            var world = systems.GetWorld();
+            _towerPool.Value.Add(mainTowerEntity);
 
-            foreach (var mainTower in allMainTowers)
-            {
-                var mainTowerEntity = world.NewEntity();
+            var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID("1tower"), new Vector3(0,10,0), Quaternion.identity);
 
-                _gameState.Value.EntityMainTower = mainTowerEntity;
-
-                world.GetPool<MainTowerTag>().Add(mainTowerEntity);
-
-                ref var viewComponent = ref world.GetPool<ViewComponent>().Add(mainTowerEntity);
-                viewComponent.GameObject = mainTower;
-            }
+            ref var viewComponent = ref _viewPool.Value.Add(mainTowerEntity);
+            viewComponent.GameObject = mainTower;
+            
         }
     }
 }

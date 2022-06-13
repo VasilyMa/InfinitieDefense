@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b64ba7e6d299d340b8011f70869ad60, type: 3}
   m_Name: TowerStorage
   m_EditorClassIdentifier: 
-  TowerPrefabs: []
+  TowerPrefabs:
+  - {fileID: 5331402050602310978, guid: c6b670c4d48725640a3f65048d5702fd, type: 3}
+  - {fileID: 5331402050602310978, guid: c6b670c4d48725640a3f65048d5702fd, type: 3}
