@@ -2,6 +2,6 @@ namespace Client
 {
     struct MainTowerTag
     {
-        
+      
     }
 }
