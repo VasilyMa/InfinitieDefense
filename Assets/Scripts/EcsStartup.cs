@@ -24,8 +24,8 @@ namespace Client
             _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _playerStorage);
             _systems = new EcsSystems (_world, _gameState);
             _systems
-                //.Add(new PlayerInitSystem())
-                //.Add(new UserInputSystem())
+                .Add(new PlayerInitSystem())
+                .Add(new InitInterfaceSystem())
                 .Add(new InitEnemyUnits())
                 .Add(new InitMainTower())
                 .Add(new RadiusInitSystem())
@@ -33,13 +33,16 @@ namespace Client
                 .Add(new EnemyMovingSystem())
                 .Add(new StoneMiningSystem())
                 //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
+                .Add(new UserInputSystem())
+
+                .AddWorld(new EcsWorld(), Idents.Worlds.Events)
 
 #if UNITY_EDITOR
                 .Add(new EcsWorldDebugSystem())
-                //.Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
+                .Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
 #endif
                 .Inject()
-                //.InjectUgui(_uguiEmitter, Idents.Worlds.Events)
+                .InjectUgui(_uguiEmitter, Idents.Worlds.Events)
                 .Init();
             _systems
                 .DelHere<StoneMiningEvent>()
