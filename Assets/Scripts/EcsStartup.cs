@@ -31,7 +31,7 @@ namespace Client
                 .Add(new RadiusInitSystem())
                 .Add(new EnemyTargetingSystem())
                 .Add(new EnemyMovingSystem())
-
+                .Add(new StoneMiningSystem())
                 //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
 
 #if UNITY_EDITOR
@@ -41,6 +41,9 @@ namespace Client
                 .Inject()
                 //.InjectUgui(_uguiEmitter, Idents.Worlds.Events)
                 .Init();
+            _systems
+                .DelHere<StoneMiningEvent>()
+            ;
         }
 
         void Update()

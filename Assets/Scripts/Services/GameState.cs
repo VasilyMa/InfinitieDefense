@@ -15,6 +15,8 @@ namespace Client
         public InterfaceStorage InterfaceStorage;
         public PlayerStorage PlayerStorage;
         public string CurrentTowerID;
+        public int RockCount;
+        public int CoinCount;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, PlayerStorage playerStorage)
         {
