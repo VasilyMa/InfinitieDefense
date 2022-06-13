@@ -16,7 +16,9 @@ namespace Client {
             var PlayerGo = (GameObject)Object.Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
-            player.MoveSpeed = 3f;
+            player.controller = PlayerGo.GetComponent<CharacterController>();
+            player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
+            player.MoveSpeed = 10f;
             player.RotateSpeed = 10f;
         }
     }

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97d227b92a3378438f74b1221286f70, type: 3}
+  m_Name: InterfaceConfig
+  m_EditorClassIdentifier: 
+  Joystick: {fileID: 275834459840966097, guid: e5768d085671b9b4a95e0a0d6d189aa6, type: 3}
