@@ -11,6 +11,7 @@ namespace Client
     sealed class EcsStartup : MonoBehaviour
     {
         [SerializeField] EcsUguiEmitter _uguiEmitter;
+        [SerializeField] private TowerStorage _towerStorage;
         EcsSystems _systems;
         EcsWorld _world = null;
         GameState _gameState = null;
@@ -18,7 +19,7 @@ namespace Client
         void Start ()
         {
             _world = new EcsWorld();
-            _gameState = new GameState(_world);
+            _gameState = new GameState(_world, _towerStorage);
             _systems = new EcsSystems (_world, _gameState);
             _systems
                 //.Add(new PlayerInitSystem())

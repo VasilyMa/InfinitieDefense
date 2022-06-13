@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc15f1e15d514f44c817ff6de0186932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uguiEmitter: {fileID: 0}
+  _towerStorage: {fileID: 11400000, guid: 694551d89be9df4488524a5291bab776, type: 2}

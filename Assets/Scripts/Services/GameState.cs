@@ -11,10 +11,13 @@ namespace Client
     {
         public EcsWorld World;
         public int EntityMainTower;
+        public TowerStorage TowerStorage;
 
-        public GameState(EcsWorld world)
+        public GameState(EcsWorld world, TowerStorage towerStorage)
         {
             World = world;
+            TowerStorage = towerStorage;
+            TowerStorage.Init();
         }
     }
 }
