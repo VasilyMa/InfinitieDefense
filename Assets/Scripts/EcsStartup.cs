@@ -24,6 +24,7 @@ namespace Client
                 //.Add(new PlayerInitSystem())
                 //.Add(new UserInputSystem())
                 .Add(new InitEnemyUnits())
+                .Add(new InitEnemyShips())
                 .Add(new InitMainTower())
                 .Add(new EnemyTargetingSystem())
                 .Add(new LookingSystem())

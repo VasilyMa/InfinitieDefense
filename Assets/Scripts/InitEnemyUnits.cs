@@ -24,12 +24,18 @@ namespace Client
 
                 world.GetPool<Targetable>().Add(enemyEntity);
 
+                world.GetPool<InactiveTag>().Add(enemyEntity);
+
+
                 ref var movableComponent = ref world.GetPool<Movable>().Add(enemyEntity);
                 movableComponent.Speed = 5f;
 
                 ref var viewComponent = ref world.GetPool<ViewComponent>().Add(enemyEntity);
                 viewComponent.GameObject = enemy;
                 viewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
+
+                ref var encounterComponent = ref world.GetPool<ShipComponent>().Add(enemyEntity);
+                encounterComponent.Number = int.Parse(viewComponent.GameObject.transform.parent.name);
 
                 ref var fightingComponent = ref world.GetPool<FightingComponent>().Add(enemyEntity);
                 fightingComponent.Damage = 5f;
