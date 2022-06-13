@@ -13,13 +13,16 @@ namespace Client
         public int EntityMainTower;
         public TowerStorage TowerStorage;
         public InterfaceStorage InterfaceStorage;
+        public PlayerStorage PlayerStorage;
         public string CurrentTowerID;
 
-        public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage)
+        public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, PlayerStorage playerStorage)
         {
             World = world;
             TowerStorage = towerStorage;
             InterfaceStorage = interfaceStorage;
+            PlayerStorage = playerStorage;
+            PlayerStorage.Init();
             TowerStorage.Init();
         }
         public bool PointInMainTowerRadius(Vector3 position)

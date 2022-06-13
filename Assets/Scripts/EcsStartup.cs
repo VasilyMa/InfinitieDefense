@@ -13,6 +13,7 @@ namespace Client
         [SerializeField] EcsUguiEmitter _uguiEmitter;
         [SerializeField] private TowerStorage _towerStorage;
         [SerializeField] private InterfaceStorage _interfaceStorage;
+        [SerializeField] private PlayerStorage _playerStorage;
         EcsSystems _systems;
         EcsWorld _world = null;
         GameState _gameState = null;
@@ -20,7 +21,7 @@ namespace Client
         void Start ()
         {
             _world = new EcsWorld();
-            _gameState = new GameState(_world, _towerStorage, _interfaceStorage);
+            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _playerStorage);
             _systems = new EcsSystems (_world, _gameState);
             _systems
                 //.Add(new PlayerInitSystem())
