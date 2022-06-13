@@ -4,14 +4,14 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "PlayerStorage", menuName = "Configs/PlayerStorage", order = 0)]
 public class PlayerStorage : ScriptableObject
 {
-    public Dictionary<string, Player> Players;
+    public Dictionary<string, PlayerData> Players;
     public GameObject[] PlayerPrefabs;
 
     public void Init()
     {
-        Players = new Dictionary<string, Player>
+        Players = new Dictionary<string, PlayerData>
         {
-            ["1level"] = new Player
+            ["1level"] = new PlayerData
             {
                 LVL = 1,
                 Damage = 5,
@@ -19,7 +19,7 @@ public class PlayerStorage : ScriptableObject
                 Health = 100,
                 PlayerPrefab = PlayerPrefabs[0]
             },
-            ["2level"] = new Player
+            ["2level"] = new PlayerData
             {
                 LVL = 2,
                 Damage = 7,

@@ -32,8 +32,7 @@ namespace Client
                 .Add(new EnemyTargetingSystem())
                 .Add(new EnemyMovingSystem())
                 .Add(new StoneMiningSystem())
-                //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
-                .Add(new UserInputSystem())
+                //.Add(new UserInputSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
 
