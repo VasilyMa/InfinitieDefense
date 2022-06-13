@@ -13,6 +13,7 @@ namespace Client
         public int EntityMainTower;
         public TowerStorage TowerStorage;
         public InterfaceStorage InterfaceStorage;
+        public string CurrentTowerID;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage)
         {
@@ -20,6 +21,18 @@ namespace Client
             TowerStorage = towerStorage;
             InterfaceStorage = interfaceStorage;
             TowerStorage.Init();
+        }
+        public bool PointInMainTowerRadius(Vector3 position)
+        {
+            int radius = TowerStorage.GetRadiusByID(CurrentTowerID);
+            if((Mathf.Pow(position.x,2))+ (Mathf.Pow(position.z,2)) <= Mathf.Pow(radius,2))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
