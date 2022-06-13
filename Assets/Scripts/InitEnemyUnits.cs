@@ -7,7 +7,7 @@ namespace Client
     sealed class InitEnemyUnits : IEcsInitSystem
     {
 
-        EcsSharedInject<GameState> _gameState = default;
+        EcsSharedInject<GameState> _state = default;
 
         string Enemy;
         public void Init(EcsSystems systems)
@@ -30,6 +30,11 @@ namespace Client
                 ref var viewComponent = ref world.GetPool<ViewComponent>().Add(enemyEntity);
                 viewComponent.GameObject = enemy;
                 viewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
+
+                ref var fightingComponent = ref world.GetPool<FightingComponent>().Add(enemyEntity);
+                fightingComponent.Damage = 5f;
+                fightingComponent.ReachZone = 10f;
+                fightingComponent.HealthPoints = 100;
             }
         }
     }

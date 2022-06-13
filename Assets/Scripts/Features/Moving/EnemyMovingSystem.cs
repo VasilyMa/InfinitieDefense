@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class EnemyMovingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<EnemyTag, ViewComponent, Movable, Targetable>> _allEnemyFilter = default;
+        readonly EcsFilterInject<Inc<EnemyTag, ViewComponent, Movable, Targetable>, Exc<NotMovable>> _allEnemyFilter = default;
 
         readonly EcsPoolInject<Movable> _movablePool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
@@ -24,8 +24,14 @@ namespace Client
                 }
 
                 ref var movableComponent = ref _movablePool.Value.Get(enemyEntity);
+
                 ref var viewComponent = ref _viewPool.Value.Get(enemyEntity);
-                viewComponent.Rigidbody.velocity = (targetableComponent.TargetObject.transform.position - viewComponent.GameObject.transform.position).normalized * movableComponent.Speed;
+
+                Vector3 flatTargetPosition = new Vector3(   targetableComponent.TargetObject.transform.position.x,
+                                                            viewComponent.GameObject.transform.position.y,
+                                                            targetableComponent.TargetObject.transform.position.z);
+
+                viewComponent.Rigidbody.velocity = (flatTargetPosition - viewComponent.GameObject.transform.position).normalized * movableComponent.Speed;
             }
         }
     }

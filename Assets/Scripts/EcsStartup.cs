@@ -26,7 +26,10 @@ namespace Client
                 .Add(new InitEnemyUnits())
                 .Add(new InitMainTower())
                 .Add(new EnemyTargetingSystem())
+                .Add(new LookingSystem())
                 .Add(new EnemyMovingSystem())
+                .Add(new DistanceToTargetSystem())
+                .Add(new JoinToFightSystem())
 
                 //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
 

@@ -6,12 +6,12 @@ namespace Client
 {
     sealed class EnemyTargetingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<EnemyTag, Targetable>> _enemyFilter = default;
+        readonly EcsFilterInject<Inc<EnemyTag, Targetable, ViewComponent>> _enemyFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
 
-        readonly EcsSharedInject<GameState> _gameState;
+        readonly EcsSharedInject<GameState> _state;
 
         public void Run (EcsSystems systems)
         {
@@ -24,8 +24,10 @@ namespace Client
                     continue;
                 }
 
-                ref var _viewMainTowerComponent = ref _viewPool.Value.Get(_gameState.Value.EntityMainTower);
+                ref var viewComponent = ref _viewPool.Value.Get(enemyEntity);
+                ref var _viewMainTowerComponent = ref _viewPool.Value.Get(_state.Value.EntityMainTower);
 
+                targetableComponent.TargetEntity = _state.Value.EntityMainTower;
                 targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
             }
         }
