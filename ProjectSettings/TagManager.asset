@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - Stone
   - Ore
+  - UpgradePoint
   layers:
   - Default
   - TransparentFX
