@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1d87b6090e485ca1e79a0836ce0e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _widgetName: TouchListner
+  _widgetName: TouchListener
   _emitter: {fileID: 0}
   _nameRegistrationType: 0
   _selectable: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f9bac33805e404f8930f9c01202984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _widgetName: TouchListner
+  _widgetName: TouchListener
   _emitter: {fileID: 0}
   _nameRegistrationType: 0
   _selectable: {fileID: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0ce5452989b457f81fe40069e44fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _widgetName: TouchListner
+  _widgetName: TouchListener
   _emitter: {fileID: 0}
   _nameRegistrationType: 0
   _selectable: {fileID: 0}
