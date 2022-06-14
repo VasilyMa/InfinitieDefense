@@ -37,6 +37,8 @@ namespace Client
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
+                .Add(new RaycastUserSystem())
+                .Add(new ReloadMiningSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
 

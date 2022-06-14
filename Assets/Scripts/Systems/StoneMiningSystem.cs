@@ -12,6 +12,7 @@ namespace Client {
             {
                 _state.Value.RockCount++;
                 //todo добавить перемещение камня за спину
+                _filter.Pools.Inc1.Del(entity);
             }
         }
     }
