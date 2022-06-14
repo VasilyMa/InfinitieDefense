@@ -14,7 +14,9 @@ namespace Client {
                 ref var playerComp = ref _playerPool.Value.Get(_state.Value.EntityPlayer);
 
                 filterComp.CoinTransform.SetParent(playerComp.ResHolderTransform);
-                filterComp.CoinTransform.localPosition = new Vector3(0, _state.Value.CoinCount, 0);
+                filterComp.CoinTransform.localPosition = new Vector3(0, _state.Value.CoinCount + _state.Value.RockCount, 0);
+
+                _state.Value.CoinTransformList.Add(filterComp.CoinTransform);
 
                 _state.Value.CoinCount++;
                 _filter.Pools.Inc1.Del(entity);

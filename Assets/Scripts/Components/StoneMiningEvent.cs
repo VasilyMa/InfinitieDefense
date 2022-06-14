@@ -1,5 +1,6 @@
+using UnityEngine;
 namespace Client {
     struct StoneMiningEvent {
-        // add your data here.
+        public Transform StoneTransform;
     }
 }
