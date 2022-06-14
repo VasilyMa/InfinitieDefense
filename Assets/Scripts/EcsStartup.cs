@@ -28,6 +28,7 @@ namespace Client
 
             _systems
                 .Add(new PlayerInitSystem())
+                .Add(new OreInitSystem())
                 .Add(new InitInterfaceSystem())
                 .Add(new InitEnemyUnits())
                 .Add(new InitMainTower())
@@ -38,6 +39,7 @@ namespace Client
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new RaycastUserSystem())
+                .Add(new OreMiningSystem())
                 .Add(new ReloadMiningSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)

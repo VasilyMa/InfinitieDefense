@@ -7,8 +7,9 @@ TagManager:
   - Enemy
   - MainTower
   - Coin
-  - Stone
   - Ore
+  - Rock
+  - Stone
   layers:
   - Default
   - TransparentFX
