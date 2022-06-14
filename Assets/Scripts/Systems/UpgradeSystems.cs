@@ -17,13 +17,25 @@ namespace Client {
                 {
                     if (_state.Value.RockCount > 0)
                     {
-                        GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount].gameObject);
-                        _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount]);
+                        //var tr = _state.Value.StoneTransformList[_state.Value.RockCount];
+                        GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
+                        _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                         _state.Value.RockCount--;
-                        
-                        
 
+                        foreach(var item in _state.Value.CoinTransformList)
+                        {
+                            item.localPosition = new Vector3(0, item.localPosition.y - 1, 0);
+                        }
                     }
+                    else
+                    {
+                        _filter.Pools.Inc1.Del(entity);
+                    }
+                }
+                filterComp.Time += Time.deltaTime * 3f;
+                if(filterComp.Time >= 1f)
+                {
+                    filterComp.Time = 0f;
                 }
             }
         }

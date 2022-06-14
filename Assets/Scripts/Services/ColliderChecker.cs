@@ -36,8 +36,11 @@ namespace Client
             }
             else if(other.gameObject.tag == "UpgradePoint")
             {
-                ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
-                upgradeComp.Time = 0f;
+                if (!_upgradePool.Has(_state.EntityPlayer))
+                {
+                    ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
+                    upgradeComp.Time = 0f;
+                }
             }
         }
         private void OnTriggerExit(Collider other)

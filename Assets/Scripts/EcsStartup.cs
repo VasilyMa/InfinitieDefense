@@ -39,6 +39,7 @@ namespace Client
                 .Add(new AddCoinSystem())
                 .Add(new RaycastUserSystem())
                 .Add(new ReloadMiningSystem())
+                .Add(new UpgradeSystems())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
 
