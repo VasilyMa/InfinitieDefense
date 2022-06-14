@@ -20,7 +20,7 @@ namespace Client
         {
             if (other.gameObject.tag == "Coin")
             {
-                Debug.Log(_state.CoinCount);
+                other.gameObject.tag = "Untagged";
                 ref var coinComp = ref _coinPool.Add(_world.NewEntity());
                 coinComp.CoinTransform = other.transform;
             }
