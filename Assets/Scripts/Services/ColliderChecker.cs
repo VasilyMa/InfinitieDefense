@@ -9,6 +9,7 @@ namespace Client
         private GameState _state;
         private EcsPool<AddCoinEvent> _coinPool;
         private EcsPool<StoneMiningEvent> _stonePool;
+        private EcsPool<UpgradeComponent> _upgradePool;
         private EcsWorld _world;
 
         public void Init(EcsWorld world, GameState state)
@@ -16,6 +17,7 @@ namespace Client
             _state = state;
             _coinPool = world.GetPool<AddCoinEvent>();
             _stonePool = world.GetPool<StoneMiningEvent>();
+            _upgradePool = world.GetPool<UpgradeComponent>();
             _world = world;
         }
         private void OnTriggerEnter(Collider other)
@@ -32,6 +34,11 @@ namespace Client
                 ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
                 stoneComp.StoneTransform = other.transform;
             }
+            else if(other.gameObject.tag == "UpgradePoint")
+            {
+                
+            }
         }
+
     }
 }
