@@ -20,6 +20,8 @@ namespace Client
         public string CurrentTowerID;
         public int RockCount = 0;
         public int CoinCount = 0;
+        public List<Transform> CoinTransformList = new List<Transform>();
+        public List<Transform> StoneTransformList = new List<Transform>();
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, PlayerStorage playerStorage)
         {

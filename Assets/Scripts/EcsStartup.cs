@@ -50,10 +50,10 @@ namespace Client
             _delHereSystems.Inject();
             _delHereSystems.Init();
 
-            _delHereSystems
+            /*_delHereSystems
                 .DelHere<StoneMiningEvent>()
                 .DelHere<AddCoinEvent>()
-                ;
+                ;*/
         }
 
         void Update()
