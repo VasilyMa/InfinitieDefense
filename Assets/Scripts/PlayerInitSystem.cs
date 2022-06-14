@@ -11,6 +11,7 @@ namespace Client {
         {
             
             var playerEntity = _playerPool.Value.GetWorld().NewEntity();
+            _state.Value.EntityPlayer = playerEntity;
             ref var player = ref _playerPool.Value.Add (playerEntity);
 
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), Vector3.zero, Quaternion.identity);
@@ -21,6 +22,9 @@ namespace Client {
             player.MoveSpeed = 10f;
             player.RotateSpeed = 10f;
             player.ResHolderTransform = PlayerGo.transform.GetChild(0).transform;
+
+            var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
+            colliderChecker.Init(systems.GetWorld(), systems.GetShared<GameState>());
         }
     }
 }

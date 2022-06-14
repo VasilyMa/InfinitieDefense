@@ -1,5 +1,6 @@
+using UnityEngine;
 namespace Client {
     struct AddCoinEvent {
-        // add your data here.
+        public Transform CoinTransform;
     }
 }

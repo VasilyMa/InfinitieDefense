@@ -13,12 +13,13 @@ namespace Client
         public InterfaceConfig InterfaceConfig;
         public int EntityMainTower;
         public int EntityInterface;
+        public int EntityPlayer;
         public TowerStorage TowerStorage;
         public InterfaceStorage InterfaceStorage;
         public PlayerStorage PlayerStorage;
         public string CurrentTowerID;
-        public int RockCount;
-        public int CoinCount;
+        public int RockCount = 0;
+        public int CoinCount = 0;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, PlayerStorage playerStorage)
         {
