@@ -28,7 +28,10 @@ namespace Client
                 var shipEntity = _world.Value.NewEntity();
 
                 ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
-                shipComponent.Number = int.Parse(ship.gameObject.name);
+                shipComponent.ShipArrivalMonoBehavior = ship.GetComponent<ShipArrivalMonoBehavior>();
+                shipComponent.ShipArrivalMonoBehavior.SetEntity(shipEntity);
+                shipComponent.ShipArrivalMonoBehavior.Init(_world);
+                shipComponent.Number = shipComponent.ShipArrivalMonoBehavior.GetShipNumber();
                 shipComponent.EnemyUnitsEntitys = new List<int>();
 
                 ref var viewComponent = ref _viewPool.Value.Add(shipEntity);

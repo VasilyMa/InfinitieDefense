@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class JoinToFightSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable, FightingComponent, ViewComponent>> _enemyFilter = default;
+        readonly EcsFilterInject<Inc<Targetable, FightingComponent, ViewComponent>, Exc<InactiveTag>> _enemyFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<FightingComponent> _fightingPool = default;

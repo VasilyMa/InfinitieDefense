@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class DistanceToTargetSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable, ViewComponent>> _entitysFilter = default;
+        readonly EcsFilterInject<Inc<Targetable, ViewComponent>, Exc<InactiveTag>> _entitysFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
@@ -17,7 +17,6 @@ namespace Client
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
                 targetableComponent.DistanceToTarget = Mathf.Sqrt((targetableComponent.TargetObject.transform.position - viewComponent.GameObject.transform.position).sqrMagnitude);
-                Debug.Log("Дистанция до цели " + targetableComponent.DistanceToTarget);
             }
         }
     }

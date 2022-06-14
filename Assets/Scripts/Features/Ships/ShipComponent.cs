@@ -9,5 +9,6 @@ namespace Client
     {
         public int Number;
         public List<int> EnemyUnitsEntitys;
+        public ShipArrivalMonoBehavior ShipArrivalMonoBehavior;
     }
 }

@@ -31,9 +31,10 @@ namespace Client
                 .Add(new EnemyMovingSystem())
                 .Add(new DistanceToTargetSystem())
                 .Add(new JoinToFightSystem())
+                .Add(new ShipArrivalSystem())
 
                 //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
-
+                .DelHere<ShipArrivalEvent>()
 #if UNITY_EDITOR
                 .Add(new EcsWorldDebugSystem())
                 //.Add(new EcsWorldDebugSystem(Idents.Worlds.Events))

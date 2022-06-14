@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class EnemyMovingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<EnemyTag, ViewComponent, Movable, Targetable>, Exc<NotMovable>> _allEnemyFilter = default;
+        readonly EcsFilterInject<Inc<EnemyTag, ViewComponent, Movable, Targetable>, Exc<NotMovable, InactiveTag>> _allEnemyFilter = default;
 
         readonly EcsPoolInject<Movable> _movablePool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
