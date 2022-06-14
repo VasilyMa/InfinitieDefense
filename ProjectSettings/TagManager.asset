@@ -8,7 +8,7 @@ TagManager:
   - MainTower
   - Coin
   - Stone
-  - Rock
+  - Ore
   layers:
   - Default
   - TransparentFX

@@ -19,30 +19,30 @@ namespace Client {
                 if (Physics.Raycast(ray, out RaycastHit hitInfo, distanceRay))
                 {
                     var dis = Vector3.Distance(_player.Transform.position, hitInfo.transform.position);
-                    if (hitInfo.collider.gameObject.CompareTag("Stone"))
+                    if (hitInfo.collider.gameObject.CompareTag("Ore"))
                     {
                         Debug.Log($"Target is {hitInfo.collider.name}, {dis}");
-                        if (cooldown.currentValue == 0 && dis <= 2)
+                        if (cooldown.currentValue == 0 && dis <= 10)
                         {
                             Debug.Log("Mining!");
                             cooldown.currentValue = cooldown.maxValue;
                             _player.animator.SetBool("isMining", true);
                             _reloadPool.Value.Add(entity);
-                            _miningPool.Value.Add(entity);
                         }
                     }
-                    if (hitInfo.collider.gameObject.CompareTag("Enemie"))
+                    else if (hitInfo.collider.gameObject.CompareTag("Enemy"))
                     {
                         Debug.Log($"Target is {hitInfo.collider.name}, {dis}");
-                        if (cooldown.currentValue == 0 && dis <= 2)
+                        if (cooldown.currentValue == 0 && dis <= 10)
                         {
                             Debug.Log("Attack!");
-                            cooldown.currentValue= cooldown.maxValue;
+                            cooldown.currentValue = cooldown.maxValue;
                             _player.animator.SetBool("isAttack", true);
                             _reloadPool.Value.Add(entity);
                             //to do attack event
                         }
                     }
+
                     _player.animator.SetBool("isMining", false);
                     _player.animator.SetBool("isAttack", false);
                 }
