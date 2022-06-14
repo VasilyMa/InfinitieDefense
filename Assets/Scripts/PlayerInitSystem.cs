@@ -13,8 +13,6 @@ namespace Client {
             var playerEntity = _playerPool.Value.GetWorld().NewEntity();
             ref var player = ref _playerPool.Value.Add (playerEntity);
 
-
-            //var PlayerPrefab = Resources.Load("Player");
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), Vector3.zero, Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
@@ -22,6 +20,7 @@ namespace Client {
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
             player.MoveSpeed = 10f;
             player.RotateSpeed = 10f;
+            player.ResHolderTransform = PlayerGo.transform.GetChild(0).transform;
         }
     }
 }

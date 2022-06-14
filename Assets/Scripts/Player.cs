@@ -7,5 +7,6 @@ namespace Client {
         public Rigidbody rigidbody;
         public float MoveSpeed;
         public float RotateSpeed;
+        public Transform ResHolderTransform;
     }
 }

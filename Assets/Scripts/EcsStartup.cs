@@ -15,6 +15,7 @@ namespace Client
         [SerializeField] private InterfaceStorage _interfaceStorage;
         [SerializeField] private PlayerStorage _playerStorage;
         EcsSystems _systems;
+        EcsSystems _delHereSystems;
         EcsWorld _world = null;
         GameState _gameState = null;
 
@@ -23,6 +24,8 @@ namespace Client
             _world = new EcsWorld();
             _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _playerStorage);
             _systems = new EcsSystems (_world, _gameState);
+            _delHereSystems = new EcsSystems(_world, _gameState);
+
             _systems
                 .Add(new PlayerInitSystem())
                 .Add(new InitInterfaceSystem())
@@ -32,7 +35,7 @@ namespace Client
                 .Add(new EnemyTargetingSystem())
                 .Add(new EnemyMovingSystem())
                 .Add(new StoneMiningSystem())
-                //.Add(new UserInputSystem())
+                .Add(new UserInputSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
 
@@ -43,9 +46,13 @@ namespace Client
                 .Inject()
                 .InjectUgui(_uguiEmitter, Idents.Worlds.Events)
                 .Init();
-            _systems
+            _delHereSystems.Inject();
+            _delHereSystems.Init();
+
+            _delHereSystems
                 .DelHere<StoneMiningEvent>()
-            ;
+                .DelHere<AddCoinEvent>()
+                ;
         }
 
         void Update()
