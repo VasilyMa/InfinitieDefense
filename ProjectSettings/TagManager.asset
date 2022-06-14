@@ -7,15 +7,16 @@ TagManager:
   - Enemy
   - MainTower
   - Coin
+  - Stone
   - Rock
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Allies
   - Water
   - UI
-  - 
+  - Enemies
   - 
   - 
   - 

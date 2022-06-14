@@ -24,9 +24,10 @@ namespace Client {
         void OnDownTouchListner(in EcsUguiDragStartEvent evt)
         {
             ref var intComp = ref _interface.Value.Get(_state.Value.EntityInterface);
-
             _joystick = intComp.joystick.transform.GetChild(0).gameObject;
             _handlerJoystick = _joystick.transform.GetChild(0).gameObject;
+            _joystick.GetComponent<Image>().enabled = true;
+            _handlerJoystick.GetComponent<Image>().enabled = true;
             startPosition = evt.Position;
             _joystick.transform.position = startPosition;
             _rectTransform = _handlerJoystick.GetComponent<RectTransform>();
@@ -67,7 +68,7 @@ namespace Client {
                 }
                 _player.rigidbody.velocity = new Vector3(moveVector.x * _player.MoveSpeed, _player.rigidbody.velocity.y, moveVector.z * _player.MoveSpeed);
             }
-            Debug.Log($"Move, {evt.Sender}, {_direction}");
+            Debug.Log($"Move, {evt.Sender}");
         }
         [Preserve]
         [EcsUguiDragEndEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
@@ -81,6 +82,8 @@ namespace Client {
                 ref var _player = ref _filter.Pools.Inc1.Get(entity);
                 _player.rigidbody.velocity = Vector3.zero;
             }
+            _joystick.GetComponent<Image>().enabled = false;
+            _handlerJoystick.GetComponent<Image>().enabled = false;
             Debug.Log($"Up, {evt.Sender}, {moveVector}");
         }
 
