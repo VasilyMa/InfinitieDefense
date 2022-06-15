@@ -8,9 +8,10 @@ TagManager:
   - MainTower
   - Ship
   - Coin
+  - Stone
   - Ore
   - Rock
-  - Stone
+  - UpgradePoint
   layers:
   - Default
   - TransparentFX

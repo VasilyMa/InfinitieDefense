@@ -17,10 +17,12 @@ namespace Client {
                 _state.Value.StoneTransformList.Add(filterComp.StoneTransform);
                 filterComp.StoneTransform.SetParent(playerComp.ResHolderTransform);
                 filterComp.StoneTransform.localPosition = new Vector3(0, _state.Value.RockCount, 0);
+
                 foreach(var item in _state.Value.CoinTransformList)
                 {
                     item.localPosition = new Vector3(0, item.localPosition.y + 1, 0);
                 }
+                filterComp.StoneTransform.SetSiblingIndex(_state.Value.RockCount);
                 _state.Value.RockCount++;
                 //todo добавить перемещение камня за спину
                 _filter.Pools.Inc1.Del(entity);

@@ -50,6 +50,8 @@ namespace Client
                 .Add(new OreMiningSystem())
                 .Add(new ReloadMiningSystem())
                 .Add(new CameraFollowSystem())
+                .Add(new UpgradeSystems())
+                .Add(new CreateNextTowerSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()

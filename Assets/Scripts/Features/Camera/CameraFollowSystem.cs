@@ -32,7 +32,7 @@ namespace Client
 
                 var actualPosition = Vector3.Lerp(cameraComponent.HolderTransform.position, cameraComponent.FollowTransform.position + _holderOffset, Time.deltaTime * _holderFollowSpeed);
                 cameraComponent.HolderTransform.position = actualPosition;
-                cameraComponent.HolderTransform.LookAt(cameraComponent.FollowTransform);
+                cameraComponent.CameraTransform.LookAt(cameraComponent.FollowTransform);
             }
         }
     }

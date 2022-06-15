@@ -21,6 +21,7 @@ namespace Client
         public string CurrentTowerID;
         public int RockCount = 0;
         public int CoinCount = 0;
+        private int _currentUpgradeTower = 0;
         public List<Transform> CoinTransformList = new List<Transform>();
         public List<Transform> StoneTransformList = new List<Transform>();
 
@@ -45,5 +46,16 @@ namespace Client
                 return false;
             }
         }
+        public void UpgradeTower()
+        {
+            _currentUpgradeTower++;
+            if(_currentUpgradeTower == TowerStorage.GetUpgradeByID(CurrentTowerID))
+            {
+                _currentUpgradeTower = 0;
+                World.GetPool<CreateNextTowerEvent>().Add(EntityMainTower);
+            }
+        }
+
+
     }
 }

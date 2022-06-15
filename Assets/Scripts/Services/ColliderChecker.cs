@@ -28,7 +28,7 @@ namespace Client
                 ref var coinComp = ref _coinPool.Add(_world.NewEntity());
                 coinComp.CoinTransform = other.transform;
             }
-            else if(other.gameObject.tag == "Rock")
+            else if(other.gameObject.tag == "Stone")
             {
                 other.gameObject.tag = "Untagged";
                 ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
@@ -36,7 +36,21 @@ namespace Client
             }
             else if(other.gameObject.tag == "UpgradePoint")
             {
-                
+                if (!_upgradePool.Has(_state.EntityPlayer))
+                {
+                    ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
+                    upgradeComp.Time = 0f;
+                }
+            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if(other.gameObject.tag == "UpgradePoint")
+            {
+                if(_upgradePool.Has(_state.EntityPlayer))
+                {
+                    _upgradePool.Del(_state.EntityPlayer);
+                }
             }
         }
 

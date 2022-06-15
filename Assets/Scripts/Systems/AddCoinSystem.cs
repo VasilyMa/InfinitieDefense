@@ -17,7 +17,7 @@ namespace Client {
                 filterComp.CoinTransform.localPosition = new Vector3(0, _state.Value.CoinCount + _state.Value.RockCount, 0);
 
                 _state.Value.CoinTransformList.Add(filterComp.CoinTransform);
-
+                filterComp.CoinTransform.SetSiblingIndex(_state.Value.CoinCount + _state.Value.RockCount);
                 _state.Value.CoinCount++;
                 _filter.Pools.Inc1.Del(entity);
             }
