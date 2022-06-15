@@ -10,7 +10,6 @@ namespace Client
     public class GameState
     {
         public EcsWorld World;
-        public InterfaceConfig InterfaceConfig;
         public int EntityMainTower;
         public int EntityInterface;
         public int EntityPlayer;

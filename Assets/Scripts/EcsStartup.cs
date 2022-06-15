@@ -45,16 +45,16 @@ namespace Client
                 .Add(new WaveSwitcher())
                 .Add(new ShipSwitcher())
 
-                //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new RaycastUserSystem())
                 .Add(new OreMiningSystem())
-                .Add(new ReloadMiningSystem())
                 .Add(new CameraFollowSystem())
                 .Add(new UpgradeSystems())
                 .Add(new CreateNextTowerSystem())
+                .Add(new CombatUserSystem())
+                .Add(new ReloadSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()

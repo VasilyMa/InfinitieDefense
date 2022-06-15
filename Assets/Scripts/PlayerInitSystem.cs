@@ -19,16 +19,19 @@ namespace Client {
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), Vector3.zero, Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
+            player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
             player.MoveSpeed = 5f;
             player.RotateSpeed = 1f;
+            player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
             player.ResHolderTransform = PlayerGo.transform.GetChild(0).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
+            player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
             var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
             colliderChecker.Init(systems.GetWorld(), systems.GetShared<GameState>());
             _cooldownMining.Value.Add(_state.Value.EntityPlayer);
             ref var cooldown = ref _cooldownMining.Value.Get(_state.Value.EntityPlayer);
-            cooldown.maxValue = 1f;
+            cooldown.maxValue = 3f;
             cooldown.currentValue = cooldown.maxValue;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
         }
