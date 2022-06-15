@@ -26,6 +26,7 @@ namespace Client
         public List<Transform> StoneTransformList = new List<Transform>();
         public string[] DefenseTowers = new string[7];
         public int[] TowersUpgrade = new int[7];
+        public int[] TowersEntity = new int[7];
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, 
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage)
@@ -75,6 +76,7 @@ namespace Client
             {
                 neededUpgradeValue = DefenseTowerStorage.GetUpgradeByID(DefenseTowers[towerIndex]);
             }
+            
             if(TowersUpgrade[towerIndex] == neededUpgradeValue)
             {
                 TowersUpgrade[towerIndex] = 0;

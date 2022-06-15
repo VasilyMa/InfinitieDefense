@@ -11,11 +11,14 @@ namespace Client {
         public void Init (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
+                
                 ref var radiusComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
-
-                radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
-                radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius, radiusComp.Radius, 1);
+                if (viewComp.GameObject != null)
+                {
+                    radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
+                    radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius, radiusComp.Radius, 1);
+                }
             }
         }
     }

@@ -31,7 +31,19 @@ namespace Client
 
             ref var viewComponent = ref _viewPool.Value.Add(entity);
             viewComponent.GameObject = mainTower;
-            
+
+            for (int i = 0; i < _state.Value.TowersEntity.Length;i++)
+            {
+                if(i == 0) _state.Value.TowersEntity[i] = entity;
+                else
+                {
+                    int towerEntity = _world.Value.NewEntity();
+                    _state.Value.TowersEntity[i] = towerEntity;
+                    _viewPool.Value.Add(towerEntity);
+                    _healthPool.Value.Add(towerEntity);
+                    _radiusPool.Value.Add(towerEntity);
+                }
+            }
         }
     }
 }
