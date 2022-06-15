@@ -19,7 +19,6 @@ namespace Client {
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), Vector3.zero, Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
-            player.controller = PlayerGo.GetComponent<CharacterController>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
             player.MoveSpeed = 5f;
             player.RotateSpeed = 1f;

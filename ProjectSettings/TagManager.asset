@@ -6,9 +6,11 @@ TagManager:
   tags:
   - Enemy
   - MainTower
+  - Ship
   - Coin
   - Stone
   - Ore
+  - Rock
   - UpgradePoint
   layers:
   - Default

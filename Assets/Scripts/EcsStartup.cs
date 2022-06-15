@@ -27,22 +27,32 @@ namespace Client
             _delHereSystems = new EcsSystems(_world, _gameState);
 
             _systems
-                .Add(new PlayerInitSystem())
-                .Add(new InitInterfaceSystem())
-                .Add(new InitEnemyUnits())
                 .Add(new InitMainTower())
+                .Add(new InitEnemyUnits())
+                .Add(new InitEnemyShips())
+                .Add(new PlayerInitSystem())
+                .Add(new OreInitSystem())
+                .Add(new InitInterfaceSystem())
                 .Add(new RadiusInitSystem())
                 .Add(new EnemyTargetingSystem())
+                .Add(new LookingSystem())
                 .Add(new EnemyMovingSystem())
+                .Add(new DistanceToTargetSystem())
+                .Add(new JoinToFightSystem())
+                .Add(new ShipArrivalSystem())
+
+                //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new RaycastUserSystem())
+                .Add(new OreMiningSystem())
                 .Add(new ReloadMiningSystem())
                 .Add(new UpgradeSystems())
                 .Add(new CreateNextTowerSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
+                .DelHere<ShipArrivalEvent>()
 
 #if UNITY_EDITOR
                 .Add(new EcsWorldDebugSystem())
