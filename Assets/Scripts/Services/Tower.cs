@@ -7,5 +7,8 @@ public class Tower
     public int TowerHealth;
     public GameObject TowerPrefab;
     public int Radius;
-    
+    public int Upgrade;
+    public bool IsLast;
+    public string NextID;
+
 }

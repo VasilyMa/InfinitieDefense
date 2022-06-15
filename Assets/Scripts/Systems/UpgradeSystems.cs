@@ -7,6 +7,7 @@ namespace Client {
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<UpgradeComponent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
+        readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
 
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
@@ -21,6 +22,8 @@ namespace Client {
                         GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
                         _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                         _state.Value.RockCount--;
+
+                        _state.Value.UpgradeTower();
 
                         foreach(var item in _state.Value.CoinTransformList)
                         {

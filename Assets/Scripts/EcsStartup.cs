@@ -40,6 +40,7 @@ namespace Client
                 .Add(new RaycastUserSystem())
                 .Add(new ReloadMiningSystem())
                 .Add(new UpgradeSystems())
+                .Add(new CreateNextTowerSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
 
