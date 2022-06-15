@@ -24,7 +24,8 @@ namespace Client
         private int _currentUpgradeTower = 0;
         public List<Transform> CoinTransformList = new List<Transform>();
         public List<Transform> StoneTransformList = new List<Transform>();
-        public string[] DefenseTowers = new string[6];
+        public string[] DefenseTowers = new string[7];
+        public int[] TowersUpgrade = new int[7];
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, 
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage)
@@ -37,13 +38,18 @@ namespace Client
             PlayerStorage.Init();
             TowerStorage.Init();
             DefenseTowerStorage.Init();
+            InitDefenseTowers();
         }
         public void InitDefenseTowers()
         {
             for (int i = 0; i < DefenseTowers.Length;i++)
             {
-                DefenseTowers[i] = "empty";
+                if(i == 0) DefenseTowers[i] = "1tower";
+                else DefenseTowers[i] = "empty";
+
+                TowersUpgrade[i] = 0;
             }
+
         }
         public bool PointInMainTowerRadius(Vector3 position)
         {
@@ -57,13 +63,23 @@ namespace Client
                 return false;
             }
         }
-        public void UpgradeTower()
+        public void UpgradeTower(int towerIndex)
         {
-            _currentUpgradeTower++;
-            if(_currentUpgradeTower == TowerStorage.GetUpgradeByID(CurrentTowerID))
+            TowersUpgrade[towerIndex]++;
+            int neededUpgradeValue = 0;
+            if(towerIndex == 0)
             {
-                _currentUpgradeTower = 0;
-                World.GetPool<CreateNextTowerEvent>().Add(EntityMainTower);
+                neededUpgradeValue = TowerStorage.GetUpgradeByID(DefenseTowers[towerIndex]);
+            }
+            else
+            {
+                neededUpgradeValue = DefenseTowerStorage.GetUpgradeByID(DefenseTowers[towerIndex]);
+            }
+            if(TowersUpgrade[towerIndex] == neededUpgradeValue)
+            {
+                TowersUpgrade[towerIndex] = 0;
+                ref var createNextTowerComp = ref World.GetPool<CreateNextTowerEvent>().Add(EntityMainTower);
+                createNextTowerComp.TowerIndex = towerIndex;
             }
         }
 

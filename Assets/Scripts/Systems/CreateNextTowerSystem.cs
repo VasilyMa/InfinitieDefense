@@ -11,7 +11,7 @@ namespace Client {
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
-                
+                ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var radiusComp = ref _radiusPool.Value.Get(entity);
 
                 ref var viewComp = ref _viewPool.Value.Get(entity);

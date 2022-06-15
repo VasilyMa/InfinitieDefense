@@ -39,7 +39,9 @@ namespace Client
                 if (!_upgradePool.Has(_state.EntityPlayer))
                 {
                     ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
+                    upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;
+
                 }
             }
         }

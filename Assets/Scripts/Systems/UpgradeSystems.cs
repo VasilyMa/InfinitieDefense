@@ -15,6 +15,7 @@ namespace Client {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
 
+                //todo
                 if(_state.Value.TowerStorage.GetIsLastByID(_state.Value.CurrentTowerID))
                 {
                     _filter.Pools.Inc1.Del(entity);
@@ -30,7 +31,7 @@ namespace Client {
                         _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                         _state.Value.RockCount--;
 
-                        _state.Value.UpgradeTower();
+                        _state.Value.UpgradeTower(filterComp.TowerIndex);
 
                         foreach(var item in _state.Value.CoinTransformList)
                         {

@@ -13,7 +13,8 @@ public class DefenseTowerStorage : ScriptableObject
         {
             ["empty"] = new DefenseTower
             {
-                
+                NextID = "1tower",
+                Upgrade = 2
             },
             ["1tower"] = new DefenseTower
             {
