@@ -30,6 +30,7 @@ namespace Client
                 .Add(new InitMainTower())
                 .Add(new InitEnemyUnits())
                 .Add(new InitEnemyShips())
+                .Add(new InitCamera())
                 .Add(new PlayerInitSystem())
                 .Add(new OreInitSystem())
                 .Add(new InitInterfaceSystem())
@@ -48,6 +49,7 @@ namespace Client
                 .Add(new RaycastUserSystem())
                 .Add(new OreMiningSystem())
                 .Add(new ReloadMiningSystem())
+                .Add(new CameraFollowSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()

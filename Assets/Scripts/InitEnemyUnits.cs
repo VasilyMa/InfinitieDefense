@@ -9,7 +9,8 @@ namespace Client
 
         EcsSharedInject<GameState> _state = default;
 
-        string Enemy;
+        private string Enemy;
+
         public void Init(EcsSystems systems)
         {
             var allEnemyUnits = GameObject.FindGameObjectsWithTag(nameof(Enemy));

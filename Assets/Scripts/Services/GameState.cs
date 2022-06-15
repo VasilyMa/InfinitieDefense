@@ -14,6 +14,7 @@ namespace Client
         public int EntityMainTower;
         public int EntityInterface;
         public int EntityPlayer;
+        public int EntityCamera;
         public TowerStorage TowerStorage;
         public InterfaceStorage InterfaceStorage;
         public PlayerStorage PlayerStorage;
