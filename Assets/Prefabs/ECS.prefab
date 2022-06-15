@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc15f1e15d514f44c817ff6de0186932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uguiEmitter: {fileID: 0}
+  _towerStorage: {fileID: 11400000, guid: 694551d89be9df4488524a5291bab776, type: 2}
+  _interfaceStorage: {fileID: 11400000, guid: ce647896e01d5944a966d338021e3ac7, type: 2}
+  _playerStorage: {fileID: 11400000, guid: 192d904650ba40549b4f1521db72a700, type: 2}

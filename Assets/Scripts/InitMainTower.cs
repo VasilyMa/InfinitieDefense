@@ -6,27 +6,32 @@ namespace Client
 {
     sealed class InitMainTower : IEcsInitSystem
     {
-        readonly EcsSharedInject<GameState> _gameState;
-
-        string MainTower;
+        readonly EcsSharedInject<GameState> _state;
+        readonly EcsWorldInject _world = default;
+        readonly EcsPoolInject<MainTowerTag> _towerPool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
+        readonly EcsPoolInject<HealthComponent> _healthPool = default;
 
         public void Init (EcsSystems systems)
         {
-            var allMainTowers = GameObject.FindGameObjectsWithTag(nameof(MainTower));
+            var entity = _world.Value.NewEntity();
+            _state.Value.EntityMainTower = entity;
+            string towerID = "1tower";
+            _state.Value.CurrentTowerID = towerID;
+            
+            _towerPool.Value.Add(entity);
+            ref var radiusComp = ref _radiusPool.Value.Add(entity);
+            radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(towerID);
 
-            var world = systems.GetWorld();
+            ref var healthComp = ref _healthPool.Value.Add(entity);
+            healthComp.Health = _state.Value.TowerStorage.GetHealthByID(towerID);
 
-            foreach (var mainTower in allMainTowers)
-            {
-                var mainTowerEntity = world.NewEntity();
+            var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
 
-                _gameState.Value.EntityMainTower = mainTowerEntity;
-
-                world.GetPool<MainTowerTag>().Add(mainTowerEntity);
-
-                ref var viewComponent = ref world.GetPool<ViewComponent>().Add(mainTowerEntity);
-                viewComponent.GameObject = mainTower;
-            }
+            ref var viewComponent = ref _viewPool.Value.Add(entity);
+            viewComponent.GameObject = mainTower;
+            
         }
     }
 }
