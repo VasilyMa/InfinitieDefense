@@ -15,17 +15,32 @@ namespace Client
         readonly EcsPoolInject<ShipComponent> _shipPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
 
-        private int _defaultActiveEncounterOnLevel = 1;
+        readonly EcsSharedInject<GameState> _state;
 
-        private string Ship;
+        private int _defaultActiveEncounterOnLevel = 1;
 
         public void Init (EcsSystems systems)
         {
-            var allShips = GameObject.FindGameObjectsWithTag(nameof(Ship));
+            //var allShips = GameObject.FindGameObjectsWithTag(nameof(Ship));
+            var allShips = GameObject.FindObjectsOfType<ShipArrivalMonoBehavior>();
 
             foreach (var ship in allShips)
             {
                 var shipEntity = _world.Value.NewEntity();
+
+                _world.Value.GetPool<EnemyTag>().Add(shipEntity);
+
+                _world.Value.GetPool<ShipTag>().Add(shipEntity);
+
+                ref var targetableComponent = ref _world.Value.GetPool<Targetable>().Add(shipEntity);
+
+                ref var _viewMainTowerComponent = ref _viewPool.Value.Get(_state.Value.EntityMainTower);
+
+                targetableComponent.TargetEntity = _state.Value.EntityMainTower;
+                targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
+
+                ref var movableComponent = ref _world.Value.GetPool<Movable>().Add(shipEntity);
+                movableComponent.Speed = 10f;
 
                 ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
                 shipComponent.ShipArrivalMonoBehavior = ship.GetComponent<ShipArrivalMonoBehavior>();
@@ -35,7 +50,8 @@ namespace Client
                 shipComponent.EnemyUnitsEntitys = new List<int>();
 
                 ref var viewComponent = ref _viewPool.Value.Add(shipEntity);
-                viewComponent.GameObject = ship;
+                viewComponent.GameObject = ship.gameObject;
+                viewComponent.Rigidbody = ship.GetComponent<Rigidbody>();
 
                 if (shipComponent.Number > _defaultActiveEncounterOnLevel)
                 {
@@ -44,9 +60,9 @@ namespace Client
 
                 foreach (var enemyUnit in _enemyUnitsFilter.Value)
                 {
-                    ref var enemyUnitEncounter = ref _shipPool.Value.Get(enemyUnit);
+                    ref var enemyUnitShip = ref _shipPool.Value.Get(enemyUnit);
 
-                    if (enemyUnitEncounter.Number == shipComponent.Number)
+                    if (enemyUnitShip.Number == shipComponent.Number)
                     {
                         shipComponent.EnemyUnitsEntitys.Add(enemyUnit);
                     }

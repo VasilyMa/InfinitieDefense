@@ -11,6 +11,7 @@ namespace Client
         private EcsWorldInject _world;
         //private EcsWorld _world;
         private EcsPool<ShipArrivalEvent> _shipArrivalEventPool;
+        private EcsPool<InactiveTag> _inactivePool;
 
         [SerializeField] private int _shipEntity;
         [SerializeField] private int _shipNumber;
@@ -18,14 +19,22 @@ namespace Client
         public void Init(EcsWorldInject world)
         {
             _shipArrivalEventPool = world.Value.GetPool<ShipArrivalEvent>();
+            _inactivePool = world.Value.GetPool<InactiveTag>();
             _world = world;
         }
 
         private void OnTriggerEnter(Collider land)
         {
             Debug.Log(land.gameObject.name);
+
+            if (_inactivePool.Has(_shipEntity))
+            {
+                return;
+            }
+
             ref var shipArrivalEvent = ref _shipArrivalEventPool.Add(_world.Value.NewEntity());
             shipArrivalEvent.ShipEntity = _shipEntity;
+
         }
 
         public void SetEntity(int entity)

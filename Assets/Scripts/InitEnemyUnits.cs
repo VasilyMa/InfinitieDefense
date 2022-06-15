@@ -26,7 +26,6 @@ namespace Client
 
                 world.GetPool<InactiveTag>().Add(enemyEntity);
 
-
                 ref var movableComponent = ref world.GetPool<Movable>().Add(enemyEntity);
                 movableComponent.Speed = 5f;
 
@@ -34,8 +33,8 @@ namespace Client
                 viewComponent.GameObject = enemy;
                 viewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
 
-                ref var encounterComponent = ref world.GetPool<ShipComponent>().Add(enemyEntity);
-                encounterComponent.Number = int.Parse(viewComponent.GameObject.transform.parent.name);
+                ref var shipComponent = ref world.GetPool<ShipComponent>().Add(enemyEntity);
+                shipComponent.Number = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMonoBehavior>().GetShipNumber();
 
                 ref var fightingComponent = ref world.GetPool<FightingComponent>().Add(enemyEntity);
                 fightingComponent.Damage = 5f;

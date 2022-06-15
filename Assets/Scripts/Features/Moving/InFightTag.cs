@@ -1,6 +1,6 @@
 namespace Client
 {
-    struct NotMovable
+    struct InFightTag
     {
         
     }

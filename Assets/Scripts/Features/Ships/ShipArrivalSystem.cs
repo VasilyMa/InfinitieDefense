@@ -23,6 +23,7 @@ namespace Client {
                 Debug.Log("Пришвартовались");
 
                 ref var shipComponent = ref _shipPool.Value.Get(shipEntity);
+                _inactivePool.Value.Add(shipEntity);
 
                 foreach (var enemyEntity in shipComponent.EnemyUnitsEntitys)
                 {

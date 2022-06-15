@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class EnemyMovingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<EnemyTag, ViewComponent, Movable, Targetable>, Exc<NotMovable, InactiveTag>> _allEnemyFilter = default;
+        readonly EcsFilterInject<Inc<EnemyTag, ViewComponent, Movable, Targetable>, Exc<InFightTag, InactiveTag>> _allEnemyFilter = default;
 
         readonly EcsPoolInject<Movable> _movablePool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
@@ -31,7 +31,17 @@ namespace Client
                                                             viewComponent.GameObject.transform.position.y,
                                                             targetableComponent.TargetObject.transform.position.z);
 
-                viewComponent.Rigidbody.velocity = (flatTargetPosition - viewComponent.GameObject.transform.position).normalized * movableComponent.Speed;
+                if (viewComponent.Rigidbody.isKinematic)
+                {
+                    viewComponent.GameObject.transform.position = Vector3.MoveTowards(  viewComponent.GameObject.transform.position,
+                                                                                        flatTargetPosition,
+                                                                                        movableComponent.Speed * Time.deltaTime);
+                    //viewComponent.Rigidbody.MovePosition(viewComponent.GameObject.transform.position + (viewComponent.GameObject.transform.forward * Time.deltaTime * movableComponent.Speed));
+                }
+                else
+                {
+                    viewComponent.Rigidbody.velocity = (flatTargetPosition - viewComponent.GameObject.transform.position).normalized * movableComponent.Speed;
+                }
             }
         }
     }

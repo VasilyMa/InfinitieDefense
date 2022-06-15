@@ -15,6 +15,11 @@ namespace Client
             foreach(var entity in _entitysFilter.Value)
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
+                if (!targetableComponent.TargetObject)
+                {
+                    continue;
+                }
+
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
                 targetableComponent.DistanceToTarget = Mathf.Sqrt((targetableComponent.TargetObject.transform.position - viewComponent.GameObject.transform.position).sqrMagnitude);
             }

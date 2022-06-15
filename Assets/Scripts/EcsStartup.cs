@@ -23,9 +23,9 @@ namespace Client
             _systems
                 //.Add(new PlayerInitSystem())
                 //.Add(new UserInputSystem())
+                .Add(new InitMainTower())
                 .Add(new InitEnemyUnits())
                 .Add(new InitEnemyShips())
-                .Add(new InitMainTower())
                 .Add(new EnemyTargetingSystem())
                 .Add(new LookingSystem())
                 .Add(new EnemyMovingSystem())
