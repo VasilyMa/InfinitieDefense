@@ -16,11 +16,25 @@ namespace Client {
                 ref var playerComp = ref _playerPool.Value.Get(entity);
 
                 //todo переделать
-                if(_state.Value.TowerStorage.GetIsLastByID(_state.Value.CurrentTowerID))
+
+                if(filterComp.TowerIndex == 0)
                 {
-                    _filter.Pools.Inc1.Del(entity);
-                    return;
+                    if(_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                    {
+                        _filter.Pools.Inc1.Del(entity);
+                        return;
+                    }
                 }
+                else
+                {
+                    if(_state.Value.DefenseTowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                    {
+                        _filter.Pools.Inc1.Del(entity);
+                        return;
+                    }
+                }
+
+                
 
                 if(filterComp.Time == 0)
                 {
