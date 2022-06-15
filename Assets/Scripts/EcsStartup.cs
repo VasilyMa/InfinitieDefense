@@ -33,8 +33,6 @@ namespace Client
                 .Add(new PlayerInitSystem())
                 .Add(new OreInitSystem())
                 .Add(new InitInterfaceSystem())
-                .Add(new InitEnemyUnits())
-                .Add(new InitMainTower())
                 .Add(new RadiusInitSystem())
                 .Add(new EnemyTargetingSystem())
                 .Add(new LookingSystem())
