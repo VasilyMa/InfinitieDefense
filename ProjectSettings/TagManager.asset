@@ -12,6 +12,7 @@ TagManager:
   - Ore
   - Rock
   - UpgradePoint
+  - DefensePoint
   layers:
   - Default
   - TransparentFX

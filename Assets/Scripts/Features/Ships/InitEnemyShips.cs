@@ -34,9 +34,9 @@ namespace Client
 
                 ref var targetableComponent = ref _world.Value.GetPool<Targetable>().Add(shipEntity);
 
-                ref var _viewMainTowerComponent = ref _viewPool.Value.Get(_state.Value.EntityMainTower);
+                ref var _viewMainTowerComponent = ref _viewPool.Value.Get(_state.Value.TowersEntity[0]);
 
-                targetableComponent.TargetEntity = _state.Value.EntityMainTower;
+                targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
                 targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
 
                 ref var movableComponent = ref _world.Value.GetPool<Movable>().Add(shipEntity);

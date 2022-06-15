@@ -1,3 +1,4 @@
+using System;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
@@ -12,11 +13,13 @@ namespace Client
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
+        readonly EcsPoolInject<TowerTag> _tPool = default;
+        private float Angle = 0;
+        private int count = 6;
 
         public void Init (EcsSystems systems)
         {
             var entity = _world.Value.NewEntity();
-            _state.Value.EntityMainTower = entity;
             string towerID = "1tower";
             _state.Value.CurrentTowerID = towerID;
             
@@ -42,6 +45,14 @@ namespace Client
                     _viewPool.Value.Add(towerEntity);
                     _healthPool.Value.Add(towerEntity);
                     _radiusPool.Value.Add(towerEntity);
+                    ref var tComp = ref _tPool.Value.Add(towerEntity);
+                    
+                    var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 15;
+                    
+                    var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 15;
+                    tComp.Position = new Vector3(x, 0, z);
+                    
+                    Angle += 360 / count;
                 }
             }
         }

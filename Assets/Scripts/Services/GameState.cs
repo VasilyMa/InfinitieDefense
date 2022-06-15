@@ -11,7 +11,7 @@ namespace Client
     {
         public EcsWorld World;
         public InterfaceConfig InterfaceConfig;
-        public int EntityMainTower;
+        //public int EntityMainTower;
         public int EntityInterface;
         public int EntityPlayer;
         public TowerStorage TowerStorage;
@@ -76,11 +76,11 @@ namespace Client
             {
                 neededUpgradeValue = DefenseTowerStorage.GetUpgradeByID(DefenseTowers[towerIndex]);
             }
-            
+
             if(TowersUpgrade[towerIndex] == neededUpgradeValue)
             {
                 TowersUpgrade[towerIndex] = 0;
-                ref var createNextTowerComp = ref World.GetPool<CreateNextTowerEvent>().Add(EntityMainTower);
+                ref var createNextTowerComp = ref World.GetPool<CreateNextTowerEvent>().Add(TowersEntity[towerIndex]);
                 createNextTowerComp.TowerIndex = towerIndex;
             }
         }
