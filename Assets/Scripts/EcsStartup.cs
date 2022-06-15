@@ -42,6 +42,9 @@ namespace Client
                 .Add(new JoinToFightSystem())
                 .Add(new ShipArrivalSystem())
 
+                .Add(new WaveSwitcher())
+                .Add(new ShipSwitcher())
+
                 //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
@@ -55,6 +58,7 @@ namespace Client
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
+                .DelHere<ActivateWaveShipsEvent>()
 
 #if UNITY_EDITOR
                 .Add(new EcsWorldDebugSystem())

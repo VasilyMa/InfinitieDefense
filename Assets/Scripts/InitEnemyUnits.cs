@@ -23,6 +23,8 @@ namespace Client
 
                 world.GetPool<EnemyTag>().Add(enemyEntity);
 
+                world.GetPool<UnitTag>().Add(enemyEntity);
+
                 world.GetPool<Targetable>().Add(enemyEntity);
 
                 world.GetPool<InactiveTag>().Add(enemyEntity);

@@ -127,3 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shipEntity: 0
   _shipNumber: 1
+  _shipWave: 1
