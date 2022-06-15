@@ -27,6 +27,7 @@ namespace Client {
                         if (cooldown.currentValue == 0 && dis <= 2)
                         {
                             cooldown.currentValue = cooldown.maxValue;
+                            _player.animator.SetBool("isIdle", false);
                             _player.animator.SetBool("isMining", true);
                             _reloadPool.Value.Add(entity);
                             foreach (var oreEntity in _oreFilter.Value)
@@ -44,14 +45,15 @@ namespace Client {
                         {
                             Debug.Log("Attack!");
                             cooldown.currentValue = cooldown.maxValue;
+                            _player.animator.SetBool("isIdle", false);
                             _player.animator.SetBool("isAttack", true);
                             _reloadPool.Value.Add(entity);
                             //to do attack event
                         }
                     }
-
                     _player.animator.SetBool("isMining", false);
                     _player.animator.SetBool("isAttack", false);
+                    _player.animator.SetBool("isIdle", true);
                 }
             }
             

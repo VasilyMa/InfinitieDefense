@@ -63,10 +63,11 @@ namespace Client {
                     {
                         Vector3 direct = Vector3.RotateTowards(_player.Transform.forward, moveVector, _player.RotateSpeed, 0.0f);
                         _player.Transform.rotation = Quaternion.LookRotation(direct);
-                        
                     }
                 }
                 _player.rigidbody.velocity = new Vector3(moveVector.x * _player.MoveSpeed, _player.rigidbody.velocity.y, moveVector.z * _player.MoveSpeed);
+                _player.animator.SetBool("isIdle", false);
+                _player.animator.SetBool("isRun", true);
             }
             Debug.Log($"Move, {evt.Sender}");
         }
@@ -80,10 +81,13 @@ namespace Client {
             foreach (var entity in _filter.Value)
             {
                 ref var _player = ref _filter.Pools.Inc1.Get(entity);
+                _player.animator.SetBool("isRun", false);
+                _player.animator.SetBool("isIdle", true);
                 _player.rigidbody.velocity = Vector3.zero;
             }
             _joystick.GetComponent<Image>().enabled = false;
             _handlerJoystick.GetComponent<Image>().enabled = false;
+            
             Debug.Log($"Up, {evt.Sender}, {moveVector}");
         }
 
