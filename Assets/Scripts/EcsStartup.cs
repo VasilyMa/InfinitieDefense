@@ -47,7 +47,8 @@ namespace Client
                 .Add(new AddCoinSystem())
                 .Add(new RaycastUserSystem())
                 .Add(new OreMiningSystem())
-                .Add(new ReloadMiningSystem())
+                .Add(new CombatUserSystem())
+                .Add(new ReloadSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
