@@ -14,6 +14,13 @@ namespace Client {
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
+
+                if(_state.Value.TowerStorage.GetIsLastByID(_state.Value.CurrentTowerID))
+                {
+                    _filter.Pools.Inc1.Del(entity);
+                    return;
+                }
+
                 if(filterComp.Time == 0)
                 {
                     if (_state.Value.RockCount > 0)
