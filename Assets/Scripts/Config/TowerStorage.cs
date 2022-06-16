@@ -20,15 +20,24 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 3,
                 IsLast = false,
                 NextID = "2tower"
-    },
+            },
             ["2tower"] = new Tower
             {
                 Radius = 17,
                 TowerHealth = 120,
                 TowerPrefab = TowerPrefabs[1],
                 Upgrade = 5,
-                IsLast = true
+                NextID = "3tower",
+                IsLast = false
             },
+            ["3tower"] = new Tower
+            {
+                Radius = 20,
+                TowerHealth = 140,
+                TowerPrefab = TowerPrefabs[2],
+                Upgrade = 7,
+                IsLast = true
+            }
         };
     }
     public int GetRadiusByID(string id)
