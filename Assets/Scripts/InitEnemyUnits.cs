@@ -35,6 +35,7 @@ namespace Client
                 ref var viewComponent = ref world.GetPool<ViewComponent>().Add(enemyEntity);
                 viewComponent.GameObject = enemy;
                 viewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
+                viewComponent.Animator = enemy.GetComponent<Animator>();
 
                 ref var shipComponent = ref world.GetPool<ShipComponent>().Add(enemyEntity);
                 shipComponent.Number = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMonoBehavior>().GetShipNumber();

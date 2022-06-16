@@ -40,6 +40,7 @@ namespace Client
                 }
                 else
                 {
+                    viewComponent.Animator.SetBool("Run", true);
                     viewComponent.Rigidbody.velocity = (flatTargetPosition - viewComponent.GameObject.transform.position).normalized * movableComponent.Speed;
                 }
             }

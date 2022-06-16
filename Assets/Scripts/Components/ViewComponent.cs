@@ -6,5 +6,6 @@ namespace Client
     {
         public GameObject GameObject;
         public Rigidbody Rigidbody;
+        public Animator Animator;
     }
 }

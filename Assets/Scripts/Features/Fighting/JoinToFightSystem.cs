@@ -27,6 +27,7 @@ namespace Client
                 {
                     _inFightPool.Value.Add(entity);
                     viewComponent.Rigidbody.velocity = Vector3.zero;
+                    viewComponent.Animator.SetBool("Run", false);
                 }
                 else if(isNotMovable && targetableComponent.DistanceToTarget > fightingComponent.ReachZone)
                 {

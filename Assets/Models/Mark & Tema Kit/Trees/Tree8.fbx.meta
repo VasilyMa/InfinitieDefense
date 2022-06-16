@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: 08f7193b3a5b1e1409457946c566b710
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: -284585330409142646
+    second: Tree_temp_climate_018|Tree_temp_climate_001|Take 001|BaseLayer
+  - first:
+      74: 3492664381232367738
+    second: Tree_temp_climate_018|Tree_temp_climate_002|Take 001|BaseLayer
+  - first:
+      74: 6409642413472384364
+    second: Tree_temp_climate_018|Tree_temp_climate_003|Take 001|BaseLayer
+  - first:
+      74: 4646649406921764518
+    second: Tree_temp_climate_018|Tree_temp_climate_004|Take 001|BaseLayer
+  - first:
+      74: 2179601488741599039
+    second: Tree_temp_climate_018|Tree_temp_climate_005|Take 001|BaseLayer
+  - first:
+      74: 764728111346842882
+    second: Tree_temp_climate_018|Tree_temp_climate_006|Take 001|BaseLayer
+  - first:
+      74: -7173894035885236948
+    second: Tree_temp_climate_018|Tree_temp_climate_007|Take 001|BaseLayer
+  - first:
+      74: 1562164332201214321
+    second: Tree_temp_climate_018|Tree_temp_climate_008|Take 001|BaseLayer
+  - first:
+      74: -5596521667028090945
+    second: Tree_temp_climate_018|Tree_temp_climate_009|Take 001|BaseLayer
+  - first:
+      74: -8587373010756744285
+    second: Tree_temp_climate_018|Tree_temp_climate_010|Take 001|BaseLayer
+  - first:
+      74: -7451315815978522037
+    second: Tree_temp_climate_018|Tree_temp_climate_011|Take 001|BaseLayer
+  - first:
+      74: -7093226992944521492
+    second: Tree_temp_climate_018|Tree_temp_climate_012|Take 001|BaseLayer
+  - first:
+      74: 87086398509450479
+    second: Tree_temp_climate_018|Tree_temp_climate_013|Take 001|BaseLayer
+  - first:
+      74: -6539766311460298306
+    second: Tree_temp_climate_018|Tree_temp_climate_014|Take 001|BaseLayer
+  - first:
+      74: 1240535459051568663
+    second: Tree_temp_climate_018|Tree_temp_climate_015|Take 001|BaseLayer
+  - first:
+      74: -2290947088214006251
+    second: Tree_temp_climate_018|Tree_temp_climate_016|Take 001|BaseLayer
+  - first:
+      74: 4046659228527496263
+    second: Tree_temp_climate_018|Tree_temp_climate_017|Take 001|BaseLayer
+  - first:
+      74: -250611543330836494
+    second: Tree_temp_climate_018|Tree_temp_climate_018|Take 001|BaseLayer
+  - first:
+      74: 6461362000315742616
+    second: Tree_temp_climate_018|Tree_temp_climate_019|Take 001|BaseLayer
+  - first:
+      74: 1992321264017372820
+    second: Tree_temp_climate_018|Tree_temp_climate_020|Take 001|BaseLayer
+  - first:
+      74: 2813656190384133780
+    second: Tree_temp_climate_018|Tree_temp_climate_021|Take 001|BaseLayer
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

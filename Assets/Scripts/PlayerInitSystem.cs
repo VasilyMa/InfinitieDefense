@@ -21,7 +21,7 @@ namespace Client {
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
-            player.MoveSpeed = 5f;
+            player.MoveSpeed = 20f;
             player.RotateSpeed = 1f;
             player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
             player.ResHolderTransform = PlayerGo.transform.GetChild(0).transform;

@@ -14,7 +14,7 @@ namespace Client
 
         readonly EcsSharedInject<GameState> _state;
         
-        private Vector3 _holderOffset = new Vector3(0, 20, -20);
+        private Vector3 _holderOffset = new Vector3(0, 15, -7);
         private float _holderFollowSpeed = 5f;
 
         public void Run (EcsSystems systems)

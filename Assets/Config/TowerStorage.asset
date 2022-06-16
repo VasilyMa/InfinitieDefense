@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: TowerStorage
   m_EditorClassIdentifier: 
   TowerPrefabs:
-  - {fileID: 5331402050602310978, guid: c6b670c4d48725640a3f65048d5702fd, type: 3}
-  - {fileID: 6877223642217301252, guid: 786b9edaf37d606408caaf6ad7a95c53, type: 3}
+  - {fileID: 5480896337099532942, guid: c7c0c55e27226a241bf8058219170c6c, type: 3}
+  - {fileID: 3618321849160661702, guid: ff15ecb27543f6140b55b970c9107291, type: 3}
+  - {fileID: 7305551903433586136, guid: b780829689abdbd4583568783b7050c2, type: 3}
