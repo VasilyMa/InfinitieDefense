@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5230301392983540603}
   - component: {fileID: 5230301392983540600}
   - component: {fileID: 5230301392983540601}
+  - component: {fileID: 1168562673}
   m_Layer: 0
   m_Name: UpgradePoint
   m_TagString: UpgradePoint
@@ -26,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5230301392983540606}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -61.2, y: 0.5, z: 2.2}
-  m_LocalScale: {x: 9.464704, y: 1, z: 13.72583}
+  m_LocalScale: {x: 2.7497368, y: 1, z: 2.801442}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,3 +96,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1168562673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5230301392983540606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e3227f1ebf4c64395350ca3d4dfaf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerIndex: 3

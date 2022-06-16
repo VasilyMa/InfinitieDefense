@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: InterfaceStorage
   m_EditorClassIdentifier: 
   RadiusPrefab: {fileID: 2045047550533751321, guid: 4470c775b270df449ba64b92d133240f, type: 3}
+  UpgradePointPrefab: {fileID: 5230301392983540606, guid: f9c684ade8e7a414f8863463c1458890, type: 3}
