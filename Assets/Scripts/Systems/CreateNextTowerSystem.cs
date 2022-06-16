@@ -36,7 +36,7 @@ namespace Client {
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);
-                radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius, radiusComp.Radius, 1);
+                radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius * 2, radiusComp.Radius * 2, 1);
 
                 _filter.Pools.Inc1.Del(entity);
 

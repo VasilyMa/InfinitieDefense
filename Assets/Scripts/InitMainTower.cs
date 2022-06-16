@@ -15,7 +15,6 @@ namespace Client
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<TowerTag> _tPool = default;
         private float Angle = 0;
-        private int count = 6;
 
         public void Init (EcsSystems systems)
         {
@@ -47,12 +46,12 @@ namespace Client
                     _radiusPool.Value.Add(towerEntity);
                     ref var tComp = ref _tPool.Value.Add(towerEntity);
                     
-                    var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 15;
+                    var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
                     
-                    var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 15;
+                    var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
                     tComp.Position = new Vector3(x, 0, z);
                     
-                    Angle += 360 / count;
+                    Angle += 360 / (_state.Value.TowerCount - 1);
                 }
             }
         }

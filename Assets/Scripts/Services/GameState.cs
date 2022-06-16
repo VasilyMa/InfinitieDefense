@@ -11,7 +11,6 @@ namespace Client
     {
         public EcsWorld World;
         public InterfaceConfig InterfaceConfig;
-        //public int EntityMainTower;
         public int EntityInterface;
         public int EntityPlayer;
         public TowerStorage TowerStorage;
@@ -24,25 +23,31 @@ namespace Client
         private int _currentUpgradeTower = 0;
         public List<Transform> CoinTransformList = new List<Transform>();
         public List<Transform> StoneTransformList = new List<Transform>();
-        public string[] DefenseTowers = new string[7];
-        public int[] TowersUpgrade = new int[7];
-        public int[] TowersEntity = new int[7];
+        public string[] DefenseTowers;
+        public int[] TowersUpgrade;
+        public int[] TowersEntity;
+        public int TowerCount;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, 
-        PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage)
+        PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount)
         {
             World = world;
             TowerStorage = towerStorage;
             InterfaceStorage = interfaceStorage;
             PlayerStorage = playerStorage;
             DefenseTowerStorage = defenseTowerStorage;
+            TowerCount = towerCount;
             PlayerStorage.Init();
             TowerStorage.Init();
             DefenseTowerStorage.Init();
             InitDefenseTowers();
         }
+
         public void InitDefenseTowers()
         {
+            DefenseTowers = new string[TowerCount];
+            TowersUpgrade = new int[TowerCount];
+            TowersEntity = new int[TowerCount];
             for (int i = 0; i < DefenseTowers.Length;i++)
             {
                 if(i == 0) DefenseTowers[i] = "1tower";

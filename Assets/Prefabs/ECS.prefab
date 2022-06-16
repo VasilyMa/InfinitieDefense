@@ -48,3 +48,4 @@ MonoBehaviour:
   _interfaceStorage: {fileID: 11400000, guid: ce647896e01d5944a966d338021e3ac7, type: 2}
   _playerStorage: {fileID: 11400000, guid: 192d904650ba40549b4f1521db72a700, type: 2}
   _defenseTowerStorage: {fileID: 11400000, guid: 730ddd42c49ede7499913fdd53ce9c8d, type: 2}
+  _towerCount: 7

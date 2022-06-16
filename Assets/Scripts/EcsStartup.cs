@@ -15,6 +15,7 @@ namespace Client
         [SerializeField] private InterfaceStorage _interfaceStorage;
         [SerializeField] private PlayerStorage _playerStorage;
         [SerializeField] private DefenseTowerStorage _defenseTowerStorage;
+        [SerializeField] private int _towerCount;
         EcsSystems _systems;
         EcsSystems _delHereSystems;
         EcsWorld _world = null;
@@ -23,7 +24,7 @@ namespace Client
         void Start ()
         {
             _world = new EcsWorld();
-            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _playerStorage, _defenseTowerStorage);
+            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _playerStorage, _defenseTowerStorage, _towerCount);
             _systems = new EcsSystems (_world, _gameState);
             _delHereSystems = new EcsSystems(_world, _gameState);
 

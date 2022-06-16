@@ -15,8 +15,6 @@ namespace Client {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
 
-                //todo переделать
-
                 if(filterComp.TowerIndex == 0)
                 {
                     if(_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))

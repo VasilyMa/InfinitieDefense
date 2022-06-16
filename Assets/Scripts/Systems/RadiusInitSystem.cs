@@ -17,7 +17,7 @@ namespace Client {
                 if (viewComp.GameObject != null)
                 {
                     radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
-                    radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius, radiusComp.Radius, 1);
+                    radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius * 2, radiusComp.Radius * 2, 1);
                 }
             }
         }
