@@ -10,11 +10,6 @@ namespace Client
     public class GameState
     {
         public EcsWorld World;
-<<<<<<< HEAD
-        public InterfaceConfig InterfaceConfig;
-=======
-        public int EntityMainTower;
->>>>>>> origin/develop
         public int EntityInterface;
         public int EntityPlayer;
         public int EntityCamera;
