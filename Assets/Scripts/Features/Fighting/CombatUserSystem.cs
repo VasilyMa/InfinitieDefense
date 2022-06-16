@@ -20,6 +20,7 @@ namespace Client {
                 {
                     ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
                     goldComp.Position = viewComp.Transform.position;
+                    GameObject.Destroy(viewComp.GameObject);
                     _filter.Pools.Inc2.Del(entity);
                     _filter.Pools.Inc3.Del(entity);
                 }
