@@ -18,9 +18,10 @@ namespace Client {
                 Debug.Log(fightComp.HealthPoints);
                 if (fightComp.HealthPoints <= 0)
                 {
+                    ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
+                    goldComp.Position = viewComp.Transform.position;
                     _filter.Pools.Inc2.Del(entity);
                     _filter.Pools.Inc3.Del(entity);
-                    _goldPool.Value.Add(_world.Value.NewEntity());
                 }
                 _filter.Pools.Inc1.Del(entity);
             }
