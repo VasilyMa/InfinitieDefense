@@ -569,6 +569,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2547387589652577254, guid: c29718758e29c48448137053fc70220a, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5795999319188923890, guid: c29718758e29c48448137053fc70220a, type: 3}
       propertyPath: m_Name
       value: Ship

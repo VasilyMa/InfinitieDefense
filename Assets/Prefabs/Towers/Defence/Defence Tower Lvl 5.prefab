@@ -98,7 +98,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d4677eb517f66fc4bb208dec71f91126, type: 3}
   m_PrefabInstance: {fileID: 2749449340786054179}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1192353857483025168
+--- !u!65 &7323901950517858846
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,5 +109,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.503536, y: 10.996366, z: 7.500902}
-  m_Center: {x: -0.014152527, y: 5.497359, z: -0.067019105}
+  m_Size: {x: 3.1573844, y: 6.59782, z: 3.146807}
+  m_Center: {x: 0, y: 3.2984154, z: 0}

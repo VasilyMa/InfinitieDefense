@@ -98,7 +98,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fa1657e6d168b4146b13ec39c0fea99b, type: 3}
   m_PrefabInstance: {fileID: 5294226412096388369}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &3206064665255327426
+--- !u!136 &6590045691579539428
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 4.5
-  m_Height: 17.468937
+  m_Radius: 1.5042295
+  m_Height: 6.49
   m_Direction: 1
-  m_Center: {x: 0.07967758, y: 2.8493464, z: 0.014610767}
+  m_Center: {x: 0.02390325, y: 1.74, z: 0.004383266}
