@@ -29,7 +29,13 @@ namespace Client
             ref var healthComp = ref _healthPool.Value.Add(entity);
             healthComp.Health = _state.Value.TowerStorage.GetHealthByID(towerID);
 
+            GameObject upgradePoint = null;
+            UpgradePointMB upgradePointMB = null;
+
             var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
+            upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0, -3), Quaternion.identity);
+            upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
+            upgradePointMB.TowerIndex = 0;
 
             ref var viewComponent = ref _viewPool.Value.Add(entity);
             viewComponent.GameObject = mainTower;
@@ -47,10 +53,13 @@ namespace Client
                     ref var tComp = ref _tPool.Value.Add(towerEntity);
                     
                     var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
-                    
                     var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
                     tComp.Position = new Vector3(x, 0, z);
-                    
+
+                    upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0, z - 3), Quaternion.identity);
+                    upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
+                    upgradePointMB.TowerIndex = i;
+
                     Angle += 360 / (_state.Value.TowerCount - 1);
                 }
             }

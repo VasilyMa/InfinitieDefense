@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class UpgradePointMB : MonoBehaviour
 {
-    [SerializeField] public int TowerIndex;
+    public int TowerIndex;
 }
