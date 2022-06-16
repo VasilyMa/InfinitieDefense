@@ -1,6 +1,6 @@
 namespace Client
 {
-    struct DisabledShipTag
+    struct CurrentWaveTag
     {
         
     }

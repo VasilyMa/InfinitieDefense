@@ -32,6 +32,7 @@ namespace Client
                 .Add(new InitMainTower())
                 .Add(new InitEnemyUnits())
                 .Add(new InitEnemyShips())
+                .Add(new InitCamera())
                 .Add(new PlayerInitSystem())
                 .Add(new OreInitSystem())
                 .Add(new InitInterfaceSystem())
@@ -43,18 +44,23 @@ namespace Client
                 .Add(new JoinToFightSystem())
                 .Add(new ShipArrivalSystem())
 
-                //.AddWorld(new EcsWorld(), Idents.Worlds.Events)
+                .Add(new WaveSwitcher())
+                .Add(new ShipSwitcher())
+
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new RaycastUserSystem())
                 .Add(new OreMiningSystem())
-                .Add(new ReloadMiningSystem())
+                .Add(new CameraFollowSystem())
                 .Add(new UpgradeSystems())
                 .Add(new CreateNextTowerSystem())
+                .Add(new CombatUserSystem())
+                .Add(new ReloadSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
+                .DelHere<ActivateWaveShipsEvent>()
 
 #if UNITY_EDITOR
                 .Add(new EcsWorldDebugSystem())

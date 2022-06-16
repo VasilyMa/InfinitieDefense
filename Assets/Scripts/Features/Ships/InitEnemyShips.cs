@@ -9,15 +9,13 @@ namespace Client
     {
         readonly EcsWorldInject _world = default;
 
-        readonly EcsFilterInject<Inc<EnemyTag, ShipComponent, InactiveTag>, Exc<DeadTag>> _enemyUnitsFilter = default;
+        readonly EcsFilterInject<Inc<EnemyTag, UnitTag, ShipComponent, InactiveTag>, Exc<DeadTag>> _enemyUnitsFilter = default;
 
-        readonly EcsPoolInject<DisabledShipTag> _disabledShipPool = default;
+        readonly EcsPoolInject<InactiveTag> _inactivePool = default;
         readonly EcsPoolInject<ShipComponent> _shipPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
 
         readonly EcsSharedInject<GameState> _state;
-
-        private int _defaultActiveEncounterOnLevel = 1;
 
         public void Init (EcsSystems systems)
         {
@@ -47,22 +45,21 @@ namespace Client
                 shipComponent.ShipArrivalMonoBehavior.SetEntity(shipEntity);
                 shipComponent.ShipArrivalMonoBehavior.Init(_world);
                 shipComponent.Number = shipComponent.ShipArrivalMonoBehavior.GetShipNumber();
+                shipComponent.Wave = shipComponent.ShipArrivalMonoBehavior.GetShipWave();
                 shipComponent.EnemyUnitsEntitys = new List<int>();
 
                 ref var viewComponent = ref _viewPool.Value.Add(shipEntity);
                 viewComponent.GameObject = ship.gameObject;
                 viewComponent.Rigidbody = ship.GetComponent<Rigidbody>();
 
-                if (shipComponent.Number > _defaultActiveEncounterOnLevel)
-                {
-                    _disabledShipPool.Value.Add(shipEntity);
-                }
+                _inactivePool.Value.Add(shipEntity);
 
                 foreach (var enemyUnit in _enemyUnitsFilter.Value)
                 {
                     ref var enemyUnitShip = ref _shipPool.Value.Get(enemyUnit);
+                    ref var enemyViewComponent = ref _viewPool.Value.Get(enemyUnit);
 
-                    if (enemyUnitShip.Number == shipComponent.Number)
+                    if (viewComponent.GameObject == enemyViewComponent.GameObject.transform.parent.gameObject)
                     {
                         shipComponent.EnemyUnitsEntitys.Add(enemyUnit);
                     }

@@ -10,9 +10,14 @@ namespace Client
     public class GameState
     {
         public EcsWorld World;
+<<<<<<< HEAD
         public InterfaceConfig InterfaceConfig;
+=======
+        public int EntityMainTower;
+>>>>>>> origin/develop
         public int EntityInterface;
         public int EntityPlayer;
+        public int EntityCamera;
         public TowerStorage TowerStorage;
         public InterfaceStorage InterfaceStorage;
         public PlayerStorage PlayerStorage;
@@ -20,6 +25,8 @@ namespace Client
         public string CurrentTowerID;
         public int RockCount = 0;
         public int CoinCount = 0;
+        public int CurrentActivatedShip = 0;
+        private int Wave = 0;
         private int _currentUpgradeTower = 0;
         public List<Transform> CoinTransformList = new List<Transform>();
         public List<Transform> StoneTransformList = new List<Transform>();
@@ -88,6 +95,18 @@ namespace Client
                 ref var createNextTowerComp = ref World.GetPool<CreateNextTowerEvent>().Add(TowersEntity[towerIndex]);
                 createNextTowerComp.TowerIndex = towerIndex;
             }
+        }
+
+        public void SetNextWave()
+        {
+            World.GetPool<ActivateWaveShipsEvent>().Add(World.NewEntity());
+            Wave++;
+            CurrentActivatedShip = 0;
+        }
+
+        public int GetCurrentWave()
+        {
+            return Wave;
         }
 
 

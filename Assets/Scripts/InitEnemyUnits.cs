@@ -9,7 +9,8 @@ namespace Client
 
         EcsSharedInject<GameState> _state = default;
 
-        string Enemy;
+        private string Enemy;
+
         public void Init(EcsSystems systems)
         {
             var allEnemyUnits = GameObject.FindGameObjectsWithTag(nameof(Enemy));
@@ -21,6 +22,8 @@ namespace Client
                 var enemyEntity = world.NewEntity();
 
                 world.GetPool<EnemyTag>().Add(enemyEntity);
+
+                world.GetPool<UnitTag>().Add(enemyEntity);
 
                 world.GetPool<Targetable>().Add(enemyEntity);
 

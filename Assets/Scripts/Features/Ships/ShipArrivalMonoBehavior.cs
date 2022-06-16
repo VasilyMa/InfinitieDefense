@@ -15,6 +15,7 @@ namespace Client
 
         [SerializeField] private int _shipEntity;
         [SerializeField] private int _shipNumber;
+        [SerializeField] private int _shipWave;
 
         public void Init(EcsWorldInject world)
         {
@@ -34,7 +35,6 @@ namespace Client
 
             ref var shipArrivalEvent = ref _shipArrivalEventPool.Add(_world.Value.NewEntity());
             shipArrivalEvent.ShipEntity = _shipEntity;
-
         }
 
         public void SetEntity(int entity)
@@ -46,9 +46,15 @@ namespace Client
         {
             return _shipEntity;
         }
+
         public int GetShipNumber()
         {
             return _shipNumber;
+        }
+
+        public int GetShipWave()
+        {
+            return _shipWave;
         }
     }
 }
