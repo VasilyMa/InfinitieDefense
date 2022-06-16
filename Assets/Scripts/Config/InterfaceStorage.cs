@@ -6,4 +6,5 @@ public class InterfaceStorage : ScriptableObject
 {
     public GameObject RadiusPrefab;
     public GameObject UpgradePointPrefab;
+    public GameObject GoldPrefab;
 }

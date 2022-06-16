@@ -36,6 +36,7 @@ namespace Client
                 viewComponent.GameObject = enemy;
                 viewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
                 viewComponent.Animator = enemy.GetComponent<Animator>();
+                viewComponent.Transform = enemy.GetComponent<Transform>();
 
                 ref var shipComponent = ref world.GetPool<ShipComponent>().Add(enemyEntity);
                 shipComponent.Number = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMonoBehavior>().GetShipNumber();
@@ -43,7 +44,7 @@ namespace Client
                 ref var fightingComponent = ref world.GetPool<FightingComponent>().Add(enemyEntity);
                 fightingComponent.Damage = 5f;
                 fightingComponent.ReachZone = 10f;
-                fightingComponent.HealthPoints = 100;
+                fightingComponent.HealthPoints = 15;
             }
         }
     }
