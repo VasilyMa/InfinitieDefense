@@ -69,10 +69,11 @@ namespace Client
 
 
 #if UNITY_EDITOR
-            _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
+            _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
                 //_systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(Idents.Worlds.Events))
                 //.Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
-#endif
+#endif         
+            _systems
                 .Inject()
                 .InjectUgui(_uguiEmitter, Idents.Worlds.Events)
                 .Init();
