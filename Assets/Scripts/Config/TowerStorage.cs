@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class TowerStorage : ScriptableObject
 {
     public GameObject[] TowerPrefabs;
+    public GameObject DefenderPrefab;
     public Dictionary<string, Tower> Towers;
 
     public void Init()
@@ -19,7 +20,8 @@ public class TowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[0],
                 Upgrade = 3,
                 IsLast = false,
-                NextID = "2tower"
+                NextID = "2tower",
+                DefenderCount = 1
             },
             ["2tower"] = new Tower
             {
@@ -28,7 +30,8 @@ public class TowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[1],
                 Upgrade = 5,
                 NextID = "3tower",
-                IsLast = false
+                IsLast = false,
+                DefenderCount = 2
             },
             ["3tower"] = new Tower
             {
@@ -36,7 +39,8 @@ public class TowerStorage : ScriptableObject
                 TowerHealth = 140,
                 TowerPrefab = TowerPrefabs[2],
                 Upgrade = 7,
-                IsLast = true
+                IsLast = true,
+                DefenderCount = 3
             }
         };
     }
@@ -63,6 +67,10 @@ public class TowerStorage : ScriptableObject
     public string GetNextIDByID(string id)
     {
         return Towers[id].NextID;
+    }
+    public int GetDefenderCountByID(string id)
+    {
+        return Towers[id].DefenderCount;
     }
     
 }

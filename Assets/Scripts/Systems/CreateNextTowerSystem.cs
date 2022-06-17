@@ -5,10 +5,12 @@ using Leopotam.EcsLite.Di;
 namespace Client {
     sealed class CreateNextTowerSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
+        readonly EcsWorldInject _world = default;
         readonly EcsFilterInject<Inc<CreateNextTowerEvent>> _filter = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
         readonly EcsPoolInject<TowerTag> _towerPool = default;
+        readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -26,6 +28,10 @@ namespace Client {
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), Vector3.zero, Quaternion.identity);
                     radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
+
+
+                    _defenderPool.Value.Add(_world.Value.NewEntity());
+
                 }
                 else
                 {

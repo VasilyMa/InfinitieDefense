@@ -25,6 +25,8 @@ namespace Client
         private int _currentUpgradeTower = 0;
         public List<Transform> CoinTransformList = new List<Transform>();
         public List<Transform> StoneTransformList = new List<Transform>();
+        public GameObject[] DefendersGOs;
+        public int[] DefendersEntity;
         public string[] DefenseTowers;
         public int[] TowersUpgrade;
         public int[] TowersEntity;
@@ -43,6 +45,12 @@ namespace Client
             TowerStorage.Init();
             DefenseTowerStorage.Init();
             InitDefenseTowers();
+            InitDefenders();
+        }
+        public void InitDefenders()
+        {
+            DefendersEntity = new int[10];
+            DefendersGOs = new GameObject[10];
         }
 
         public void InitDefenseTowers()
