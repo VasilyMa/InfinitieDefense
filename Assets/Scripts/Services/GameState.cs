@@ -17,7 +17,6 @@ namespace Client
         public InterfaceStorage InterfaceStorage;
         public PlayerStorage PlayerStorage;
         public DefenseTowerStorage DefenseTowerStorage;
-        public string CurrentTowerID;
         public int RockCount = 0;
         public int CoinCount = 0;
         public int CurrentActivatedShip = 0;
@@ -31,6 +30,8 @@ namespace Client
         public int[] TowersUpgrade;
         public int[] TowersEntity;
         public int TowerCount;
+        public string CurrentPlayerID;
+        public int PlayerUpgrade;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, 
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount)
@@ -46,11 +47,17 @@ namespace Client
             DefenseTowerStorage.Init();
             InitDefenseTowers();
             InitDefenders();
+            InitSaves();
         }
         public void InitDefenders()
         {
             DefendersEntity = new int[10];
             DefendersGOs = new GameObject[10];
+        }
+        private void InitSaves()
+        {
+            CurrentPlayerID = "1level";
+            PlayerUpgrade = 0;
         }
 
         public void InitDefenseTowers()
@@ -69,7 +76,7 @@ namespace Client
         }
         public bool PointInMainTowerRadius(Vector3 position)
         {
-            int radius = TowerStorage.GetRadiusByID(CurrentTowerID);
+            int radius = TowerStorage.GetRadiusByID(DefenseTowers[0]);
             if((Mathf.Pow(position.x,2))+ (Mathf.Pow(position.z,2)) <= Mathf.Pow(radius,2))
             {
                 return true;
@@ -97,6 +104,16 @@ namespace Client
                 TowersUpgrade[towerIndex] = 0;
                 ref var createNextTowerComp = ref World.GetPool<CreateNextTowerEvent>().Add(TowersEntity[towerIndex]);
                 createNextTowerComp.TowerIndex = towerIndex;
+            }
+        }
+        public void UpgradePlayer()
+        {
+            PlayerUpgrade++;
+            int neededUpgradeValue = PlayerStorage.GetUpgradeByID(CurrentPlayerID);
+            if(PlayerUpgrade == neededUpgradeValue)
+            {
+                PlayerUpgrade = 0;
+                
             }
         }
 

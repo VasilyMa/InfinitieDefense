@@ -41,13 +41,30 @@ namespace Client
                     ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                     upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;
+                    upgradeComp.UpgradeTower = true;
 
+                }
+            }
+            else if(other.gameObject.tag == "UpgradePlayerPoint")
+            {
+                if(!_upgradePool.Has(_state.EntityPlayer))
+                {
+                    ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
+                    upgradeComp.Time = 0f;
+                    upgradeComp.UpgradeTower = false;
                 }
             }
         }
         private void OnTriggerExit(Collider other)
         {
             if(other.gameObject.tag == "UpgradePoint")
+            {
+                if(_upgradePool.Has(_state.EntityPlayer))
+                {
+                    _upgradePool.Del(_state.EntityPlayer);
+                }
+            }
+            else if(other.gameObject.tag == "UpgradePlayerPoint")
             {
                 if(_upgradePool.Has(_state.EntityPlayer))
                 {

@@ -17,7 +17,10 @@ public class PlayerStorage : ScriptableObject
                 Damage = 5,
                 Speed = 3f,
                 Health = 100,
-                PlayerPrefab = PlayerPrefabs[0]
+                PlayerPrefab = PlayerPrefabs[0],
+                IsLast = false,
+                NextID = "2level",
+                UpgradeValue = 5
             },
             ["2level"] = new PlayerData
             {
@@ -25,7 +28,9 @@ public class PlayerStorage : ScriptableObject
                 Damage = 7,
                 Speed = 3.5f,
                 Health = 120,
-                PlayerPrefab = PlayerPrefabs[1]
+                PlayerPrefab = PlayerPrefabs[1],
+                IsLast = true,
+                UpgradeValue = 5
             },
         };
     }
@@ -49,5 +54,17 @@ public class PlayerStorage : ScriptableObject
     public GameObject GetPlayerByID(string id)
     {
         return Players[id].PlayerPrefab;
+    }
+    public bool GetIsLastByID(string id)
+    {
+        return Players[id].IsLast;
+    }
+    public string GetNextIdByID(string id)
+    {
+        return Players[id].NextID;
+    }
+    public int GetUpgradeByID(string id)
+    {
+        return Players[id].UpgradeValue;
     }
 }

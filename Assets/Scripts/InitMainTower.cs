@@ -20,8 +20,8 @@ namespace Client
         public void Init (EcsSystems systems)
         {
             var entity = _world.Value.NewEntity();
-            string towerID = "1tower";
-            _state.Value.CurrentTowerID = towerID;
+            string towerID = _state.Value.DefenseTowers[0];
+            //_state.Value.CurrentTowerID = towerID;
             
             ref var towerComp = ref _towerPool.Value.Add(entity);
             towerComp.DefendersPositions = new Vector3[10];

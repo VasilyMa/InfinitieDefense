@@ -9,6 +9,8 @@ namespace Client {
         readonly EcsPoolInject<RealoadComponent> _reloadPool = default;
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<HealthComponent> _healthPool = default;
         public void Init (EcsSystems systems) 
         {
             
@@ -16,7 +18,7 @@ namespace Client {
             _state.Value.EntityPlayer = playerEntity;
             ref var player = ref _playerPool.Value.Add (playerEntity);
 
-            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,2,-10), Quaternion.identity);
+            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), new Vector3(0,2,-10), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
