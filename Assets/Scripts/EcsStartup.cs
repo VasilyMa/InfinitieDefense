@@ -57,10 +57,13 @@ namespace Client
                 .Add(new CreateNextTowerSystem())
                 .Add(new CombatUserSystem())
                 .Add(new ReloadSystem())
+                .Add(new DamagingEventSystem())
+                .Add(new DieSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
                 .DelHere<ActivateWaveShipsEvent>()
+                .DelHere<DamagingEventComponent>()
 
 #if UNITY_EDITOR
                 .Add(new EcsWorldDebugSystem())

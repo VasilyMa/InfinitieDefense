@@ -12,7 +12,7 @@ namespace Client
         readonly EcsPoolInject<MainTowerTag> _towerPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
-        readonly EcsPoolInject<FightingComponent> _fightingPool = default;
+        readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<TowerTag> _tPool = default;
         private float Angle = 0;
 
@@ -26,8 +26,9 @@ namespace Client
             ref var radiusComp = ref _radiusPool.Value.Add(entity);
             radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(towerID);
 
-            ref var fightingComponent = ref _fightingPool.Value.Add(entity);
-            fightingComponent.HealthPoints = _state.Value.TowerStorage.GetHealthByID(towerID);
+            ref var healthComponent = ref _healthPool.Value.Add(entity);
+            healthComponent.MaxValue = _state.Value.TowerStorage.GetHealthByID(towerID);
+            healthComponent.CurrentValue = healthComponent.MaxValue;
 
             GameObject upgradePoint = null;
             UpgradePointMB upgradePointMB = null;
@@ -48,7 +49,7 @@ namespace Client
                     int towerEntity = _world.Value.NewEntity();
                     _state.Value.TowersEntity[i] = towerEntity;
                     _viewPool.Value.Add(towerEntity);
-                    _fightingPool.Value.Add(towerEntity);
+                    _healthPool.Value.Add(towerEntity);
                     _radiusPool.Value.Add(towerEntity);
                     ref var tComp = ref _tPool.Value.Add(towerEntity);
                     

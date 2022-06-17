@@ -21,7 +21,7 @@ namespace Client {
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
-            player.MoveSpeed = 10f;
+            player.MoveSpeed = 15f;
             player.RotateSpeed = 1f;
             player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
             player.ResHolderTransform = PlayerGo.transform.GetChild(0).transform;
@@ -34,6 +34,12 @@ namespace Client {
             cooldown.maxValue = 3f;
             cooldown.currentValue = cooldown.maxValue;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
+
+            //udalit' eto haxyu posle bilda
+            player.AttackMonoBehaviour = PlayerGo.GetComponent<AttackMonoBehaviour>();
+            player.AttackMonoBehaviour.Init(_world);
+            player.AttackMonoBehaviour.SetEntity(playerEntity);
+            player.AttackMonoBehaviour.SetDamageValue(50);
         }
     }
 }

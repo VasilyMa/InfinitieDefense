@@ -29,6 +29,12 @@ namespace Client
 
                 targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
                 targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
+
+                // ubrat' proverku v collader unita
+                if (viewComponent.AttackMonoBehaviour)
+                {
+                    viewComponent.AttackMonoBehaviour.SetTargetInfo(targetableComponent.TargetEntity, targetableComponent.TargetObject);
+                }
             }
         }
     }

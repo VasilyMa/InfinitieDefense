@@ -6,10 +6,10 @@ namespace Client
 {
     sealed class JoinToFightSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable, FightingComponent, ViewComponent>, Exc<InactiveTag>> _enemyFilter = default;
+        readonly EcsFilterInject<Inc<Targetable, ViewComponent, Movable, ReachZoneComponent>, Exc<InactiveTag>> _enemyFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
-        readonly EcsPoolInject<FightingComponent> _fightingPool = default;
+        readonly EcsPoolInject<ReachZoneComponent> _reachZonePool = default;
         readonly EcsPoolInject<InFightTag> _inFightPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
 
@@ -18,20 +18,22 @@ namespace Client
             foreach (var entity in _enemyFilter.Value)
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
-                ref var fightingComponent = ref _fightingPool.Value.Get(entity);
+                ref var reachZoneComponent = ref _reachZonePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                bool isNotMovable = _inFightPool.Value.Has(entity);
+                bool isInFigth = _inFightPool.Value.Has(entity);
 
-                if (!isNotMovable && targetableComponent.DistanceToTarget < fightingComponent.ReachZone)
+                if (!isInFigth && targetableComponent.DistanceToTarget < reachZoneComponent.Value)
                 {
                     _inFightPool.Value.Add(entity);
                     viewComponent.Rigidbody.velocity = Vector3.zero;
                     viewComponent.Animator.SetBool("Run", false);
+                    viewComponent.Animator.SetBool("Attack", true);
                 }
-                else if(isNotMovable && targetableComponent.DistanceToTarget > fightingComponent.ReachZone)
+                else if(isInFigth && targetableComponent.DistanceToTarget > reachZoneComponent.Value)
                 {
                     _inFightPool.Value.Del(entity);
+                    viewComponent.Animator.SetBool("Attack", false);
                 }
             }
         }

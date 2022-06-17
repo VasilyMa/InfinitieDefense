@@ -17,7 +17,7 @@ namespace Client {
                 ref var _player = ref _filter.Pools.Inc1.Get(entity);
                 ref var cooldown = ref _cooldownPool.Value.Get(entity);
                 
-                Ray ray = new Ray(_player.Transform.position, _player.Transform.forward);
+                Ray ray = new Ray(_player.Transform.position + Vector3.up, _player.Transform.forward);
                 Debug.DrawRay(_player.Transform.position, _player.Transform.forward * distanceRay);
                 if (Physics.Raycast(ray, out RaycastHit hitInfo, distanceRay))
                 {
@@ -58,7 +58,10 @@ namespace Client {
                             foreach (var enemyEntity in _enemyfilter.Value)
                             {
                                 if (hitInfo.collider.gameObject == _enemyfilter.Pools.Inc1.Get(enemyEntity).GameObject)
+                                {
                                     _player.playerMB.InitCombatEvent(enemyEntity, hitInfo.collider.gameObject);
+                                    _player.AttackMonoBehaviour.SetTargetInfo(enemyEntity, hitInfo.collider.gameObject);
+                                }
                             }
                             Debug.Log("Attack!");
                             //to do attack event

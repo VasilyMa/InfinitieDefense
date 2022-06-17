@@ -422,7 +422,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7770318624900243041, guid: 662496b7ffb588441916b52eeb82c952, type: 3}
+  - {fileID: 2100000, guid: 1c9b2d8aa74a9ca4d9c17f93567a20e5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -582,6 +582,7 @@ GameObject:
   - component: {fileID: 4431837402814381582}
   - component: {fileID: 8952504763310265792}
   - component: {fileID: 8952504763310265791}
+  - component: {fileID: -8845241411232706800}
   m_Layer: 0
   m_Name: EnemyMelee
   m_TagString: Enemy
@@ -654,6 +655,21 @@ CapsuleCollider:
   m_Height: 2.2165787
   m_Direction: 1
   m_Center: {x: 0, y: 1.104251, z: 0}
+--- !u!114 &-8845241411232706800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929615800299421390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e159a150a5eeb0045931045b7a0a9891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitEntity: 0
+  _targetEntity: 0
+  _damageValue: 0
 --- !u!1 &6940528574697838223
 GameObject:
   m_ObjectHideFlags: 0
