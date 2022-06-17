@@ -3,7 +3,7 @@ using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Unity.Ugui;
 using Leopotam.EcsLite.ExtendedSystems;
 using Leopotam.EcsLite.Unity;
-using Leopotam.EcsLite.UnityEditor;
+//using Leopotam.EcsLite.UnityEditor;
 using UnityEngine;
 
 namespace Client
@@ -65,10 +65,13 @@ namespace Client
                 .DelHere<ShipArrivalEvent>()
                 .DelHere<ActivateWaveShipsEvent>()
                 .DelHere<DamagingEventComponent>()
+                ;
+
 
 #if UNITY_EDITOR
-                .Add(new EcsWorldDebugSystem())
-                .Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
+            _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
+                //_systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(Idents.Worlds.Events))
+                //.Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
 #endif
                 .Inject()
                 .InjectUgui(_uguiEmitter, Idents.Worlds.Events)

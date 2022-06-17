@@ -17,7 +17,7 @@ namespace Client {
                 ref var _player = ref _filter.Pools.Inc1.Get(entity);
                 ref var cooldown = ref _cooldownPool.Value.Get(entity);
                 
-                Ray ray = new Ray(_player.Transform.position + new Vector3(0, -0.5f, 0), _player.Transform.forward);
+                Ray ray = new Ray(_player.Transform.position + new Vector3(0, 0.5f, 0), _player.Transform.forward);
                 Debug.DrawRay(_player.Transform.position, _player.Transform.forward * distanceRay);
                 if (Physics.Raycast(ray, out RaycastHit hitInfo, distanceRay))
                 {

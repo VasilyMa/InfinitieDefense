@@ -21,10 +21,10 @@ namespace Client {
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
-            player.MoveSpeed = 15f;
+            player.MoveSpeed = 10f;
             player.RotateSpeed = 1f;
             player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
-            player.ResHolderTransform = PlayerGo.transform.GetChild(0).transform;
+            player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
             var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
