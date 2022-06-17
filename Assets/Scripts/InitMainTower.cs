@@ -28,10 +28,10 @@ namespace Client
 
             for (int d = 0; d < towerComp.DefendersPositions.Length;d++)
             {
-                var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 13;
-                var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 13;
-
-                Angle += 360 / towerComp.DefendersPositions.Length;
+                var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 7;
+                var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 7;
+                towerComp.DefendersPositions[d] = new Vector3(x, 0, z);
+                Angle += 360 / 10;
 
                 var ent = _world.Value.NewEntity();
                 _defenderPool.Value.Add(ent);

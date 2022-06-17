@@ -21,7 +21,7 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 3,
                 IsLast = false,
                 NextID = "2tower",
-                DefenderCount = 1
+                DefenderCount = 3
             },
             ["2tower"] = new Tower
             {
@@ -31,7 +31,7 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 5,
                 NextID = "3tower",
                 IsLast = false,
-                DefenderCount = 2
+                DefenderCount = 6
             },
             ["3tower"] = new Tower
             {
@@ -40,7 +40,7 @@ public class TowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[2],
                 Upgrade = 7,
                 IsLast = true,
-                DefenderCount = 3
+                DefenderCount = 9
             }
         };
     }
