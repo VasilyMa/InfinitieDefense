@@ -6,7 +6,7 @@ namespace Client {
     sealed class PlayerInitSystem : IEcsInitSystem {
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<CooldownComponent> _cooldownMining = default;
-        readonly EcsPoolInject<RealoadComponent> _reloadPool = default;
+        readonly EcsPoolInject<ReloadComponent> _reloadPool = default;
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         public void Init (EcsSystems systems) 
@@ -31,7 +31,7 @@ namespace Client {
             colliderChecker.Init(systems.GetWorld(), systems.GetShared<GameState>());
             _cooldownMining.Value.Add(_state.Value.EntityPlayer);
             ref var cooldown = ref _cooldownMining.Value.Get(_state.Value.EntityPlayer);
-            cooldown.maxValue = 1f;
+            cooldown.maxValue = 2f;
             cooldown.currentValue = cooldown.maxValue;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
 

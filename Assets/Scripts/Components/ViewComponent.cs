@@ -9,5 +9,7 @@ namespace Client
         public Animator Animator;
         public AttackMonoBehaviour AttackMonoBehaviour;
         public Transform Transform;
+        public float MoveSpeed;
+        public float RotateSpeed;
     }
 }
