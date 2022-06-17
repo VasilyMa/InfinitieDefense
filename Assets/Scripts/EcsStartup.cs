@@ -56,6 +56,7 @@ namespace Client
                 .Add(new UpgradeSystems())
                 .Add(new CreateNextTowerSystem())
                 .Add(new CombatUserSystem())
+                .Add(new DroppedGoldSystem())
                 .Add(new ReloadSystem())
                 .Add(new DamagingEventSystem())
                 .Add(new DieSystem())

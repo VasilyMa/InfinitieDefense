@@ -16,7 +16,7 @@ namespace Client {
             _state.Value.EntityPlayer = playerEntity;
             ref var player = ref _playerPool.Value.Add (playerEntity);
 
-            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,0,-5), Quaternion.identity);
+            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,2,-5), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
@@ -31,7 +31,7 @@ namespace Client {
             colliderChecker.Init(systems.GetWorld(), systems.GetShared<GameState>());
             _cooldownMining.Value.Add(_state.Value.EntityPlayer);
             ref var cooldown = ref _cooldownMining.Value.Get(_state.Value.EntityPlayer);
-            cooldown.maxValue = 3f;
+            cooldown.maxValue = 1f;
             cooldown.currentValue = cooldown.maxValue;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
 

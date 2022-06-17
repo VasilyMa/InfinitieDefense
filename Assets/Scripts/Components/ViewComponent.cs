@@ -8,5 +8,6 @@ namespace Client
         public Rigidbody Rigidbody;
         public Animator Animator;
         public AttackMonoBehaviour AttackMonoBehaviour;
+        public Transform Transform;
     }
 }
