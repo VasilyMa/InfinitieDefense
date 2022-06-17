@@ -53,6 +53,7 @@ namespace Client
                 viewComponent.AttackMonoBehaviour.SetEntity(enemyEntity);
                 viewComponent.AttackMonoBehaviour.SetDamageValue(damageComponent.Value);
                 viewComponent.Transform = enemy.GetComponent<Transform>();
+                viewComponent.Outline = enemy.GetComponent<Outline>();
 
                 shipComponent.Number = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMonoBehavior>().GetShipNumber();
             }

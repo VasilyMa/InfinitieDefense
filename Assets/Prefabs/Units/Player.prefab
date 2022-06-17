@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: -8413090635480457555}
   - component: {fileID: 1692087424332287810}
   - component: {fileID: 4558196868119118243}
+  - component: {fileID: 3748161237271677150}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -574,6 +575,24 @@ MonoBehaviour:
   _targetEntity: 0
   _targetObject: {fileID: 0}
   _damageValue: 0
+--- !u!114 &3748161237271677150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2599815697395588373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 0, g: 0.44154477, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2832315524486362101
 GameObject:
   m_ObjectHideFlags: 0

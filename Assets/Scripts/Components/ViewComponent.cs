@@ -11,5 +11,6 @@ namespace Client
         public Transform Transform;
         public float MoveSpeed;
         public float RotateSpeed;
+        public Outline Outline;
     }
 }

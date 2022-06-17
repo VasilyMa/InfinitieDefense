@@ -29,6 +29,11 @@ namespace Client
                 goldComp.Position = viewComponent.Transform.position;
                 viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
                 _deadPool.Value.Add(entity);
+
+                if (viewComponent.Outline)
+                {
+                    viewComponent.Outline.enabled = false;
+                }
             }
         }
     }
