@@ -9,5 +9,6 @@ namespace Client
         public Animator Animator;
         public AttackMonoBehaviour AttackMonoBehaviour;
         public Transform Transform;
+        public Outline Outline;
     }
 }

@@ -17,29 +17,33 @@ namespace Client {
                 ref var _player = ref _filter.Pools.Inc1.Get(entity);
                 ref var cooldown = ref _cooldownPool.Value.Get(entity);
                 
-                Ray ray = new Ray(_player.Transform.position + new Vector3(0, -0.5f, 0), _player.Transform.forward);
+                Ray ray = new Ray(_player.Transform.position + new Vector3(0, 0.5f, 0), _player.Transform.forward);
                 Debug.DrawRay(_player.Transform.position, _player.Transform.forward * distanceRay);
                 if (Physics.Raycast(ray, out RaycastHit hitInfo, distanceRay))
                 {
                     var dis = Vector3.Distance(_player.Transform.position, hitInfo.transform.position);
                     if (hitInfo.collider.gameObject.CompareTag("Ore"))
                     {
-                        //Debug.Log($"Target is {hitInfo.collider.name}, {dis}");
-                        if (cooldown.currentValue == 0 && dis <= 2)
+                        Debug.Log($"Target is {hitInfo.collider.name}, {dis}");
+                        if (dis <= 12)
                         {
-                            cooldown.currentValue = cooldown.maxValue;
-                            _player.animator.SetBool("isIdle", false);
-                            _player.animator.SetTrigger("Mining");
-                            _reloadPool.Value.Add(entity);
-                            foreach (var oreEntity in _oreFilter.Value)
+                            _player.Transform.LookAt(hitInfo.collider.transform);
+                            if (cooldown.currentValue == 0 && dis <= 2)
                             {
-                                if (hitInfo.collider.gameObject == _oreFilter.Pools.Inc1.Get(oreEntity).prefab)
+                                cooldown.currentValue = cooldown.maxValue;
+                                _player.animator.SetBool("isIdle", false);
+                                _player.animator.SetTrigger("Mining");
+                                _reloadPool.Value.Add(entity);
+                                foreach (var oreEntity in _oreFilter.Value)
                                 {
-                                    //_world.Value.GetPool<OreEventComponent>().Add(oreEntity);
-                                    _player.playerMB.InitMiningEvent(oreEntity, hitInfo.collider.gameObject);
+                                    if (hitInfo.collider.gameObject == _oreFilter.Pools.Inc1.Get(oreEntity).prefab)
+                                    {
+                                        //_world.Value.GetPool<OreEventComponent>().Add(oreEntity);
+                                        _player.playerMB.InitMiningEvent(oreEntity, hitInfo.collider.gameObject);
+                                    }
                                 }
+                                Debug.Log($"Mining!");
                             }
-                            Debug.Log($"Mining!");
                         }
                         else
                         {
@@ -48,23 +52,25 @@ namespace Client {
                     }
                     else if (hitInfo.collider.gameObject.CompareTag("Enemy"))
                     {
-                        //Debug.Log($"Target is {hitInfo.collider.name}, {dis}");
-                        if (cooldown.currentValue == 0 && dis <= 5)
+                        if (dis <= 10)
                         {
-                            cooldown.currentValue = cooldown.maxValue;
-                            _player.animator.SetBool("isIdle", false);
-                            _player.animator.SetTrigger("Attack");
-                            _reloadPool.Value.Add(entity);
-                            foreach (var enemyEntity in _enemyfilter.Value)
+                            _player.Transform.LookAt(hitInfo.collider.transform);
+                            if (cooldown.currentValue == 0 && dis <= 5)
                             {
-                                if (hitInfo.collider.gameObject == _enemyfilter.Pools.Inc1.Get(enemyEntity).GameObject)
+                                cooldown.currentValue = cooldown.maxValue;
+                                _player.animator.SetBool("isIdle", false);
+                                _player.animator.SetTrigger("Attack");
+                                _reloadPool.Value.Add(entity);
+                                foreach (var enemyEntity in _enemyfilter.Value)
                                 {
-                                    _player.playerMB.InitCombatEvent(enemyEntity, hitInfo.collider.gameObject);
-                                    _player.AttackMonoBehaviour.SetTargetInfo(enemyEntity, hitInfo.collider.gameObject);
+                                    if (hitInfo.collider.gameObject == _enemyfilter.Pools.Inc1.Get(enemyEntity).GameObject)
+                                    {
+                                        //_player.playerMB.InitCombatEvent(enemyEntity, hitInfo.collider.gameObject);
+                                        _player.AttackMonoBehaviour.SetTargetInfo(enemyEntity, hitInfo.collider.gameObject);
+                                    }
                                 }
+                                Debug.Log("Attack!");
                             }
-                            Debug.Log("Attack!");
-                            //to do attack event
                         }
                         else
                         {

@@ -4,6 +4,7 @@ using Leopotam.EcsLite.Unity.Ugui;
 using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 namespace Client {
     sealed class UserInputSystem : EcsUguiCallbackSystem
     {
@@ -93,8 +94,9 @@ namespace Client {
 
         [Preserve]
         [EcsUguiClickEvent(Idents.Ui.Forward, Idents.Worlds.Events)]
-        void OnClickForward(in EcsUguiClickEvent evt)
+        void OnClickRestart(in EcsUguiClickEvent evt)
         {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Debug.Log("Click!", evt.Sender);
         }
         public float Horizontal()

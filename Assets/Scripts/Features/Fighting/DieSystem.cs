@@ -11,6 +11,8 @@ namespace Client
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
+        readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
+        readonly EcsWorldInject _world = default;
 
         public void Run (EcsSystems systems)
         {
@@ -23,8 +25,15 @@ namespace Client
 
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
                 viewComponent.Animator.SetTrigger("Die");
+                ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
+                goldComp.Position = viewComponent.Transform.position;
                 viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
                 _deadPool.Value.Add(entity);
+
+                if (viewComponent.Outline)
+                {
+                    viewComponent.Outline.enabled = false;
+                }
             }
         }
     }

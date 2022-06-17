@@ -3,7 +3,7 @@ using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Unity.Ugui;
 using Leopotam.EcsLite.ExtendedSystems;
 using Leopotam.EcsLite.Unity;
-using Leopotam.EcsLite.UnityEditor;
+//using Leopotam.EcsLite.UnityEditor;
 using UnityEngine;
 
 namespace Client
@@ -56,20 +56,24 @@ namespace Client
                 .Add(new UpgradeSystems())
                 .Add(new CreateNextTowerSystem())
                 .Add(new CombatUserSystem())
-                .Add(new DroppedGoldSystem())
                 .Add(new ReloadSystem())
                 .Add(new DamagingEventSystem())
                 .Add(new DieSystem())
+                .Add(new DroppedGoldSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
                 .DelHere<ActivateWaveShipsEvent>()
                 .DelHere<DamagingEventComponent>()
+                ;
+
 
 #if UNITY_EDITOR
-                .Add(new EcsWorldDebugSystem())
-                .Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
-#endif
+            _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+                //_systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(Idents.Worlds.Events))
+                //.Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
+#endif         
+            _systems
                 .Inject()
                 .InjectUgui(_uguiEmitter, Idents.Worlds.Events)
                 .Init();

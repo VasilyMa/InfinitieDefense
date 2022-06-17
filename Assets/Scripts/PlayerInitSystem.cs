@@ -16,15 +16,15 @@ namespace Client {
             _state.Value.EntityPlayer = playerEntity;
             ref var player = ref _playerPool.Value.Add (playerEntity);
 
-            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,2,-5), Quaternion.identity);
+            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,2,-10), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
-            player.MoveSpeed = 15f;
+            player.MoveSpeed = 10f;
             player.RotateSpeed = 1f;
             player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
-            player.ResHolderTransform = PlayerGo.transform.GetChild(0).transform;
+            player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
             var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
