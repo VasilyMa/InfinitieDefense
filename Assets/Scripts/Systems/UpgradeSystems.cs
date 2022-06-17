@@ -15,6 +15,8 @@ namespace Client {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
 
+                int neededResource = 0;
+
                 if(filterComp.TowerIndex == 0)
                 {
                     if(_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
@@ -22,6 +24,7 @@ namespace Client {
                         _filter.Pools.Inc1.Del(entity);
                         return;
                     }
+                    neededResource = _state.Value.CoinCount;
                 }
                 else
                 {
@@ -30,25 +33,37 @@ namespace Client {
                         _filter.Pools.Inc1.Del(entity);
                         return;
                     }
+                    neededResource = _state.Value.RockCount;
                 }
 
                 
 
                 if(filterComp.Time == 0)
                 {
-                    if (_state.Value.RockCount > 0)
+                    if (neededResource > 0)
                     {
-                        //var tr = _state.Value.StoneTransformList[_state.Value.RockCount];
-                        GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
-                        _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
-                        _state.Value.RockCount--;
+                        
+
+                        //todo переделать на апгрейд главной башни
+                        if (filterComp.TowerIndex == 0)
+                        {
+                            GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
+                            _state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
+                            _state.Value.CoinCount--;
+                        }
+                        else
+                        {
+                            GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
+                            _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
+                            _state.Value.RockCount--;
+
+                            foreach(var item in _state.Value.CoinTransformList)
+                            {
+                                item.localPosition = new Vector3(0, item.localPosition.y - 1, 0);
+                            }
+                        }
 
                         _state.Value.UpgradeTower(filterComp.TowerIndex);
-
-                        foreach(var item in _state.Value.CoinTransformList)
-                        {
-                            item.localPosition = new Vector3(0, item.localPosition.y - 1, 0);
-                        }
                     }
                     else
                     {
