@@ -4,7 +4,7 @@ using UnityEngine;
 using Leopotam.EcsLite;
 namespace Client
 {
-    public class ColliderChecker : MonoBehaviour
+    public class ColliderChecker : MonoBehaviour 
     {
         private GameState _state;
         private EcsWorld _world;
@@ -64,8 +64,7 @@ namespace Client
             }
             if (other.gameObject.CompareTag("Ore"))
             {
-                if (_cooldownPool.Get(_state.EntityPlayer).currentValue == 0)
-                    _playerPool.Get(_state.EntityPlayer).animator.SetBool("isIdle", true);
+                _playerPool.Get(_state.EntityPlayer).animator.SetTrigger("Out");
             }
         }
         private void OnTriggerStay(Collider other)

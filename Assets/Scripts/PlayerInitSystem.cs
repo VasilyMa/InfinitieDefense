@@ -7,6 +7,7 @@ namespace Client {
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<CooldownComponent> _cooldownMining = default;
         readonly EcsPoolInject<ReloadComponent> _reloadPool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         public void Init (EcsSystems systems) 
@@ -15,7 +16,7 @@ namespace Client {
             var playerEntity = _playerPool.Value.GetWorld().NewEntity();
             _state.Value.EntityPlayer = playerEntity;
             ref var player = ref _playerPool.Value.Add (playerEntity);
-
+            ref var viewPool = ref _viewPool.Value.Add(playerEntity);
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,2,-10), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
@@ -24,14 +25,23 @@ namespace Client {
             player.MoveSpeed = 10f;
             player.RotateSpeed = 1f;
             player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
+            player.health = _state.Value.PlayerStorage.GetHealthByID("1level");
             player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+            viewPool.Healthbar = PlayerGo.GetComponent<HealthbarMB>();
+            viewPool.Healthbar.SetMaxHealth(player.health);
+            viewPool.Healthbar.SetHealth(player.health);
+            viewPool.Healthbar.ToggleSwitcher();
+            viewPool.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
             var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
             colliderChecker.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
             _cooldownMining.Value.Add(_state.Value.EntityPlayer);
             ref var cooldown = ref _cooldownMining.Value.Get(_state.Value.EntityPlayer);
-            cooldown.maxValue = 2f;
+            cooldown.maxValue = 3f;
             cooldown.currentValue = cooldown.maxValue;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
 

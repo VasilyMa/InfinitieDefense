@@ -41,6 +41,11 @@ namespace Client
             ref var viewComponent = ref _viewPool.Value.Add(entity);
             viewComponent.GameObject = mainTower;
 
+            viewComponent.Healthbar = mainTower.GetComponent<HealthbarMB>();
+            viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);
+            viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
+            viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
             for (int i = 0; i < _state.Value.TowersEntity.Length;i++)
             {
                 if(i == 0) _state.Value.TowersEntity[i] = entity;
