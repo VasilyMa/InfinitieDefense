@@ -5,6 +5,7 @@ using Leopotam.EcsLite.Di;
 namespace Client {
     sealed class CreateNextTowerSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
+        readonly EcsWorldInject _world = default;
         readonly EcsFilterInject<Inc<CreateNextTowerEvent>> _filter = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
@@ -26,6 +27,10 @@ namespace Client {
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), Vector3.zero, Quaternion.identity);
                     radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
+                    viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
+                    viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 }
                 else
                 {
@@ -34,6 +39,10 @@ namespace Client {
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
+                    viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
+                    viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);
