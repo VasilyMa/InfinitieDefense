@@ -16,7 +16,13 @@ namespace Client
         [SerializeField] private int _unitEntity;
         [SerializeField] private int _targetEntity;
         [SerializeField] private GameObject _targetObject;
+        [SerializeField] private EcsInfoMB _ecsInfoMB;
         [SerializeField] private float _damageValue;
+
+        public void Start()
+        {
+            _ecsInfoMB = gameObject.GetComponent<EcsInfoMB>();
+        }
 
         public void Init(EcsWorldInject world)
         {

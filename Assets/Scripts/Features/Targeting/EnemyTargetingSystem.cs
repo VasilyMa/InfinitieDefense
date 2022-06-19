@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class EnemyTargetingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<EnemyTag, Targetable, ViewComponent>, Exc<InactiveTag, ShipTag>> _enemyFilter = default;
+        readonly EcsFilterInject<Inc<EnemyTag, Targetable, ViewComponent>, Exc<InactiveTag, ShipTag, DeadTag>> _enemyFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;

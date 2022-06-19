@@ -48,12 +48,15 @@ namespace Client
                 viewComponent.GameObject = enemy;
                 viewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
                 viewComponent.Animator = enemy.GetComponent<Animator>();
+                viewComponent.Transform = enemy.GetComponent<Transform>();
+                viewComponent.Outline = enemy.GetComponent<Outline>();
                 viewComponent.AttackMonoBehaviour = enemy.GetComponent<AttackMonoBehaviour>();
                 viewComponent.AttackMonoBehaviour.Init(_world);
                 viewComponent.AttackMonoBehaviour.SetEntity(enemyEntity);
                 viewComponent.AttackMonoBehaviour.SetDamageValue(damageComponent.Value);
-                viewComponent.Transform = enemy.GetComponent<Transform>();
-                viewComponent.Outline = enemy.GetComponent<Outline>();
+                viewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
+                viewComponent.EcsInfoMB.Init(_world);
+                viewComponent.EcsInfoMB.SetEntity(enemyEntity);
 
                 shipComponent.Number = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMonoBehavior>().GetShipNumber();
             }

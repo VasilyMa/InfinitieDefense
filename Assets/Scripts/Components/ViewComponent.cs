@@ -7,8 +7,10 @@ namespace Client
         public GameObject GameObject;
         public Rigidbody Rigidbody;
         public Animator Animator;
-        public AttackMonoBehaviour AttackMonoBehaviour;
         public Transform Transform;
         public Outline Outline;
+
+        public AttackMonoBehaviour AttackMonoBehaviour;
+        public EcsInfoMB EcsInfoMB;
     }
 }
