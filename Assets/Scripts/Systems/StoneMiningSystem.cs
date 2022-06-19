@@ -7,13 +7,14 @@ namespace Client {
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<StoneMiningEvent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
-
+        readonly EcsPoolInject<InterfaceComponent> _intComp = default;
 
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(_state.Value.EntityPlayer);
+                ref var intComp = ref _intComp.Value.Get(_state.Value.EntityInterface);
                 _state.Value.StoneTransformList.Add(filterComp.StoneTransform);
                 filterComp.StoneTransform.SetParent(playerComp.ResHolderTransform);
                 filterComp.StoneTransform.localPosition = new Vector3(0, _state.Value.RockCount, 0);
@@ -24,6 +25,7 @@ namespace Client {
                 }
                 filterComp.StoneTransform.SetSiblingIndex(_state.Value.RockCount);
                 _state.Value.RockCount++;
+                intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                 //todo добавить перемещение камня за спину
                 _filter.Pools.Inc1.Del(entity);
             }
