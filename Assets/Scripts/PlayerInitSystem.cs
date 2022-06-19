@@ -25,7 +25,7 @@ namespace Client {
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
             player.MoveSpeed = 10f;
             player.RotateSpeed = 1f;
-            player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
+            player.damage = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
             player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());

@@ -12,5 +12,6 @@ public class PlayerData
     public bool IsLast;
     public string NextID;
     public int UpgradeValue;
+    public Mesh Mesh;
 
 }

@@ -6,6 +6,7 @@ public class PlayerStorage : ScriptableObject
 {
     public Dictionary<string, PlayerData> Players;
     public GameObject[] PlayerPrefabs;
+    public Mesh[] PlayerMeshes;
 
     public void Init()
     {
@@ -20,7 +21,8 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "2level",
-                UpgradeValue = 5
+                UpgradeValue = 5,
+                Mesh = PlayerMeshes[0]
             },
             ["2level"] = new PlayerData
             {
@@ -30,7 +32,8 @@ public class PlayerStorage : ScriptableObject
                 Health = 120,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = true,
-                UpgradeValue = 5
+                UpgradeValue = 5,
+                Mesh = PlayerMeshes[1]
             },
         };
     }
@@ -66,5 +69,9 @@ public class PlayerStorage : ScriptableObject
     public int GetUpgradeByID(string id)
     {
         return Players[id].UpgradeValue;
+    }
+    public Mesh GetMeshByID(string id)
+    {
+        return Players[id].Mesh;
     }
 }
