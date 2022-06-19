@@ -42,6 +42,9 @@ namespace Client {
             player.AttackMonoBehaviour.Init(_world);
             player.AttackMonoBehaviour.SetEntity(playerEntity);
             player.AttackMonoBehaviour.SetDamageValue(50);
+
+            ref var viewComp = ref _viewPool.Value.Add(playerEntity);
+            viewComp.SkinnedMeshRenderer = PlayerGo.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
         }
     }
 }

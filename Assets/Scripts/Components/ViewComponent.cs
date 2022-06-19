@@ -10,5 +10,6 @@ namespace Client
         public AttackMonoBehaviour AttackMonoBehaviour;
         public Transform Transform;
         public Outline Outline;
+        public SkinnedMeshRenderer SkinnedMeshRenderer;
     }
 }

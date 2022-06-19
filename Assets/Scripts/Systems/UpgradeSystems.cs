@@ -74,6 +74,8 @@ namespace Client {
                             GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
                             _state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                             _state.Value.CoinCount--;
+
+                            _state.Value.UpgradePlayer();
                         }
                     }
                     else
