@@ -18,7 +18,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["1tower"] = new DefenseTower
             {
-                Radius = 5,
+                Radius = 20,
                 TowerHealth = 50,
                 TowerPrefab = TowerPrefabs[0],
                 Upgrade = 3,

@@ -12,8 +12,10 @@ namespace Client
         public float MoveSpeed;
         public float RotateSpeed;
         public Outline Outline;
+        public SphereCollider SphereCollider;
 
         public AttackMB AttackMB;
+        public TowerAttackMB TowerAttackMB;
         public PlayerAttackMB PlayerAttackMB;
         public EcsInfoMB EcsInfoMB;
         public SkinnedMeshRenderer SkinnedMeshRenderer;

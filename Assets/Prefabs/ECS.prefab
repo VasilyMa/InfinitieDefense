@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9176728929114068212}
   - component: {fileID: 6524960714590515784}
+  - component: {fileID: 2135641420}
   m_Layer: 0
   m_Name: ECS
   m_TagString: Untagged
@@ -47,6 +48,18 @@ MonoBehaviour:
   _towerStorage: {fileID: 11400000, guid: 694551d89be9df4488524a5291bab776, type: 2}
   _interfaceStorage: {fileID: 11400000, guid: ce647896e01d5944a966d338021e3ac7, type: 2}
   _playerStorage: {fileID: 11400000, guid: 192d904650ba40549b4f1521db72a700, type: 2}
-  _defenseTowerStorage: {fileID: 11400000, guid: 730ddd42c49ede7499913fdd53ce9c8d,
-    type: 2}
+  _defenseTowerStorage: {fileID: 11400000, guid: 730ddd42c49ede7499913fdd53ce9c8d, type: 2}
   _towerCount: 7
+--- !u!114 &2135641420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8760066942237610673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81af0bc06080061449680f0e3b1d53f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Waves: []

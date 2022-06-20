@@ -9,7 +9,6 @@ namespace Client
     public class AttackMB : MonoBehaviour
     {
         [SerializeField] private EcsInfoMB _ecsInfoMB;
-        [SerializeField] private List<GameObject> _detectedObject;
 
         private Animator _animator;
 
@@ -20,11 +19,10 @@ namespace Client
         private EcsPool<Targetable> _targetablePool;
 
 
-        public void Start()
+        void Start()
         {
             _ecsInfoMB = gameObject.GetComponent<EcsInfoMB>();
             _animator = gameObject.GetComponent<Animator>();
-            _detectedObject = new List<GameObject>();
         }
 
         public void Init(EcsWorldInject world)

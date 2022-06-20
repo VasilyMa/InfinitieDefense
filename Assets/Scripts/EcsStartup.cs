@@ -16,6 +16,7 @@ namespace Client
         [SerializeField] private PlayerStorage _playerStorage;
         [SerializeField] private DefenseTowerStorage _defenseTowerStorage;
         [SerializeField] private int _towerCount;
+        private WaveStorage _waveStorage;
         EcsSystems _systems;
         EcsSystems _delHereSystems;
         EcsWorld _world = null;
@@ -23,8 +24,9 @@ namespace Client
 
         void Start ()
         {
+            _waveStorage = gameObject.GetComponent<WaveStorage>();
             _world = new EcsWorld();
-            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _playerStorage, _defenseTowerStorage, _towerCount);
+            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _playerStorage, _defenseTowerStorage, _towerCount, _waveStorage);
             _systems = new EcsSystems (_world, _gameState);
             _delHereSystems = new EcsSystems(_world, _gameState);
 
