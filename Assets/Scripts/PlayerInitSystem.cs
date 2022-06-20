@@ -59,9 +59,14 @@ namespace Client {
 
             _cooldownMining.Value.Add(_state.Value.EntityPlayer);
             ref var cooldown = ref _cooldownMining.Value.Get(_state.Value.EntityPlayer);
-            cooldown.maxValue = 2.5f;
-            cooldown.currentValue = cooldown.maxValue;
+            cooldown.maxValue = 2f;
+            cooldown.currentValue = 0;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
+
+            
+            
+            
+            
         }
     }
 }

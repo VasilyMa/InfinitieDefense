@@ -15,6 +15,7 @@ namespace Client
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<TowerTag> _tPool = default;
         readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
+        readonly EcsPoolInject<CanvasUpgradeComponent> _upgradeCanvasPool = default;
         private float Angle = 0;
 
         public void Init (EcsSystems systems)
@@ -47,6 +48,7 @@ namespace Client
 
             GameObject upgradePoint = null;
             UpgradePointMB upgradePointMB = null;
+            UpgradeCanvasMB upgradeInfo = null;
 
             var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
             upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0, -3), Quaternion.identity);
@@ -77,6 +79,7 @@ namespace Client
                     _viewPool.Value.Add(towerEntity);
                     _healthPool.Value.Add(towerEntity);
                     _radiusPool.Value.Add(towerEntity);
+                    ref var upgradeComponent = ref _upgradeCanvasPool.Value.Add(towerEntity);
                     ref var tComp = ref _tPool.Value.Add(towerEntity);
                     
                     var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
@@ -85,6 +88,10 @@ namespace Client
 
                     upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0, z - 3), Quaternion.identity);
                     upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
+                    upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
+                    upgradeComponent.upgrade = upgradeInfo;
+                    upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
                     upgradePointMB.TowerIndex = i;
 
                     Angle += 360 / (_state.Value.TowerCount - 1);

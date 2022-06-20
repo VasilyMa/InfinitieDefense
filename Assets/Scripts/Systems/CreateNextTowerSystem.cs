@@ -22,7 +22,6 @@ namespace Client {
                 int towerIndex = filterComp.TowerIndex;
                 ref var radiusComp = ref _radiusPool.Value.Get(entity);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
-
                 if(viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
 
                 if (towerIndex == 0)
@@ -39,6 +38,9 @@ namespace Client {
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    //upgradeComp.upgrade = radiusComp.RadiusTransform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
+                    //upgradeComp.upgrade.UpdateUpgradePoint();
+                    //upgradeComp.upgrade.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 }
                 else
                 {
