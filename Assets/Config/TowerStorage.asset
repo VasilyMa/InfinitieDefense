@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 5480896337099532942, guid: c7c0c55e27226a241bf8058219170c6c, type: 3}
   - {fileID: 3618321849160661702, guid: ff15ecb27543f6140b55b970c9107291, type: 3}
   - {fileID: 7305551903433586136, guid: b780829689abdbd4583568783b7050c2, type: 3}
-  DefenderPrefab: {fileID: 919132149155446097, guid: 7ae2d2e353d9e454f9bfeaf8330260fa, type: 3}
+  DefenderPrefab: {fileID: 2881775947377203435, guid: 73217cd2f437a234eb6ed6f5543395be, type: 3}
