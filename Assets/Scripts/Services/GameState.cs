@@ -9,6 +9,7 @@ namespace Client
 {
     public class GameState
     {
+        public Saves Saves = new Saves();
         public EcsWorld World;
         public int EntityInterface;
         public int EntityPlayer;
@@ -58,6 +59,7 @@ namespace Client
         }
         private void InitSaves()
         {
+            Saves.InitSave();
             CurrentPlayerID = "1level";
             PlayerUpgrade = 0;
         }
