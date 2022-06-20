@@ -13,5 +13,6 @@ namespace Client
         public float MoveSpeed;
         public float RotateSpeed;
         public Outline Outline;
+        public SkinnedMeshRenderer SkinnedMeshRenderer;
     }
 }

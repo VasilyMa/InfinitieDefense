@@ -15,10 +15,10 @@ namespace Client
             _world = world;
             _state = state;
         }
-        public void UpdateUpgradePoint(int entity)
+        public void UpdateUpgradePoint(int currentAmount, int maxAmount)
         {
-
-            Debug.Log("Upgrade!");
+            _amount.text = ($"{currentAmount}/{maxAmount}");
+            Debug.Log(_amount.text);
         }
     }
 }

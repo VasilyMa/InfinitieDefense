@@ -10,5 +10,6 @@ public class Tower
     public int Upgrade;
     public bool IsLast;
     public string NextID;
+    public int DefenderCount;
 
 }

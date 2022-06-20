@@ -9,5 +9,9 @@ public class PlayerData
     public int Damage;
     public float Speed;
     public GameObject PlayerPrefab;
+    public bool IsLast;
+    public string NextID;
+    public int UpgradeValue;
+    public Mesh Mesh;
 
 }

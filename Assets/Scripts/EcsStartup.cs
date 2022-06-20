@@ -54,6 +54,8 @@ namespace Client
                 .Add(new CameraFollowSystem())
                 .Add(new UpgradeSystems())
                 .Add(new CreateNextTowerSystem())
+                .Add(new CreateNewPlayer())
+                .Add(new CreateDefenders())
                 .Add(new CombatUserSystem())
                 .Add(new ReloadSystem())
                 .Add(new DamagingEventSystem())

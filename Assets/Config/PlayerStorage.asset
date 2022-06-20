@@ -15,3 +15,6 @@ MonoBehaviour:
   PlayerPrefabs:
   - {fileID: 2599815697395588373, guid: 9ed8a92db7e15bf459f90a3a1d714b63, type: 3}
   - {fileID: 2599815697395588373, guid: 9ed8a92db7e15bf459f90a3a1d714b63, type: 3}
+  PlayerMeshes:
+  - {fileID: 2791369629923464968, guid: 662496b7ffb588441916b52eeb82c952, type: 3}
+  - {fileID: 2791369629923464968, guid: 662496b7ffb588441916b52eeb82c952, type: 3}
