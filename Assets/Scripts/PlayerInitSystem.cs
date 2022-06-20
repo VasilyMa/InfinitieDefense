@@ -17,8 +17,10 @@ namespace Client {
             
             var playerEntity = _playerPool.Value.GetWorld().NewEntity();
             _state.Value.EntityPlayer = playerEntity;
+            _world.Value.GetPool<UnitTag>().Add(playerEntity);
             ref var player = ref _playerPool.Value.Add (playerEntity);
             ref var viewComponent = ref _viewPool.Value.Add(playerEntity);
+            ref var healthComponent = ref _world.Value.GetPool<HealthComponent>().Add(playerEntity);
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,2,-10), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
@@ -33,6 +35,7 @@ namespace Client {
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
             viewComponent.GameObject = PlayerGo;
+            viewComponent.Animator = PlayerGo.GetComponent<Animator>();
             viewComponent.Healthbar = PlayerGo.GetComponent<HealthbarMB>();
             viewComponent.Healthbar.SetMaxHealth(player.health);
             viewComponent.Healthbar.SetHealth(player.health);
@@ -45,6 +48,9 @@ namespace Client {
 
             ref var targetWeightComponent = ref _targetWeightPool.Value.Add(playerEntity);
             targetWeightComponent.Value = 10;
+
+            healthComponent.MaxValue = 100;
+            healthComponent.CurrentValue = healthComponent.MaxValue;
 
             var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
             colliderChecker.Init(systems.GetWorld(), systems.GetShared<GameState>());

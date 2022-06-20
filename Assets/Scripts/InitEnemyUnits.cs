@@ -44,7 +44,7 @@ namespace Client
 
                 reachZoneComponent.Value = 2.5f;
 
-                damageComponent.Value = 5f;
+                damageComponent.Value = 50f;
 
                 movableComponent.Speed = 10f;
 

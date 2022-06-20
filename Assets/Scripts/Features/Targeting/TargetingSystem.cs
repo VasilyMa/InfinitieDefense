@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class TargetingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<EnemyTag, Targetable, ViewComponent>, Exc<InactiveTag, ShipTag, DeadTag>> _enemyFilter = default;
+        readonly EcsFilterInject<Inc<UnitTag, Targetable, ViewComponent>, Exc<InactiveTag, ShipTag, DeadTag>> _unitsFilter = default;
 
         readonly EcsFilterInject<Inc<TargetingEvent>> _targetingEventFilter = default;
 
@@ -14,14 +14,20 @@ namespace Client
         readonly EcsPoolInject<TargetingEvent> _targetingEventPool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<DeadTag> _deadPool = default;
 
         readonly EcsSharedInject<GameState> _state;
 
         public void Run (EcsSystems systems)
         {
-            foreach(var enemyEntity in _enemyFilter.Value)
+            foreach(var enemyEntity in _unitsFilter.Value)
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(enemyEntity);
+
+                if (_deadPool.Value.Has(targetableComponent.TargetEntity))
+                {
+                    targetableComponent.TargetObject = null;
+                }
 
                 if (targetableComponent.TargetObject)
                 {

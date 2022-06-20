@@ -40,6 +40,7 @@ namespace Client
 
             ref var viewComponent = ref _viewPool.Value.Add(entity);
             viewComponent.GameObject = mainTower;
+            viewComponent.Transform = mainTower.transform;
 
             viewComponent.Healthbar = mainTower.GetComponent<HealthbarMB>();
             viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);

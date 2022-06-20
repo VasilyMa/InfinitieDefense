@@ -8,7 +8,7 @@ namespace Client
     {
         readonly EcsWorldInject _world = default;
 
-        readonly EcsFilterInject<Inc<UnitTag, HealthComponent, ViewComponent>, Exc<DeadTag>> _unitsFilter = default;
+        readonly EcsFilterInject<Inc<UnitTag, HealthComponent, ViewComponent>, Exc<DeadTag, InactiveTag>> _unitsFilter = default;
 
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
@@ -24,13 +24,15 @@ namespace Client
                     continue;
                 }
 
+
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
-                viewComponent.Rigidbody.velocity = Vector3.zero;
-                viewComponent.Animator.SetTrigger("Die");
+                Debug.Log("Обработка " + viewComponent.GameObject.name);
+                if (viewComponent.Rigidbody) viewComponent.Rigidbody.velocity = Vector3.zero;
+                if (viewComponent.Animator) viewComponent.Animator.SetTrigger("Die");
                 viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
 
                 ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
-                goldComp.Position = viewComponent.Transform.position;
+                if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
 
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
 
