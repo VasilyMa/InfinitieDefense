@@ -17,6 +17,7 @@ namespace Client
         public InterfaceStorage InterfaceStorage;
         public PlayerStorage PlayerStorage;
         public DefenseTowerStorage DefenseTowerStorage;
+        public WaveStorage WaveStorage;
         public int RockCount = 0;
         public int CoinCount = 0;
         public int CurrentActivatedShip = 0;
@@ -34,7 +35,7 @@ namespace Client
         public int PlayerUpgrade;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, 
-        PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount)
+        PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, WaveStorage waveStorage)
         {
             World = world;
             TowerStorage = towerStorage;
@@ -42,6 +43,7 @@ namespace Client
             PlayerStorage = playerStorage;
             DefenseTowerStorage = defenseTowerStorage;
             TowerCount = towerCount;
+            WaveStorage = waveStorage;
             PlayerStorage.Init();
             TowerStorage.Init();
             DefenseTowerStorage.Init();

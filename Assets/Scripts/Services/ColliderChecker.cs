@@ -16,6 +16,10 @@ namespace Client
         private EcsPool<ViewComponent> _viewPool;
         private EcsPool<OreComponent> _orePool;
         private EcsPool<Player> _playerPool;
+        private EcsPool<TowerTag> _towerPool;
+        private EcsPool<UpgradeCanvasEvent> _canvasEvent;
+        private EcsPool<CanvasUpgradeComponent> _upgradeCanvasPool;
+        private EcsPool<MainTowerTag> _mainPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -27,6 +31,10 @@ namespace Client
             _reloadPool = world.GetPool<ReloadComponent>();
             _orePool = world.GetPool<OreComponent>();
             _playerPool = world.GetPool<Player>();
+            _towerPool = world.GetPool<TowerTag>();
+            _mainPool = world.GetPool<MainTowerTag>();
+            _canvasEvent = world.GetPool<UpgradeCanvasEvent>();
+            _upgradeCanvasPool = world.GetPool<CanvasUpgradeComponent>();
             _world = world;
         }
         private void OnTriggerEnter(Collider other)
@@ -51,6 +59,34 @@ namespace Client
                     upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;
                     upgradeComp.UpgradeTower = true;
+                    if (_state.RockCount > 0)
+                    {
+                        var filter = _world.Filter<TowerTag>().Inc<CanvasUpgradeComponent>().End();
+                        var towerTag = _world.GetPool<CanvasUpgradeComponent>();
+                        foreach (var entity in filter)
+                        {
+                            ref var towerComp = ref towerTag.Get(entity);
+                            if (other.gameObject == towerComp.point)
+                            {
+                                ref var upgradeEvent = ref _canvasEvent.Add(entity);
+                                towerComp.Index = other.GetComponent<UpgradePointMB>().TowerIndex;
+                            }
+                        }
+                    }
+                    if (_state.CoinCount > 0)
+                    {
+                        var mainFilter = _world.Filter<MainTowerTag>().Inc<CanvasUpgradeComponent>().End();
+                        var mainTowerTag = _world.GetPool<CanvasUpgradeComponent>();
+                        foreach (var entity in mainFilter)
+                        {
+                            ref var mainTowerComp = ref mainTowerTag.Get(entity);
+                            if (other.gameObject == mainTowerComp.point)
+                            {
+                                ref var upgradeEvent = ref _canvasEvent.Add(entity);
+                                mainTowerComp.Index = other.GetComponent<UpgradePointMB>().TowerIndex;
+                            }
+                        }
+                    }
                 }
             }
             else if (other.gameObject.tag == "UpgradePlayerPoint")
@@ -60,6 +96,7 @@ namespace Client
                     ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                     upgradeComp.Time = 0f;
                     upgradeComp.UpgradeTower = false;
+
                 }
             }
             else if (other.gameObject.CompareTag("Ore"))
@@ -105,5 +142,22 @@ namespace Client
                 _player.animator.SetBool("isMining", false);
             }
         }
+        /*private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.CompareTag("UpgradePoint"))
+            {
+                var filter = _world.Filter<TowerTag>();
+                var towerTag = _world.GetPool<CanvasUpgradeComponent>();
+                foreach (var entity in filter.End())
+                {
+                    ref var towerComp = ref towerTag.Get(entity);
+                    if (other.gameObject == towerComp.point)
+                    {
+                        ref var upgradeEvent = ref _canvasEvent.Add(entity);
+                        towerComp.Index = other.GetComponent<UpgradePointMB>().TowerIndex;
+                    }
+                }
+            }
+        }*/
     }
 }
