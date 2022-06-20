@@ -14,15 +14,30 @@ namespace Client
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<TowerTag> _tPool = default;
+        readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
         private float Angle = 0;
 
         public void Init (EcsSystems systems)
         {
             var entity = _world.Value.NewEntity();
-            string towerID = "1tower";
-            _state.Value.CurrentTowerID = towerID;
+            string towerID = _state.Value.DefenseTowers[0];
+            //_state.Value.CurrentTowerID = towerID;
             
-            _towerPool.Value.Add(entity);
+            ref var towerComp = ref _towerPool.Value.Add(entity);
+            towerComp.DefendersPositions = new Vector3[10];
+
+            for (int d = 0; d < towerComp.DefendersPositions.Length;d++)
+            {
+                var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 7;
+                var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 7;
+                towerComp.DefendersPositions[d] = new Vector3(x, 0, z);
+                Angle += 360 / 10;
+
+                var ent = _world.Value.NewEntity();
+                _defenderPool.Value.Add(ent);
+                _state.Value.DefendersEntity[d] = ent;
+            }
+
             ref var radiusComp = ref _radiusPool.Value.Add(entity);
             radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(towerID);
 
@@ -41,6 +56,7 @@ namespace Client
             ref var viewComponent = ref _viewPool.Value.Add(entity);
             viewComponent.GameObject = mainTower;
             viewComponent.Transform = mainTower.transform;
+            Angle = 0;
 
             viewComponent.Healthbar = mainTower.GetComponent<HealthbarMB>();
             viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);

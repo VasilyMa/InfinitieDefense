@@ -16,5 +16,6 @@ namespace Client
         public AttackMB AttackMB;
         public PlayerAttackMB PlayerAttackMB;
         public EcsInfoMB EcsInfoMB;
+        public SkinnedMeshRenderer SkinnedMeshRenderer;
     }
 }

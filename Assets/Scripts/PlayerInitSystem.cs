@@ -12,6 +12,7 @@ namespace Client {
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
+        readonly EcsPoolInject<HealthComponent> _healthPool = default;
         public void Init (EcsSystems systems) 
         {
             
@@ -21,15 +22,15 @@ namespace Client {
             ref var player = ref _playerPool.Value.Add (playerEntity);
             ref var viewComponent = ref _viewPool.Value.Add(playerEntity);
             ref var healthComponent = ref _world.Value.GetPool<HealthComponent>().Add(playerEntity);
-            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,2,-10), Quaternion.identity);
+            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), new Vector3(0,2,-10), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
             player.MoveSpeed = 15f;
             player.RotateSpeed = 1f;
-            player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
-            player.health = _state.Value.PlayerStorage.GetHealthByID("1level");
+            player.damage = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
+            player.health = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
             player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
@@ -45,6 +46,7 @@ namespace Client {
             viewComponent.EcsInfoMB.SetEntity(playerEntity);
             viewComponent.PlayerAttackMB = PlayerGo.GetComponent<PlayerAttackMB>();
             viewComponent.PlayerAttackMB.Init(_world);
+            viewComponent.SkinnedMeshRenderer = PlayerGo.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
 
             ref var targetWeightComponent = ref _targetWeightPool.Value.Add(playerEntity);
             targetWeightComponent.Value = 10;
@@ -60,7 +62,6 @@ namespace Client {
             cooldown.maxValue = 2.5f;
             cooldown.currentValue = cooldown.maxValue;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
-
         }
     }
 }
