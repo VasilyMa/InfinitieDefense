@@ -37,13 +37,13 @@ namespace Client
                 ref var coinComp = ref _coinPool.Add(_world.NewEntity());
                 coinComp.CoinTransform = other.transform;
             }
-            else if(other.gameObject.CompareTag("Stone"))
+            else if (other.gameObject.CompareTag("Stone"))
             {
                 other.gameObject.tag = "Untagged";
                 ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
                 stoneComp.StoneTransform = other.transform;
             }
-            else if(other.gameObject.CompareTag("UpgradePoint"))
+            else if (other.gameObject.CompareTag("UpgradePoint"))
             {
                 if (!_upgradePool.Has(_state.EntityPlayer))
                 {
@@ -53,14 +53,19 @@ namespace Client
                     upgradeComp.UpgradeTower = true;
                 }
             }
-            else if(other.gameObject.tag == "UpgradePlayerPoint")
+            else if (other.gameObject.tag == "UpgradePlayerPoint")
             {
-                if(!_upgradePool.Has(_state.EntityPlayer))
+                if (!_upgradePool.Has(_state.EntityPlayer))
                 {
                     ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                     upgradeComp.Time = 0f;
                     upgradeComp.UpgradeTower = false;
                 }
+            }
+            else if (other.gameObject.CompareTag("Ore"))
+            {
+                _cooldownPool.Get(_state.EntityPlayer).currentValue = 0f;
+                _reloadPool.Del(_state.EntityPlayer);
             }
         }
         private void OnTriggerExit(Collider other)
@@ -82,6 +87,7 @@ namespace Client
             if (other.gameObject.CompareTag("Ore"))
             {
                 _playerPool.Get(_state.EntityPlayer).animator.SetTrigger("Out");
+                _cooldownPool.Get(_state.EntityPlayer).currentValue = _cooldownPool.Get(_state.EntityPlayer).maxValue;
             }
         }
         void OnTriggerStay(Collider other)
@@ -95,6 +101,7 @@ namespace Client
                 var ores = _world.GetPool<OreComponent>();
                 if (cooldownComp.currentValue == 0)
                 {
+                    ref var reloadComp = ref _reloadPool.Add(player);
                     cooldownComp.currentValue = cooldownComp.maxValue;
                     foreach (int entity in filter.End())
                     {
@@ -105,7 +112,6 @@ namespace Client
                             _player.animator.SetBool("isIdle", false);
                             _player.animator.SetBool("isRun", false);
                             _player.animator.SetTrigger("Mining");
-                            ref var reloadComp = ref _reloadPool.Add(player);
                             Debug.Log("Mining!");
                         }
                     }
