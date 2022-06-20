@@ -11,6 +11,8 @@ namespace Client {
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
         readonly EcsPoolInject<TowerTag> _towerPool = default;
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
+        readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
+        readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -35,9 +37,6 @@ namespace Client {
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    //upgradeComp.upgrade = radiusComp.RadiusTransform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
-                    //upgradeComp.upgrade.UpdateUpgradePoint();
-                    //upgradeComp.upgrade.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 }
                 else
                 {
@@ -50,9 +49,6 @@ namespace Client {
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    //upgradeComp.upgrade = radiusComp.RadiusTransform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
-                    //upgradeComp.upgrade.UpdateUpgradePoint();
-                    //upgradeComp.upgrade.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);

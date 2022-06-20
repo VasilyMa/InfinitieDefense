@@ -39,7 +39,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 9,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[2],
-                Upgrade = 5,
+                Upgrade = 7,
                 IsLast = false,
                 NextID = "4tower"
             },
@@ -48,7 +48,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 11,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[3],
-                Upgrade = 5,
+                Upgrade = 10,
                 IsLast = false,
                 NextID = "5tower"
             },
@@ -57,7 +57,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 13,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[4],
-                Upgrade = 5,
+                Upgrade = 13,
                 IsLast = false,
                 NextID = "6tower"
             },
@@ -66,7 +66,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 15,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[5],
-                Upgrade = 5,
+                Upgrade = 15,
                 IsLast = false,
                 NextID = "7tower"
             },
@@ -75,7 +75,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 17,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[6],
-                Upgrade = 5,
+                Upgrade = 18,
                 IsLast = false,
                 NextID = "8tower"
             },
@@ -84,7 +84,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 19,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[7],
-                Upgrade = 5,
+                Upgrade = 20,
                 IsLast = false,
                 NextID = "9tower"
             },
@@ -93,7 +93,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 21,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[8],
-                Upgrade = 5,
+                Upgrade = 22,
                 IsLast = false,
                 NextID = "10tower"
             },
@@ -102,7 +102,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 23,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[9],
-                Upgrade = 5,
+                Upgrade = 25,
                 IsLast = true
             },
         };
