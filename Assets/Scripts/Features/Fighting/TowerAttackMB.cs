@@ -20,6 +20,9 @@ namespace Client
         private EcsPool<DamageComponent> _damagePool;
         private EcsPool<Targetable> _targetablePool;
 
+        private float MaxCoolDown = 2f;
+        private float CurrentCoolDown = 0f;
+
         private string Enemy;
 
         void Start()
@@ -27,6 +30,13 @@ namespace Client
             _ecsInfoMB = gameObject.GetComponent<EcsInfoMB>();
             //_animator = gameObject.GetComponent<Animator>();
             _detectedEnemyObjects = new List<GameObject>();
+        }
+        void Update()
+        {
+            if (CurrentCoolDown > 0)
+            {
+                CurrentCoolDown -= Time.deltaTime;
+            }
         }
 
         public void Init(EcsWorldInject world)
@@ -39,6 +49,8 @@ namespace Client
 
         public void DealDamagingEvent()
         {
+            if (CurrentCoolDown > 0) return;
+
             ref var damagingEventComponent = ref _damagingEventPool.Add(_world.Value.NewEntity());
             ref var damageComponent = ref _damagePool.Get(_ecsInfoMB.GetEntity());
 
@@ -47,6 +59,7 @@ namespace Client
             damagingEventComponent.TargetEntity = _firstDetectedEnemyObject.GetComponent<EcsInfoMB>().GetEntity();
             damagingEventComponent.DamageValue = damageComponent.Value;
             damagingEventComponent.DamagingEntity = _ecsInfoMB.GetEntity();
+            CurrentCoolDown = MaxCoolDown;
         }
 
         private void OnTriggerEnter(Collider other)

@@ -13,6 +13,7 @@ namespace Client {
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
+        readonly EcsPoolInject<HealthComponent> _healthWeightPool = default;
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
@@ -63,6 +64,7 @@ namespace Client {
                     ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                     ref var damageComponent = ref _damagePool.Value.Get(entity);
                     ref var targetWeightComponent = ref _targetWeightPool.Value.Get(entity);
+                    ref var healthComponent = ref _healthWeightPool.Value.Get(entity);
 
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
@@ -75,7 +77,7 @@ namespace Client {
                     viewComp.SphereCollider = viewComp.GameObject.GetComponent<SphereCollider>();
                     viewComp.SphereCollider.radius = radiusComp.Radius;
 
-                    damageComponent.Value = 1; //ispravit'
+                    damageComponent.Value = 5; //ispravit'
 
                     viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();
                     viewComp.EcsInfoMB.Init(_world);
@@ -85,6 +87,9 @@ namespace Client {
                     viewComp.TowerAttackMB.Init(_world);
 
                     targetWeightComponent.Value = 5;
+
+                    healthComponent.MaxValue = 50;
+                    healthComponent.CurrentValue = healthComponent.MaxValue;
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);
