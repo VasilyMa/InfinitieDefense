@@ -10,6 +10,7 @@ namespace Client {
         public float MoveSpeed;
         public float RotateSpeed;
         public float damage;
+        public float health;
         public Transform ResHolderTransform;
     }
 }

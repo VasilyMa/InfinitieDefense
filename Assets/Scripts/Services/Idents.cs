@@ -18,7 +18,7 @@ namespace Client
 
         public static class Ui
         {
-            public const string Forward = "Restart";
+            public const string Restart = "Restart";
             public const string TouchListener = "TouchListener";
         }
     }

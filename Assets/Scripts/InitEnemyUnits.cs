@@ -54,7 +54,11 @@ namespace Client
                 viewComponent.AttackMonoBehaviour.SetDamageValue(damageComponent.Value);
                 viewComponent.Transform = enemy.GetComponent<Transform>();
                 viewComponent.Outline = enemy.GetComponent<Outline>();
-
+                viewComponent.Healthbar = enemy.GetComponent<HealthbarMB>();
+                viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);
+                viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
+                viewComponent.Healthbar.ToggleSwitcher();
+                viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 shipComponent.Number = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMonoBehavior>().GetShipNumber();
             }
         }

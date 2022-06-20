@@ -32,6 +32,10 @@ namespace Client {
 
                     _defenderPool.Value.Add(_world.Value.NewEntity());
 
+                    viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
+                    viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 }
                 else
                 {
@@ -40,6 +44,10 @@ namespace Client {
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
+                    viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
+                    viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);

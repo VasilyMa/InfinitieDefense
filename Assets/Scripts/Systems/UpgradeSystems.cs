@@ -8,38 +8,44 @@ namespace Client {
         readonly EcsFilterInject<Inc<UpgradeComponent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
+        readonly EcsPoolInject<InterfaceComponent> _intPool = default;
 
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
+                ref var intComp = ref _intPool.Value.Get(_state.Value.EntityInterface);
 
                 int neededResource = 0;
                 if (filterComp.UpgradeTower)
                 {
+                    
                     if (filterComp.TowerIndex == 0)
                     {
-                        if (_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                        if (filterComp.TowerIndex == 0)
                         {
-                            _filter.Pools.Inc1.Del(entity);
-                            return;
+                            if (_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                            {
+                                _filter.Pools.Inc1.Del(entity);
+                                return;
+                            }
+                            neededResource = _state.Value.CoinCount;
                         }
-                        neededResource = _state.Value.CoinCount;
-                    }
-                    else
-                    {
-                        if (_state.Value.DefenseTowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                        else
                         {
-                            _filter.Pools.Inc1.Del(entity);
-                            return;
+                            if (_state.Value.DefenseTowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                            {
+                                _filter.Pools.Inc1.Del(entity);
+                                return;
+                            }
+                            neededResource = _state.Value.RockCount;
                         }
-                        neededResource = _state.Value.RockCount;
                     }
                 }
                 else
                 {
-                    if(_state.Value.PlayerStorage.GetIsLastByID(_state.Value.CurrentPlayerID))
+                    if (_state.Value.PlayerStorage.GetIsLastByID(_state.Value.CurrentPlayerID))
                     {
                         _filter.Pools.Inc1.Del(entity);
                         neededResource = _state.Value.CoinCount;
@@ -64,7 +70,8 @@ namespace Client {
                                 GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
                                 _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                                 _state.Value.RockCount--;
-
+                        
+                                intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                                 RelocateCoinInResourceHolder();
                             }
                             _state.Value.UpgradeTower(filterComp.TowerIndex);
