@@ -113,7 +113,6 @@ namespace Client
             if(PlayerUpgrade == neededUpgradeValue)
             {
                 PlayerUpgrade = 0;
-                //todo 
                 World.GetPool<CreateNewPlayerEvent>().Add(EntityPlayer);
             }
         }
