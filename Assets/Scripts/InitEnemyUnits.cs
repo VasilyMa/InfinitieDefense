@@ -39,7 +39,7 @@ namespace Client
 
                 targetWeightComponent.Value = 5;
 
-                healthComponent.MaxValue = 100;
+                healthComponent.MaxValue = 20;
                 healthComponent.CurrentValue = healthComponent.MaxValue;
 
                 reachZoneComponent.Value = 2.5f;
