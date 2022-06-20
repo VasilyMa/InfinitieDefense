@@ -1,9 +1,9 @@
 namespace Client
 {
-    struct DamagingEventComponent
+    struct DamagingEvent
     {
         public float DamageValue;
-        public int TargetingEntity;
+        public int TargetEntity;
         public int DamagingEntity;
     }
 }

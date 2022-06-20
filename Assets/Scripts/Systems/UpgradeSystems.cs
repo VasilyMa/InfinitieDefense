@@ -8,13 +8,14 @@ namespace Client {
         readonly EcsFilterInject<Inc<UpgradeComponent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
+        readonly EcsPoolInject<InterfaceComponent> _intPool = default;
 
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
-
+                ref var intComp = ref _intPool.Value.Get(_state.Value.EntityInterface);
                 if(filterComp.TowerIndex == 0)
                 {
                     if(_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
@@ -42,7 +43,7 @@ namespace Client {
                         GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
                         _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                         _state.Value.RockCount--;
-
+                        intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                         _state.Value.UpgradeTower(filterComp.TowerIndex);
 
                         foreach(var item in _state.Value.CoinTransformList)

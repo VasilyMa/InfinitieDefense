@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace Client {
     sealed class PlayerInitSystem : IEcsInitSystem {
+
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<CooldownComponent> _cooldownMining = default;
-        readonly EcsPoolInject<RealoadComponent> _reloadPool = default;
+        readonly EcsPoolInject<ReloadComponent> _reloadPool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         public void Init (EcsSystems systems) 
@@ -15,31 +18,43 @@ namespace Client {
             var playerEntity = _playerPool.Value.GetWorld().NewEntity();
             _state.Value.EntityPlayer = playerEntity;
             ref var player = ref _playerPool.Value.Add (playerEntity);
-
+            ref var viewComponent = ref _viewPool.Value.Add(playerEntity);
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID("1level"), new Vector3(0,2,-10), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
-            player.MoveSpeed = 10f;
+            player.MoveSpeed = 15f;
             player.RotateSpeed = 1f;
             player.damage = _state.Value.PlayerStorage.GetDamageByID("1level");
+            player.health = _state.Value.PlayerStorage.GetHealthByID("1level");
             player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+            viewComponent.GameObject = PlayerGo;
+            viewComponent.Healthbar = PlayerGo.GetComponent<HealthbarMB>();
+            viewComponent.Healthbar.SetMaxHealth(player.health);
+            viewComponent.Healthbar.SetHealth(player.health);
+            viewComponent.Healthbar.ToggleSwitcher();
+            viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
+            viewComponent.EcsInfoMB.SetEntity(playerEntity);
+            viewComponent.PlayerAttackMB = PlayerGo.GetComponent<PlayerAttackMB>();
+            viewComponent.PlayerAttackMB.Init(_world);
+
+            ref var targetWeightComponent = ref _targetWeightPool.Value.Add(playerEntity);
+            targetWeightComponent.Value = 10;
+
             var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
             colliderChecker.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
             _cooldownMining.Value.Add(_state.Value.EntityPlayer);
             ref var cooldown = ref _cooldownMining.Value.Get(_state.Value.EntityPlayer);
-            cooldown.maxValue = 1f;
+            cooldown.maxValue = 2.5f;
             cooldown.currentValue = cooldown.maxValue;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
 
-            //udalit' eto haxyu posle bilda
-            player.AttackMonoBehaviour = PlayerGo.GetComponent<AttackMonoBehaviour>();
-            player.AttackMonoBehaviour.Init(_world);
-            player.AttackMonoBehaviour.SetEntity(playerEntity);
-            player.AttackMonoBehaviour.SetDamageValue(50);
         }
     }
 }

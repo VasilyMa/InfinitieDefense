@@ -14,8 +14,6 @@ namespace Client
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
-        readonly EcsPoolInject<Movable> _movablePool = default;
-        readonly EcsPoolInject<Targetable> _targetablePool = default;
 
         public void Run (EcsSystems systems)
         {
@@ -35,9 +33,6 @@ namespace Client
                 goldComp.Position = viewComponent.Transform.position;
 
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
-
-                if (_movablePool.Value.Has(entity)) _movablePool.Value.Del(entity);
-                if (_targetablePool.Value.Has(entity)) _targetablePool.Value.Del(entity);
 
                 _deadPool.Value.Add(entity);
             }

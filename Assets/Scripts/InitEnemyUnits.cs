@@ -35,11 +35,14 @@ namespace Client
                 ref var healthComponent = ref world.GetPool<HealthComponent>().Add(enemyEntity);
                 ref var reachZoneComponent = ref world.GetPool<ReachZoneComponent>().Add(enemyEntity);
                 ref var damageComponent = ref world.GetPool<DamageComponent>().Add(enemyEntity);
+                ref var targetWeightComponent = ref world.GetPool<TargetWeightComponent>().Add(enemyEntity);
+
+                targetWeightComponent.Value = 5;
 
                 healthComponent.MaxValue = 100;
                 healthComponent.CurrentValue = healthComponent.MaxValue;
 
-                reachZoneComponent.Value = 5f;
+                reachZoneComponent.Value = 2.5f;
 
                 damageComponent.Value = 5f;
 
@@ -50,14 +53,17 @@ namespace Client
                 viewComponent.Animator = enemy.GetComponent<Animator>();
                 viewComponent.Transform = enemy.GetComponent<Transform>();
                 viewComponent.Outline = enemy.GetComponent<Outline>();
-                viewComponent.AttackMonoBehaviour = enemy.GetComponent<AttackMonoBehaviour>();
-                viewComponent.AttackMonoBehaviour.Init(_world);
-                viewComponent.AttackMonoBehaviour.SetEntity(enemyEntity);
-                viewComponent.AttackMonoBehaviour.SetDamageValue(damageComponent.Value);
+                viewComponent.AttackMB = enemy.GetComponent<AttackMB>();
+                viewComponent.AttackMB.Init(_world);
                 viewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
                 viewComponent.EcsInfoMB.Init(_world);
                 viewComponent.EcsInfoMB.SetEntity(enemyEntity);
 
+                viewComponent.Healthbar = enemy.GetComponent<HealthbarMB>();
+                viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);
+                viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
+                viewComponent.Healthbar.ToggleSwitcher();
+                viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                 shipComponent.Number = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMonoBehavior>().GetShipNumber();
             }
         }

@@ -60,7 +60,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.41081083
-        functionName: DealDamageEvent
+        functionName: DealDamagingEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: e159a150a5eeb0045931045b7a0a9891, type: 3}
         floatParameter: 0

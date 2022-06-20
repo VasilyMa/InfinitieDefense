@@ -93,7 +93,7 @@ namespace Client {
         }
 
         [Preserve]
-        [EcsUguiClickEvent(Idents.Ui.Forward, Idents.Worlds.Events)]
+        [EcsUguiClickEvent(Idents.Ui.Restart, Idents.Worlds.Events)]
         void OnClickRestart(in EcsUguiClickEvent evt)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

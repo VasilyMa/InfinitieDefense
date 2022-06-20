@@ -10,7 +10,12 @@ namespace Client
     {
         private EcsWorldInject _world;
 
+
         [SerializeField] private int _gameObjectEntity;
+
+        [SerializeField] private int _targetEntity;
+        [SerializeField] private GameObject _targetObject;
+
 
         public void Init(EcsWorldInject world)
         {
@@ -22,9 +27,19 @@ namespace Client
             _gameObjectEntity = entity;
         }
 
-        public int GetUnitEntity()
+        public int GetEntity()
         {
             return _gameObjectEntity;
+        }
+
+        public EcsWorldInject GetWorld()
+        {
+            return _world;
+        }
+
+        public GameObject GetTargetObject()
+        {
+            return _targetObject;
         }
     }
 }

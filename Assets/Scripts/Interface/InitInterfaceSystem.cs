@@ -13,12 +13,13 @@ namespace Client {
 
             ref var interfaceComp = ref world.GetPool<InterfaceComponent>().Add(entity);
             interfaceComp.joystick = GameObject.Find("Joystick");
+            interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
             var joystick = interfaceComp.joystick.transform.GetChild(0).gameObject;
-            
+            var resourcePanel = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             var handler = joystick.transform.GetChild(0).gameObject;
             var handColor = handler.GetComponent<Image>().enabled = false;
             var joyColor = joystick.GetComponent<Image>().enabled = false;
-
+            resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
             }
     }
 }

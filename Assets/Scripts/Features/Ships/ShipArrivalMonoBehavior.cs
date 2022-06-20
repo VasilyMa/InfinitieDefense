@@ -14,7 +14,7 @@ namespace Client
         private EcsPool<InactiveTag> _inactivePool;
 
         [SerializeField] private int _shipEntity;
-        [SerializeField] private int _shipNumber;
+        [SerializeField] [Range(0, 10)] private int _shipNumber;
         [SerializeField] private int _shipWave;
 
         public void Init(EcsWorldInject world)

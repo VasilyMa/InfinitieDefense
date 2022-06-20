@@ -37,7 +37,8 @@ namespace Client
                 .Add(new OreInitSystem())
                 .Add(new InitInterfaceSystem())
                 .Add(new RadiusInitSystem())
-                .Add(new EnemyTargetingSystem())
+                .Add(new DamagingEventSystem())
+                .Add(new TargetingSystem())
                 .Add(new LookingSystem())
                 .Add(new EnemyMovingSystem())
                 .Add(new DistanceToTargetSystem())
@@ -50,21 +51,20 @@ namespace Client
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
-                .Add(new RaycastUserSystem())
                 .Add(new OreMiningSystem())
                 .Add(new CameraFollowSystem())
                 .Add(new UpgradeSystems())
                 .Add(new CreateNextTowerSystem())
                 .Add(new CombatUserSystem())
                 .Add(new ReloadSystem())
-                .Add(new DamagingEventSystem())
                 .Add(new DieSystem())
                 .Add(new DroppedGoldSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
                 .DelHere<ActivateWaveShipsEvent>()
-                .DelHere<DamagingEventComponent>()
+                .DelHere<DamagingEvent>()
+                .DelHere<TargetingEvent>()
                 ;
 
 

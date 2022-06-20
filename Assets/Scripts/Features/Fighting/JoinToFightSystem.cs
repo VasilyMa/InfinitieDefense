@@ -29,11 +29,13 @@ namespace Client
                     viewComponent.Rigidbody.velocity = Vector3.zero;
                     viewComponent.Animator.SetBool("Run", false);
                     viewComponent.Animator.SetBool("Attack", true);
+                    viewComponent.Healthbar.ToggleSwitcher();
                 }
                 else if(isInFigth && targetableComponent.DistanceToTarget > reachZoneComponent.Value)
                 {
                     _inFightPool.Value.Del(entity);
                     viewComponent.Animator.SetBool("Attack", false);
+                    viewComponent.Healthbar.ToggleSwitcher();
                 }
             }
         }

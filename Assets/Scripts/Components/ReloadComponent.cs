@@ -1,5 +1,5 @@
 namespace Client {
-    struct RealoadComponent {
+    struct ReloadComponent {
         // add your data here.
     }
 }
