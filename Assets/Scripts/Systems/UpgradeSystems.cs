@@ -44,6 +44,7 @@ namespace Client {
                         _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                         _state.Value.RockCount--;
                         intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
+
                         _state.Value.UpgradeTower(filterComp.TowerIndex);
 
                         foreach(var item in _state.Value.CoinTransformList)
