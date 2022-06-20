@@ -47,6 +47,7 @@ namespace Client {
             viewComponent.PlayerAttackMB = PlayerGo.GetComponent<PlayerAttackMB>();
             viewComponent.PlayerAttackMB.Init(_world);
             viewComponent.SkinnedMeshRenderer = PlayerGo.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
+            viewComponent.UpgradeParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(0).GetComponent<ParticleSystem>();
 
             ref var targetWeightComponent = ref _targetWeightPool.Value.Add(playerEntity);
             targetWeightComponent.Value = 10;
