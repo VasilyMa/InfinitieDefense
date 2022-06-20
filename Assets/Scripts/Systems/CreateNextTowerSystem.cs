@@ -10,6 +10,9 @@ namespace Client {
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
         readonly EcsPoolInject<TowerTag> _towerPool = default;
+        readonly EcsPoolInject<Targetable> _targetablePool = default;
+        readonly EcsPoolInject<DamageComponent> _damagePool = default;
+        readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
@@ -40,6 +43,25 @@ namespace Client {
                 else
                 {
                     ref var towerComp = ref _towerPool.Value.Get(entity);
+                    if (!_targetablePool.Value.Has(entity))
+                    {
+                        _targetablePool.Value.Add(entity);
+                    }
+
+                    if (!_damagePool.Value.Has(entity))
+                    {
+                        _damagePool.Value.Add(entity);
+                    }
+
+                    if (!_targetWeightPool.Value.Has(entity))
+                    {
+                        _targetWeightPool.Value.Add(entity);
+                    }
+
+                    ref var targetableComponent = ref _targetablePool.Value.Get(entity);
+                    ref var damageComponent = ref _damagePool.Value.Get(entity);
+                    ref var targetWeightComponent = ref _targetWeightPool.Value.Get(entity);
+
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
@@ -48,6 +70,19 @@ namespace Client {
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    viewComp.SphereCollider = viewComp.GameObject.GetComponent<SphereCollider>();
+                    viewComp.SphereCollider.radius = radiusComp.Radius;
+
+                    damageComponent.Value = 1; //ispravit'
+
+                    viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();
+                    viewComp.EcsInfoMB.Init(_world);
+                    viewComp.EcsInfoMB.SetEntity(entity);
+
+                    viewComp.TowerAttackMB = viewComp.GameObject.GetComponent<TowerAttackMB>();
+                    viewComp.TowerAttackMB.Init(_world);
+
+                    targetWeightComponent.Value = 5;
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);

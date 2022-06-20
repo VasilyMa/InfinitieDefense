@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3990703539696012948}
   - component: {fileID: 8882976104160722052}
+  - component: {fileID: 6159995836325961060}
+  - component: {fileID: 3953731571758904410}
+  - component: {fileID: 8751909896412050622}
   m_Layer: 0
   m_Name: Defence Tower Lvl 10
   m_TagString: Untagged
@@ -79,6 +82,49 @@ MonoBehaviour:
   _curHp: 0
   _maxHP: 0
   _healthBar: {fileID: 7375067689826875443}
+--- !u!135 &6159995836325961060
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4335280981600228398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3953731571758904410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4335280981600228398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c412d422e0b3e684a8b88f79b1790e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameObjectEntity: 0
+  _targetEntity: 0
+  _targetObject: {fileID: 0}
+--- !u!114 &8751909896412050622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4335280981600228398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd521bdbc33db14fa573aa88b56e462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ecsInfoMB: {fileID: 0}
+  _detectedEnemyObjects: []
+  _firstDetectedEnemyObject: {fileID: 0}
 --- !u!1001 &5010243901692537807
 PrefabInstance:
   m_ObjectHideFlags: 0
