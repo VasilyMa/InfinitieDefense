@@ -16,41 +16,37 @@ namespace Client {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
                 ref var intComp = ref _intPool.Value.Get(_state.Value.EntityInterface);
-
                 int neededResource = 0;
-                if (filterComp.UpgradeTower)
+                if (filterComp.UpgradeTower) //если апгрейдим башни
                 {
-                    
-                    if (filterComp.TowerIndex == 0)
+                    if (filterComp.TowerIndex == 0) //главная башня
                     {
-                        if (filterComp.TowerIndex == 0)
+                        if (_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
                         {
-                            if (_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
-                            {
-                                _filter.Pools.Inc1.Del(entity);
-                                return;
-                            }
-                            neededResource = _state.Value.CoinCount;
+                            _filter.Pools.Inc1.Del(entity);
+                            return;
                         }
-                        else
+                        neededResource = _state.Value.CoinCount;
+                    }
+                    else //защитные башни
+                    {
+                        if (_state.Value.DefenseTowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
                         {
-                            if (_state.Value.DefenseTowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
-                            {
-                                _filter.Pools.Inc1.Del(entity);
-                                return;
-                            }
-                            neededResource = _state.Value.RockCount;
+                            _filter.Pools.Inc1.Del(entity);
+                            return;
                         }
+                        neededResource = _state.Value.RockCount;
+                        
                     }
                 }
-                else
+                else // если апгрейдим игрока
                 {
                     if (_state.Value.PlayerStorage.GetIsLastByID(_state.Value.CurrentPlayerID))
                     {
                         _filter.Pools.Inc1.Del(entity);
-                        neededResource = _state.Value.CoinCount;
                         return;
                     }
+                    neededResource = _state.Value.CoinCount;
                 }
 
                 if(filterComp.Time == 0)
