@@ -83,7 +83,8 @@ namespace Client {
             {
                 ref var _player = ref _filter.Pools.Inc1.Get(entity);
                 _player.animator.SetBool("isRun", false);
-                _player.animator.SetBool("isIdle", true);
+                if(!_player.animator.GetBool("isMining"))
+                    _player.animator.SetBool("isIdle", true);
                 _player.rigidbody.velocity = Vector3.zero;
             }
             _joystick.GetComponent<Image>().enabled = false;
