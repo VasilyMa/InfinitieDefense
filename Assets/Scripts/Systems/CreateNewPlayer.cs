@@ -16,11 +16,11 @@ namespace Client {
                 ref var playerComp = ref _playerPool.Value.Get(entity);
 
                 _state.Value.CurrentPlayerID = _state.Value.PlayerStorage.GetNextIdByID(_state.Value.CurrentPlayerID);
-                Debug.Log("dfdfdfdfd " + _state.Value.CurrentPlayerID);
+                //Debug.Log("dfdfdfdfd " + _state.Value.CurrentPlayerID);
                 playerComp.damage = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
                 playerComp.health = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
 
-                viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
+                //viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
 
                 _filter.Pools.Inc1.Del(entity);
             }
