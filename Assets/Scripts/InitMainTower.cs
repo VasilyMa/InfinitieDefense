@@ -52,7 +52,7 @@ namespace Client
             UpgradeCanvasMB upgradeInfo = null;
 
             var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
-            upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0, -3), Quaternion.identity);
+            upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, Vector3.zero, Quaternion.identity);
             upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
             upgradeComponent.point = upgradePoint.gameObject;
             upgradeComponent.upgrade = upgradeInfo;
@@ -72,6 +72,7 @@ namespace Client
             viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);
             viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
 
             ref var targetWeightComponent = ref _world.Value.GetPool<TargetWeightComponent>().Add(entity);
 
@@ -94,7 +95,7 @@ namespace Client
                     var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
                     tComp.Position = new Vector3(x, 0, z);
 
-                    upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0, z - 3), Quaternion.identity);
+                    upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0, z), Quaternion.identity);
                     upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
                     upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
                     upgradeTowerComponent.point = upgradePoint.gameObject;
@@ -103,6 +104,7 @@ namespace Client
                     upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
                     upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
                     upgradePointMB.TowerIndex = i;
+                    viewComp.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
 
                     Angle += 360 / (_state.Value.TowerCount - 1);
                 }

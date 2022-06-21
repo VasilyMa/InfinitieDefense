@@ -19,7 +19,7 @@ namespace Client {
                 //Debug.Log("dfdfdfdfd " + _state.Value.CurrentPlayerID);
                 playerComp.damage = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
                 playerComp.health = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
-
+                viewComp.UpgradeParticleSystem.Play();
                 //viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
 
                 _filter.Pools.Inc1.Del(entity);

@@ -19,5 +19,6 @@ namespace Client
         public PlayerAttackMB PlayerAttackMB;
         public EcsInfoMB EcsInfoMB;
         public SkinnedMeshRenderer SkinnedMeshRenderer;
+        public ParticleSystem UpgradeParticleSystem;
     }
 }

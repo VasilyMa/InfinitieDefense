@@ -26,6 +26,8 @@ namespace Client {
                 ref var viewComp = ref _viewPool.Value.Get(entity);
                 if(viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
 
+                viewComp.UpgradeParticleSystem.Play();
+                
                 if (towerIndex == 0)
                 {
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.TowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
