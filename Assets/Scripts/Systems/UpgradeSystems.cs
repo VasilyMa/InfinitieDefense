@@ -48,6 +48,12 @@ namespace Client {
                     neededResource = _state.Value.CoinCount;
                 }
 
+                if(filterComp.DelayTime < 2f)
+                {
+                    filterComp.DelayTime += Time.deltaTime * 2f;
+                    return;
+                }
+
                 if(filterComp.Time == 0)
                 {
                     if (neededResource > 0)
@@ -85,7 +91,7 @@ namespace Client {
                         _filter.Pools.Inc1.Del(entity);
                     }
                 }
-                filterComp.Time += Time.deltaTime * 3f;
+                filterComp.Time += Time.deltaTime * 2f;
                 if(filterComp.Time >= 1f)
                 {
                     filterComp.Time = 0f;
