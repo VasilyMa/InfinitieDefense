@@ -14,7 +14,7 @@ public class DefenseTowerStorage : ScriptableObject
             ["empty"] = new DefenseTower
             {
                 NextID = "1tower",
-                Upgrade = 3
+                Upgrade = 1
             },
             ["1tower"] = new DefenseTower
             {
@@ -39,7 +39,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Radius = 9,
                 TowerHealth = 70,
                 TowerPrefab = TowerPrefabs[2],
-                Upgrade = 10,
+                Upgrade = 7,
                 IsLast = false,
                 NextID = "4tower"
             },
