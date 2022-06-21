@@ -3175,10 +3175,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasController
       objectReference: {fileID: 0}
-    - target: {fileID: 8834329936356928247, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
-      propertyPath: _stoneAmount
-      value: 
-      objectReference: {fileID: 1886334978}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
 --- !u!1001 &1521298115
@@ -3957,17 +3953,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6af3d5937a99f714bba749865d7d1919, type: 3}
---- !u!114 &1886334978 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1912707176114881873, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
-  m_PrefabInstance: {fileID: 1437435195}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1953430617
 PrefabInstance:
   m_ObjectHideFlags: 0
