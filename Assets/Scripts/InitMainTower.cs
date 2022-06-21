@@ -58,7 +58,7 @@ namespace Client
             upgradeComponent.upgrade = upgradeInfo;
             upgradeComponent.amount = 0;
             upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
+            upgradeInfo.UpdateUpgradePoint(0, 3);
 
             upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
             upgradePointMB.TowerIndex = 0;
@@ -102,7 +102,7 @@ namespace Client
                     upgradeTowerComponent.upgrade = upgradeInfo;
                     upgradeTowerComponent.amount = 0;
                     upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
+                    upgradeInfo.UpdateUpgradePoint(0, 3);
                     upgradePointMB.TowerIndex = i;
                     viewComp.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
 
