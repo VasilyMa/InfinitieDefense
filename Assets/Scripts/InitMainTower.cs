@@ -56,9 +56,9 @@ namespace Client
             upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
             upgradeComponent.point = upgradePoint.gameObject;
             upgradeComponent.upgrade = upgradeInfo;
-            upgradeComponent.amount = 0;
+            upgradeComponent.Index = 0;
             upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
+            upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("empty"));
 
             upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
             upgradePointMB.TowerIndex = 0;
@@ -100,10 +100,11 @@ namespace Client
                     upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
                     upgradeTowerComponent.point = upgradePoint.gameObject;
                     upgradeTowerComponent.upgrade = upgradeInfo;
-                    upgradeTowerComponent.amount = 0;
+                    
                     upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
+                    upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("empty"));
                     upgradePointMB.TowerIndex = i;
+                    upgradeTowerComponent.Index = upgradePointMB.TowerIndex;
                     viewComp.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
 
                     Angle += 360 / (_state.Value.TowerCount - 1);
