@@ -545,9 +545,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ba50e45098cc404588f19ebe6b982d3, type: 2}
+    - target: {fileID: -7511558181221131132, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 1c9b2d8aa74a9ca4d9c17f93567a20e5, type: 2}
+      objectReference: {fileID: 2100000, guid: 6bb83fcd3d27ac6409ff1f311075c462, type: 2}
     - target: {fileID: 919132149155446097, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
       propertyPath: m_Name
       value: raft1
