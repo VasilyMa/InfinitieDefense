@@ -65,6 +65,7 @@ namespace Client
                 .Add(new ReloadSystem())
                 .Add(new DieSystem())
                 .Add(new DroppedGoldSystem())
+                .Add(new RespawnDefender())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
