@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerStorage
   m_EditorClassIdentifier: 
   PlayerPrefabs:
-  - {fileID: 2599815697395588373, guid: 9ed8a92db7e15bf459f90a3a1d714b63, type: 3}
-  - {fileID: 2599815697395588373, guid: 9ed8a92db7e15bf459f90a3a1d714b63, type: 3}
+  - {fileID: 2185536900004340669, guid: 514ee454f58c7da47bc6b3079cd82daf, type: 3}
+  - {fileID: 4546838530622626531, guid: 604045274b086d143bdbb73b67b15ea7, type: 3}
   PlayerMeshes:
   - {fileID: 2791369629923464968, guid: 662496b7ffb588441916b52eeb82c952, type: 3}
   - {fileID: 2791369629923464968, guid: 662496b7ffb588441916b52eeb82c952, type: 3}
