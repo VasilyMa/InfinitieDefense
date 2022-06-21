@@ -9,8 +9,6 @@ namespace Client
     public class TowerAttackMB : MonoBehaviour
     {
         [SerializeField] private EcsInfoMB _ecsInfoMB;
-        [SerializeField] private List<GameObject> _detectedEnemyObjects;
-        [SerializeField] private GameObject _firstDetectedEnemyObject;
 
         //private Animator _animator;
 
@@ -29,10 +27,14 @@ namespace Client
         {
             _ecsInfoMB = gameObject.GetComponent<EcsInfoMB>();
             //_animator = gameObject.GetComponent<Animator>();
-            _detectedEnemyObjects = new List<GameObject>();
         }
         void Update()
         {
+            if (_ecsInfoMB.GetTargetObject())
+            {
+                DealDamagingEvent();
+            }
+
             if (CurrentCoolDown > 0)
             {
                 CurrentCoolDown -= Time.deltaTime;
@@ -54,15 +56,15 @@ namespace Client
             ref var damagingEventComponent = ref _damagingEventPool.Add(_world.Value.NewEntity());
             ref var damageComponent = ref _damagePool.Get(_ecsInfoMB.GetEntity());
 
-            Debug.Log("Членистоногая сущность - "+ _ecsInfoMB.GetEntity()+ " \nСовершает непотребство над - "+ _firstDetectedEnemyObject.GetComponent<EcsInfoMB>().GetEntity() + " \nС уроном в "+ damageComponent.Value);
+            Debug.Log("Членистоногая сущность - "+ _ecsInfoMB.GetEntity()+ " \nСовершает непотребство над - "+ _ecsInfoMB.GetTargetObject().GetComponent<EcsInfoMB>().GetEntity() + " \nС уроном в "+ damageComponent.Value);
 
-            damagingEventComponent.TargetEntity = _firstDetectedEnemyObject.GetComponent<EcsInfoMB>().GetEntity();
+            damagingEventComponent.TargetEntity = _ecsInfoMB.GetTargetObject().GetComponent<EcsInfoMB>().GetEntity();
             damagingEventComponent.DamageValue = damageComponent.Value;
             damagingEventComponent.DamagingEntity = _ecsInfoMB.GetEntity();
             CurrentCoolDown = MaxCoolDown;
         }
 
-        private void OnTriggerEnter(Collider other)
+        /*private void OnTriggerEnter(Collider other)
         {
             if (!other.gameObject.CompareTag(nameof(Enemy)))
             {
@@ -105,6 +107,6 @@ namespace Client
             }
 
             _detectedEnemyObjects.Remove(other.gameObject);
-        }
+        }*/
     }
 }

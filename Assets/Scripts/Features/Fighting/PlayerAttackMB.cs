@@ -10,7 +10,6 @@ namespace Client
     {
         [SerializeField] private EcsInfoMB _ecsInfoMB;
         [SerializeField] private List<GameObject> _detectedEnemyObjects;
-        [SerializeField] private GameObject _firstDetectedEnemyObject;
 
         private Animator _animator;
 

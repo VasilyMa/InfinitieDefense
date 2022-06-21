@@ -1,9 +1,11 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 using Leopotam.EcsLite.Di;
+using UnityEngine;
 
-namespace Client {
-    sealed class CreateNextTowerSystem : IEcsRunSystem {
+namespace Client
+{
+    sealed class CreateNextTowerSystem : IEcsRunSystem
+    {
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsWorldInject _world = default;
         readonly EcsFilterInject<Inc<CreateNextTowerEvent>> _filter = default;
@@ -17,15 +19,16 @@ namespace Client {
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
         readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
-        public void Run (EcsSystems systems) {
-            foreach(var entity in _filter.Value)
+        public void Run(EcsSystems systems)
+        {
+            foreach (var entity in _filter.Value)
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
 
                 int towerIndex = filterComp.TowerIndex;
                 ref var radiusComp = ref _radiusPool.Value.Get(entity);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
-                if(viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
+                if (viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
 
                 if (towerIndex == 0)
                 {
@@ -73,8 +76,6 @@ namespace Client {
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    viewComp.SphereCollider = viewComp.GameObject.GetComponent<SphereCollider>();
-                    viewComp.SphereCollider.radius = radiusComp.Radius;
 
                     damageComponent.Value = 5; //ispravit'
 
@@ -85,10 +86,35 @@ namespace Client {
                     viewComp.TowerAttackMB = viewComp.GameObject.GetComponent<TowerAttackMB>();
                     viewComp.TowerAttackMB.Init(_world);
 
+                    Transform[] allChildren = viewComp.GameObject.GetComponentsInChildren<Transform>();
+                    foreach (var child in allChildren)
+                    {
+                        if (child.CompareTag("Weapon"))
+                        {
+                            viewComp.TowerWeapon = child.gameObject;
+
+                            Transform[] allWeaponChildren = viewComp.TowerWeapon.GetComponentsInChildren<Transform>();
+
+                            foreach (var weaponChild in allWeaponChildren)
+                            {
+                                if (weaponChild.CompareTag("Fire Point"))
+                                {
+                                    viewComp.FirePoint = weaponChild.gameObject;
+                                }
+                            }
+                        }
+
+                        if (child.CompareTag("DetectedZone"))
+                        {
+                            viewComp.DetectedZone = child.GetComponent<SphereCollider>();
+                            viewComp.DetectedZone.radius = radiusComp.Radius;
+                        }
+                    }
+
                     targetWeightComponent.Value = 5;
 
-                    healthComponent.MaxValue = 50;
-                    healthComponent.CurrentValue = healthComponent.MaxValue;
+                    healthComponent.MaxValue = _state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
+                    healthComponent.CurrentValue = _state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);

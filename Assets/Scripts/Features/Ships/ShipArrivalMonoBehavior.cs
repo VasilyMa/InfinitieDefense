@@ -26,7 +26,6 @@ namespace Client
 
         private void OnTriggerEnter(Collider land)
         {
-            Debug.Log(land.gameObject.name);
 
             if (_inactivePool.Has(_shipEntity))
             {

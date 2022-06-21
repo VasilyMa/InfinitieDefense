@@ -2,17 +2,16 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-
 namespace Client
 {
-    sealed class LookingSystem : IEcsRunSystem
+    sealed class TowerLookingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<ViewComponent, Targetable>, Exc<DeadTag>> _entitysFilter = default;
+        readonly EcsFilterInject<Inc<TowerTag, ViewComponent, Targetable>, Exc<DeadTag, MainTowerTag>> _entitysFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
 
-        public void Run (EcsSystems systems)
+        public void Run(EcsSystems systems)
         {
             foreach (var entity in _entitysFilter.Value)
             {
@@ -26,10 +25,10 @@ namespace Client
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
                 Vector3 flatTargetPosition = new Vector3(targetableComponent.TargetObject.transform.position.x,
-                                                            viewComponent.GameObject.transform.position.y,
+                                                            viewComponent.TowerWeapon.transform.position.y,
                                                             targetableComponent.TargetObject.transform.position.z);
 
-                viewComponent.GameObject.transform.LookAt(flatTargetPosition);
+                viewComponent.TowerWeapon.transform.LookAt(flatTargetPosition);
             }
         }
     }

@@ -20,11 +20,9 @@ namespace Client {
             {
                 ref var shipArrivalEvent = ref _shipArrivalEventPool.Value.Get(eventEntity);
                 var shipEntity = shipArrivalEvent.ShipEntity;
-                Debug.Log("Пришвартовались");
 
                 ref var shipComponent = ref _shipPool.Value.Get(shipEntity);
                 _inactivePool.Value.Add(shipEntity);
-                Debug.Log("Закинул-ли мы пришвартованный корабль к инактивный пул? "+_inactivePool.Value.Has(shipEntity));
 
                 foreach (var enemyEntity in shipComponent.EnemyUnitsEntitys)
                 {

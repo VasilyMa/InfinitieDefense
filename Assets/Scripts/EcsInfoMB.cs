@@ -10,6 +10,7 @@ namespace Client
     {
         private EcsWorldInject _world;
 
+        private EcsPool<TargetingEvent> _targetingEventPool;
 
         [SerializeField] private int _gameObjectEntity;
 
@@ -20,6 +21,7 @@ namespace Client
         public void Init(EcsWorldInject world)
         {
             _world = world;
+            _targetingEventPool = world.Value.GetPool<TargetingEvent>();
         }
 
         public void SetEntity(int entity)
@@ -40,6 +42,11 @@ namespace Client
         public GameObject GetTargetObject()
         {
             return _targetObject;
+        }
+
+        public void SetTargetObject(GameObject gameObject)
+        {
+            _targetObject = gameObject;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Client
 
                 damageComponent.Value = 5f;
 
-                movableComponent.Speed = 10f;
+                movableComponent.Speed = 5f;
 
                 viewComponent.GameObject = enemy;
                 viewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
