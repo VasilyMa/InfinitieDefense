@@ -24,21 +24,18 @@ namespace Client {
                     if(filterComp.Coin)
                     {
                         _state.Value.CoinTransformList.Add(filterComp.Transform);
-                        filterComp.Transform.SetSiblingIndex(_state.Value.CoinCount + _state.Value.RockCount);
                         interComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                     }
                     else
                     {
-                        _state.Value.StoneTransformList.Add(filterComp.Transform);
-
                         foreach(var item in _state.Value.CoinTransformList)
                         {
                             item.localPosition = new Vector3(0, item.localPosition.y + 0.6f, 0);
                         }
-                        filterComp.Transform.SetSiblingIndex(_state.Value.RockCount);
-                        //_state.Value.RockCount++;
+                        _state.Value.StoneTransformList.Add(filterComp.Transform);
                         interComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                     }
+                    filterComp.Transform.localPosition = filterComp.TargetPosition;
                     _filter.Pools.Inc1.Del(entity);
                 }
             }

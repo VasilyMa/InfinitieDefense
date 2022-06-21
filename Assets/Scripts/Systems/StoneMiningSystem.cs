@@ -25,15 +25,14 @@ namespace Client {
                 //todo target
                 moveToBagComp.StartPosition = moveToBagComp.Transform.localPosition;
                 moveToBagComp.TargetPosition = new Vector3(0, _state.Value.RockCount * 0.6f, 0);
-                _state.Value.RockCount++;
                 moveToBagComp.Coin = false;
 
                 // foreach(var item in _state.Value.CoinTransformList)
                 // {
                 //     item.localPosition = new Vector3(0, item.localPosition.y + 0.6f, 0);
                 // }
-                // filterComp.StoneTransform.SetSiblingIndex(_state.Value.RockCount);
-                // _state.Value.RockCount++;
+                filterComp.StoneTransform.SetSiblingIndex(_state.Value.RockCount);
+                _state.Value.RockCount++;
                 // intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                 //todo добавить перемещение камня за спину
                 _filter.Pools.Inc1.Del(entity);
