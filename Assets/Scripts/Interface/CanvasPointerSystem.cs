@@ -9,11 +9,12 @@ namespace Client {
     sealed class CanvasPointerSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<CanvasPointerComponent>> _canvasfilter = default;
-        readonly EcsFilterInject<Inc<EnemyTag, UnitTag>, Exc<InactiveTag>> _enemyFilter = default;
+        readonly EcsFilterInject<Inc<EnemyTag, UnitTag>, Exc<InactiveTag>> _enemyActiveFilter = default;
+        readonly EcsFilterInject<Inc<EnemyTag, UnitTag, InactiveTag>> _enemyInactiveFilter = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<CameraComponent> _cameraPool = default;
         public void Run (EcsSystems systems) {
-            foreach (var enemyEntity in _enemyFilter.Value)
+            foreach (var enemyEntity in _enemyActiveFilter.Value)
             {
                 ref var viewComp = ref _viewPool.Value.Get(enemyEntity);
 
@@ -21,6 +22,7 @@ namespace Client {
                 {
                     ref var cameraComp = ref _cameraPool.Value.Get(_state.Value.EntityCamera);
                     ref var pointerComp = ref _canvasfilter.Pools.Inc1.Get(entityPlayer);
+                    viewComp.PointerTransform.gameObject.SetActive(true);
                     Vector3 ToEnemy = viewComp.GameObject.transform.position - pointerComp.player.transform.position;
                     Ray ray = new Ray(pointerComp.player.transform.position, ToEnemy);
                     Debug.DrawRay(pointerComp.player.transform.position, ToEnemy);
@@ -53,6 +55,11 @@ namespace Client {
                         viewComp.PointerTransform.localScale = Vector3.one * Time.deltaTime * 1.5f;
                     }
                 }
+            }
+            foreach (var enemyEntity in _enemyInactiveFilter.Value)
+            {
+                ref var viewComp = ref _viewPool.Value.Get(enemyEntity);
+                viewComp.PointerTransform.gameObject.SetActive(false);
             }
         }
         Quaternion GetIconRotation(int planeIndex)
