@@ -15,14 +15,15 @@ namespace Client
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
+        readonly EcsPoolInject<EnemyTag> _enemyPool = default;
 
         readonly EcsSharedInject<GameState> _state;
 
         public void Run (EcsSystems systems)
         {
-            foreach(var enemyEntity in _unitsFilter.Value)
+            foreach(var entity in _unitsFilter.Value)
             {
-                ref var targetableComponent = ref _targetablePool.Value.Get(enemyEntity);
+                ref var targetableComponent = ref _targetablePool.Value.Get(entity);
 
                 if (_deadPool.Value.Has(targetableComponent.TargetEntity))
                 {
@@ -34,11 +35,14 @@ namespace Client
                     continue;
                 }
 
-                ref var viewComponent = ref _viewPool.Value.Get(enemyEntity);
-                ref var _viewMainTowerComponent = ref _viewPool.Value.Get(_state.Value.TowersEntity[0]);
+                if (_enemyPool.Value.Has(entity))
+                {
+                    ref var viewComponent = ref _viewPool.Value.Get(entity);
+                    ref var _viewMainTowerComponent = ref _viewPool.Value.Get(_state.Value.TowersEntity[0]);
 
-                targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
-                targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
+                    targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
+                    targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
+                }
             }
 
             foreach (var entity in _targetingEventFilter.Value)

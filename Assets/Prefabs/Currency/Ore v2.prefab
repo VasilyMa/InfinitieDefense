@@ -40,9 +40,9 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649720191870491427}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.4138687
+  m_Radius: 2.71
   m_Height: 4.5130634
   m_Direction: 1
   m_Center: {x: -0.032872915, y: 0.8426629, z: 0}

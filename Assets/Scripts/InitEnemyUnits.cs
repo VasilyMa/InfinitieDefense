@@ -44,9 +44,9 @@ namespace Client
 
                 reachZoneComponent.Value = 2.5f;
 
-                damageComponent.Value = 50f;
+                damageComponent.Value = 5f;
 
-                movableComponent.Speed = 10f;
+                movableComponent.Speed = 5f;
 
                 viewComponent.GameObject = enemy;
                 viewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();

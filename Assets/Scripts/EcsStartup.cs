@@ -41,10 +41,12 @@ namespace Client
                 .Add(new RadiusInitSystem())
                 .Add(new DamagingEventSystem())
                 .Add(new TargetingSystem())
-                .Add(new LookingSystem())
+                .Add(new UnitLookingSystem())
+                .Add(new TowerLookingSystem())
                 .Add(new EnemyMovingSystem())
+                .Add(new ShipMovingSystem())
                 .Add(new DistanceToTargetSystem())
-                .Add(new JoinToFightSystem())
+                //.Add(new JoinToFightSystem())
                 .Add(new ShipArrivalSystem())
 
                 .Add(new WaveSwitcher())
@@ -63,6 +65,8 @@ namespace Client
                 .Add(new ReloadSystem())
                 .Add(new DieSystem())
                 .Add(new DroppedGoldSystem())
+                .Add(new RespawnDefender())
+                .Add(new UpgradeCanvasSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
