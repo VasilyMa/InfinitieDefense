@@ -13,6 +13,7 @@ namespace Client {
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
+        readonly EcsPoolInject<CanvasPointerComponent> _pointerPool = default;
         public void Init (EcsSystems systems) 
         {
             
@@ -22,6 +23,7 @@ namespace Client {
             ref var player = ref _playerPool.Value.Add (playerEntity);
             ref var viewComponent = ref _viewPool.Value.Add(playerEntity);
             ref var healthComponent = ref _world.Value.GetPool<HealthComponent>().Add(playerEntity);
+            ref var pointerComponent = ref _world.Value.GetPool<CanvasPointerComponent>().Add(playerEntity);
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), new Vector3(0,2,-10), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
@@ -48,6 +50,8 @@ namespace Client {
             viewComponent.PlayerAttackMB.Init(_world);
             viewComponent.SkinnedMeshRenderer = PlayerGo.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
             viewComponent.UpgradeParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(0).GetComponent<ParticleSystem>();
+
+            pointerComponent.player = PlayerGo;
 
             ref var targetWeightComponent = ref _targetWeightPool.Value.Add(playerEntity);
             targetWeightComponent.Value = 10;
