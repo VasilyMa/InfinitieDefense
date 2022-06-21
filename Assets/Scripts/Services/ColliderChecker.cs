@@ -59,34 +59,44 @@ namespace Client
                     upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;
                     upgradeComp.UpgradeTower = true;
+                    #region UpgradeCanvas
                     if (_state.RockCount > 0)
                     {
-                        var filter = _world.Filter<TowerTag>().Inc<CanvasUpgradeComponent>().End();
+                        var filter = _world.Filter<TowerTag>().Inc<CanvasUpgradeComponent>().Exc<MainTowerTag>().End();
                         var towerTag = _world.GetPool<CanvasUpgradeComponent>();
                         foreach (var entity in filter)
                         {
                             ref var towerComp = ref towerTag.Get(entity);
-                            if (other.gameObject == towerComp.point)
+                            if (other.gameObject == towerComp.point && !_canvasEvent.Has(entity))
                             {
                                 ref var upgradeEvent = ref _canvasEvent.Add(entity);
                                 towerComp.Index = other.GetComponent<UpgradePointMB>().TowerIndex;
+                            }
+                            else
+                            {
+                                _canvasEvent.Del(entity);
                             }
                         }
                     }
                     if (_state.CoinCount > 0)
                     {
-                        var mainFilter = _world.Filter<MainTowerTag>().Inc<CanvasUpgradeComponent>().End();
+                        var mainFilter = _world.Filter<MainTowerTag>().Inc<CanvasUpgradeComponent>().Exc<TowerTag>().End();
                         var mainTowerTag = _world.GetPool<CanvasUpgradeComponent>();
                         foreach (var entity in mainFilter)
                         {
                             ref var mainTowerComp = ref mainTowerTag.Get(entity);
-                            if (other.gameObject == mainTowerComp.point)
+                            if (other.gameObject == mainTowerComp.point && !_canvasEvent.Has(entity))
                             {
                                 ref var upgradeEvent = ref _canvasEvent.Add(entity);
                                 mainTowerComp.Index = other.GetComponent<UpgradePointMB>().TowerIndex;
                             }
+                            else
+                            {
+                                _canvasEvent.Del(entity);
+                            }
                         }
                     }
+                    #endregion
                 }
             }
             else if (other.gameObject.tag == "UpgradePlayerPoint")

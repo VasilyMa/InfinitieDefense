@@ -20,7 +20,6 @@ namespace Client {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
                 ref var intComp = ref _intPool.Value.Get(_state.Value.EntityInterface);
-                
                 int neededResource = 0;
                 if (filterComp.UpgradeTower) //если апгрейдим башни
                 {
@@ -101,9 +100,9 @@ namespace Client {
                     else
                     {
                         _filter.Pools.Inc1.Del(entity);
-                        _canvasFilter.Pools.Inc2.Del(TowerEntity);
-                        _mainCanvasFilter.Pools.Inc3.Del(MainTowerEntity);
                     }
+                    _canvasFilter.Pools.Inc2.Del(TowerEntity);
+                    _mainCanvasFilter.Pools.Inc3.Del(MainTowerEntity);
                 }
                 filterComp.Time += Time.deltaTime * 3f;
                 if(filterComp.Time >= 1f)
