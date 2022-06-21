@@ -14,8 +14,6 @@ namespace Client {
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
-        readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
-        readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
