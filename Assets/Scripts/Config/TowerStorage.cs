@@ -16,7 +16,7 @@ public class TowerStorage : ScriptableObject
             ["1tower"] = new Tower
             {
                 Radius = 15,
-                TowerHealth = 100,
+                TowerHealth = 50,
                 TowerPrefab = TowerPrefabs[0],
                 Upgrade = 3,
                 IsLast = false,

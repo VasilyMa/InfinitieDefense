@@ -14,6 +14,8 @@ TagManager:
   - UpgradePoint
   - DefensePoint
   - UpgradePlayerPoint
+  - Weapon
+  - Fire Point
   layers:
   - Default
   - TransparentFX

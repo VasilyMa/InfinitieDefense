@@ -10,7 +10,6 @@ namespace Client
     {
         [SerializeField] private EcsInfoMB _ecsInfoMB;
         [SerializeField] private List<GameObject> _detectedEnemyObjects;
-        [SerializeField] private GameObject _firstDetectedEnemyObject;
 
         private Animator _animator;
 
@@ -35,13 +34,13 @@ namespace Client
 
         public void DealDamagingEvent()
         {
-            if (!_firstDetectedEnemyObject)
+            if (!_detectedEnemyObjects[0])
             {
                 return;
             }
 
             ref var damagingEventComponent = ref _damagingEventPool.Add(_world.Value.NewEntity());
-            damagingEventComponent.TargetEntity = _firstDetectedEnemyObject.GetComponent<EcsInfoMB>().GetEntity();
+            damagingEventComponent.TargetEntity = _detectedEnemyObjects[0].GetComponent<EcsInfoMB>().GetEntity();
             damagingEventComponent.DamageValue = 50;
             damagingEventComponent.DamagingEntity = _ecsInfoMB.GetEntity();
         }
@@ -50,12 +49,11 @@ namespace Client
         {
             if (!other.gameObject.CompareTag(nameof(Enemy)))
             {
+                if (_detectedEnemyObjects.Count > 0)
+                {
+                    _detectedEnemyObjects.Clear();
+                }
                 return;
-            }
-
-            if (!_firstDetectedEnemyObject)
-            {
-                _firstDetectedEnemyObject = other.gameObject;
             }
 
             _detectedEnemyObjects.Add(other.gameObject);
@@ -68,9 +66,9 @@ namespace Client
                 return;
             }
 
-            if (!_firstDetectedEnemyObject)
+            if (_detectedEnemyObjects.Count == 0)
             {
-                _firstDetectedEnemyObject = _detectedEnemyObjects[0];
+                _detectedEnemyObjects.Add(other.gameObject);
             }
 
             _animator.SetBool("Attack", true);
@@ -83,10 +81,9 @@ namespace Client
                 return;
             }
 
-            if (other.gameObject == _firstDetectedEnemyObject)
+            if (other.gameObject == _detectedEnemyObjects[0])
             {
                 _animator.SetBool("Attack", false);
-                _firstDetectedEnemyObject = null;
             }
 
             _detectedEnemyObjects.Remove(other.gameObject);

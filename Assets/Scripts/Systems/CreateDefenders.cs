@@ -13,6 +13,7 @@ namespace Client {
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
+        readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<Movable> _movablePool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<UnitTag> _unitPool = default;
@@ -43,16 +44,18 @@ namespace Client {
                         ref var targetWeightComponent = ref _targetWeightPool.Value.Add(defenderEntity);
                         ref var movableComponent = ref _movablePool.Value.Add(defenderEntity);
                         ref var damageComponent = ref _damagePool.Value.Add(defenderEntity);
+                        ref var targetable = ref _targetablePool.Value.Add(defenderEntity);
 
                         damageComponent.Value = 10;
 
-                        movableComponent.Speed = 10;
+                        movableComponent.Speed = 10f;
 
                         targetWeightComponent.Value = 10;
 
                         viewComponent.GameObject = _state.Value.DefendersGOs[i];
                         viewComponent.Transform = viewComponent.GameObject.transform;
                         viewComponent.Rigidbody = viewComponent.GameObject.GetComponent<Rigidbody>();
+                        viewComponent.Animator = viewComponent.GameObject.GetComponent<Animator>();
 
                         viewComponent.EcsInfoMB = viewComponent.GameObject.GetComponent<EcsInfoMB>();
                         viewComponent.EcsInfoMB.Init(_world);
