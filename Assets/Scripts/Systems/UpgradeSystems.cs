@@ -95,7 +95,7 @@ namespace Client {
             {
                 foreach(var item in _state.Value.CoinTransformList)
                 {
-                    item.localPosition = new Vector3(0, item.localPosition.y - 1, 0);
+                    item.localPosition = new Vector3(0, item.localPosition.y - 0.6f, 0);
                 }
             }
         }
