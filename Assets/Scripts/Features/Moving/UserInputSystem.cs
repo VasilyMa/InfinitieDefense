@@ -39,7 +39,7 @@ namespace Client {
         [EcsUguiDragMoveEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
         void OnDragTouchListner(in EcsUguiDragMoveEvent evt)
         {
-            
+
             lastPosition = evt.Position - startPosition;
             _rectTransform.localPosition = lastPosition;
             float size = lastPosition.magnitude;
@@ -50,14 +50,14 @@ namespace Client {
             }
             else
                 _speed = size / _maxAllowedSize;
-            _direction = lastPosition*0.1f;
-            
+            _direction = lastPosition * 0.1f;
+
             moveVector.x = Horizontal();
             moveVector.z = Vertical();
             foreach (var entity in _filter.Value)
             {
                 ref var _player = ref _filter.Pools.Inc1.Get(entity);
-                
+
                 if (_speed > 0.0f)
                 {
                     if (Vector3.Angle(Vector3.forward, moveVector) > 1f || Vector3.Angle(Vector3.forward, moveVector) == 0)
@@ -83,13 +83,13 @@ namespace Client {
             {
                 ref var _player = ref _filter.Pools.Inc1.Get(entity);
                 _player.animator.SetBool("isRun", false);
-                if(!_player.animator.GetBool("isMining"))
+                if (!_player.animator.GetBool("isMining"))
                     _player.animator.SetBool("isIdle", true);
                 _player.rigidbody.velocity = Vector3.zero;
             }
             _joystick.GetComponent<Image>().enabled = false;
             _handlerJoystick.GetComponent<Image>().enabled = false;
-            
+
             Debug.Log($"Up, {evt.Sender}, {moveVector}");
         }
 
@@ -98,7 +98,32 @@ namespace Client {
         void OnClickRestart(in EcsUguiClickEvent evt)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("Click!", evt.Sender);
+            Debug.Log("Restart!", evt.Sender);
+        }
+        [Preserve]
+        [EcsUguiClickEvent(Idents.Ui.NextLevel, Idents.Worlds.Events)]
+        void OnClickNextLevel(in EcsUguiClickEvent evt)
+        {
+            /*int index = 0;
+            if (SceneManager.GetActiveScene().buildIndex + 1 > SceneManager.sceneCountInBuildSettings - 1)
+            {
+                index = 1;
+            }
+            else
+            {
+                index = SceneManager.GetActiveScene().buildIndex + 1;
+            }
+            _state.Saves.SaveSceneNumber(index);
+            _state.Saves.SaveLevel(_state.Saves.LVL + 1);
+            SceneManager.LoadScene(index);*/
+            Debug.Log("NextLevel");
+        }
+        [Preserve]
+        [EcsUguiClickEvent(Idents.Ui.Retry, Idents.Worlds.Events)]
+        void OnClickRetry(in EcsUguiClickEvent evt)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Retry!");
         }
         public float Horizontal()
         {
