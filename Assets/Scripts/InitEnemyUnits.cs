@@ -58,7 +58,7 @@ namespace Client
                 viewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
                 viewComponent.EcsInfoMB.Init(_world);
                 viewComponent.EcsInfoMB.SetEntity(enemyEntity);
-
+                viewComponent.PointerTransform = enemy.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform;
                 viewComponent.Healthbar = enemy.GetComponent<HealthbarMB>();
                 viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);
                 viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);

@@ -68,6 +68,7 @@ namespace Client
                 .Add(new DroppedGoldSystem())
                 .Add(new RespawnDefender())
                 .Add(new UpgradeCanvasSystem())
+                .Add(new CanvasPointerSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()

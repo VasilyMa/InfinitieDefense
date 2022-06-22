@@ -8,7 +8,6 @@ namespace Client {
         readonly EcsWorldInject _world = default;
         readonly EcsPoolInject<OreComponent> _orePool = default;
         private string Ore;
-        private int amount = 4;
         public void Init (EcsSystems systems) {
             List<GameObject[]> Ores = new List<GameObject[]>();
             var allOres = GameObject.FindGameObjectsWithTag(nameof(Ore));
@@ -16,6 +15,7 @@ namespace Client {
             Ores.Add(allOres);
             foreach (var ore in allOres)
             {
+                int amount = Random.Range(1, 6);
                 var oresEntity = _world.Value.NewEntity();
                 _orePool.Value.Add(oresEntity);
                 ref var orePool = ref _orePool.Value.Get(oresEntity);
