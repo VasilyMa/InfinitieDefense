@@ -23,5 +23,7 @@ namespace Client
         public GameObject FirePoint;
         public SphereCollider DetectedZone;
         public ParticleSystem UpgradeParticleSystem;
+        public ParticleSystem HitParticleSystem;
+        public ParticleSystem DropItemParticleSystem;
     }
 }

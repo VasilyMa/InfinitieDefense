@@ -9,12 +9,14 @@ namespace Client {
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
                 ref var intComp = ref _intPool.Value.Get(_state.Value.EntityInterface);
+                ref var viewComp = ref _viewPool.Value.Get(entity);
                 int neededResource = 0;
                 if (filterComp.UpgradeTower) //если апгрейдим башни
                 {
@@ -85,6 +87,8 @@ namespace Client {
                             intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                             _state.Value.UpgradePlayer();
                         }
+                        //viewComp.DropItemParticleSystem.Stop();
+                        viewComp.DropItemParticleSystem.Play();
                     }
                     else
                     {

@@ -29,7 +29,7 @@ Transform:
   m_Children:
   - {fileID: 1716937928025576846}
   m_Father: {fileID: 3078383490416015447}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4546838530622626531
 GameObject:
@@ -68,10 +68,10 @@ Transform:
   m_LocalPosition: {x: -39.181046, y: -0.00000667572, z: -63.093678}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3095177423351376731}
   - {fileID: 3580656668915128078}
   - {fileID: 1756805264102637605}
   - {fileID: 3653288281736518395}
-  - {fileID: 3095177423351376731}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -130,64 +130,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: '
-
-    Transform ''head'' has been deleted
-
-    Transform ''neck''
-    has been deleted
-
-    Transform ''hand.L'' has been deleted
-
-    Transform ''forearm.L''
-    has been deleted
-
-    Transform ''upper_arm.L'' has been deleted
-
-    Transform
-    ''shoulder.L'' has been deleted
-
-    Transform ''hand.R'' has been deleted
-
-    Transform
-    ''forearm.R'' has been deleted
-
-    Transform ''upper_arm.R'' has been deleted
-
-    Transform
-    ''shoulder.R'' has been deleted
-
-    Transform ''spine3'' has been deleted
-
-    Transform
-    ''spine2'' has been deleted
-
-    Transform ''spine1'' has been deleted
-
-    Transform
-    ''toe.L'' has been deleted
-
-    Transform ''foot.L'' has been deleted
-
-    Transform
-    ''shin.L'' has been deleted
-
-    Transform ''thigh.L'' has been deleted
-
-    Transform
-    ''toe.R'' has been deleted
-
-    Transform ''foot.R'' has been deleted
-
-    Transform
-    ''shin.R'' has been deleted
-
-    Transform ''thigh.R'' has been deleted
-
-    Transform
-    ''hip'' has been deleted
-
-    Transform ''characterRig'' has been deleted'
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -339,7 +282,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3078383490416015447}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -409,6 +352,22 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 19800004, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -450,7 +409,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4b0fff83ff824a54ea4121f4cf500136, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b0fff83ff824a54ea4121f4cf500136, type: 3}
       propertyPath: m_LocalPosition.x
@@ -540,7 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2584633757141308384, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2584633757141308384, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
       propertyPath: m_AnchorMax.x
