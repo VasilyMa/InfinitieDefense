@@ -18,6 +18,7 @@ namespace Client
         public int SceneNumber;
         public int TutorialState;
         public string PlayerID;
+        public string[] TowerID;
 
         public SaveSettings Save = new SaveSettings();
         public string path;
@@ -77,6 +78,17 @@ namespace Client
 
             File.WriteAllText(path, JsonUtility.ToJson(Save));
         }
+        public void SaveTowerID(string[] value)
+        {
+            Save.TowerID = new string[value.Length];
+            TowerID = new string[value.Length];
+            for (int i = 0; i < TowerID.Length;i++)
+            {
+                TowerID[i] = value[i];
+                Save.TowerID[i] = value[i];
+            }
+
+        }
 
         #endregion
         public void InitSave()
@@ -111,6 +123,7 @@ namespace Client
                 SceneNumber = 1;
                 TutorialState = 1;
                 PlayerID = "1level";
+                
 
                 Save.Sounds = Sounds;
                 Save.Music = Music;
@@ -156,6 +169,7 @@ namespace Client
             public int SceneNumber;
             public int TutorialState;
             public string PlayerID;
+            public string[] TowerID;
         }
     }
 }
