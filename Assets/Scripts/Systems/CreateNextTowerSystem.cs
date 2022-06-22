@@ -75,8 +75,8 @@ namespace Client
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
-                    viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
-                    viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.SetMaxHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.SetHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                     damageComponent.Value = 5; //ispravit'
@@ -115,8 +115,8 @@ namespace Client
 
                     targetWeightComponent.Value = 5;
 
-                    healthComponent.MaxValue = _state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
-                    healthComponent.CurrentValue = _state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
+                    healthComponent.MaxValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
+                    healthComponent.CurrentValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);

@@ -59,7 +59,8 @@ namespace Client
                     upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;
                     upgradeComp.UpgradeTower = true;
-                    
+                    //upgradeComp.DelayTime = 0f;
+
                 }
             }
             else if (other.gameObject.tag == "UpgradePlayerPoint")
@@ -69,7 +70,7 @@ namespace Client
                     ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                     upgradeComp.Time = 0f;
                     upgradeComp.UpgradeTower = false;
-
+                    //upgradeComp.DelayTime = 0f;
                 }
             }
             else if (other.gameObject.CompareTag("Ore"))

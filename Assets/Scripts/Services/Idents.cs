@@ -19,6 +19,8 @@ namespace Client
         public static class Ui
         {
             public const string Restart = "Restart";
+            public const string NextLevel = "NextLevel";
+            public const string Retry = "Retry";
             public const string TouchListener = "TouchListener";
         }
     }

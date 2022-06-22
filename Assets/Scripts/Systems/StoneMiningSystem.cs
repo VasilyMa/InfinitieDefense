@@ -8,6 +8,7 @@ namespace Client {
         readonly EcsFilterInject<Inc<StoneMiningEvent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intComp = default;
+        readonly EcsPoolInject<MoveToBagComponent> _moveToBagPool = default;
 
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
@@ -15,17 +16,24 @@ namespace Client {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(_state.Value.EntityPlayer);
                 ref var intComp = ref _intComp.Value.Get(_state.Value.EntityInterface);
-                _state.Value.StoneTransformList.Add(filterComp.StoneTransform);
-                filterComp.StoneTransform.SetParent(playerComp.ResHolderTransform);
-                filterComp.StoneTransform.localPosition = new Vector3(0, _state.Value.RockCount, 0);
+                ref var moveToBagComp = ref _moveToBagPool.Value.Add(entity);
+                moveToBagComp.Transform = filterComp.StoneTransform;
+                
 
-                foreach(var item in _state.Value.CoinTransformList)
-                {
-                    item.localPosition = new Vector3(0, item.localPosition.y + 1, 0);
-                }
+                //_state.Value.StoneTransformList.Add(filterComp.StoneTransform);
+                filterComp.StoneTransform.SetParent(playerComp.ResHolderTransform);
+                //todo target
+                moveToBagComp.StartPosition = moveToBagComp.Transform.localPosition;
+                moveToBagComp.TargetPosition = new Vector3(0, _state.Value.RockCount * 0.6f, 0);
+                moveToBagComp.Coin = false;
+
+                // foreach(var item in _state.Value.CoinTransformList)
+                // {
+                //     item.localPosition = new Vector3(0, item.localPosition.y + 0.6f, 0);
+                // }
                 filterComp.StoneTransform.SetSiblingIndex(_state.Value.RockCount);
                 _state.Value.RockCount++;
-                intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
+                // intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                 //todo добавить перемещение камня за спину
                 _filter.Pools.Inc1.Del(entity);
             }

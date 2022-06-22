@@ -55,6 +55,7 @@ namespace Client
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
+                .Add(new ItemMoveToBagSystem())
                 .Add(new OreMiningSystem())
                 .Add(new CameraFollowSystem())
                 .Add(new UpgradeSystems())
@@ -67,6 +68,7 @@ namespace Client
                 .Add(new DroppedGoldSystem())
                 .Add(new RespawnDefender())
                 .Add(new UpgradeCanvasSystem())
+                .Add(new CanvasPointerSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()

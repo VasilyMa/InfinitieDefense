@@ -9,6 +9,7 @@ namespace Client
         public Animator Animator;
         public HealthbarMB Healthbar;
         public Transform Transform;
+        public Transform PointerTransform;
         public float MoveSpeed;
         public float RotateSpeed;
         public Outline Outline;
@@ -19,9 +20,12 @@ namespace Client
         public EcsInfoMB EcsInfoMB;
         public SkinnedMeshRenderer SkinnedMeshRenderer;
 
+
         public GameObject TowerWeapon;
         public GameObject FirePoint;
         public SphereCollider DetectedZone;
         public ParticleSystem UpgradeParticleSystem;
+        public ParticleSystem HitParticleSystem;
+        public ParticleSystem DropItemParticleSystem;
     }
 }

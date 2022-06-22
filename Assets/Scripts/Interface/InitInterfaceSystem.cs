@@ -14,6 +14,10 @@ namespace Client {
             ref var interfaceComp = ref world.GetPool<InterfaceComponent>().Add(entity);
             interfaceComp.joystick = GameObject.Find("Joystick");
             interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
+            interfaceComp.winPanel = GameObject.Find("WinPanel");
+            interfaceComp.winPanel.SetActive(false);
+            interfaceComp.losePanel = GameObject.Find("LosePanel");
+            interfaceComp.losePanel.SetActive(false);
             var joystick = interfaceComp.joystick.transform.GetChild(0).gameObject;
             var resourcePanel = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             var handler = joystick.transform.GetChild(0).gameObject;
