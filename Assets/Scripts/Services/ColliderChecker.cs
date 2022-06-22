@@ -20,6 +20,7 @@ namespace Client
         private EcsPool<UpgradeCanvasEvent> _canvasEvent;
         private EcsPool<CanvasUpgradeComponent> _upgradeCanvasPool;
         private EcsPool<MainTowerTag> _mainPool;
+        private EcsPool<OreEventComponent> _oreEventPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -30,6 +31,7 @@ namespace Client
             _cooldownPool = world.GetPool<CooldownComponent>();
             _reloadPool = world.GetPool<ReloadComponent>();
             _orePool = world.GetPool<OreComponent>();
+            _oreEventPool = world.GetPool<OreEventComponent>();
             _playerPool = world.GetPool<Player>();
             _towerPool = world.GetPool<TowerTag>();
             _mainPool = world.GetPool<MainTowerTag>();
@@ -109,16 +111,40 @@ namespace Client
                     _upgradePool.Del(_state.EntityPlayer);
                 }
             }
-            if (other.gameObject.CompareTag("Ore"))
+            else if (other.gameObject.CompareTag("Ore"))
             {
                 ref var player = ref _state.EntityPlayer;
                 ref var _player = ref _playerPool.Get(player);
                 _player.animator.SetBool("isMining", false);
+                var filter = _world.Filter<OreComponent>();
+                var ores = _world.GetPool<OreComponent>();
+                foreach (int entity in filter.End())
+                {
+                    _oreEventPool.Del(entity);
+                }
             }
         }
         private void OnTriggerStay(Collider other)
         {
-
+            if (other.gameObject.CompareTag("Ore"))
+            {
+                ref var player = ref _state.EntityPlayer;
+                ref var _player = ref _playerPool.Get(player);
+                var filter = _world.Filter<OreComponent>();
+                var ores = _world.GetPool<OreComponent>();
+                foreach (int entity in filter.End())
+                {
+                    ref OreComponent oreComp = ref ores.Get(entity);
+                    if (other.gameObject == oreComp.prefab)
+                    {
+                        _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
+                        _player.animator.SetBool("isIdle", false);
+                        _player.animator.SetBool("isRun", false);
+                        _player.animator.SetBool("isMining", true);
+                        Debug.Log("Mining!");
+                    }
+                }
+            }
         }
     }
 }

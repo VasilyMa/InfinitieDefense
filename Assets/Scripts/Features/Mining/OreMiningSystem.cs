@@ -19,12 +19,14 @@ namespace Client {
                 stone.transform.position = Vector3.Lerp(stone.transform.position, stonePos, Time.deltaTime * 10f);
                 if (oreComp.amount <= 0) 
                 { 
+                    oreComp.prefab.GetComponent<SphereCollider>().enabled = false;
                     oreComp.prefab.gameObject.SetActive(false); 
                     _filter.Pools.Inc2.Del(entity);
                     foreach (var entityPlayer in _filterPlayer.Value)
                     {
                         ref var player = ref _filterPlayer.Pools.Inc1.Get(entityPlayer);
                         player.animator.SetBool("isMining", false);
+                        player.animator.SetBool("isIdle", true);
                     }
                 }
                 _filter.Pools.Inc1.Del(entity);

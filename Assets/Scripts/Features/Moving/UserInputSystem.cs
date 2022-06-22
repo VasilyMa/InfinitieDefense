@@ -20,78 +20,80 @@ namespace Client {
         private float _speed;
         private Vector2 _direction;
         private Vector3 moveVector;
-        [Preserve]
-        [EcsUguiDragStartEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
-        void OnDownTouchListner(in EcsUguiDragStartEvent evt)
-        {
-            ref var intComp = ref _interface.Value.Get(_state.Value.EntityInterface);
-            _joystick = intComp.joystick.transform.GetChild(0).gameObject;
-            _handlerJoystick = _joystick.transform.GetChild(0).gameObject;
-            _joystick.GetComponent<Image>().enabled = true;
-            _handlerJoystick.GetComponent<Image>().enabled = true;
-            startPosition = evt.Position;
-            _joystick.transform.position = startPosition;
-            _rectTransform = _handlerJoystick.GetComponent<RectTransform>();
-            moveVector = Vector3.zero;
-            Debug.Log($"Down, {evt.Sender}, {_joystick.gameObject}, {_handlerJoystick}");
-        }
-        [Preserve]
-        [EcsUguiDragMoveEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
-        void OnDragTouchListner(in EcsUguiDragMoveEvent evt)
-        {
+        #region Old
+        //[Preserve]
+        //[EcsUguiDragStartEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
+        //void OnDownTouchListner(in EcsUguiDragStartEvent evt)
+        //{
+        //    ref var intComp = ref _interface.Value.Get(_state.Value.EntityInterface);
+        //    _joystick = intComp.joystick.transform.GetChild(0).gameObject;
+        //    _handlerJoystick = _joystick.transform.GetChild(0).gameObject;
+        //    _joystick.GetComponent<Image>().enabled = true;
+        //    _handlerJoystick.GetComponent<Image>().enabled = true;
+        //    startPosition = evt.Position;
+        //    _joystick.transform.position = startPosition;
+        //    _rectTransform = _handlerJoystick.GetComponent<RectTransform>();
+        //    moveVector = Vector3.zero;
+        //    Debug.Log($"Down, {evt.Sender}, {_joystick.gameObject}, {_handlerJoystick}");
+        //}
+        //[Preserve]
+        //[EcsUguiDragMoveEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
+        //void OnDragTouchListner(in EcsUguiDragMoveEvent evt)
+        //{
 
-            lastPosition = evt.Position - startPosition;
-            _rectTransform.localPosition = lastPosition;
-            float size = lastPosition.magnitude;
-            if (size > _maxAllowedSize)
-            {
-                _speed = 1.0f;
-                lastPosition = lastPosition / size * _maxAllowedSize;
-            }
-            else
-                _speed = size / _maxAllowedSize;
-            _direction = lastPosition * 0.1f;
+        //    lastPosition = evt.Position - startPosition;
+        //    _rectTransform.localPosition = lastPosition;
+        //    float size = lastPosition.magnitude;
+        //    if (size > _maxAllowedSize)
+        //    {
+        //        _speed = 1.0f;
+        //        lastPosition = lastPosition / size * _maxAllowedSize;
+        //    }
+        //    else
+        //        _speed = size / _maxAllowedSize;
+        //    _direction = lastPosition * 0.1f;
 
-            moveVector.x = Horizontal();
-            moveVector.z = Vertical();
-            foreach (var entity in _filter.Value)
-            {
-                ref var _player = ref _filter.Pools.Inc1.Get(entity);
+        //    moveVector.x = Horizontal();
+        //    moveVector.z = Vertical();
+        //    foreach (var entity in _filter.Value)
+        //    {
+        //        ref var _player = ref _filter.Pools.Inc1.Get(entity);
 
-                if (_speed > 0.0f)
-                {
-                    if (Vector3.Angle(Vector3.forward, moveVector) > 1f || Vector3.Angle(Vector3.forward, moveVector) == 0)
-                    {
-                        Vector3 direct = Vector3.RotateTowards(_player.Transform.forward, moveVector, _player.RotateSpeed, 0.0f);
-                        _player.Transform.rotation = Quaternion.LookRotation(direct);
-                    }
-                }
-                _player.rigidbody.velocity = new Vector3(moveVector.x * _player.MoveSpeed, _player.rigidbody.velocity.y, moveVector.z * _player.MoveSpeed);
-                _player.animator.SetBool("isIdle", false);
-                _player.animator.SetBool("isRun", true);
-            }
-            Debug.Log($"Move, {evt.Sender}");
-        }
-        [Preserve]
-        [EcsUguiDragEndEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
-        void OnUpTouchListner(in EcsUguiDragEndEvent evt)
-        {
-            _rectTransform.localPosition = Vector2.zero;
-            _direction = Vector2.zero;
-            moveVector = Vector3.zero;
-            foreach (var entity in _filter.Value)
-            {
-                ref var _player = ref _filter.Pools.Inc1.Get(entity);
-                _player.animator.SetBool("isRun", false);
-                if (!_player.animator.GetBool("isMining"))
-                    _player.animator.SetBool("isIdle", true);
-                _player.rigidbody.velocity = Vector3.zero;
-            }
-            _joystick.GetComponent<Image>().enabled = false;
-            _handlerJoystick.GetComponent<Image>().enabled = false;
+        //        if (_speed > 0.0f)
+        //        {
+        //            if (Vector3.Angle(Vector3.forward, moveVector) > 1f || Vector3.Angle(Vector3.forward, moveVector) == 0)
+        //            {
+        //                Vector3 direct = Vector3.RotateTowards(_player.Transform.forward, moveVector, _player.RotateSpeed, 0.0f);
+        //                _player.Transform.rotation = Quaternion.LookRotation(direct);
+        //            }
+        //        }
+        //        _player.rigidbody.velocity = new Vector3(moveVector.x * _player.MoveSpeed, _player.rigidbody.velocity.y, moveVector.z * _player.MoveSpeed);
+        //        _player.animator.SetBool("isIdle", false);
+        //        _player.animator.SetBool("isRun", true);
+        //    }
+        //    Debug.Log($"Move, {evt.Sender}");
+        //}
+        //[Preserve]
+        //[EcsUguiDragEndEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
+        //void OnUpTouchListner(in EcsUguiDragEndEvent evt)
+        //{
+        //    _rectTransform.localPosition = Vector2.zero;
+        //    _direction = Vector2.zero;
+        //    moveVector = Vector3.zero;
+        //    foreach (var entity in _filter.Value)
+        //    {
+        //        ref var _player = ref _filter.Pools.Inc1.Get(entity);
+        //        _player.animator.SetBool("isRun", false);
+        //        if (!_player.animator.GetBool("isMining"))
+        //            _player.animator.SetBool("isIdle", true);
+        //        _player.rigidbody.velocity = Vector3.zero;
+        //    }
+        //    _joystick.GetComponent<Image>().enabled = false;
+        //    _handlerJoystick.GetComponent<Image>().enabled = false;
 
-            Debug.Log($"Up, {evt.Sender}, {moveVector}");
-        }
+        //    Debug.Log($"Up, {evt.Sender}, {moveVector}");
+        //}
+        #endregion
 
         [Preserve]
         [EcsUguiClickEvent(Idents.Ui.Restart, Idents.Worlds.Events)]

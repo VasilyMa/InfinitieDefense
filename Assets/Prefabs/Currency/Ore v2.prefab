@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7869104043701649955}
   - component: {fileID: 9179047166056180860}
+  - component: {fileID: 3465370153583069999}
   m_Layer: 0
   m_Name: Ore v2
   m_TagString: Ore
@@ -41,11 +42,24 @@ CapsuleCollider:
   m_GameObject: {fileID: 1649720191870491427}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 2.71
   m_Height: 4.5130634
   m_Direction: 1
   m_Center: {x: -0.032872915, y: 0.8426629, z: 0}
+--- !u!135 &3465370153583069999
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649720191870491427}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.1368217
+  m_Center: {x: 0, y: 1.01, z: -0.13}
 --- !u!1001 &731698000470280493
 PrefabInstance:
   m_ObjectHideFlags: 0
