@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 using Leopotam.EcsLite.Di;
+using System.Collections.Generic;
 
 namespace Client {
     sealed class CreateDefenders : IEcsRunSystem {
@@ -44,7 +45,12 @@ namespace Client {
                         ref var targetWeightComponent = ref _targetWeightPool.Value.Add(defenderEntity);
                         ref var movableComponent = ref _movablePool.Value.Add(defenderEntity);
                         ref var damageComponent = ref _damagePool.Value.Add(defenderEntity);
-                        ref var targetable = ref _targetablePool.Value.Add(defenderEntity);
+                        ref var targetableComponent = ref _targetablePool.Value.Add(defenderEntity);
+
+                        targetableComponent.TargetEntity = -1;
+                        targetableComponent.TargetObject = null;
+                        targetableComponent.AllEntityInDetectedZone = new List<int>();
+                        targetableComponent.AllEntityInDamageZone = new List<int>();
 
                         damageComponent.Value = 10;
 
@@ -67,8 +73,7 @@ namespace Client {
                         viewComponent.Healthbar.ToggleSwitcher();
                         viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
-                        viewComponent.AttackMB = viewComponent.GameObject.GetComponent<AttackMB>();
-                        viewComponent.AttackMB.Init(_world);
+                        viewComponent.AttackMB = viewComponent.GameObject.GetComponent<MeleeAttackMB>();
 
                         viewComponent.Outline = viewComponent.GameObject.GetComponent<Outline>();
 

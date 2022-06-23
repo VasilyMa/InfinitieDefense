@@ -20,19 +20,16 @@ namespace Client
         {
             if (_ActiveShipsFilter.Value.GetEntitiesCount() > 0)
             {
-                Debug.Log("Ещё есть активные корабли");
                 return;
             }
 
             if (_AliveUnitsFilter.Value.GetEntitiesCount() > 0)
             {
-                Debug.Log("Юниты ещё живы");
                 return;
             }
 
             if (_InactiveAliveUnitsFilter.Value.GetEntitiesCount() == 0)
             {
-                Debug.Log("Нет доступных юнитов");
                 return;
             }
 

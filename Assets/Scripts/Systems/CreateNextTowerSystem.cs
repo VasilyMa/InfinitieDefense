@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Client
 {
@@ -17,6 +18,7 @@ namespace Client
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         readonly EcsPoolInject<HealthComponent> _healthWeightPool = default;
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
+        readonly EcsPoolInject<DeadTag> _deadPool = default;
         readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
         public void Run(EcsSystems systems)
@@ -29,6 +31,13 @@ namespace Client
                 ref var radiusComp = ref _radiusPool.Value.Get(entity);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
                 if (viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
+
+                if (!_targetWeightPool.Value.Has(entity))
+                {
+                    _targetWeightPool.Value.Add(entity);
+                }
+
+                ref var targetWeightComponent = ref _targetWeightPool.Value.Get(entity);
 
                 viewComp.UpgradeParticleSystem.Play();
                 
@@ -46,6 +55,8 @@ namespace Client
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+                    targetWeightComponent.Value = 0;
                 }
                 else
                 {
@@ -60,14 +71,9 @@ namespace Client
                         _damagePool.Value.Add(entity);
                     }
 
-                    if (!_targetWeightPool.Value.Has(entity))
-                    {
-                        _targetWeightPool.Value.Add(entity);
-                    }
 
                     ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                     ref var damageComponent = ref _damagePool.Value.Get(entity);
-                    ref var targetWeightComponent = ref _targetWeightPool.Value.Get(entity);
                     ref var healthComponent = ref _healthWeightPool.Value.Get(entity);
 
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
@@ -75,8 +81,8 @@ namespace Client
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
-                    viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
-                    viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.SetMaxHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Healthbar.SetHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                     damageComponent.Value = 5; //ispravit'
@@ -113,10 +119,17 @@ namespace Client
                         }
                     }
 
-                    targetWeightComponent.Value = 5;
+                    targetableComponent.TargetEntity = -1;
+                    targetableComponent.TargetObject = null;
+                    targetableComponent.AllEntityInDetectedZone = new List<int>();
+                    targetableComponent.AllEntityInDamageZone = new List<int>();
 
-                    healthComponent.MaxValue = _state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
-                    healthComponent.CurrentValue = _state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
+                    targetWeightComponent.Value = 10;
+
+                    healthComponent.MaxValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
+                    healthComponent.CurrentValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
+
+                    if (_deadPool.Value.Has(entity)) _deadPool.Value.Del(entity);
                 }
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);

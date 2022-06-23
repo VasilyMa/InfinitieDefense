@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7678623873936072309}
   m_Layer: 0
   m_Name: Defence Tower Lvl 4
-  m_TagString: Untagged
+  m_TagString: Friendly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -123,8 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ecsInfoMB: {fileID: 0}
-  _detectedEnemyObjects: []
-  _firstDetectedEnemyObject: {fileID: 0}
 --- !u!1001 &288223456198625881
 PrefabInstance:
   m_ObjectHideFlags: 0

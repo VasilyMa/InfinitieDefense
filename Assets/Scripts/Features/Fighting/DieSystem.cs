@@ -8,11 +8,12 @@ namespace Client
     {
         readonly EcsWorldInject _world = default;
 
-        readonly EcsFilterInject<Inc<UnitTag, HealthComponent, ViewComponent>, Exc<DeadTag, InactiveTag>> _unitsFilter = default;
+        readonly EcsFilterInject<Inc<HealthComponent, ViewComponent>, Exc<DeadTag, InactiveTag>> _unitsFilter = default;
 
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
+        readonly EcsPoolInject<EnemyTag> _enemyPool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
 
         public void Run (EcsSystems systems)
@@ -24,15 +25,16 @@ namespace Client
                     continue;
                 }
 
-
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
-                Debug.Log("Обработка " + viewComponent.GameObject.name);
+                if (viewComponent.GameObject) viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
                 if (viewComponent.Rigidbody) viewComponent.Rigidbody.velocity = Vector3.zero;
                 if (viewComponent.Animator) viewComponent.Animator.SetTrigger("Die");
-                viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
 
-                ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
-                if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
+                if (_enemyPool.Value.Has(entity))
+                {
+                    ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
+                    if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
+                }
 
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
 

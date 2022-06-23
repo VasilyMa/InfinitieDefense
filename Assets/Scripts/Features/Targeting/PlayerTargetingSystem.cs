@@ -5,12 +5,9 @@ using System.Collections.Generic;
 
 namespace Client
 {
-    /// <summary>
-    /// Работает с энтити в зоне обнаружения
-    /// </summary>
-    sealed class TargetingSystem : IEcsRunSystem
+    sealed class PlayerTargetingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable>, Exc<InactiveTag, DeadTag, ShipTag, Player>> _targetableFilter = default;
+        readonly EcsFilterInject<Inc<Targetable, Player>, Exc<DeadTag>> _playerFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
@@ -21,7 +18,7 @@ namespace Client
 
         public void Run (EcsSystems systems)
         {
-            foreach(var entity in _targetableFilter.Value)
+            foreach (var entity in _playerFilter.Value)
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
@@ -41,58 +38,43 @@ namespace Client
                     targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
                 }
 
-                if (targetableComponent.AllEntityInDetectedZone.Count == 0)
+                if (targetableComponent.AllEntityInDamageZone.Count == 0)
                 {
-                    if (_enemyPool.Value.Has(entity))
-                    {
-                        targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
-                        targetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
-                        viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
-                    }
-                    else
-                    {
-                        targetableComponent.TargetEntity = -1;
-                        targetableComponent.TargetObject = null;
-                        viewComponent.EcsInfoMB.ResetTarget();
-                    }
-                    Debug.Log("Удалили старую энтити цели");
+                    targetableComponent.TargetEntity = -1;
+                    targetableComponent.TargetObject = null;
+                    viewComponent.EcsInfoMB.ResetTarget();
                     continue;
                 }
 
                 List<int> allDeadEntitys = new List<int>();
 
-                foreach (var entityInDetectedZone in targetableComponent.AllEntityInDetectedZone)
+                foreach (var entityInDamageZone in targetableComponent.AllEntityInDamageZone)
                 {
-                    if (_deadPool.Value.Has(entityInDetectedZone))
+                    if (_deadPool.Value.Has(entityInDamageZone))
                     {
-                        allDeadEntitys.Add(entityInDetectedZone);
+                        allDeadEntitys.Add(entityInDamageZone);
                         Debug.Log("Энтити находилась в пуле мертвых");
                     }
                 }
 
                 foreach (var deadEntity in allDeadEntitys)
                 {
-                    targetableComponent.AllEntityInDetectedZone.Remove(deadEntity);
+                    targetableComponent.AllEntityInDamageZone.Remove(deadEntity);
                 }
 
-                if (targetableComponent.AllEntityInDetectedZone.Count == 0)
+                if (targetableComponent.AllEntityInDamageZone.Count == 0)
                 {
                     continue;
                 }
 
                 if (targetableComponent.TargetEntity < 1)
                 {
-                    targetableComponent.TargetEntity = targetableComponent.AllEntityInDetectedZone[0];
+                    targetableComponent.TargetEntity = targetableComponent.AllEntityInDamageZone[0];
                     targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
                     viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
                     Debug.Log("Попытались записать новую цель");
                 }
             }
-        }
-
-        private void SetTarget(int entity, GameObject gameObject)
-        {
-
         }
     }
 }

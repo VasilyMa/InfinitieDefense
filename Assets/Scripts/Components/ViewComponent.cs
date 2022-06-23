@@ -14,7 +14,7 @@ namespace Client
         public float RotateSpeed;
         public Outline Outline;
 
-        public AttackMB AttackMB;
+        public MeleeAttackMB AttackMB;
         public TowerAttackMB TowerAttackMB;
         public PlayerAttackMB PlayerAttackMB;
         public EcsInfoMB EcsInfoMB;

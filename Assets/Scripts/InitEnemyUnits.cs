@@ -1,12 +1,24 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Client
 {
     sealed class InitEnemyUnits : IEcsInitSystem
     {
         readonly EcsWorldInject _world = default;
+
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<EnemyTag> _enemyPool = default;
+        readonly EcsPoolInject<UnitTag> _unitPool = default;
+        readonly EcsPoolInject<InactiveTag> _inactivePool = default;
+        readonly EcsPoolInject<Targetable> _targetablePool = default;
+        readonly EcsPoolInject<Movable> _movablePool = default;
+        readonly EcsPoolInject<ShipComponent> _shipPool = default;
+        readonly EcsPoolInject<HealthComponent> _healthPool = default;
+        readonly EcsPoolInject<DamageComponent> _damagePool = default;
+        readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
 
         EcsSharedInject<GameState> _state = default;
 
@@ -22,27 +34,27 @@ namespace Client
             {
                 var enemyEntity = world.NewEntity();
 
-                world.GetPool<EnemyTag>().Add(enemyEntity);
+                _enemyPool.Value.Add(enemyEntity);
+                _unitPool.Value.Add(enemyEntity);
+                _inactivePool.Value.Add(enemyEntity);
 
-                world.GetPool<UnitTag>().Add(enemyEntity);
+                ref var targetableComponent = ref _targetablePool.Value.Add(enemyEntity);
+                ref var movableComponent = ref _movablePool.Value.Add(enemyEntity);
+                ref var viewComponent = ref _viewPool.Value.Add(enemyEntity);
+                ref var shipComponent = ref _shipPool.Value.Add(enemyEntity);
+                ref var healthComponent = ref _healthPool.Value.Add(enemyEntity);
+                ref var damageComponent = ref _damagePool.Value.Add(enemyEntity);
+                ref var targetWeightComponent = ref _targetWeightPool.Value.Add(enemyEntity);
 
-                world.GetPool<InactiveTag>().Add(enemyEntity);
-
-                ref var targetableComponent = ref world.GetPool<Targetable>().Add(enemyEntity);
-                ref var movableComponent = ref world.GetPool<Movable>().Add(enemyEntity);
-                ref var viewComponent = ref world.GetPool<ViewComponent>().Add(enemyEntity);
-                ref var shipComponent = ref world.GetPool<ShipComponent>().Add(enemyEntity);
-                ref var healthComponent = ref world.GetPool<HealthComponent>().Add(enemyEntity);
-                ref var reachZoneComponent = ref world.GetPool<ReachZoneComponent>().Add(enemyEntity);
-                ref var damageComponent = ref world.GetPool<DamageComponent>().Add(enemyEntity);
-                ref var targetWeightComponent = ref world.GetPool<TargetWeightComponent>().Add(enemyEntity);
+                targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
+                targetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
+                targetableComponent.AllEntityInDetectedZone = new List<int>();
+                targetableComponent.AllEntityInDamageZone = new List<int>();
 
                 targetWeightComponent.Value = 5;
 
                 healthComponent.MaxValue = 20;
                 healthComponent.CurrentValue = healthComponent.MaxValue;
-
-                reachZoneComponent.Value = 2.5f;
 
                 damageComponent.Value = 5f;
 
@@ -53,11 +65,11 @@ namespace Client
                 viewComponent.Animator = enemy.GetComponent<Animator>();
                 viewComponent.Transform = enemy.GetComponent<Transform>();
                 viewComponent.Outline = enemy.GetComponent<Outline>();
-                viewComponent.AttackMB = enemy.GetComponent<AttackMB>();
-                viewComponent.AttackMB.Init(_world);
+                viewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();
                 viewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
                 viewComponent.EcsInfoMB.Init(_world);
                 viewComponent.EcsInfoMB.SetEntity(enemyEntity);
+                viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
                 viewComponent.PointerTransform = enemy.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform;
                 viewComponent.Healthbar = enemy.GetComponent<HealthbarMB>();
                 viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Client
 {
@@ -6,6 +7,9 @@ namespace Client
     {
         public GameObject TargetObject;
         public int TargetEntity;
+        public List<int> AllEntityInDetectedZone;
+        public List<int> AllEntityInDamageZone;
+
         public float DistanceToTarget;
     }
 }

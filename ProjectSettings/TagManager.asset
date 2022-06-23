@@ -16,6 +16,8 @@ TagManager:
   - UpgradePlayerPoint
   - Weapon
   - Fire Point
+  - DetectedZone
+  - Friendly
   layers:
   - Default
   - TransparentFX

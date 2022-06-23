@@ -6,36 +6,55 @@ namespace Client
 {
     sealed class JoinToFightSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable, ViewComponent, Movable, ReachZoneComponent>, Exc<InactiveTag>> _enemyFilter = default;
+        readonly EcsFilterInject<Inc<Targetable>, Exc<InactiveTag, DeadTag, ShipTag, TowerTag>> _inFightFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
-        readonly EcsPoolInject<ReachZoneComponent> _reachZonePool = default;
         readonly EcsPoolInject<InFightTag> _inFightPool = default;
+        readonly EcsPoolInject<IsNotMovableTag> _isNotMovablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<Player> _playerPool = default;
 
         public void Run (EcsSystems systems)
         {
-            foreach (var entity in _enemyFilter.Value)
+            foreach (var entity in _inFightFilter.Value)
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
-                ref var reachZoneComponent = ref _reachZonePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                bool isInFigth = _inFightPool.Value.Has(entity);
-
-                if (!isInFigth && targetableComponent.DistanceToTarget < reachZoneComponent.Value)
+                if (targetableComponent.AllEntityInDamageZone.Count == 0)
                 {
-                    _inFightPool.Value.Add(entity);
-                    viewComponent.Rigidbody.velocity = Vector3.zero;
-                    viewComponent.Animator.SetBool("Run", false);
-                    viewComponent.Animator.SetBool("Attack", true);
-                    viewComponent.Healthbar.ToggleSwitcher();
-                }
-                else if(isInFigth && targetableComponent.DistanceToTarget > reachZoneComponent.Value)
-                {
-                    _inFightPool.Value.Del(entity);
+                    if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
+                    if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
                     viewComponent.Animator.SetBool("Attack", false);
-                    viewComponent.Healthbar.ToggleSwitcher();
+                    continue;
+                }
+
+                bool targetInDamageZone = false;
+
+                if (_playerPool.Value.Has(entity))
+                {
+                    targetInDamageZone = true;
+                }
+
+                foreach (var entityInDamageZone in targetableComponent.AllEntityInDamageZone)
+                {
+                    if (entityInDamageZone == targetableComponent.TargetEntity)
+                    {
+                        targetInDamageZone = true;
+                    }
+                }
+
+                if (targetInDamageZone)
+                {
+                    if (!_inFightPool.Value.Has(entity)) _inFightPool.Value.Add(entity);
+                    if (!_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Add(entity);
+                    viewComponent.Animator.SetBool("Attack", true);
+                }
+                else
+                {
+                    if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
+                    if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
+                    viewComponent.Animator.SetBool("Attack", false);
                 }
             }
         }

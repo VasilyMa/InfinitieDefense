@@ -24,6 +24,12 @@ namespace Client
             foreach (var entity in _damagingEventFilter.Value)
             {
                 ref var damagingEventComponent = ref _damagingEventPool.Value.Get(entity);
+
+                if (damagingEventComponent.TargetEntity == -1)
+                {
+                    Debug.Log("При проведении DamagingEvent пришла -1 энтити");
+                    continue;
+                }
                 
                 if (!_healthPool.Value.Has(damagingEventComponent.TargetEntity))
                 {

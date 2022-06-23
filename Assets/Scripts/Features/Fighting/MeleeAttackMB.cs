@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Client
 {
-    public class DetectedZoneMB : MonoBehaviour
+    public class MeleeAttackMB : MonoBehaviour
     {
         [SerializeField] private GameObject _mainGameObject;
         [SerializeField] private EcsInfoMB _ecsInfoMB;
@@ -14,16 +14,15 @@ namespace Client
         private EcsWorldInject _world;
 
         private EcsPool<Targetable> _targetablePool;
-        private EcsPool<DeadTag> _deadPool;
 
         private string _enemyTag = "Enemy";
         private string _friendlyTag = "Friendly";
         private string _targetTag;
 
-        public void Start()
+        void Start()
         {
             if (_mainGameObject == null) _mainGameObject = transform.parent.gameObject;
-            if (_ecsInfoMB == null) _ecsInfoMB = GetComponentInParent<EcsInfoMB>();
+            if (_ecsInfoMB == null) _ecsInfoMB = _mainGameObject.GetComponent<EcsInfoMB>();
 
             if (_mainGameObject.CompareTag(_enemyTag))
             {
@@ -47,15 +46,11 @@ namespace Client
                 return;
             }
 
-            if (_ecsInfoMB.GetWorld().Value.GetPool<DeadTag>().Has(other.GetComponent<EcsInfoMB>().GetEntity()))
-            {
-                return;
-            }
-
             _world = _ecsInfoMB.GetWorld();
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
-            targetableComponent.AllEntityInDetectedZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
+            targetableComponent.AllEntityInDamageZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
+            Debug.Log("Новая энтити попала в DamageZone");
         }
 
         private void OnTriggerExit(Collider other)
@@ -70,15 +65,11 @@ namespace Client
                 return;
             }
 
-            if (_ecsInfoMB.GetWorld().Value.GetPool<DeadTag>().Has(other.GetComponent<EcsInfoMB>().GetEntity()))
-            {
-                return;
-            }
-
             _world = _ecsInfoMB.GetWorld();
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
-            targetableComponent.AllEntityInDetectedZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
+            targetableComponent.AllEntityInDamageZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
+            Debug.Log("Энтити вышла из DamageZone");
         }
     }
 }

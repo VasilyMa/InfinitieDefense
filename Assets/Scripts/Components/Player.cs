@@ -3,7 +3,7 @@ namespace Client {
     struct Player {
         public Transform Transform;
         public PlayerMB playerMB;
-        public AttackMB AttackMonoBehaviour;
+        public MeleeAttackMB AttackMonoBehaviour;
         public Vector3 direction;
         public Rigidbody rigidbody;
         public Animator animator;

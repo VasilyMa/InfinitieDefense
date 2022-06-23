@@ -40,13 +40,20 @@ namespace Client
                 .Add(new InitInterfaceSystem())
                 .Add(new RadiusInitSystem())
                 .Add(new DamagingEventSystem())
+
                 .Add(new TargetingSystem())
+                .Add(new PlayerTargetingSystem())
+                //.Add(new TargetingEventSystem())
+
                 .Add(new UnitLookingSystem())
+                .Add(new DefendersFallbackSystem())
                 .Add(new TowerLookingSystem())
-                .Add(new EnemyMovingSystem())
-                .Add(new ShipMovingSystem())
+                .Add(new UnitMovingSystem())
+                .Add(new UnitStandingSystem())
                 .Add(new DistanceToTargetSystem())
-                //.Add(new JoinToFightSystem())
+                .Add(new JoinToFightSystem())
+
+                .Add(new ShipMovingSystem())
                 .Add(new ShipArrivalSystem())
 
                 .Add(new WaveSwitcher())
