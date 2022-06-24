@@ -16,7 +16,6 @@ namespace Client
 
         public MeleeAttackMB AttackMB;
         public TowerAttackMB TowerAttackMB;
-        public PlayerAttackMB PlayerAttackMB;
         public EcsInfoMB EcsInfoMB;
         public SkinnedMeshRenderer SkinnedMeshRenderer;
 

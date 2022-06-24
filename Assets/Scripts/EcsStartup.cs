@@ -40,10 +40,11 @@ namespace Client
                 .Add(new InitInterfaceSystem())
                 .Add(new RadiusInitSystem())
                 .Add(new DamagingEventSystem())
+                .Add(new CooldownSystem())
 
                 .Add(new TargetingSystem())
                 .Add(new PlayerTargetingSystem())
-                //.Add(new TargetingEventSystem())
+                //.Add(new TargetingEventSystem()) её дописать
 
                 .Add(new UnitLookingSystem())
                 .Add(new DefendersFallbackSystem())
@@ -51,7 +52,7 @@ namespace Client
                 .Add(new UnitMovingSystem())
                 .Add(new UnitStandingSystem())
                 .Add(new DistanceToTargetSystem())
-                .Add(new JoinToFightSystem())
+                .Add(new OnOffUnitAttack())
 
                 .Add(new ShipMovingSystem())
                 .Add(new ShipArrivalSystem())
@@ -64,11 +65,12 @@ namespace Client
                 .Add(new AddCoinSystem())
                 .Add(new OreMiningSystem())
                 .Add(new CameraFollowSystem())
+
                 .Add(new UpgradeSystems())
                 .Add(new CreateNextTowerSystem())
                 .Add(new CreateNewPlayer())
                 .Add(new CreateDefenders())
-                .Add(new CombatUserSystem())
+
                 .Add(new ReloadSystem())
                 .Add(new DieSystem())
                 .Add(new DroppedGoldSystem())

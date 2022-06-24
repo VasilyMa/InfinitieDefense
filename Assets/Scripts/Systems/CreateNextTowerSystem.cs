@@ -15,6 +15,7 @@ namespace Client
         readonly EcsPoolInject<TowerTag> _towerPool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
+        readonly EcsPoolInject<Cooldown> _cooldownPool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         readonly EcsPoolInject<HealthComponent> _healthWeightPool = default;
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
@@ -51,6 +52,9 @@ namespace Client
 
                     _defenderPool.Value.Add(_world.Value.NewEntity());
 
+                    viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();
+                    viewComp.EcsInfoMB.Init(_world);
+                    viewComp.EcsInfoMB.SetEntity(entity);
                     viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
@@ -74,6 +78,7 @@ namespace Client
 
                     ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                     ref var damageComponent = ref _damagePool.Value.Get(entity);
+                    ref var cooldownComponent = ref _cooldownPool.Value.Get(entity);
                     ref var healthComponent = ref _healthWeightPool.Value.Get(entity);
 
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
@@ -85,7 +90,7 @@ namespace Client
                     viewComp.Healthbar.SetHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
-                    damageComponent.Value = 5; //ispravit'
+                    damageComponent.Value = _state.Value.DefenseTowerStorage.GetDamageByID(_state.Value.DefenseTowers[towerIndex]);
 
                     viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();
                     viewComp.EcsInfoMB.Init(_world);
@@ -125,6 +130,9 @@ namespace Client
                     targetableComponent.AllEntityInDamageZone = new List<int>();
 
                     targetWeightComponent.Value = 10;
+
+                    cooldownComponent.MaxValue = _state.Value.DefenseTowerStorage.GetCooldownByID(_state.Value.DefenseTowers[towerIndex]);
+                    cooldownComponent.CurrentValue = 0;
 
                     healthComponent.MaxValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
                     healthComponent.CurrentValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);

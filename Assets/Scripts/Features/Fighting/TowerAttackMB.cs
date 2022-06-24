@@ -8,15 +8,18 @@ namespace Client
 {
     public class TowerAttackMB : MonoBehaviour
     {
+        [SerializeField] private GameObject _mainGameObject;
         [SerializeField] private EcsInfoMB _ecsInfoMB;
-
-        //private Animator _animator;
 
         private EcsWorldInject _world;
 
         private EcsPool<DamagingEvent> _damagingEventPool;
         private EcsPool<DamageComponent> _damagePool;
         private EcsPool<Targetable> _targetablePool;
+
+        private string _enemyTag = "Enemy";
+        private string _friendlyTag = "Friendly";
+        private string _targetTag;
 
         private float MaxCoolDown = 2f;
         private float CurrentCoolDown = 0f;
@@ -25,16 +28,20 @@ namespace Client
 
         void Start()
         {
-            _ecsInfoMB = gameObject.GetComponent<EcsInfoMB>();
-            //_animator = gameObject.GetComponent<Animator>();
+            if (_mainGameObject == null) _mainGameObject = transform.parent.gameObject;
+            if (_ecsInfoMB == null) _ecsInfoMB = _mainGameObject.GetComponent<EcsInfoMB>();
+
+            if (_mainGameObject.CompareTag(_enemyTag))
+            {
+                _targetTag = _friendlyTag;
+            }
+            else
+            {
+                _targetTag = _enemyTag;
+            }
         }
         void Update()
         {
-            if (_ecsInfoMB.GetTargetObject())
-            {
-                DealDamagingEvent();
-            }
-
             if (CurrentCoolDown > 0)
             {
                 CurrentCoolDown -= Time.deltaTime;
@@ -63,50 +70,5 @@ namespace Client
             damagingEventComponent.DamagingEntity = _ecsInfoMB.GetEntity();
             CurrentCoolDown = MaxCoolDown;
         }
-
-        /*private void OnTriggerEnter(Collider other)
-        {
-            if (!other.gameObject.CompareTag(nameof(Enemy)))
-            {
-                return;
-            }
-
-            if (!_firstDetectedEnemyObject)
-            {
-                _firstDetectedEnemyObject = other.gameObject;
-            }
-
-            _detectedEnemyObjects.Add(other.gameObject);
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
-            if (!other.gameObject.CompareTag(nameof(Enemy)))
-            {
-                return;
-            }
-
-            if (!_firstDetectedEnemyObject)
-            {
-                _firstDetectedEnemyObject = _detectedEnemyObjects[0];
-            }
-
-            DealDamagingEvent();
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (!other.gameObject.CompareTag(nameof(Enemy)))
-            {
-                return;
-            }
-
-            if (other.gameObject == _firstDetectedEnemyObject)
-            {
-                _firstDetectedEnemyObject = null;
-            }
-
-            _detectedEnemyObjects.Remove(other.gameObject);
-        }*/
     }
 }

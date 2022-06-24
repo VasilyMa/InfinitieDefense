@@ -7,6 +7,8 @@ public class DefenseTower
     public int TowerHealth;
     public GameObject TowerPrefab;
     public int Radius;
+    public int Damage;
+    public float Cooldown;
     public int Upgrade;
     public bool IsLast;
     public string NextID;

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Client
 {
-    sealed class JoinToFightSystem : IEcsRunSystem
+    sealed class OnOffUnitAttack : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable>, Exc<InactiveTag, DeadTag, ShipTag, TowerTag>> _inFightFilter = default;
+        readonly EcsFilterInject<Inc<UnitTag, Targetable>, Exc<InactiveTag, DeadTag>> _inFightFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<InFightTag> _inFightPool = default;
@@ -29,7 +29,7 @@ namespace Client
                     continue;
                 }
 
-                bool targetInDamageZone = false;
+                bool targetInDamageZone = true;
 
                 if (_playerPool.Value.Has(entity))
                 {
