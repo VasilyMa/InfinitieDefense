@@ -32,11 +32,12 @@ namespace Client
             {
                 var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 7;
                 var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 7;
-                towerComp.DefendersPositions[d] = new Vector3(x, 0, z);
+                
                 Angle += 360 / 10;
 
                 var ent = _world.Value.NewEntity();
-                _defenderPool.Value.Add(ent);
+                ref var defComp = ref _defenderPool.Value.Add(ent);
+                defComp.Position = new Vector3(x, 0, z);
                 _state.Value.DefendersEntity[d] = ent;
             }
 

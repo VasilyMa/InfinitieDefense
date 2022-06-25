@@ -1,5 +1,6 @@
+using UnityEngine;
 namespace Client {
     struct DefenderComponent {
-        // add your data here.
+        public Vector3 Position;
     }
 }

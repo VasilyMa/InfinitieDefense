@@ -18,6 +18,7 @@ namespace Client {
         readonly EcsPoolInject<Movable> _movablePool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<UnitTag> _unitPool = default;
+        readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
 
         //todo components
 
@@ -33,8 +34,8 @@ namespace Client {
                     if(_state.Value.DefendersGOs[i] == null)
                     {
                         int defenderEntity = _state.Value.DefendersEntity[i];
-
-                        _state.Value.DefendersGOs[i] = GameObject.Instantiate(_state.Value.TowerStorage.DefenderPrefab, mainTowerComp.DefendersPositions[i], Quaternion.identity);
+                        ref var defenderComp = ref _defenderPool.Value.Get(defenderEntity);
+                        _state.Value.DefendersGOs[i] = GameObject.Instantiate(_state.Value.TowerStorage.DefenderPrefab, defenderComp.Position, Quaternion.identity);
                         //todo заполнить энтити дефендера
 
 

@@ -47,7 +47,6 @@ namespace Client
                 ref var projectileComponent = ref _projectilePool.Value.Add(cannonBallEntity);
                 ref var damageComponent = ref _damagePool.Value.Add(cannonBallEntity);
 
-
                 cannonBallViewComponent.GameObject = GameObject.Instantiate(Resources.Load<GameObject>("Test"), viewComponent.TowerFirePoint.transform.position, Quaternion.identity);
 
                 projectileComponent.Speed = 30;
@@ -58,8 +57,6 @@ namespace Client
                 projectileComponent.SupportPosition = supportPosition;
                 projectileComponent.TargetEntity = targetableComponent.TargetEntity;
                 projectileComponent.TargetObject = targetableComponent.TargetObject;
-
-                GameObject.Instantiate(Resources.Load<GameObject>("Test"), supportPosition, Quaternion.identity);
 
                 damageComponent.Value = 1000;
 

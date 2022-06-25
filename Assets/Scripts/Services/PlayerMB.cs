@@ -7,7 +7,7 @@ namespace Client
     public class PlayerMB : MonoBehaviour
     {
         private GameState _state;
-        private EcsPool<OreEventComponent> _orePool;
+        private EcsPool<OreEventComponent> _oreEventPool;
         private EcsWorld _world;
         private int _entity;
         private GameObject _target;
@@ -15,7 +15,7 @@ namespace Client
         public void Init(EcsWorld world, GameState state)
         {
             _state = state;
-            _orePool = world.GetPool<OreEventComponent>();
+            _oreEventPool = world.GetPool<OreEventComponent>();
             _world = world;
         }
         public void InitMiningEvent(int entity, GameObject target)
@@ -25,9 +25,9 @@ namespace Client
         }
         public void MiningEvent()
         {
-            if (_target != null)
+            if (_target != null && _target.activeSelf)
             {
-                ref var oreEvent = ref _orePool.Add(_entity);
+                ref var oreEvent = ref _oreEventPool.Add(_entity);
             }
         }
     }

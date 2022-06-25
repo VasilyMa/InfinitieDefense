@@ -4,5 +4,6 @@ namespace Client {
         public float Time;
         public int TowerIndex;
         public bool UpgradeTower;
+        public float DelayTime;
     }
 }

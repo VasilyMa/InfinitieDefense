@@ -25,5 +25,7 @@ namespace Client
         public SphereCollider DetectedZone;
         public SphereCollider DamageZone;
         public ParticleSystem UpgradeParticleSystem;
+        public ParticleSystem HitParticleSystem;
+        public ParticleSystem DropItemParticleSystem;
     }
 }

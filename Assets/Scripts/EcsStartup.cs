@@ -38,6 +38,7 @@ namespace Client
                 .Add(new PlayerInitSystem())
                 .Add(new OreInitSystem())
                 .Add(new InitInterfaceSystem())
+                
                 .Add(new RadiusInitSystem())
                 .Add(new DamagingEventSystem())
                 .Add(new CooldownSystem())
@@ -67,7 +68,9 @@ namespace Client
 
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
+                .Add(new UserMoveSystem())
                 .Add(new AddCoinSystem())
+                .Add(new ItemMoveToBagSystem())
                 .Add(new OreMiningSystem())
                 .Add(new CameraFollowSystem())
 
