@@ -10,7 +10,7 @@ namespace Client
     /// </summary>
     sealed class TargetingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable>, Exc<InactiveTag, DeadTag, ShipTag, Player>> _targetableFilter = default;
+        readonly EcsFilterInject<Inc<Targetable>, Exc<InactiveTag, DeadTag, ShipTag, Projectile>> _targetableFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;

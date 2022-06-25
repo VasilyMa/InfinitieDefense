@@ -75,6 +75,10 @@ namespace Client
                         _damagePool.Value.Add(entity);
                     }
 
+                    if (!_cooldownPool.Value.Has(entity))
+                    {
+                        _cooldownPool.Value.Add(entity);
+                    }
 
                     ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                     ref var damageComponent = ref _damagePool.Value.Get(entity);
@@ -96,8 +100,9 @@ namespace Client
                     viewComp.EcsInfoMB.Init(_world);
                     viewComp.EcsInfoMB.SetEntity(entity);
 
-                    viewComp.TowerAttackMB = viewComp.GameObject.GetComponent<TowerAttackMB>();
-                    viewComp.TowerAttackMB.Init(_world);
+                    viewComp.TowerAttackMB = viewComp.GameObject.GetComponentInChildren<TowerAttackMB>();
+                    viewComp.DamageZone = viewComp.TowerAttackMB.GetComponent<SphereCollider>();
+                    viewComp.DamageZone.radius = radiusComp.Radius - 1;
 
                     Transform[] allChildren = viewComp.GameObject.GetComponentsInChildren<Transform>();
                     foreach (var child in allChildren)
@@ -112,7 +117,7 @@ namespace Client
                             {
                                 if (weaponChild.CompareTag("Fire Point"))
                                 {
-                                    viewComp.FirePoint = weaponChild.gameObject;
+                                    viewComp.TowerFirePoint = weaponChild.gameObject;
                                 }
                             }
                         }

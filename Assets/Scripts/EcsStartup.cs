@@ -48,11 +48,16 @@ namespace Client
 
                 .Add(new UnitLookingSystem())
                 .Add(new DefendersFallbackSystem())
-                .Add(new TowerLookingSystem())
+
                 .Add(new UnitMovingSystem())
                 .Add(new UnitStandingSystem())
                 .Add(new DistanceToTargetSystem())
                 .Add(new OnOffUnitAttack())
+
+                .Add(new OnOffTowerAttack())
+                .Add(new TowerLookingSystem())
+                .Add(new TowerShotSystem())
+                .Add(new ProjectileFlyingSystem())
 
                 .Add(new ShipMovingSystem())
                 .Add(new ShipArrivalSystem())

@@ -12,7 +12,6 @@ namespace Client
         readonly EcsPoolInject<InFightTag> _inFightPool = default;
         readonly EcsPoolInject<IsNotMovableTag> _isNotMovablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
-        readonly EcsPoolInject<Player> _playerPool = default;
 
         public void Run (EcsSystems systems)
         {
@@ -26,35 +25,12 @@ namespace Client
                     if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
                     if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
                     viewComponent.Animator.SetBool("Attack", false);
-                    continue;
                 }
-
-                bool targetInDamageZone = true;
-
-                if (_playerPool.Value.Has(entity))
-                {
-                    targetInDamageZone = true;
-                }
-
-                foreach (var entityInDamageZone in targetableComponent.AllEntityInDamageZone)
-                {
-                    if (entityInDamageZone == targetableComponent.TargetEntity)
-                    {
-                        targetInDamageZone = true;
-                    }
-                }
-
-                if (targetInDamageZone)
+                else
                 {
                     if (!_inFightPool.Value.Has(entity)) _inFightPool.Value.Add(entity);
                     if (!_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Add(entity);
                     viewComponent.Animator.SetBool("Attack", true);
-                }
-                else
-                {
-                    if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
-                    if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
-                    viewComponent.Animator.SetBool("Attack", false);
                 }
             }
         }

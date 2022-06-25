@@ -13,18 +13,11 @@ namespace Client
 
         private EcsWorldInject _world;
 
-        private EcsPool<DamagingEvent> _damagingEventPool;
-        private EcsPool<DamageComponent> _damagePool;
         private EcsPool<Targetable> _targetablePool;
 
         private string _enemyTag = "Enemy";
         private string _friendlyTag = "Friendly";
         private string _targetTag;
-
-        private float MaxCoolDown = 2f;
-        private float CurrentCoolDown = 0f;
-
-        private string Enemy;
 
         void Start()
         {
@@ -40,35 +33,45 @@ namespace Client
                 _targetTag = _enemyTag;
             }
         }
-        void Update()
+
+        private void OnTriggerEnter(Collider other)
         {
-            if (CurrentCoolDown > 0)
+            if (other.isTrigger)
             {
-                CurrentCoolDown -= Time.deltaTime;
+                return;
             }
+
+            if (!other.gameObject.CompareTag(_targetTag))
+            {
+                return;
+            }
+
+            Debug.Log("В нашу TowerAttackMB попал " + other.name);
+
+            _world = _ecsInfoMB.GetWorld();
+            _targetablePool = _world.Value.GetPool<Targetable>();
+            ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
+            targetableComponent.AllEntityInDamageZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
+            Debug.Log("Новая энтити попала в DamageZone");
         }
 
-        public void Init(EcsWorldInject world)
+        private void OnTriggerExit(Collider other)
         {
-            _world = world;
-            _damagingEventPool = world.Value.GetPool<DamagingEvent>();
-            _damagePool = world.Value.GetPool<DamageComponent>();
-            _targetablePool = world.Value.GetPool<Targetable>();
-        }
+            if (other.isTrigger)
+            {
+                return;
+            }
 
-        public void DealDamagingEvent()
-        {
-            if (CurrentCoolDown > 0) return;
+            if (!other.gameObject.CompareTag(_targetTag))
+            {
+                return;
+            }
 
-            ref var damagingEventComponent = ref _damagingEventPool.Add(_world.Value.NewEntity());
-            ref var damageComponent = ref _damagePool.Get(_ecsInfoMB.GetEntity());
-
-            Debug.Log("Членистоногая сущность - "+ _ecsInfoMB.GetEntity()+ " \nСовершает непотребство над - "+ _ecsInfoMB.GetTargetObject().GetComponent<EcsInfoMB>().GetEntity() + " \nС уроном в "+ damageComponent.Value);
-
-            damagingEventComponent.TargetEntity = _ecsInfoMB.GetTargetObject().GetComponent<EcsInfoMB>().GetEntity();
-            damagingEventComponent.DamageValue = damageComponent.Value;
-            damagingEventComponent.DamagingEntity = _ecsInfoMB.GetEntity();
-            CurrentCoolDown = MaxCoolDown;
+            _world = _ecsInfoMB.GetWorld();
+            _targetablePool = _world.Value.GetPool<Targetable>();
+            ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
+            targetableComponent.AllEntityInDamageZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
+            Debug.Log("Энтити вышла из DamageZone");
         }
     }
 }
