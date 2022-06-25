@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Client
 {
@@ -17,6 +18,7 @@ namespace Client
         public MeleeAttackMB AttackMB;
         public TowerAttackMB TowerAttackMB;
         public EcsInfoMB EcsInfoMB;
+        public NavMeshAgent NavMeshAgent;
         public SkinnedMeshRenderer SkinnedMeshRenderer;
 
 

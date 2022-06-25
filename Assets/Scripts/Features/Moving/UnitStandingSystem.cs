@@ -21,6 +21,7 @@ namespace Client
 
                 viewComponent.Animator.SetBool("Run", false);
                 viewComponent.Rigidbody.velocity = Vector3.zero;
+                viewComponent.NavMeshAgent.ResetPath();
             }
         }
     }

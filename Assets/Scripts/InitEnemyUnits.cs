@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
+using UnityEngine.AI;
 using System.Collections.Generic;
 
 namespace Client
@@ -46,8 +47,14 @@ namespace Client
                 ref var damageComponent = ref _damagePool.Value.Add(enemyEntity);
                 ref var targetWeightComponent = ref _targetWeightPool.Value.Add(enemyEntity);
 
-                targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
-                targetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
+                //targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
+                //targetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
+
+                targetableComponent.TargetObject = GameObject.FindObjectOfType<NavMeshTargetTest>().gameObject;
+                targetableComponent.TargetEntity = _world.Value.NewEntity();
+                ref var navMeshTargetTestViewComponent = ref _viewPool.Value.Add(targetableComponent.TargetEntity);
+                navMeshTargetTestViewComponent.GameObject = targetableComponent.TargetObject;
+
                 targetableComponent.AllEntityInDetectedZone = new List<int>();
                 targetableComponent.AllEntityInDamageZone = new List<int>();
 
@@ -66,6 +73,7 @@ namespace Client
                 viewComponent.Transform = enemy.GetComponent<Transform>();
                 viewComponent.Outline = enemy.GetComponent<Outline>();
                 viewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();
+                viewComponent.NavMeshAgent = enemy.GetComponent<NavMeshAgent>();
                 viewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
                 viewComponent.EcsInfoMB.Init(_world);
                 viewComponent.EcsInfoMB.SetEntity(enemyEntity);
