@@ -9180,6 +9180,10 @@ PrefabInstance:
       propertyPath: _shipNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5795999319188923892, guid: c29718758e29c48448137053fc70220a, type: 3}
+      propertyPath: _shipEncounter
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5795999319188923893, guid: c29718758e29c48448137053fc70220a, type: 3}
       propertyPath: m_RootOrder
       value: 1
