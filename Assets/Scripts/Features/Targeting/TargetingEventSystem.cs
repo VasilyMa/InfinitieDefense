@@ -8,12 +8,11 @@ namespace Client
     {
         readonly EcsFilterInject<Inc<TargetingEvent>> _targetingEventFilter = default;
 
-        readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         readonly EcsPoolInject<TargetingEvent> _targetingEventPool = default;
+        readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
-        readonly EcsPoolInject<EnemyTag> _enemyPool = default;
 
         readonly EcsSharedInject<GameState> _state;
 
@@ -21,41 +20,40 @@ namespace Client
         {
             foreach (var entity in _targetingEventFilter.Value)
             {
+                Debug.Log("Мы зашли в Таргетинг эвент");
+
                 ref var targetingEvent = ref _targetingEventPool.Value.Get(entity);
 
                 ref var targetableComponent = ref _targetablePool.Value.Get(targetingEvent.TargetingEntity);
 
-                if (targetingEvent.TargetEntity == -1 || targetableComponent.TargetObject == null)
-                {
-                    targetableComponent.TargetEntity = targetingEvent.TargetEntity;
-                    targetableComponent.TargetObject = null;
-                    continue;
-                }
-
                 if (_deadPool.Value.Has(targetingEvent.TargetEntity))
                 {
-                    targetableComponent.TargetEntity = -1;
-                    targetableComponent.TargetObject = null;
+                    Debug.Log("Цель, нанесшая нам урон оказалась мёртвой");
                     continue;
                 }
 
-                if (!_deadPool.Value.Has(targetableComponent.TargetEntity))
+                if (targetableComponent.TargetEntity == -1)
                 {
-                    ref var oldTargetWeightComponent = ref _targetWeightPool.Value.Get(targetableComponent.TargetEntity);
-                    ref var newTargetWeightComponent = ref _targetWeightPool.Value.Get(targetingEvent.TargetEntity);
-
-                    if (oldTargetWeightComponent.Value >= newTargetWeightComponent.Value)
-                    {
-                        continue;
-                    }
+                    targetableComponent.TargetEntity = targetingEvent.TargetEntity;
+                    targetableComponent.TargetObject = _viewPool.Value.Get(targetingEvent.TargetEntity).GameObject;
+                    _viewPool.Value.Get(targetingEvent.TargetingEntity).EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
+                    Debug.Log("У нас небыло цели, поэтому мы сразу перезаписали её на новую, нанёсшую нам урон");
+                    continue;
                 }
+                
+                ref var oldTargetWeightComponent = ref _targetWeightPool.Value.Get(targetableComponent.TargetEntity);
+                ref var newTargetWeightComponent = ref _targetWeightPool.Value.Get(targetingEvent.TargetEntity);
 
-                ref var viewComponent = ref _viewPool.Value.Get(targetingEvent.TargetingEntity);
-                ref var targetViewComponent = ref _viewPool.Value.Get(targetingEvent.TargetEntity);
-                targetableComponent.TargetEntity = targetingEvent.TargetEntity;
-                targetableComponent.TargetObject = targetViewComponent.GameObject;
+                if (oldTargetWeightComponent.Value < newTargetWeightComponent.Value)
+                {
+                    targetableComponent.TargetEntity = targetingEvent.TargetEntity;
+                    targetableComponent.TargetObject = _viewPool.Value.Get(targetingEvent.TargetEntity).GameObject;
 
-                viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
+                    _viewPool.Value.Get(targetingEvent.TargetingEntity).EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
+                    Debug.Log("Вес новой цели ("+ newTargetWeightComponent.Value + ") оказался больше, чем старой(" + oldTargetWeightComponent.Value + "). Цель перезаписана");
+                    continue;
+                }
+                Debug.Log("Вес старой цели (" + oldTargetWeightComponent.Value + ") оказался больше, чем новой(" + newTargetWeightComponent.Value + ")");
             }
         }
     }

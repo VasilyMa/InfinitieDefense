@@ -47,13 +47,8 @@ namespace Client
                 ref var damageComponent = ref _damagePool.Value.Add(enemyEntity);
                 ref var targetWeightComponent = ref _targetWeightPool.Value.Add(enemyEntity);
 
-                //targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
-                //targetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
-
-                targetableComponent.TargetObject = GameObject.FindObjectOfType<NavMeshTargetTest>().gameObject;
-                targetableComponent.TargetEntity = _world.Value.NewEntity();
-                ref var navMeshTargetTestViewComponent = ref _viewPool.Value.Add(targetableComponent.TargetEntity);
-                navMeshTargetTestViewComponent.GameObject = targetableComponent.TargetObject;
+                targetableComponent.TargetEntity = _state.Value.TowersEntity[0];
+                targetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
 
                 targetableComponent.AllEntityInDetectedZone = new List<int>();
                 targetableComponent.AllEntityInDamageZone = new List<int>();

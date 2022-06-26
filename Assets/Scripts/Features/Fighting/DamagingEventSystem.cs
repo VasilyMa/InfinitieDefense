@@ -33,12 +33,12 @@ namespace Client
                 
                 if (!_healthPool.Value.Has(damagingEventComponent.TargetEntity))
                 {
-                    _damagingEventPool.Value.Del(entity);
                     continue;
                 }
 
                 ref var healthPointComponent = ref _healthPool.Value.Get(damagingEventComponent.TargetEntity);
                 ref var viewComp = ref _viewPool.Value.Get(damagingEventComponent.TargetEntity);
+
                 if (damagingEventComponent.DamageValue > healthPointComponent.CurrentValue)
                 {
                     damagingEventComponent.DamageValue = healthPointComponent.CurrentValue;

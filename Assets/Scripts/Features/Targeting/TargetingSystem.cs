@@ -26,8 +26,13 @@ namespace Client
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                if (targetableComponent.TargetEntity > 0)
+                if (targetableComponent.TargetEntity > -1) //если есть цель
                 {
+                    if (targetableComponent.TargetObject == null)
+                    {
+                        targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
+                    }
+
                     if (_deadPool.Value.Has(targetableComponent.TargetEntity))
                     {
                         targetableComponent.TargetEntity = -1;
@@ -36,12 +41,7 @@ namespace Client
                     }
                 }
 
-                if (targetableComponent.TargetEntity > -1 && targetableComponent.TargetObject == null)
-                {
-                    targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
-                }
-
-                if (targetableComponent.AllEntityInDetectedZone.Count == 0)
+                if (targetableComponent.AllEntityInDetectedZone.Count == 0 && targetableComponent.TargetEntity == -1) //если никого в зоне обнаружения и нет цели
                 {
                     if (_enemyPool.Value.Has(entity))
                     {
@@ -88,11 +88,6 @@ namespace Client
                     Debug.Log("Попытались записать новую цель");
                 }
             }
-        }
-
-        private void SetTarget(int entity, GameObject gameObject)
-        {
-
         }
     }
 }

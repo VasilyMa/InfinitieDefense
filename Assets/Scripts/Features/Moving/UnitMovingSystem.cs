@@ -19,7 +19,7 @@ namespace Client
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(unitEntity);
 
-                if (targetableComponent.TargetEntity == -1)
+                if (targetableComponent.TargetEntity == -1 || targetableComponent.TargetObject == null)
                 {
                     continue;
                 }

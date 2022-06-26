@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class UnitLookingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<UnitTag, ViewComponent, Targetable>, Exc<DeadTag>> _entitysFilter = default;
+        readonly EcsFilterInject<Inc<UnitTag, ViewComponent, Targetable, InFightTag>, Exc<DeadTag>> _entitysFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;

@@ -25,6 +25,7 @@ namespace Client
                 ref var cooldownComponent = ref _cooldownPool.Value.Get(towerEntity);
                 ref var viewComponent = ref _viewPool.Value.Get(towerEntity);
                 ref var targetableComponent = ref _targetablePool.Value.Get(towerEntity);
+                ref var damageComponent = ref _damagePool.Value.Get(towerEntity);
 
                 // Вспомогательные поля
                 float startDistance = Vector3.Distance(viewComponent.TowerFirePoint.transform.position, targetableComponent.TargetObject.transform.position);
@@ -45,7 +46,7 @@ namespace Client
 
                 ref var cannonBallViewComponent = ref _viewPool.Value.Add(cannonBallEntity);
                 ref var projectileComponent = ref _projectilePool.Value.Add(cannonBallEntity);
-                ref var damageComponent = ref _damagePool.Value.Add(cannonBallEntity);
+                ref var cannonBallDamageComponent = ref _damagePool.Value.Add(cannonBallEntity);
 
                 cannonBallViewComponent.GameObject = GameObject.Instantiate(Resources.Load<GameObject>("Test"), viewComponent.TowerFirePoint.transform.position, Quaternion.identity);
 
@@ -58,7 +59,7 @@ namespace Client
                 projectileComponent.TargetEntity = targetableComponent.TargetEntity;
                 projectileComponent.TargetObject = targetableComponent.TargetObject;
 
-                damageComponent.Value = 1000;
+                cannonBallDamageComponent.Value = damageComponent.Value;
 
                 cooldownComponent.CurrentValue = cooldownComponent.MaxValue;
             }

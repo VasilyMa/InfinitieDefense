@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using UnityEngine;
+using UnityEngine.AI;
 using Leopotam.EcsLite.Di;
 using System.Collections.Generic;
 
@@ -75,6 +76,8 @@ namespace Client {
                         viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                         viewComponent.AttackMB = viewComponent.GameObject.GetComponent<MeleeAttackMB>();
+
+                        viewComponent.NavMeshAgent = viewComponent.GameObject.GetComponent<NavMeshAgent>();
 
                         viewComponent.Outline = viewComponent.GameObject.GetComponent<Outline>();
 

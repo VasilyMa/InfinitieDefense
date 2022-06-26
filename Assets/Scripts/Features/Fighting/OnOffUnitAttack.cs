@@ -20,17 +20,27 @@ namespace Client
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                if (targetableComponent.AllEntityInDamageZone.Count == 0)
+                bool targetObjectInDamageZone = false;
+
+                foreach (var entityInDamageZone in targetableComponent.AllEntityInDamageZone)
                 {
-                    if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
-                    if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
-                    viewComponent.Animator.SetBool("Attack", false);
+                    if (_viewPool.Value.Get(entityInDamageZone).GameObject == targetableComponent.TargetObject)
+                    {
+                        targetObjectInDamageZone = true;
+                    }
                 }
-                else
+
+                if (targetObjectInDamageZone)
                 {
                     if (!_inFightPool.Value.Has(entity)) _inFightPool.Value.Add(entity);
                     if (!_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Add(entity);
                     viewComponent.Animator.SetBool("Attack", true);
+                }
+                else
+                {
+                    if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
+                    if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
+                    viewComponent.Animator.SetBool("Attack", false);
                 }
             }
         }

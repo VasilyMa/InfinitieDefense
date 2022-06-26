@@ -6,7 +6,7 @@ namespace Client
 {
     sealed class UnitStandingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<UnitTag, ViewComponent, Movable, IsNotMovableTag>, Exc<Player>> _allUnitsFilter = default;
+        readonly EcsFilterInject<Inc<UnitTag, ViewComponent, Movable, IsNotMovableTag>, Exc<Player, DeadTag, InactiveTag>> _allUnitsFilter = default;
 
         readonly EcsPoolInject<Movable> _movablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;

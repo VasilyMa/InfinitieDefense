@@ -6,11 +6,14 @@ namespace Client
 {
     sealed class ProjectileFlyingSystem : IEcsRunSystem
     {
+        readonly EcsWorldInject _world = default;
+
         readonly EcsFilterInject<Inc<Projectile, DamageComponent, ViewComponent>> _projectileFilter = default;
 
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<Projectile> _projectilePool = default;
+        readonly EcsPoolInject<DamagingEvent> _damagingEventPool = default;
 
         public void Run(EcsSystems systems)
         {
@@ -55,7 +58,17 @@ namespace Client
 
                 if (viewComponent.GameObject.transform.position == projectileComponent.TargetObject.transform.position)
                 {
+                    Debug.Log("Снаряд прилетел в цель");
+
+                    var damagingEventEntity = _world.Value.NewEntity();
+                    ref var damagingEventComponent = ref _damagingEventPool.Value.Add(damagingEventEntity);
+                    damagingEventComponent.TargetEntity = projectileComponent.TargetEntity;
+                    damagingEventComponent.DamageValue = damageComponent.Value;
+                    damagingEventComponent.DamagingEntity = projectileComponent.OwnerEntity;
+
                     viewComponent.GameObject.SetActive(false);
+
+                    _world.Value.DelEntity(projectileEntity);
                 }
             }
         }
