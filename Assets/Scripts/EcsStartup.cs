@@ -64,7 +64,7 @@ namespace Client
                 .Add(new ShipArrivalSystem())
 
                 .Add(new WaveSwitcher())
-                .Add(new ShipSwitcher())
+                .Add(new EncounterSwitcher())
 
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())

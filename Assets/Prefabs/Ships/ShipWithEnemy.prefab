@@ -78,11 +78,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3408906690740430384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d442ed367bb47d343af2feeec4441697, type: 3}
+  m_Script: {fileID: 11500000, guid: 42dd4bb5fa9cefe44a6117e638b3ec15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _shipEntity: 0
-  _shipNumber: 2
+  _shipEncounter: 1
   _shipWave: 1
 --- !u!1001 &5528406966087874717
 PrefabInstance:

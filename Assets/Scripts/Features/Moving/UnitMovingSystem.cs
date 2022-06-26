@@ -18,15 +18,16 @@ namespace Client
             foreach (var unitEntity in _allUnitsFilter.Value)
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(unitEntity);
+                ref var viewComponent = ref _viewPool.Value.Get(unitEntity);
 
                 if (targetableComponent.TargetEntity == -1 || targetableComponent.TargetObject == null)
                 {
+                    viewComponent.Animator.SetBool("Run", false);
+                    viewComponent.NavMeshAgent.ResetPath();
                     continue;
                 }
 
                 ref var movableComponent = ref _movablePool.Value.Get(unitEntity);
-
-                ref var viewComponent = ref _viewPool.Value.Get(unitEntity);
                 ref var targetViewComponent = ref _viewPool.Value.Get(targetableComponent.TargetEntity);
 
                 if (_enemyPool.Value.Has(unitEntity))

@@ -7,9 +7,9 @@ namespace Client
     /// </summary>
     struct ShipComponent
     {
-        public int Number;
+        public int Encounter;
         public int Wave;
         public List<int> EnemyUnitsEntitys;
-        public ShipArrivalMonoBehavior ShipArrivalMonoBehavior;
+        public ShipArrivalMB ShipArrivalMB;
     }
 }

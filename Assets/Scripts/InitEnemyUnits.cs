@@ -79,7 +79,7 @@ namespace Client
                 viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
                 viewComponent.Healthbar.ToggleSwitcher();
                 viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                shipComponent.Number = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMonoBehavior>().GetShipNumber();
+                shipComponent.Encounter = viewComponent.GameObject.transform.parent.GetComponent<ShipArrivalMB>().GetShipEncounter();
             }
         }
     }

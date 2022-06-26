@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Client
 {
-    public class ShipArrivalMonoBehavior : MonoBehaviour
+    public class ShipArrivalMB : MonoBehaviour
     {
         private EcsWorldInject _world;
         //private EcsWorld _world;
@@ -14,7 +14,7 @@ namespace Client
         private EcsPool<InactiveTag> _inactivePool;
 
         [SerializeField] private int _shipEntity;
-        [SerializeField] [Range(0, 10)] private int _shipNumber;
+        [SerializeField] [Range(0, 10)] private int _shipEncounter;
         [SerializeField] private int _shipWave;
 
         public void Init(EcsWorldInject world)
@@ -32,8 +32,12 @@ namespace Client
                 return;
             }
 
-            ref var shipArrivalEvent = ref _shipArrivalEventPool.Add(_world.Value.NewEntity());
-            shipArrivalEvent.ShipEntity = _shipEntity;
+            if (land.CompareTag("LandTrigger"))
+            {
+                ref var shipArrivalEvent = ref _shipArrivalEventPool.Add(_world.Value.NewEntity());
+                shipArrivalEvent.ShipEntity = _shipEntity;
+            }
+
         }
 
         public void SetEntity(int entity)
@@ -46,9 +50,9 @@ namespace Client
             return _shipEntity;
         }
 
-        public int GetShipNumber()
+        public int GetShipEncounter()
         {
-            return _shipNumber;
+            return _shipEncounter;
         }
 
         public int GetShipWave()

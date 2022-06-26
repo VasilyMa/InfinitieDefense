@@ -20,7 +20,7 @@ namespace Client
         public void Init (EcsSystems systems)
         {
             //var allShips = GameObject.FindGameObjectsWithTag(nameof(Ship));
-            var allShips = GameObject.FindObjectsOfType<ShipArrivalMonoBehavior>();
+            var allShips = GameObject.FindObjectsOfType<ShipArrivalMB>();
 
             foreach (var ship in allShips)
             {
@@ -41,11 +41,11 @@ namespace Client
                 movableComponent.Speed = 10f;
 
                 ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
-                shipComponent.ShipArrivalMonoBehavior = ship.GetComponent<ShipArrivalMonoBehavior>();
-                shipComponent.ShipArrivalMonoBehavior.SetEntity(shipEntity);
-                shipComponent.ShipArrivalMonoBehavior.Init(_world);
-                shipComponent.Number = shipComponent.ShipArrivalMonoBehavior.GetShipNumber();
-                shipComponent.Wave = shipComponent.ShipArrivalMonoBehavior.GetShipWave();
+                shipComponent.ShipArrivalMB = ship.GetComponent<ShipArrivalMB>();
+                shipComponent.ShipArrivalMB.SetEntity(shipEntity);
+                shipComponent.ShipArrivalMB.Init(_world);
+                shipComponent.Encounter = shipComponent.ShipArrivalMB.GetShipEncounter();
+                shipComponent.Wave = shipComponent.ShipArrivalMB.GetShipWave();
                 shipComponent.EnemyUnitsEntitys = new List<int>();
 
                 ref var viewComponent = ref _viewPool.Value.Add(shipEntity);

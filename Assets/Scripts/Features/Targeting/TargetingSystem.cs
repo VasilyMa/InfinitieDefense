@@ -10,12 +10,13 @@ namespace Client
     /// </summary>
     sealed class TargetingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable>, Exc<InactiveTag, DeadTag, ShipTag, Projectile>> _targetableFilter = default;
+        readonly EcsFilterInject<Inc<Targetable>, Exc<InactiveTag, DeadTag, Projectile>> _targetableFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
         readonly EcsPoolInject<EnemyTag> _enemyPool = default;
+        readonly EcsPoolInject<ShipTag> _shipPool = default;
 
         readonly EcsSharedInject<GameState> _state;
 
@@ -26,7 +27,7 @@ namespace Client
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                if (targetableComponent.TargetEntity > -1) //если есть цель
+                if (targetableComponent.TargetEntity > -1) // ≈сли есть цель
                 {
                     if (targetableComponent.TargetObject == null)
                     {
@@ -41,7 +42,12 @@ namespace Client
                     }
                 }
 
-                if (targetableComponent.AllEntityInDetectedZone.Count == 0 && targetableComponent.TargetEntity == -1) //если никого в зоне обнаружени€ и нет цели
+                if (_shipPool.Value.Has(entity)) // „тобы тут кончалс€ код дл€ кораблей
+                {
+                    continue;
+                }
+
+                if (targetableComponent.AllEntityInDetectedZone.Count == 0 && targetableComponent.TargetEntity == -1) // ≈сли никого в зоне обнаружени€ и нет цели
                 {
                     if (_enemyPool.Value.Has(entity))
                     {

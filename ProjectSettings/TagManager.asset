@@ -18,6 +18,8 @@ TagManager:
   - Fire Point
   - DetectedZone
   - Friendly
+  - FxTemporaire
+  - LandTrigger
   layers:
   - Default
   - TransparentFX
