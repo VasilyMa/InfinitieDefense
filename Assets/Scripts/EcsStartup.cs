@@ -75,7 +75,7 @@ namespace Client
 
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
-                .Add(new UserMoveSystem())
+                //.Add(new UserMoveSystem())
                 .Add(new AddCoinSystem())
                 .Add(new ItemMoveToBagSystem())
                 .Add(new OreMiningSystem())
