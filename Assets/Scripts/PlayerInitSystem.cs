@@ -40,8 +40,8 @@ namespace Client
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
-            player.MoveSpeed = 15f;
-            player.RotateSpeed = 1f;
+            player.MoveSpeed = 10f;
+            player.RotateSpeed = 10f;
             player.damage = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
             player.health = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
             player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
