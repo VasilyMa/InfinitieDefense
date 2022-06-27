@@ -6,16 +6,18 @@ namespace Client
 {
     sealed class HPRegenerationSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<HPRegeneration, HealthComponent>, Exc<DeadTag, InactiveTag>> _regenerationFilter = default;
+        readonly EcsFilterInject<Inc<HPRegeneration, HealthComponent, ViewComponent>, Exc<DeadTag, InactiveTag>> _regenerationFilter = default;
 
         readonly EcsPoolInject<HPRegeneration> _regenerationPool = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
         public void Run (EcsSystems systems)
         {
             foreach (var regenerationEntity in _regenerationFilter.Value)
             {
                 ref var regenerationComponent = ref _regenerationPool.Value.Get(regenerationEntity);
                 ref var healthComponent = ref _healthPool.Value.Get(regenerationEntity);
+                ref var viewComponent = ref _viewPool.Value.Get(regenerationEntity);
                 Debug.Log("Çàøëè â ğåãåíåğàöèş");
                 if (healthComponent.CurrentValue == healthComponent.MaxValue)
                 {
@@ -52,6 +54,8 @@ namespace Client
                 }
 
                 regenerationComponent.OldHPValue = healthComponent.CurrentValue;
+                viewComponent.UpgradeParticleSystem.Play();
+
                 Debug.Log("ĞÅÃÅÅÅÅÅÅÅÅÅÍ");
             }
         }

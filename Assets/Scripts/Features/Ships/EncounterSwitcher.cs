@@ -20,23 +20,18 @@ namespace Client
         {
             if (_ActiveShipsFilter.Value.GetEntitiesCount() > 0)
             {
-                Debug.Log("�� ��� ���������� �������� �������");
                 return;
             }
 
             if (_AliveUnitsFilter.Value.GetEntitiesCount() > 0)
             {
-                Debug.Log("�� ��� ���� ����� �����");
                 return;
             }
 
             if (_InactiveAliveUnitsFilter.Value.GetEntitiesCount() == 0)
             {
-                Debug.Log("����������� ���������� �����");
                 return;
             }
-
-            Debug.Log("������ ��������� ������� �� ���������� "+_state.Value.CurrentActivatedShip);
 
             foreach (var shipEntity in _InactiveShipsFilter.Value)
             {
@@ -44,18 +39,13 @@ namespace Client
                 if (shipComponent.Encounter == _state.Value.CurrentActivatedShip)
                 {
                     _inactivePool.Value.Del(shipEntity);
-                    Debug.Log("������������ ������� �� ���������� " + _state.Value.CurrentActivatedShip);
                 }
             }
 
             if (_InactiveShipsFilter.Value.GetEntitiesCount() > 0)
             {
-                Debug.Log("���� ���������� �������, ������� ������� ���������");
                 _state.Value.CurrentActivatedShip++;
-                Debug.Log("������� ��������� �� " + _state.Value.CurrentActivatedShip);
             }
-
-            Debug.Log("��������� ������. ������ �������� ��������� - �"+_state.Value.CurrentActivatedShip);
         }
     }
 }

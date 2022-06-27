@@ -38,7 +38,7 @@ namespace Client
                 .Add(new StartWaveSystem())
                 .Add(new StartCurrentWave())
 
-                // .Add(new InitEnemyUnits())
+                // .Add(new InitEnemyUnits()) удалить
                 // .Add(new InitEnemyShips())
                 .Add(new InitCamera())
                 .Add(new PlayerInitSystem())
