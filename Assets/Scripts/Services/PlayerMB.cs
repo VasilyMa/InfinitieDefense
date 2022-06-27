@@ -47,6 +47,16 @@ namespace Client
                 player.animator.SetBool("isMining", false);
                 player.animator.SetBool("isRun", true);
             }
+            else if (player.animator.GetBool("isMining"))
+            {
+                player.animator.SetBool("isRun", false);
+                player.animator.SetBool("isIdle", false);
+            }
+            else if (!player.animator.GetBool("isMining"))
+            {
+                player.animator.SetBool("isRun", false);
+                player.animator.SetBool("isIdle", true);
+            }
         }
     }
 }
