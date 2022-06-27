@@ -21,12 +21,15 @@ namespace Client {
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
         private float _angle = 0f;
         private float _shipAngle = 0f;
+        private int _encounter = 0;
+        private int _enemyCountInEncounter = 0;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 
                 int[] enemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].EnemyInShip;
+                int[] encounters = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].Encounters;
 
                 for (int i = 0; i < enemyInShip.Length;i++)
                 {
@@ -55,7 +58,7 @@ namespace Client {
                     //shipComponent.ShipArrivalMB = ship.GetComponent<ShipArrivalMB>();
                     //shipComponent.ShipArrivalMB.SetEntity(shipEntity);
                     //shipComponent.ShipArrivalMB.Init(_world);
-                    shipComponent.Encounter = i;
+                    shipComponent.Encounter = _encounter;
                     shipComponent.Wave = _state.Value.Saves.CurrentWave;
                     shipComponent.EnemyUnitsEntitys = new List<int>();
 
@@ -68,7 +71,7 @@ namespace Client {
 
                     _inactivePool.Value.Add(shipEntity);
 
-
+                    
                     for (int j = 0; j < enemyInShip[i];j++)
                     {
                         //todo enemy na lodke
@@ -126,15 +129,27 @@ namespace Client {
                         enemyViewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
                         enemyViewComponent.Healthbar.ToggleSwitcher();
                         enemyViewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                        enemyShipComponent.Encounter = i;
+                        enemyShipComponent.Encounter = _encounter;
 
                         shipComponent.EnemyUnitsEntitys.Add(enemyEntity);
+
+                        
                     }
+                    _enemyCountInEncounter++;
+                    Debug.Log("Dlinna " + encounters.Length + " " + _encounter + " " + encounters[_encounter] + " " + _enemyCountInEncounter);
+                    if(_encounter <= encounters.Length && _enemyCountInEncounter == encounters[_encounter])
+                    {
+                        _encounter++;
+                        _enemyCountInEncounter = 0;
+                    }
+
                     _shipAngle = 0f;
                 }
-                _state.Value.Saves.SaveCurrentWave(_state.Value.Saves.CurrentWave++);
+                // _state.Value.Saves.CurrentWave++;
+                // _state.Value.Saves.SaveCurrentWave(_state.Value.Saves.CurrentWave);
                 _angle = 0f;
-                //_shipAngle = 0f;
+                _encounter = 0;
+                _enemyCountInEncounter = 0;
                 _filter.Pools.Inc1.Del(entity);
             }
         }
