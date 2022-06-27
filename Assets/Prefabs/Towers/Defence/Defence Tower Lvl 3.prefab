@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3876849412093506701}
   - component: {fileID: 7185176716749255873}
   - component: {fileID: 1597465594912446697}
+  - component: {fileID: 1693384942491395312}
   m_Layer: 0
   m_Name: Defence Tower Lvl 3
   m_TagString: Friendly
@@ -112,6 +113,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2003894, y: 5.6, z: 3.200389}
   m_Center: {x: -0.0060684085, y: 2.8002918, z: -0.046975017}
+--- !u!208 &1693384942491395312
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785620539395791169}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.6, y: 2.8, z: 1.6}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.7, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &2664252884021748978
 PrefabInstance:
   m_ObjectHideFlags: 0

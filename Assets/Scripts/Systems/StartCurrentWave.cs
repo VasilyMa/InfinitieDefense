@@ -112,6 +112,7 @@ namespace Client {
                         enemyViewComponent.GameObject = enemy;
                         enemyViewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
                         enemyViewComponent.Animator = enemy.GetComponent<Animator>();
+                        enemyViewComponent.Animator.SetBool("Range", true);
                         enemyViewComponent.Transform = enemy.GetComponent<Transform>();
                         enemyViewComponent.Outline = enemy.GetComponent<Outline>();
                         enemyViewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();
