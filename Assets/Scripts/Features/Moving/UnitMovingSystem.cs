@@ -30,21 +30,11 @@ namespace Client
                 ref var movableComponent = ref _movablePool.Value.Get(unitEntity);
                 ref var targetViewComponent = ref _viewPool.Value.Get(targetableComponent.TargetEntity);
 
-                if (_enemyPool.Value.Has(unitEntity))
-                {
-                    viewComponent.Animator.SetBool("Run", true);
-                    viewComponent.NavMeshAgent.SetDestination(targetableComponent.TargetObject.transform.position);
-                    Debug.Log(targetableComponent.TargetObject);
-                    Debug.Log(targetableComponent.TargetObject.transform.position);
-                    Debug.Log("Установили точку назначения");
-                }
-                else
-                {
-                    Vector3 direction = (targetViewComponent.GameObject.transform.position - viewComponent.GameObject.transform.position).normalized * movableComponent.Speed;
-
-                    viewComponent.Animator.SetBool("Run", true);
-                    viewComponent.Rigidbody.velocity = new Vector3(direction.x, viewComponent.Rigidbody.velocity.y, direction.z);
-                }
+                viewComponent.Animator.SetBool("Run", true);
+                viewComponent.NavMeshAgent.SetDestination(targetableComponent.TargetObject.transform.position);
+                Debug.Log(targetableComponent.TargetObject);
+                Debug.Log(targetableComponent.TargetObject.transform.position);
+                Debug.Log("Установили точку назначения");
             }
         }
     }
