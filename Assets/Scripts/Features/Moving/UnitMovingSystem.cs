@@ -1,6 +1,5 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
 
 namespace Client
 {
@@ -19,19 +18,22 @@ namespace Client
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(unitEntity);
                 ref var viewComponent = ref _viewPool.Value.Get(unitEntity);
+                ref var movableComponent = ref _movablePool.Value.Get(unitEntity);
 
-                if (targetableComponent.TargetEntity == -1 || targetableComponent.TargetObject == null)
+                if (targetableComponent.TargetEntity != -1)
+                {
+                    movableComponent.Destination = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject.transform.position;
+                }
+
+                if (movableComponent.Destination == null)
                 {
                     viewComponent.Animator.SetBool("Run", false);
                     viewComponent.NavMeshAgent.ResetPath();
                     continue;
                 }
 
-                ref var movableComponent = ref _movablePool.Value.Get(unitEntity);
-                ref var targetViewComponent = ref _viewPool.Value.Get(targetableComponent.TargetEntity);
-
                 viewComponent.Animator.SetBool("Run", true);
-                viewComponent.NavMeshAgent.SetDestination(targetableComponent.TargetObject.transform.position);
+                viewComponent.NavMeshAgent.SetDestination(movableComponent.Destination);
             }
         }
     }
