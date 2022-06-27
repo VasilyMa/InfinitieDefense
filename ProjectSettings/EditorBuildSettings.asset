@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/island.unity
-    guid: a46afe0f32a778c48a86853061be2319
+    path: Assets/Scenes/island2.unity
+    guid: a320125f3778dc84aa4c8afd7a6da1b2
   m_configObjects: {}

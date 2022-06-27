@@ -8,26 +8,16 @@ namespace Client
 {
     public class ShipArrivalMB : MonoBehaviour
     {
+        [SerializeField] private EcsInfoMB _ecsInfoMB;
+
         private EcsWorldInject _world;
-        //private EcsWorld _world;
+
         private EcsPool<ShipArrivalEvent> _shipArrivalEventPool;
         private EcsPool<InactiveTag> _inactivePool;
 
-        [SerializeField] private int _shipEntity;
-        [SerializeField] [Range(0, 10)] private int _shipEncounter;
-        [SerializeField] private int _shipWave;
-        private EcsInfoMB _ecsInfoMB;
-
-        // public void Init(EcsWorldInject world)
-        // {
-        //     _shipArrivalEventPool = world.Value.GetPool<ShipArrivalEvent>();
-        //     _inactivePool = world.Value.GetPool<InactiveTag>();
-        //     _world = world;
-        // }
         void Start()
         {
             if (_ecsInfoMB == null) _ecsInfoMB = gameObject.GetComponent<EcsInfoMB>();
-            
         }
         private void OnTriggerEnter(Collider land)
         {
@@ -39,32 +29,13 @@ namespace Client
 
             if (land.CompareTag("LandTrigger"))
             {
-                _shipArrivalEventPool = _ecsInfoMB.GetWorld().Value.GetPool<ShipArrivalEvent>();
+                _world = _ecsInfoMB.GetWorld();
+                _shipArrivalEventPool = _world.Value.GetPool<ShipArrivalEvent>();
                 ref var shipArrivalEvent = ref _shipArrivalEventPool.Add(_world.Value.NewEntity());
                 shipArrivalEvent.ShipEntity = _ecsInfoMB.GetEntity();
                 
             }
 
         }
-
-        // public void SetEntity(int entity)
-        // {
-        //     _shipEntity = entity;
-        // }
-
-        // public int GetShipEntity()
-        // {
-        //     return _shipEntity;
-        // }
-
-        // public int GetShipEncounter()
-        // {
-        //     return _shipEncounter;
-        // }
-
-        // public int GetShipWave()
-        // {
-        //     return _shipWave;
-        // }
     }
 }

@@ -64,6 +64,7 @@ namespace Client {
                     viewComponent.Rigidbody = ship.GetComponent<Rigidbody>();
                     viewComponent.EcsInfoMB = ship.GetComponent<EcsInfoMB>();
                     viewComponent.EcsInfoMB.Init(_world);
+                    viewComponent.EcsInfoMB.SetEntity(shipEntity);
 
                     _inactivePool.Value.Add(shipEntity);
 
