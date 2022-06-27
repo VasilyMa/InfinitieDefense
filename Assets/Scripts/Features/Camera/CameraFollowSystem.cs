@@ -15,7 +15,7 @@ namespace Client
         readonly EcsSharedInject<GameState> _state;
         
         private Vector3 _holderOffset = new Vector3(0, 15, -7);
-        private float _holderFollowSpeed = 5f;
+        private float _holderFollowSpeed = 10f;
 
         public void Run (EcsSystems systems)
         {
@@ -32,7 +32,8 @@ namespace Client
 
                 var actualPosition = Vector3.Lerp(cameraComponent.HolderTransform.position, cameraComponent.FollowTransform.position + _holderOffset, Time.deltaTime * _holderFollowSpeed);
                 cameraComponent.HolderTransform.position = actualPosition;
-                cameraComponent.CameraTransform.LookAt(cameraComponent.FollowTransform);
+                //cameraComponent.CameraTransform.LookAt(cameraComponent.FollowTransform);
+                cameraComponent.CameraTransform.LookAt(actualPosition - _holderOffset);
             }
         }
     }
