@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7568774822564271473}
-  - component: {fileID: 1339497707071188148}
-  - component: {fileID: 277948933738815060}
+  - component: {fileID: 7067839110542647564}
   m_Layer: 0
   m_Name: Ore v6
   m_TagString: Ore
@@ -33,8 +32,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1339497707071188148
-BoxCollider:
+--- !u!135 &7067839110542647564
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -44,21 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.92682475, y: 0.8471286, z: 1.0694746}
-  m_Center: {x: 0.14367577, y: 0.4085245, z: 0.13001709}
---- !u!65 &277948933738815060
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358370960227077233}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5419221, y: 0.8471286, z: 0.81898886}
-  m_Center: {x: -0.5765393, y: 0.4085245, z: -0.1449351}
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &692432043461896513
 PrefabInstance:
   m_ObjectHideFlags: 0

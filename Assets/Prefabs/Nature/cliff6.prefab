@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5427453555606855492}
   - component: {fileID: 9006614132135268577}
   - component: {fileID: 6564309390038361131}
-  - component: {fileID: 1176218645350380199}
+  - component: {fileID: 6424114252844042172}
+  - component: {fileID: 3011614194514647574}
   m_Layer: 0
   m_Name: cliff6
   m_TagString: Untagged
@@ -82,17 +83,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1176218645350380199
+--- !u!136 &6424114252844042172
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4618970198577300990}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5687a367f2bbb0b4991cbcd7a4cae280, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.51498014
-  m_Height: 1.878959
-  m_Direction: 0
-  m_Center: {x: 0.16267557, y: 0.01, z: 0.10207444}
+  m_Radius: 0.5
+  m_Height: 1.35
+  m_Direction: 1
+  m_Center: {x: -0.18, y: 0.16418274, z: 0.07}
+--- !u!136 &3011614194514647574
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618970198577300990}
+  m_Material: {fileID: 13400000, guid: 5687a367f2bbb0b4991cbcd7a4cae280, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.35
+  m_Direction: 1
+  m_Center: {x: 0.51, y: 0.16418274, z: 0.13}
