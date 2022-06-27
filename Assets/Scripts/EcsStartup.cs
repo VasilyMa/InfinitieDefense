@@ -46,7 +46,7 @@ namespace Client
                 .Add(new InitInterfaceSystem())
                 .Add(new RadiusInitSystem())
 
-                
+                .Add(new HPRegenerationSystem())
                 .Add(new CooldownSystem())
 
                 .Add(new OnOffTowerAttack())

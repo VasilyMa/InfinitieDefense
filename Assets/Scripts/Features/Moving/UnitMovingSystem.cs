@@ -32,9 +32,6 @@ namespace Client
 
                 viewComponent.Animator.SetBool("Run", true);
                 viewComponent.NavMeshAgent.SetDestination(targetableComponent.TargetObject.transform.position);
-                Debug.Log(targetableComponent.TargetObject);
-                Debug.Log(targetableComponent.TargetObject.transform.position);
-                Debug.Log("Установили точку назначения");
             }
         }
     }

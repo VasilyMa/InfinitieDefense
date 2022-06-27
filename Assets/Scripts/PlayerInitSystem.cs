@@ -19,6 +19,7 @@ namespace Client
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<CanvasPointerComponent> _pointerPool = default;
+        readonly EcsPoolInject<HPRegeneration> _regenerationPool = default;
         readonly EcsPoolInject<UnitTag> _unitPool = default;
         public void Init (EcsSystems systems) 
         {
@@ -35,6 +36,7 @@ namespace Client
             ref var targetWeightComponent = ref _targetWeightPool.Value.Add(playerEntity);
             ref var damageComponent = ref _damagePool.Value.Add(playerEntity);
             ref var targetableComponent = ref _targetablePool.Value.Add(playerEntity);
+            ref var regenerationComponent = ref _regenerationPool.Value.Add(playerEntity);
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), new Vector3(0,2,-10), Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
@@ -80,6 +82,11 @@ namespace Client
             targetableComponent.AllEntityInDetectedZone = new List<int>();
             targetableComponent.TargetEntity = -1;
             targetableComponent.TargetObject = null;
+
+            regenerationComponent.MaxCooldown = 5;
+            regenerationComponent.CurrentCooldown = regenerationComponent.MaxCooldown;
+            regenerationComponent.Value = 2;
+            regenerationComponent.OldHPValue = healthComponent.CurrentValue;
 
             var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
             colliderChecker.Init(systems.GetWorld(), systems.GetShared<GameState>());
