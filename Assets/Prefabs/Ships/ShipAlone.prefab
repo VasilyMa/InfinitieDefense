@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5795999319188923890
+--- !u!1 &3592194008509780480
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,52 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5795999319188923893}
-  - component: {fileID: 5795999319188923888}
-  - component: {fileID: 5795999319188923889}
-  - component: {fileID: 5795999319188923892}
+  - component: {fileID: 3592194008509780487}
+  - component: {fileID: 3592194008509780482}
+  - component: {fileID: 3592194008509780483}
+  - component: {fileID: 8932928883885317887}
+  - component: {fileID: 4336054568177704245}
   m_Layer: 0
-  m_Name: Ship
+  m_Name: ShipAlone
   m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5795999319188923893
+--- !u!4 &3592194008509780487
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5795999319188923890}
+  m_GameObject: {fileID: 3592194008509780480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.7375164, y: 0, z: 154.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2547387589652577254}
+  - {fileID: 4823263130124586004}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5795999319188923888
+--- !u!65 &3592194008509780482
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5795999319188923890}
+  m_GameObject: {fileID: 3592194008509780480}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 6.556653, y: 0.6476189, z: 5.393961}
   m_Center: {x: -0.016489029, y: -0.17619056, z: -0.0599432}
---- !u!54 &5795999319188923889
+--- !u!54 &3592194008509780483
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5795999319188923890}
+  m_GameObject: {fileID: 3592194008509780480}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -63,27 +64,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5795999319188923892
+--- !u!114 &8932928883885317887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5795999319188923890}
+  m_GameObject: {fileID: 3592194008509780480}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42dd4bb5fa9cefe44a6117e638b3ec15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _shipEntity: 0
-  _shipEncounter: 1
-  _shipWave: 1
---- !u!1001 &2652790576315341837
+  _shipEncounter: 0
+  _shipWave: 0
+--- !u!114 &4336054568177704245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3592194008509780480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c412d422e0b3e684a8b88f79b1790e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameObjectEntity: 0
+  _targetEntity: 0
+  _targetObject: {fileID: 0}
+--- !u!1001 &5000426319040605183
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5795999319188923893}
+    m_TransformParent: {fileID: 3592194008509780487}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
       propertyPath: m_RootOrder
@@ -143,8 +159,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
---- !u!4 &2547387589652577254 stripped
+--- !u!4 &4823263130124586004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
-  m_PrefabInstance: {fileID: 2652790576315341837}
+  m_PrefabInstance: {fileID: 5000426319040605183}
   m_PrefabAsset: {fileID: 0}

@@ -49,6 +49,7 @@ MonoBehaviour:
   _interfaceStorage: {fileID: 11400000, guid: ce647896e01d5944a966d338021e3ac7, type: 2}
   _playerStorage: {fileID: 11400000, guid: 192d904650ba40549b4f1521db72a700, type: 2}
   _defenseTowerStorage: {fileID: 11400000, guid: 730ddd42c49ede7499913fdd53ce9c8d, type: 2}
+  _enemyConfig: {fileID: 11400000, guid: c3870e1e49f27004ca7c4e903c8aa465, type: 2}
   _towerCount: 7
 --- !u!114 &2135641420
 MonoBehaviour:
@@ -62,4 +63,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81af0bc06080061449680f0e3b1d53f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Waves: []
+  Waves:
+  - EnemyInShip: 0200000003000000
+  - EnemyInShip: 040000000100000003000000

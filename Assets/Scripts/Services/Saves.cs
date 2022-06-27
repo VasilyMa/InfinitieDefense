@@ -19,6 +19,7 @@ namespace Client
         public int TutorialState;
         public string PlayerID;
         public string[] TowerID;
+        public int CurrentWave;
 
         public SaveSettings Save = new SaveSettings();
         public string path;
@@ -87,7 +88,15 @@ namespace Client
                 TowerID[i] = value[i];
                 Save.TowerID[i] = value[i];
             }
+            
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
+        public void SaveCurrentWave(int value)
+        {
+            Save.CurrentWave = value;
+            CurrentWave = value;
 
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
         }
 
         #endregion
@@ -111,6 +120,7 @@ namespace Client
                 SceneNumber = Save.SceneNumber;
                 TutorialState = Save.TutorialState;
                 PlayerID = Save.PlayerID;
+                CurrentWave = Save.CurrentWave;
             }
             //если нет, то записываем значения в SaveSettings и создаем файлик
             else
@@ -123,7 +133,8 @@ namespace Client
                 SceneNumber = 1;
                 TutorialState = 1;
                 PlayerID = "1level";
-                
+                CurrentWave = 0;
+
 
                 Save.Sounds = Sounds;
                 Save.Music = Music;
@@ -133,6 +144,7 @@ namespace Client
                 Save.SceneNumber = SceneNumber;
                 Save.TutorialState = TutorialState;
                 Save.PlayerID = PlayerID;
+                Save.CurrentWave = CurrentWave;
 
                 File.WriteAllText(path, JsonUtility.ToJson(Save));
             }
@@ -170,6 +182,7 @@ namespace Client
             public int TutorialState;
             public string PlayerID;
             public string[] TowerID;
+            public int CurrentWave;
         }
     }
 }

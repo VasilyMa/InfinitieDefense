@@ -20,23 +20,23 @@ namespace Client
         {
             if (_ActiveShipsFilter.Value.GetEntitiesCount() > 0)
             {
-                Debug.Log("Всё ещё существуют активные корабли");
+                Debug.Log("пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                 return;
             }
 
             if (_AliveUnitsFilter.Value.GetEntitiesCount() > 0)
             {
-                Debug.Log("Всё ещё есть живые юниты");
+                Debug.Log("пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
                 return;
             }
 
             if (_InactiveAliveUnitsFilter.Value.GetEntitiesCount() == 0)
             {
-                Debug.Log("Закончились неактивные юниты");
+                Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
                 return;
             }
 
-            Debug.Log("Начали активацию корабля на энкаунтере "+_state.Value.CurrentActivatedShip);
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "+_state.Value.CurrentActivatedShip);
 
             foreach (var shipEntity in _InactiveShipsFilter.Value)
             {
@@ -44,18 +44,18 @@ namespace Client
                 if (shipComponent.Encounter == _state.Value.CurrentActivatedShip)
                 {
                     _inactivePool.Value.Del(shipEntity);
-                    Debug.Log("Активировали корабль на энкаунтере " + _state.Value.CurrentActivatedShip);
+                    Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + _state.Value.CurrentActivatedShip);
                 }
             }
 
             if (_InactiveShipsFilter.Value.GetEntitiesCount() > 0)
             {
-                Debug.Log("Есть неактивные корабли, поэтому сменяем энкаунтер");
+                Debug.Log("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                 _state.Value.CurrentActivatedShip++;
-                Debug.Log("Сменили энкаунтер на " + _state.Value.CurrentActivatedShip);
+                Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + _state.Value.CurrentActivatedShip);
             }
 
-            Debug.Log("Закончили работу. Теперь активный энкаунтер - №"+_state.Value.CurrentActivatedShip);
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅ"+_state.Value.CurrentActivatedShip);
         }
     }
 }

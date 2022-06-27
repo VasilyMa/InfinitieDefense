@@ -40,13 +40,13 @@ namespace Client
                 ref var movableComponent = ref _world.Value.GetPool<Movable>().Add(shipEntity);
                 movableComponent.Speed = 10f;
 
-                ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
-                shipComponent.ShipArrivalMB = ship.GetComponent<ShipArrivalMB>();
-                shipComponent.ShipArrivalMB.SetEntity(shipEntity);
-                shipComponent.ShipArrivalMB.Init(_world);
-                shipComponent.Encounter = shipComponent.ShipArrivalMB.GetShipEncounter();
-                shipComponent.Wave = shipComponent.ShipArrivalMB.GetShipWave();
-                shipComponent.EnemyUnitsEntitys = new List<int>();
+                // ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
+                // shipComponent.ShipArrivalMB = ship.GetComponent<ShipArrivalMB>();
+                // shipComponent.ShipArrivalMB.SetEntity(shipEntity);
+                // shipComponent.ShipArrivalMB.Init(_world);
+                // shipComponent.Encounter = shipComponent.ShipArrivalMB.GetShipEncounter();
+                // shipComponent.Wave = shipComponent.ShipArrivalMB.GetShipWave();
+                // shipComponent.EnemyUnitsEntitys = new List<int>();
 
                 ref var viewComponent = ref _viewPool.Value.Add(shipEntity);
                 viewComponent.GameObject = ship.gameObject;
@@ -54,16 +54,16 @@ namespace Client
 
                 _inactivePool.Value.Add(shipEntity);
 
-                foreach (var enemyUnit in _enemyUnitsFilter.Value)
-                {
-                    ref var enemyUnitShip = ref _shipPool.Value.Get(enemyUnit);
-                    ref var enemyViewComponent = ref _viewPool.Value.Get(enemyUnit);
+                // foreach (var enemyUnit in _enemyUnitsFilter.Value)
+                // {
+                //     ref var enemyUnitShip = ref _shipPool.Value.Get(enemyUnit);
+                //     ref var enemyViewComponent = ref _viewPool.Value.Get(enemyUnit);
 
-                    if (viewComponent.GameObject == enemyViewComponent.GameObject.transform.parent.gameObject)
-                    {
-                        shipComponent.EnemyUnitsEntitys.Add(enemyUnit);
-                    }
-                }
+                //     if (viewComponent.GameObject == enemyViewComponent.GameObject.transform.parent.gameObject)
+                //     {
+                //         shipComponent.EnemyUnitsEntitys.Add(enemyUnit);
+                //     }
+                // }
             }
         }
     }

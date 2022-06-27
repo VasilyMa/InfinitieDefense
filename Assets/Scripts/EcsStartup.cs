@@ -15,6 +15,7 @@ namespace Client
         [SerializeField] private InterfaceStorage _interfaceStorage;
         [SerializeField] private PlayerStorage _playerStorage;
         [SerializeField] private DefenseTowerStorage _defenseTowerStorage;
+        [SerializeField] private EnemyConfig _enemyConfig;
         [SerializeField] private int _towerCount;
         private WaveStorage _waveStorage;
         EcsSystems _systems;
@@ -26,20 +27,26 @@ namespace Client
         {
             _waveStorage = gameObject.GetComponent<WaveStorage>();
             _world = new EcsWorld();
-            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _playerStorage, _defenseTowerStorage, _towerCount, _waveStorage);
+            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, 
+            _playerStorage, _defenseTowerStorage, _towerCount, _waveStorage, _enemyConfig);
             _systems = new EcsSystems (_world, _gameState);
             _delHereSystems = new EcsSystems(_world, _gameState);
 
             _systems
                 .Add(new InitMainTower())
-                .Add(new InitEnemyUnits())
-                .Add(new InitEnemyShips())
+
+                .Add(new StartWaveSystem())
+                .Add(new StartCurrentWave())
+
+                // .Add(new InitEnemyUnits())
+                // .Add(new InitEnemyShips())
                 .Add(new InitCamera())
                 .Add(new PlayerInitSystem())
                 .Add(new OreInitSystem())
                 .Add(new InitInterfaceSystem())
-                
                 .Add(new RadiusInitSystem())
+
+                
                 .Add(new CooldownSystem())
 
                 .Add(new OnOffTowerAttack())
