@@ -93,19 +93,8 @@ namespace Client {
                         var ex = Mathf.Cos(_shipAngle * Mathf.Deg2Rad) * 2;
                         var ez = Mathf.Sin(_shipAngle * Mathf.Deg2Rad) * 2;
                         _shipAngle += 360 / enemyInShip[i];
-                        //todo проверить тип врага, в ифке навесишь уникальные компоненты и родишь нужного врага
-                        GameObject enemy = null;
-                        if (enemies[j] == "Melee")
-                        {
-                            enemy = GameObject.Instantiate(_state.Value.EnemyConfig.EnemyPrefab, ship.transform);
-                            //todo components
-                        }
-                        else
-                        {
-                            //todo роди дальника и компоненты 
-                        }
-                        enemy.transform.localPosition = new Vector3(ex, 0, ez);
 
+                        GameObject enemy = null;
 
                         var enemyEntity = _world.Value.NewEntity();
 
@@ -120,6 +109,28 @@ namespace Client {
                         ref var healthComponent = ref _healthPool.Value.Add(enemyEntity);
                         ref var damageComponent = ref _damagePool.Value.Add(enemyEntity);
                         ref var targetWeightComponent = ref _targetWeightPool.Value.Add(enemyEntity);
+
+                        switch (enemies[j])
+                        {
+                            case "Melee":
+                                {
+                                    enemy = GameObject.Instantiate(_state.Value.EnemyConfig.EnemyPrefab, ship.transform);
+                                    enemyViewComponent.GameObject = enemy;
+                                    enemyViewComponent.Animator = enemy.GetComponent<Animator>();
+                                    enemyViewComponent.Animator.SetBool("Melee", true);
+                                    break;
+                                }
+                            case "Range":
+                                {
+                                    enemy = GameObject.Instantiate(_state.Value.EnemyConfig.RangeEnemyPrefab, ship.transform);
+                                    enemyViewComponent.GameObject = enemy;
+                                    enemyViewComponent.Animator = enemy.GetComponent<Animator>();
+                                    enemyViewComponent.Animator.SetBool("Range", true);
+                                    break;
+                                }
+                        }
+
+                        enemy.transform.localPosition = new Vector3(ex, 0, ez);
 
                         enemyTargetableComponent.TargetEntity = _state.Value.TowersEntity[0];
                         enemyTargetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
@@ -136,10 +147,7 @@ namespace Client {
 
                         movableComponent.Speed = 5f;
 
-                        enemyViewComponent.GameObject = enemy;
                         enemyViewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
-                        enemyViewComponent.Animator = enemy.GetComponent<Animator>();
-                        enemyViewComponent.Animator.SetBool("Range", true);
                         enemyViewComponent.Transform = enemy.GetComponent<Transform>();
                         enemyViewComponent.Outline = enemy.GetComponent<Outline>();
                         enemyViewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();

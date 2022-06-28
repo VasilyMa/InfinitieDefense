@@ -6,5 +6,6 @@ public class EnemyConfig : ScriptableObject
 {
     public GameObject ShipPrefab;
     public GameObject EnemyPrefab;
+    public GameObject RangeEnemyPrefab;
 
 }
