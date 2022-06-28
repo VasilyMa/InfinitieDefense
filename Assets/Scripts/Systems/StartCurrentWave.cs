@@ -29,7 +29,13 @@ namespace Client {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 
                 int[] enemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].EnemyInShip;
+                int[] rangeEnemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].RangeEnemyInShip;
                 int[] encounters = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].Encounters;
+
+                List<int[]> allEnemyTypes = new List<int[]>();
+
+                allEnemyTypes.Add(enemyInShip);
+                allEnemyTypes.Add(rangeEnemyInShip);
 
                 for (int i = 0; i < enemyInShip.Length;i++)
                 {
@@ -55,9 +61,6 @@ namespace Client {
                     movableComponent.Speed = 10f;
 
                     ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
-                    //shipComponent.ShipArrivalMB = ship.GetComponent<ShipArrivalMB>();
-                    //shipComponent.ShipArrivalMB.SetEntity(shipEntity);
-                    //shipComponent.ShipArrivalMB.Init(_world);
                     shipComponent.Encounter = _encounter;
                     shipComponent.Wave = _state.Value.Saves.CurrentWave;
                     shipComponent.EnemyUnitsEntitys = new List<int>();
@@ -71,6 +74,23 @@ namespace Client {
 
                     _inactivePool.Value.Add(shipEntity);
 
+                    string[] wtf = new string[enemyInShip.Length + rangeEnemyInShip.Length];
+
+                    for (int n = 0; n < wtf.Length; n++)
+                    {
+                        Debug.Log("Итерация "+ n);
+                        Debug.Log("Номер корабля - " + i);
+                        if (n < enemyInShip.Length)
+                        {
+                            wtf[n] = "Melee";
+                            Debug.Log("Юнит "+ n+" оказался ближником");
+                        }
+                        else
+                        {
+                            wtf[n] = "Range";
+                            Debug.Log("Юнит " + n + " оказался дальником");
+                        }
+                    }
                     
                     for (int j = 0; j < enemyInShip[i];j++)
                     {

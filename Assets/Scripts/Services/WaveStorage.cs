@@ -7,8 +7,15 @@ public class WaveStorage : MonoBehaviour
     [System.Serializable]
     public class Test
     {
+        [Header("Указываем сколько кораблей будет на Энкаунтере")]
+        [Tooltip("Количество энкаунтеров")]
+        public int[] Encounters;
+        [Header("Задаем ближников на каждом из кораблей")]
+        [Tooltip("Количество кораблей")]
         public int[] EnemyInShip;
-        public int[] Encounters;//СЂР°Р·РјРµСЂ СЌС‚Рѕ РєРѕР»Р»РёС‡РµСЃС‚РІРѕ СЌРЅРєР°СѓРЅС‚РµСЂРѕРІ, Р·РЅР°С‡РµРЅРёРµ СЃРєРѕР»СЊРєРѕ Р°РєС‚РёРІРЅС‹С… РІСЂР°РіРѕРІ РЅР° СЌРЅРєР°СѓРЅС‚РµСЂРµ
+        [Header("Задаем дальников на каждом из кораблей")]
+        [Tooltip("Количество кораблей")]
+        public int[] RangeEnemyInShip;
     }
     public List<Test> Waves = new List<Test>();
     
