@@ -74,35 +74,39 @@ namespace Client {
 
                     _inactivePool.Value.Add(shipEntity);
 
-                    string[] wtf = new string[enemyInShip.Length + rangeEnemyInShip.Length];
+                    string[] enemies = new string[enemyInShip[i] + rangeEnemyInShip[i]];
 
-                    for (int n = 0; n < wtf.Length; n++)
+                    for (int n = 0; n < enemies.Length; n++)
                     {
-                        Debug.Log("Итерация "+ n);
-                        Debug.Log("Номер корабля - " + i);
-                        if (n < enemyInShip.Length)
+                        if (n < enemyInShip[i])
                         {
-                            wtf[n] = "Melee";
-                            Debug.Log("Юнит "+ n+" оказался ближником");
+                            enemies[n] = "Melee";
                         }
                         else
                         {
-                            wtf[n] = "Range";
-                            Debug.Log("Юнит " + n + " оказался дальником");
+                            enemies[n] = "Range";
                         }
                     }
                     
-                    for (int j = 0; j < enemyInShip[i];j++)
+                    for (int j = 0; j < enemies.Length;j++)
                     {
-                        //todo enemy na lodke
                         var ex = Mathf.Cos(_shipAngle * Mathf.Deg2Rad) * 2;
                         var ez = Mathf.Sin(_shipAngle * Mathf.Deg2Rad) * 2;
                         _shipAngle += 360 / enemyInShip[i];
-                        var enemy = GameObject.Instantiate(_state.Value.EnemyConfig.EnemyPrefab, ship.transform);
+                        //todo проверить тип врага, в ифке навесишь уникальные компоненты и родишь нужного врага
+                        GameObject enemy = null;
+                        if (enemies[j] == "Melee")
+                        {
+                            enemy = GameObject.Instantiate(_state.Value.EnemyConfig.EnemyPrefab, ship.transform);
+                            //todo components
+                        }
+                        else
+                        {
+                            //todo роди дальника и компоненты 
+                        }
                         enemy.transform.localPosition = new Vector3(ex, 0, ez);
 
 
-                        //todo заполнить енеми
                         var enemyEntity = _world.Value.NewEntity();
 
                         _enemyPool.Value.Add(enemyEntity);
@@ -157,7 +161,7 @@ namespace Client {
                         
                     }
                     _enemyCountInEncounter++;
-                    Debug.Log("Dlinna " + encounters.Length + " " + _encounter + " " + encounters[_encounter] + " " + _enemyCountInEncounter);
+                    //Debug.Log("Dlinna " + encounters.Length + " " + _encounter + " " + encounters[_encounter] + " " + _enemyCountInEncounter);
                     if(_encounter <= encounters.Length && _enemyCountInEncounter == encounters[_encounter])
                     {
                         _encounter++;

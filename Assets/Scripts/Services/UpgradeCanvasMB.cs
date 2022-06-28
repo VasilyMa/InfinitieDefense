@@ -18,7 +18,7 @@ namespace Client
         public void UpdateUpgradePoint(int currentAmount, int maxAmount)
         {
             _amount.text = ($"{currentAmount}/{maxAmount}");
-            Debug.Log(_amount.text);
+            //Debug.Log(_amount.text);
         }
     }
 }
