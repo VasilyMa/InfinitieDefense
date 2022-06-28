@@ -54,6 +54,10 @@ namespace Client
         private void Update()
         {
             CameraFollow();
+            if (_curHp == _maxHP)
+                _healthBar.SetActive(false);
+            else
+                _healthBar.SetActive(true);
         }
     }
 }
