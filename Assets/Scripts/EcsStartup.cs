@@ -42,7 +42,7 @@ namespace Client
                 .Add(new PlayerInitSystem())
                 .Add(new OreInitSystem())
                 .Add(new InitInterfaceSystem())
-                .Add(new RadiusInitSystem())
+                //.Add(new RadiusInitSystem())
 
                 .Add(new HPRegenerationSystem())
                 .Add(new CooldownSystem())

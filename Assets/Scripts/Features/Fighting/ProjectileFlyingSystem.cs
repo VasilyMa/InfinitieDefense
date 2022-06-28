@@ -58,8 +58,6 @@ namespace Client
 
                 if (viewComponent.GameObject.transform.position == projectileComponent.TargetObject.transform.position)
                 {
-                    Debug.Log("Снаряд прилетел в цель");
-
                     var damagingEventEntity = _world.Value.NewEntity();
                     ref var damagingEventComponent = ref _damagingEventPool.Value.Add(damagingEventEntity);
                     damagingEventComponent.TargetEntity = projectileComponent.TargetEntity;

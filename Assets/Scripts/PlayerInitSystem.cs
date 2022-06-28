@@ -83,7 +83,7 @@ namespace Client
             targetableComponent.TargetEntity = -1;
             targetableComponent.TargetObject = null;
 
-            regenerationComponent.MaxCooldown = 5;
+            regenerationComponent.MaxCooldown = 2;
             regenerationComponent.CurrentCooldown = regenerationComponent.MaxCooldown;
             regenerationComponent.Value = 2;
             regenerationComponent.OldHPValue = healthComponent.CurrentValue;

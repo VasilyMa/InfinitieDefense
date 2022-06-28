@@ -61,7 +61,7 @@ namespace Client
                         targetableComponent.TargetObject = null;
                         viewComponent.EcsInfoMB.ResetTarget();
                     }
-                    Debug.Log("Удалили старую энтити цели");
+                    Debug.Log("Удалили старую энтити цели у "+ viewComponent.GameObject);
                     continue;
                 }
 
@@ -91,7 +91,7 @@ namespace Client
                     targetableComponent.TargetEntity = targetableComponent.AllEntityInDetectedZone[0];
                     targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
                     viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
-                    Debug.Log("Попытались записать новую цель");
+                    Debug.Log("Записали новую цель");
                 }
             }
         }

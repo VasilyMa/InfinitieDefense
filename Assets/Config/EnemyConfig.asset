@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
   ShipPrefab: {fileID: 3592194008509780480, guid: 5d37fad8ff092dd45937b49833d7d4f5, type: 3}
-  EnemyPrefab: {fileID: 4827656138189228337, guid: 7b18740922d47a340938281339b24e22, type: 3}
+  EnemyPrefab: {fileID: 6929615800299421390, guid: 6af3d5937a99f714bba749865d7d1919, type: 3}
+  RangeEnemyPrefab: {fileID: 4827656138189228337, guid: 7b18740922d47a340938281339b24e22, type: 3}

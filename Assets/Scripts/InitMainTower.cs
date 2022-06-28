@@ -53,7 +53,7 @@ namespace Client
             UpgradeCanvasMB upgradeInfo = null;
 
             var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
-            upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, Vector3.zero, Quaternion.identity);
+            upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0.1f, 0), Quaternion.identity);
             upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
             upgradeComponent.point = upgradePoint.gameObject;
             upgradeComponent.upgrade = upgradeInfo;
@@ -96,7 +96,7 @@ namespace Client
                     var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
                     tComp.Position = new Vector3(x, 0, z);
 
-                    upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0, z), Quaternion.identity);
+                    upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0.1f, z), Quaternion.identity);
                     upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
                     upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
                     upgradeTowerComponent.point = upgradePoint.gameObject;
@@ -111,6 +111,51 @@ namespace Client
                     Angle += 360 / (_state.Value.TowerCount - 1);
                 }
             }
+
+
+            Mesh mesh = new Mesh();
+            viewComponent.MeshFilter = viewComponent.GameObject.GetComponent<MeshFilter>();
+            viewComponent.MeshFilter.mesh = mesh;
+
+            float fov = 360f;
+            Vector3 origin = Vector3.zero;
+            int triangelesCount = 45;
+            float angle = 0f;
+            float angleIncrease = fov / triangelesCount;
+            float viewDistence = radiusComp.Radius;
+
+            Vector3[] vertices = new Vector3[triangelesCount + 1 + 1];
+            //Vector2[] uv = new Vector2[vertices.Length];
+            int[] trianglesVertices = new int[triangelesCount * 3];
+
+            vertices[0] = origin;
+
+            int vertexIndex = 1;
+            int triangleIndex = 0;
+            for (int i = 0; i <= triangelesCount; i++)
+            {
+                float angleRad = angle * (Mathf.PI / 180f);
+                Vector3 VectorFromAngle = new Vector3(Mathf.Cos(angleRad), 0, Mathf.Sin(angleRad));
+
+                Vector3 vertex = origin + VectorFromAngle * viewDistence;
+                vertices[vertexIndex] = vertex;
+
+                if (i > 0)
+                {
+                    trianglesVertices[triangleIndex + 0] = 0;
+                    trianglesVertices[triangleIndex + 1] = vertexIndex - 1;
+                    trianglesVertices[triangleIndex + 2] = vertexIndex;
+
+                    triangleIndex += 3;
+                }
+
+                vertexIndex++;
+                angle -= angleIncrease;
+            }
+
+            mesh.vertices = vertices;
+            //mesh.uv = uv;
+            mesh.triangles = trianglesVertices;
         }
     }
 }

@@ -18,26 +18,21 @@ namespace Client
                 ref var regenerationComponent = ref _regenerationPool.Value.Get(regenerationEntity);
                 ref var healthComponent = ref _healthPool.Value.Get(regenerationEntity);
                 ref var viewComponent = ref _viewPool.Value.Get(regenerationEntity);
-                Debug.Log("Зашли в регенерацию");
                 if (healthComponent.CurrentValue == healthComponent.MaxValue)
                 {
-                    Debug.Log("У нас фул хп");
                     continue;
                 }
 
                 if (healthComponent.CurrentValue < regenerationComponent.OldHPValue) // Если нас ударили
                 {
-                    Debug.Log("По нам ёбнули");
                     regenerationComponent.OldHPValue = healthComponent.CurrentValue;
                     regenerationComponent.CurrentCooldown = regenerationComponent.MaxCooldown;
                     continue;
                 }
 
                 regenerationComponent.CurrentCooldown -= Time.deltaTime;
-                Debug.Log("Кулдауним регенерацию");
                 if (regenerationComponent.CurrentCooldown > 0)
                 {
-                    Debug.Log("Время ещё не пришло");
                     continue;
                 }
 
@@ -55,8 +50,6 @@ namespace Client
 
                 regenerationComponent.OldHPValue = healthComponent.CurrentValue;
                 viewComponent.UpgradeParticleSystem.Play();
-
-                Debug.Log("РЕГЕЕЕЕЕЕЕЕЕН");
             }
         }
     }

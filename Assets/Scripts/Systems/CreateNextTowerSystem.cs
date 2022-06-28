@@ -46,7 +46,7 @@ namespace Client
                 {
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.TowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), Vector3.zero, Quaternion.identity);
-                    radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
+                    //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
 
 
@@ -88,7 +88,7 @@ namespace Client
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
-                    radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
+                    //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
                     viewComp.Healthbar.SetMaxHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
@@ -144,9 +144,56 @@ namespace Client
 
                     if (_deadPool.Value.Has(entity)) _deadPool.Value.Del(entity);
                 }
+                
 
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);
-                radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius * 2, radiusComp.Radius * 2, 1);
+                //radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius * 2, radiusComp.Radius * 2, 1);
+
+                // —оздаем отображение дл€ зоны обнаружени€
+                Mesh mesh = new Mesh();
+                viewComp.MeshFilter = viewComp.GameObject.GetComponent<MeshFilter>();
+                viewComp.MeshFilter.mesh = mesh;
+
+                float fov = 360f;
+                Vector3 origin = Vector3.zero;
+                int triangelesCount = 45;
+                float angle = 0f;
+                float angleIncrease = fov / triangelesCount;
+                float viewDistence = radiusComp.Radius;
+
+                Vector3[] vertices = new Vector3[triangelesCount + 1 + 1];
+                //Vector2[] uv = new Vector2[vertices.Length];
+                int[] trianglesVertices = new int[triangelesCount * 3];
+
+                vertices[0] = origin;
+
+                int vertexIndex = 1;
+                int triangleIndex = 0;
+                for (int i = 0; i <= triangelesCount; i++)
+                {
+                    float angleRad = angle * (Mathf.PI / 180f);
+                    Vector3 VectorFromAngle = new Vector3(Mathf.Cos(angleRad), 0, Mathf.Sin(angleRad));
+
+                    Vector3 vertex = origin + VectorFromAngle * viewDistence;
+                    vertices[vertexIndex] = vertex;
+
+                    if (i > 0)
+                    {
+                        trianglesVertices[triangleIndex + 0] = 0;
+                        trianglesVertices[triangleIndex + 1] = vertexIndex - 1;
+                        trianglesVertices[triangleIndex + 2] = vertexIndex;
+
+                        triangleIndex += 3;
+                    }
+
+                    vertexIndex++;
+                    angle -= angleIncrease;
+                }
+
+                mesh.vertices = vertices;
+                //mesh.uv = uv;
+                mesh.triangles = trianglesVertices;
+                // «акончили создание зоны обнаружени€
 
                 _filter.Pools.Inc1.Del(entity);
 
