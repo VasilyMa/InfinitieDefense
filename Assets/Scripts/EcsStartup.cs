@@ -77,6 +77,7 @@ namespace Client
                 .Add(new AddCoinSystem())
                 .Add(new ItemMoveToBagSystem())
                 .Add(new OreMiningSystem())
+                .Add(new OreMoveSystem())
                 .Add(new CameraFollowSystem())
 
                 .Add(new UpgradeSystems())

@@ -10,6 +10,7 @@ namespace Client
         private EcsPool<OreEventComponent> _oreEventPool;
         private EcsPool<Player> _playerPool;
         private EcsPool<InterfaceComponent> _interfacePool;
+        private EcsPool<OreMoveEvent> _movePool;
         private EcsWorld _world;
         private int _entity;
         private GameObject _target;
@@ -20,6 +21,7 @@ namespace Client
             _oreEventPool = world.GetPool<OreEventComponent>();
             _playerPool = world.GetPool<Player>();
             _interfacePool = world.GetPool<InterfaceComponent>();
+            _movePool = world.GetPool<OreMoveEvent>();
             _world = world;
         }
         public void InitMiningEvent(int entity, GameObject target)
@@ -32,6 +34,14 @@ namespace Client
             if (_target != null && _target.activeSelf)
             {
                 ref var oreEvent = ref _oreEventPool.Add(_entity);
+                var filter = _world.Filter<OreMoveEvent>();
+                foreach (int entity in filter.End())
+                {
+                    if (_movePool.Has(entity))
+                    {
+                        _world.DelEntity(entity);
+                    }
+                }
             }
         }
         private void FixedUpdate()

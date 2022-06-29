@@ -11,7 +11,8 @@ namespace Client {
         readonly EcsPoolInject<MoveToBagComponent> _moveToBagPool = default;
 
         public void Run (EcsSystems systems) {
-            foreach(var entity in _filter.Value)
+            
+            foreach (var entity in _filter.Value)
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(_state.Value.EntityPlayer);

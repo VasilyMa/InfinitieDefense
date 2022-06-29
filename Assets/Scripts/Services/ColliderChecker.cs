@@ -21,6 +21,7 @@ namespace Client
         private EcsPool<CanvasUpgradeComponent> _upgradeCanvasPool;
         private EcsPool<MainTowerTag> _mainPool;
         private EcsPool<OreEventComponent> _oreEventPool;
+        private EcsPool<OreMoveEvent> _moveEventPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -32,6 +33,7 @@ namespace Client
             _reloadPool = world.GetPool<ReloadComponent>();
             _orePool = world.GetPool<OreComponent>();
             _oreEventPool = world.GetPool<OreEventComponent>();
+            _moveEventPool = world.GetPool<OreMoveEvent>();
             _playerPool = world.GetPool<Player>();
             _towerPool = world.GetPool<TowerTag>();
             _mainPool = world.GetPool<MainTowerTag>();
@@ -49,7 +51,14 @@ namespace Client
             }
             else if (other.gameObject.CompareTag("Stone"))
             {
-                other.gameObject.tag = "Untagged";
+                var filter = _world.Filter<OreMoveEvent>();
+                foreach (int entity in filter.End())
+                {
+                    if (_moveEventPool.Has(entity))
+                    {
+                        _world.DelEntity(entity);
+                    }
+                }
                 ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
                 stoneComp.StoneTransform = other.transform;
             }
@@ -117,7 +126,6 @@ namespace Client
                 ref var _player = ref _playerPool.Get(player);
                 _player.animator.SetBool("isMining", false);
                 var filter = _world.Filter<OreComponent>();
-                var ores = _world.GetPool<OreComponent>();
                 foreach (int entity in filter.End())
                 {
                     _oreEventPool.Del(entity);
