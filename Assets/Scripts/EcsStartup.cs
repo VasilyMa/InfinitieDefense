@@ -78,12 +78,13 @@ namespace Client
                 .Add(new WaveSwitcher())
                 .Add(new EncounterSwitcher())
 
-                .Add(new StoneMiningSystem())
+                
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new ItemMoveToBagSystem())
                 .Add(new OreMiningSystem())
                 .Add(new OreMoveSystem())
+                .Add(new StoneMiningSystem())
                 .Add(new CameraFollowSystem())
 
                 .Add(new UpgradeSystems())
