@@ -36,6 +36,10 @@ namespace Client
             
             
             _systems
+                .Add(new CheckWinSystem())
+                .Add(new WinSystem())
+                .Add(new CheckLoseSystem())
+                .Add(new LoseSystem())
                 .Add(new InitMainTower())
 
                 .Add(new StartWaveSystem())

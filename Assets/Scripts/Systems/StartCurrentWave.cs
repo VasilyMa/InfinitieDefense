@@ -31,7 +31,7 @@ namespace Client {
                 int[] enemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].EnemyInShip;
                 int[] rangeEnemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].RangeEnemyInShip;
                 int[] encounters = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].Encounters;
-
+               
                 List<int[]> allEnemyTypes = new List<int[]>();
 
                 allEnemyTypes.Add(enemyInShip);
@@ -180,6 +180,7 @@ namespace Client {
                 }
                 // _state.Value.Saves.CurrentWave++;
                 // _state.Value.Saves.SaveCurrentWave(_state.Value.Saves.CurrentWave);
+                _state.Value.AllEnemies = (enemyInShip.Length + rangeEnemyInShip.Length);
                 _angle = 0f;
                 _encounter = 0;
                 _enemyCountInEncounter = 0;
