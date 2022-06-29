@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
@@ -117,6 +117,9 @@ namespace Client
             viewComponent.MeshFilter = viewComponent.GameObject.GetComponent<MeshFilter>();
             viewComponent.MeshFilter.mesh = mesh;
 
+            viewComponent.LineRenderer = viewComponent.GameObject.GetComponent<LineRenderer>();
+            viewComponent.LineRenderer.loop = true;
+
             float fov = 360f;
             Vector3 origin = Vector3.zero;
             int triangelesCount = 45;
@@ -127,11 +130,14 @@ namespace Client
             Vector3[] vertices = new Vector3[triangelesCount + 1 + 1];
             //Vector2[] uv = new Vector2[vertices.Length];
             int[] trianglesVertices = new int[triangelesCount * 3];
+            Vector3[] circleVerticesv = new Vector3[triangelesCount];
+            viewComponent.LineRenderer.positionCount = triangelesCount;
 
             vertices[0] = origin;
 
             int vertexIndex = 1;
             int triangleIndex = 0;
+            int circleIndex = 0;
             for (int i = 0; i <= triangelesCount; i++)
             {
                 float angleRad = angle * (Mathf.PI / 180f);
@@ -139,6 +145,12 @@ namespace Client
 
                 Vector3 vertex = origin + VectorFromAngle * viewDistence;
                 vertices[vertexIndex] = vertex;
+
+                if (i > 0 && i <= circleVerticesv.Length)
+                {
+                    circleVerticesv[circleIndex] = vertices[vertexIndex];
+                    circleIndex++;
+                }
 
                 if (i > 0)
                 {
@@ -156,6 +168,8 @@ namespace Client
             mesh.vertices = vertices;
             //mesh.uv = uv;
             mesh.triangles = trianglesVertices;
+
+            viewComponent.LineRenderer.SetPositions(circleVerticesv);
         }
     }
 }

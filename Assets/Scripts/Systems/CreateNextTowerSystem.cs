@@ -154,6 +154,8 @@ namespace Client
                 viewComp.MeshFilter = viewComp.GameObject.GetComponent<MeshFilter>();
                 viewComp.MeshFilter.mesh = mesh;
 
+                viewComp.LineRenderer = viewComp.GameObject.GetComponent<LineRenderer>();
+
                 float fov = 360f;
                 Vector3 origin = Vector3.zero;
                 int triangelesCount = 45;
@@ -164,11 +166,14 @@ namespace Client
                 Vector3[] vertices = new Vector3[triangelesCount + 1 + 1];
                 //Vector2[] uv = new Vector2[vertices.Length];
                 int[] trianglesVertices = new int[triangelesCount * 3];
+                Vector3[] circleVerticesv = new Vector3[triangelesCount];
+                if (viewComp.LineRenderer) viewComp.LineRenderer.positionCount = triangelesCount;
 
                 vertices[0] = origin;
 
                 int vertexIndex = 1;
                 int triangleIndex = 0;
+                int circleIndex = 0;
                 for (int i = 0; i <= triangelesCount; i++)
                 {
                     float angleRad = angle * (Mathf.PI / 180f);
@@ -176,6 +181,12 @@ namespace Client
 
                     Vector3 vertex = origin + VectorFromAngle * viewDistence;
                     vertices[vertexIndex] = vertex;
+
+                    if (i > 0 && i <= circleVerticesv.Length)
+                    {
+                        circleVerticesv[circleIndex] = vertices[vertexIndex];
+                        circleIndex++;
+                    }
 
                     if (i > 0)
                     {
@@ -193,6 +204,12 @@ namespace Client
                 mesh.vertices = vertices;
                 //mesh.uv = uv;
                 mesh.triangles = trianglesVertices;
+
+                if (viewComp.LineRenderer)
+                {
+                    viewComp.LineRenderer.SetPositions(circleVerticesv);
+                    viewComp.LineRenderer.loop = true;
+                }
                 // Закончили создание зоны обнаружения
 
                 _filter.Pools.Inc1.Del(entity);
