@@ -36,6 +36,10 @@ namespace Client
             
             
             _systems
+                .Add(new CheckWinSystem())
+                .Add(new WinSystem())
+                .Add(new CheckLoseSystem())
+                .Add(new LoseSystem())
                 .Add(new InitMainTower())
 
                 .Add(new StartWaveSystem())
@@ -74,12 +78,13 @@ namespace Client
                 .Add(new WaveSwitcher())
                 .Add(new EncounterSwitcher())
 
-                .Add(new StoneMiningSystem())
+                
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new ItemMoveToBagSystem())
                 .Add(new OreMiningSystem())
                 .Add(new OreMoveSystem())
+                .Add(new StoneMiningSystem())
                 .Add(new CameraFollowSystem())
 
                 .Add(new UpgradeSystems())

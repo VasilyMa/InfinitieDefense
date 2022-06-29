@@ -31,7 +31,7 @@ namespace Client {
                 int[] enemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].EnemyInShip;
                 int[] rangeEnemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].RangeEnemyInShip;
                 int[] encounters = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].Encounters;
-
+               
                 List<int[]> allEnemyTypes = new List<int[]>();
 
                 allEnemyTypes.Add(enemyInShip);

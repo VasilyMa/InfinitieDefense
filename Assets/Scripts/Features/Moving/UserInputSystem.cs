@@ -106,7 +106,10 @@ namespace Client {
         [EcsUguiClickEvent(Idents.Ui.NextLevel, Idents.Worlds.Events)]
         void OnClickNextLevel(in EcsUguiClickEvent evt)
         {
-            /*int index = 0;
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Restart!", evt.Sender);
+            int index = 0;
             if (SceneManager.GetActiveScene().buildIndex + 1 > SceneManager.sceneCountInBuildSettings - 1)
             {
                 index = 1;
@@ -115,15 +118,16 @@ namespace Client {
             {
                 index = SceneManager.GetActiveScene().buildIndex + 1;
             }
-            _state.Saves.SaveSceneNumber(index);
-            _state.Saves.SaveLevel(_state.Saves.LVL + 1);
-            SceneManager.LoadScene(index);*/
+            _state.Value.Saves.SaveSceneNumber(index);
+            _state.Value.Saves.SaveLevel(_state.Value.Saves.LVL + 1);
+            SceneManager.LoadScene(index);
             Debug.Log("NextLevel");
         }
         [Preserve]
         [EcsUguiClickEvent(Idents.Ui.Retry, Idents.Worlds.Events)]
         void OnClickRetry(in EcsUguiClickEvent evt)
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Debug.Log("Retry!");
         }

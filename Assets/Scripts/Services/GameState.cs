@@ -35,7 +35,7 @@ namespace Client
         public int TowerCount;
         public string CurrentPlayerID;
         public int PlayerUpgrade;
-
+        public int AllEnemies;
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, 
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, WaveStorage waveStorage,
         EnemyConfig enemyConfig)
