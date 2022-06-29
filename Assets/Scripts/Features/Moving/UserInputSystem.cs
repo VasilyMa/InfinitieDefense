@@ -127,19 +127,5 @@ namespace Client {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Debug.Log("Retry!");
         }
-        public float Horizontal()
-        {
-            if (_direction.x != 0)
-                return _direction.x;
-            else
-                return _direction.y;
-        }
-        public float Vertical()
-        {
-            if (_direction.y != 0)
-                return _direction.y;
-            else
-                return _direction.x;
-        }
     }
 }
