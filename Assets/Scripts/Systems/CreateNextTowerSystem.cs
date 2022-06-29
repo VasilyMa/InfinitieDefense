@@ -49,7 +49,6 @@ namespace Client
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
 
-
                     _defenderPool.Value.Add(_world.Value.NewEntity());
 
                     viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();

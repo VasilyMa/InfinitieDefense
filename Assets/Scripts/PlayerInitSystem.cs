@@ -67,14 +67,12 @@ namespace Client
             viewComponent.HitParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(1).GetComponent<ParticleSystem>();
             viewComponent.DropItemParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(2).GetComponent<ParticleSystem>();
             
-
             pointerComponent.player = PlayerGo;
 
             targetWeightComponent.Value = 5;
 
             damageComponent.Value = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
 
-            //healthComponent.MaxValue = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
             healthComponent.MaxValue = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
             healthComponent.CurrentValue = healthComponent.MaxValue;
 
