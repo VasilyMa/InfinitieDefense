@@ -23,7 +23,16 @@ public class WaveStorage : MonoBehaviour
         int allEnemies = 0;
         for (int i = 0; i < Waves.Count; i++)
         {
-            allEnemies += Waves[i].EnemyInShip.Length + Waves[i].RangeEnemyInShip.Length;
+            int shipCount = 0;
+            foreach (var encounter in Waves[i].Encounters)
+            {
+                shipCount += encounter;
+            }
+
+            for (int j = 0; j < shipCount; j++)
+            {
+                allEnemies += Waves[i].EnemyInShip[j] + Waves[i].RangeEnemyInShip[j];
+            }
         }
         return allEnemies;
     }
