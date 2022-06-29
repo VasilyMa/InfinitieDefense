@@ -20,6 +20,7 @@ namespace Client
         private WaveStorage _waveStorage;
         EcsSystems _systems;
         EcsSystems _delHereSystems;
+        EcsSystems _systemsFixed;
         EcsWorld _world = null;
         GameState _gameState = null;
 
@@ -30,8 +31,10 @@ namespace Client
             _gameState = new GameState(_world, _towerStorage, _interfaceStorage, 
             _playerStorage, _defenseTowerStorage, _towerCount, _waveStorage, _enemyConfig);
             _systems = new EcsSystems (_world, _gameState);
+            _systemsFixed = new EcsSystems(_world, _gameState);
             _delHereSystems = new EcsSystems(_world, _gameState);
-
+            
+            
             _systems
                 .Add(new InitMainTower())
 
@@ -73,7 +76,6 @@ namespace Client
 
                 .Add(new StoneMiningSystem())
                 .Add(new UserInputSystem())
-                //.Add(new UserMoveSystem())
                 .Add(new AddCoinSystem())
                 .Add(new ItemMoveToBagSystem())
                 .Add(new OreMiningSystem())
@@ -101,16 +103,21 @@ namespace Client
                 .DelHere<DamagingEvent>()
                 .DelHere<TargetingEvent>()
                 ;
-
+            _systemsFixed
+                .Add(new UserMoveSystem())
+                ;
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+            _systemsFixed.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
                 //_systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(Idents.Worlds.Events))
                 //.Add(new EcsWorldDebugSystem(Idents.Worlds.Events))
 #endif         
             _systems
                 .Inject()
                 .InjectUgui(_uguiEmitter, Idents.Worlds.Events)
+                .Init();
+            _systemsFixed.Inject()
                 .Init();
             _delHereSystems.Inject();
             _delHereSystems.Init();
@@ -124,6 +131,10 @@ namespace Client
         void Update()
         {
             _systems?.Run();
+        }
+        private void FixedUpdate()
+        {
+            _systemsFixed?.Run();
         }
 
         void OnDestroy()

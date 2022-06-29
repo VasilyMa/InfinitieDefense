@@ -44,7 +44,7 @@ namespace Client
                 }
             }
         }
-        private void FixedUpdate()
+        /*private void FixedUpdate()
         {
             ref var player = ref _playerPool.Get(_state.EntityPlayer);
             ref var interfaceComp = ref _interfacePool.Get(_state.EntityInterface);
@@ -67,6 +67,6 @@ namespace Client
                 player.animator.SetBool("isRun", false);
                 player.animator.SetBool("isIdle", true);
             }
-        }
+        }*/
     }
 }
