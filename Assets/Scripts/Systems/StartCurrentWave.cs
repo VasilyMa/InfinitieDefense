@@ -180,7 +180,6 @@ namespace Client {
                 }
                 // _state.Value.Saves.CurrentWave++;
                 // _state.Value.Saves.SaveCurrentWave(_state.Value.Saves.CurrentWave);
-                _state.Value.AllEnemies = (enemyInShip.Length + rangeEnemyInShip.Length);
                 _angle = 0f;
                 _encounter = 0;
                 _enemyCountInEncounter = 0;
