@@ -46,10 +46,12 @@ namespace Client
                 if (healthComponent.CurrentValue >= healthComponent.MaxValue)
                 {
                     healthComponent.CurrentValue = healthComponent.MaxValue;
+                    if (viewComponent.Healthbar) viewComponent.Healthbar.ToggleSwitcher();
                 }
 
                 regenerationComponent.OldHPValue = healthComponent.CurrentValue;
                 viewComponent.UpgradeParticleSystem.Play();
+                if (viewComponent.Healthbar) viewComponent.Healthbar.UpdateHealth(healthComponent.CurrentValue);
             }
         }
     }

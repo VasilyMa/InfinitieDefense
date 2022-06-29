@@ -55,8 +55,8 @@ namespace Client
             viewComponent.Transform = PlayerGo.transform;
             viewComponent.Animator = PlayerGo.GetComponent<Animator>();
             viewComponent.Healthbar = PlayerGo.GetComponent<HealthbarMB>();
-            viewComponent.Healthbar.SetMaxHealth(player.health);
-            viewComponent.Healthbar.SetHealth(player.health);
+            viewComponent.Healthbar.SetMaxHealth(_state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));
+            viewComponent.Healthbar.SetHealth(_state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));
             viewComponent.Healthbar.ToggleSwitcher();
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
@@ -75,7 +75,7 @@ namespace Client
             damageComponent.Value = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
 
             //healthComponent.MaxValue = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
-            healthComponent.MaxValue = 1000;
+            healthComponent.MaxValue = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
             healthComponent.CurrentValue = healthComponent.MaxValue;
 
             targetableComponent.AllEntityInDamageZone = new List<int>();
@@ -85,7 +85,7 @@ namespace Client
 
             regenerationComponent.MaxCooldown = 2;
             regenerationComponent.CurrentCooldown = regenerationComponent.MaxCooldown;
-            regenerationComponent.Value = 2;
+            regenerationComponent.Value = 10;
             regenerationComponent.OldHPValue = healthComponent.CurrentValue;
 
             var colliderChecker = PlayerGo.GetComponent<ColliderChecker>();
@@ -96,11 +96,6 @@ namespace Client
             cooldown.maxValue = 2f;
             cooldown.currentValue = 0;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
-
-            
-            
-            
-            
         }
     }
 }

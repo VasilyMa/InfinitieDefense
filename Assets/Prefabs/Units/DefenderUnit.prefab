@@ -648,6 +648,7 @@ MonoBehaviour:
   _gameObjectEntity: 0
   _targetEntity: 0
   _targetObject: {fileID: 0}
+  _arrowFirePoint: {fileID: 0}
 --- !u!195 &-8013961294534509194
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -662,7 +663,7 @@ NavMeshAgent:
   m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 720
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

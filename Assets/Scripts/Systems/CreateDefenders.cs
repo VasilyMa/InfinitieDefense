@@ -70,20 +70,20 @@ namespace Client {
                         viewComponent.EcsInfoMB.Init(_world);
                         viewComponent.EcsInfoMB.SetEntity(defenderEntity);
 
-                        viewComponent.Healthbar = viewComponent.GameObject.GetComponent<HealthbarMB>();
-                        viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);
-                        viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
-                        viewComponent.Healthbar.ToggleSwitcher();
-                        viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-
                         viewComponent.AttackMB = viewComponent.GameObject.GetComponent<MeleeAttackMB>();
 
                         viewComponent.NavMeshAgent = viewComponent.GameObject.GetComponent<NavMeshAgent>();
 
                         viewComponent.Outline = viewComponent.GameObject.GetComponent<Outline>();
 
-                        healthComponent.MaxValue = 1000;
+                        healthComponent.MaxValue = 200;
                         healthComponent.CurrentValue = healthComponent.MaxValue;
+
+                        viewComponent.Healthbar = viewComponent.GameObject.GetComponent<HealthbarMB>();
+                        viewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);
+                        viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
+                        viewComponent.Healthbar.ToggleSwitcher();
+                        viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                     }
                 }
 

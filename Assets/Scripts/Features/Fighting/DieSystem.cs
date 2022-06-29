@@ -38,6 +38,7 @@ namespace Client
 
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
                 if (viewComponent.NavMeshAgent) viewComponent.NavMeshAgent.enabled = false;
+                if (viewComponent.Healthbar) viewComponent.Healthbar.UpdateHealth(0);
 
                 _deadPool.Value.Add(entity);
             }
