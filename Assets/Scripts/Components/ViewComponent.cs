@@ -13,6 +13,7 @@ namespace Client
         public Transform PointerTransform;
         public float MoveSpeed;
         public float RotateSpeed;
+        public bool CanMining;
         public Outline Outline;
         public MeshFilter MeshFilter;
         public LineRenderer LineRenderer;

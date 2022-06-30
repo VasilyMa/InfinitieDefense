@@ -16,6 +16,7 @@ namespace Client
         readonly EcsPoolInject<TowerTag> _tPool = default;
         readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradeCanvasPool = default;
+        readonly EcsPoolInject<CircleComponent> _circlePool = default;
         private float Angle = 0;
 
         public void Init (EcsSystems systems)
@@ -26,6 +27,7 @@ namespace Client
             
             ref var towerComp = ref _towerPool.Value.Add(entity);
             ref var upgradeComponent = ref _upgradeCanvasPool.Value.Add(entity);
+            
             towerComp.DefendersPositions = new Vector3[10];
 
             for (int d = 0; d < towerComp.DefendersPositions.Length;d++)
@@ -164,7 +166,8 @@ namespace Client
                 vertexIndex++;
                 angle -= angleIncrease;
             }
-
+            ref var circleComp = ref _circlePool.Value.Add(_world.Value.NewEntity());
+            circleComp.maxDistance = radiusComp.Radius;
             mesh.vertices = vertices;
             //mesh.uv = uv;
             mesh.triangles = trianglesVertices;

@@ -78,7 +78,7 @@ namespace Client
                 .Add(new WaveSwitcher())
                 .Add(new EncounterSwitcher())
 
-                
+                .Add(new CheckCircleMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new ItemMoveToBagSystem())
