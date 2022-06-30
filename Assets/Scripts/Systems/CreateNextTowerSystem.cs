@@ -21,6 +21,7 @@ namespace Client
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
         readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
+        readonly EcsFilterInject<Inc<CircleComponent>> _circleFilter = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
         public void Run(EcsSystems systems)
         {
@@ -48,7 +49,10 @@ namespace Client
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), Vector3.zero, Quaternion.identity);
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
-
+                    foreach (var entityCircle in _circleFilter.Value)
+                    {
+                        _circleFilter.Pools.Inc1.Get(entityCircle).maxDistance = radiusComp.Radius;
+                    }
                     _defenderPool.Value.Add(_world.Value.NewEntity());
 
                     viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();
