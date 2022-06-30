@@ -18,7 +18,7 @@ namespace Client {
                 
                 moveComp.stone = stone;
                 moveComp.TargetPosition = new Vector3(oreComp.prefab.transform.position.x + Random.Range(-4, 4), oreComp.prefab.transform.position.y, oreComp.prefab.transform.position.z + Random.Range(-4, 4));
-                moveComp.Speed = 5f;
+                moveComp.Speed = 10f;
                 moveComp.outTime = 0.5f;
 
                 if (oreComp.amount <= 0) 

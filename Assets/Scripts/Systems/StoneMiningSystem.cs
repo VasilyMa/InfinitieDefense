@@ -9,11 +9,16 @@ namespace Client {
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intComp = default;
         readonly EcsPoolInject<MoveToBagComponent> _moveToBagPool = default;
-
+        readonly EcsFilterInject<Inc<OreMoveEvent>> _moveEventFilter = default;
         public void Run (EcsSystems systems) {
-            
+
             foreach (var entity in _filter.Value)
             {
+                foreach (var entityMove in _moveEventFilter.Value)
+                {
+                    _moveEventFilter.Pools.Inc1.Del(entityMove);
+                }
+
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(_state.Value.EntityPlayer);
                 ref var intComp = ref _intComp.Value.Get(_state.Value.EntityInterface);

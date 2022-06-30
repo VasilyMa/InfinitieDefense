@@ -51,14 +51,6 @@ namespace Client
             }
             else if (other.gameObject.CompareTag("Stone"))
             {
-                var filter = _world.Filter<OreMoveEvent>();
-                foreach (int entity in filter.End())
-                {
-                    if (_moveEventPool.Has(entity))
-                    {
-                        _world.DelEntity(entity);
-                    }
-                }
                 ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
                 stoneComp.StoneTransform = other.transform;
             }

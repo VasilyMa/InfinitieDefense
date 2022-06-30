@@ -15,8 +15,8 @@ namespace Client {
                 var speed = filterComp.Speed;
                 ref var outComp = ref filterComp.outTime;
                 transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-                outComp -= Time.deltaTime;
-                if (outComp <= 0)
+                //outComp -= Time.deltaTime;
+                if (transform.position == target)
                 {
                     _world.Value.DelEntity(entity);
                 }
