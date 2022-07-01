@@ -50,13 +50,13 @@ namespace Client {
                     neededResource = _state.Value.CoinCount;
                 }
 
-                if(filterComp.DelayTime < 2f)
+                if (filterComp.DelayTime < 2f)
                 {
                     filterComp.DelayTime += Time.deltaTime * 2f;
                     return;
                 }
 
-                if(filterComp.Time == 0)
+                if (filterComp.Time == 0)
                 {
                     if (neededResource > 0)
                     {

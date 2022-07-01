@@ -76,7 +76,7 @@ namespace Client {
 
                         viewComponent.Outline = viewComponent.GameObject.GetComponent<Outline>();
 
-                        healthComponent.MaxValue = 200;
+                        healthComponent.MaxValue = 50;
                         healthComponent.CurrentValue = healthComponent.MaxValue;
 
                         viewComponent.Healthbar = viewComponent.GameObject.GetComponent<HealthbarMB>();

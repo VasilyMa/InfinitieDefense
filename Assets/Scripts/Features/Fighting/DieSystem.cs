@@ -38,7 +38,7 @@ namespace Client
 
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
                 if (viewComponent.NavMeshAgent) viewComponent.NavMeshAgent.enabled = false;
-                if (viewComponent.Healthbar) viewComponent.Healthbar.UpdateHealth(0);
+                if (viewComponent.Healthbar) viewComponent.Healthbar.ToggleSwitcher();
 
                 _deadPool.Value.Add(entity);
             }

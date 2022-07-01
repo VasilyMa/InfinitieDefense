@@ -15,8 +15,8 @@ public class TowerStorage : ScriptableObject
             //MELEE
             ["1tower"] = new Tower
             {
-                Radius = 15,
-                TowerHealth = 50,
+                Radius = 30,
+                TowerHealth = 5000,
                 TowerPrefab = TowerPrefabs[0],
                 Upgrade = 3,
                 IsLast = false,
@@ -25,8 +25,8 @@ public class TowerStorage : ScriptableObject
             },
             ["2tower"] = new Tower
             {
-                Radius = 17,
-                TowerHealth = 120,
+                Radius = 40,
+                TowerHealth = 12000,
                 TowerPrefab = TowerPrefabs[1],
                 Upgrade = 5,
                 NextID = "3tower",
@@ -35,8 +35,8 @@ public class TowerStorage : ScriptableObject
             },
             ["3tower"] = new Tower
             {
-                Radius = 20,
-                TowerHealth = 140,
+                Radius = 50,
+                TowerHealth = 14000,
                 TowerPrefab = TowerPrefabs[2],
                 Upgrade = 7,
                 IsLast = true,

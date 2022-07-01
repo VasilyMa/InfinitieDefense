@@ -52,13 +52,16 @@ namespace Client
             }
             else if (other.gameObject.CompareTag("Stone"))
             {
+                other.gameObject.tag = "Untagged";
                 ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
                 stoneComp.StoneTransform = other.transform;
             }
             else if (other.gameObject.CompareTag("UpgradePoint"))
             {
+                Debug.Log("Чёрт");
                 if (!_upgradePool.Has(_state.EntityPlayer))
                 {
+                    Debug.Log("Синий Чёрт");
                     ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                     upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;
