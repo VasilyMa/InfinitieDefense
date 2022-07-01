@@ -5,9 +5,10 @@ using Unity;
 namespace Client {
     sealed class OreMiningSystem : IEcsRunSystem {
         readonly EcsWorldInject _world = default;
-        readonly EcsFilterInject<Inc<OreEventComponent, OreComponent>> _filter = default;
+        readonly EcsFilterInject<Inc<OreEventComponent, OreComponent>, Exc<OreMinedTag>> _filter = default;
         readonly EcsFilterInject<Inc<Player>> _filterPlayer = default;
         readonly EcsPoolInject<OreMoveEvent> _movePool = default;
+        readonly EcsPoolInject<OreMinedTag> _minedPool = default;
         public void Run (EcsSystems systems) {
             foreach (var entity in _filter.Value)
             {
@@ -24,8 +25,9 @@ namespace Client {
                 if (oreComp.amount <= 0) 
                 { 
                     oreComp.prefab.GetComponent<SphereCollider>().enabled = false;
-                    oreComp.prefab.gameObject.SetActive(false); 
-                    _filter.Pools.Inc2.Del(entity);
+                    oreComp.prefab.gameObject.SetActive(false);
+                    _minedPool.Value.Add(entity);
+                    oreComp.respawnTime = 5f;
                     foreach (var entityPlayer in _filterPlayer.Value)
                     {
                         ref var player = ref _filterPlayer.Pools.Inc1.Get(entityPlayer);
