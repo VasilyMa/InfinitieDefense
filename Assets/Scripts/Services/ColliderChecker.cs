@@ -66,8 +66,6 @@ namespace Client
                     upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;
                     upgradeComp.UpgradeTower = true;
-                    //upgradeComp.DelayTime = 0f;
-
                 }
             }
             else if (other.gameObject.tag == "UpgradePlayerPoint")
