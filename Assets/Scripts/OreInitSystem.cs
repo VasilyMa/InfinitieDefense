@@ -15,7 +15,7 @@ namespace Client {
             Ores.Add(allOres);
             foreach (var ore in allOres)
             {
-                int amount = Random.Range(1, 6);
+                int amount = Random.Range(2, 7);
                 var oresEntity = _world.Value.NewEntity();
                 _orePool.Value.Add(oresEntity);
                 ref var orePool = ref _orePool.Value.Get(oresEntity);
