@@ -52,6 +52,7 @@ namespace Client
             }
             else if (other.gameObject.CompareTag("Stone"))
             {
+                other.gameObject.tag = "Untagged";
                 ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
                 stoneComp.StoneTransform = other.transform;
             }
@@ -63,8 +64,6 @@ namespace Client
                     upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;
                     upgradeComp.UpgradeTower = true;
-                    //upgradeComp.DelayTime = 0f;
-
                 }
             }
             else if (other.gameObject.tag == "UpgradePlayerPoint")
