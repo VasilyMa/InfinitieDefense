@@ -53,6 +53,7 @@ namespace Client
             viewComponent.GameObject = PlayerGo;
             viewComponent.Rigidbody = PlayerGo.GetComponent<Rigidbody>();
             viewComponent.Transform = PlayerGo.transform;
+            viewComponent.WeaponHolder = GameObject.Find("WeaponHolder").transform;
             viewComponent.Animator = PlayerGo.GetComponent<Animator>();
             viewComponent.Healthbar = PlayerGo.GetComponent<HealthbarMB>();
             viewComponent.Healthbar.SetMaxHealth(_state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));

@@ -5,15 +5,18 @@ using Unity;
 namespace Client {
     sealed class OreMiningSystem : IEcsRunSystem {
         readonly EcsWorldInject _world = default;
+        readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<OreEventComponent, OreComponent>, Exc<OreMinedTag>> _filter = default;
         readonly EcsFilterInject<Inc<Player>> _filterPlayer = default;
         readonly EcsPoolInject<OreMoveEvent> _movePool = default;
         readonly EcsPoolInject<OreMinedTag> _minedPool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
         public void Run (EcsSystems systems) {
             foreach (var entity in _filter.Value)
             {
                 ref var oreComp = ref _filter.Pools.Inc2.Get(entity);
                 ref var moveComp = ref _movePool.Value.Add(_world.Value.NewEntity());
+                ref var viewComp = ref _viewPool.Value.Get(_state.Value.EntityPlayer);
                 oreComp.amount--;
                 var stone = (GameObject)GameObject.Instantiate(Resources.Load("Stone"), new Vector3(oreComp.prefab.transform.position.x, oreComp.prefab.transform.position.y + Random.Range(0.5f, 1.2f), oreComp.prefab.transform.position.z), Quaternion.identity);
                 
@@ -33,6 +36,7 @@ namespace Client {
                         ref var player = ref _filterPlayer.Pools.Inc1.Get(entityPlayer);
                         player.animator.SetBool("isMining", false);
                         player.animator.SetBool("isIdle", true);
+                        viewComp.isMining = false;
                     }
                 }
                 _filter.Pools.Inc1.Del(entity);

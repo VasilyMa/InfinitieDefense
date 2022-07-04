@@ -11,9 +11,12 @@ namespace Client
         public HealthbarMB Healthbar;
         public Transform Transform;
         public Transform PointerTransform;
+        public Transform WeaponHolder;
         public float MoveSpeed;
         public float RotateSpeed;
         public bool CanMining;
+        public bool isFight;
+        public bool isMining;
         public Outline Outline;
         public MeshFilter MeshFilter;
         public LineRenderer LineRenderer;
