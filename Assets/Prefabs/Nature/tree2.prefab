@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7191612356037326570}
   - component: {fileID: 4911538353448075808}
   - component: {fileID: 7672527010263759004}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: tree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6080535423969737039
@@ -50,7 +50,7 @@ MeshRenderer:
   m_GameObject: {fileID: 6857212483146703861}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1

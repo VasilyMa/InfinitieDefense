@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 1251600449293993423}
   - component: {fileID: 3943575147418726661}
   - component: {fileID: 3811145077671094000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cliff4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2806103686335187562
