@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9176728929114068212}
   - component: {fileID: 6524960714590515784}
   - component: {fileID: 2135641420}
+  - component: {fileID: 465355375}
   m_Layer: 0
   m_Name: ECS
   m_TagString: Untagged
@@ -64,5 +65,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Waves:
-  - EnemyInShip: 0200000003000000
-  - EnemyInShip: 040000000100000003000000
+  - Encounters: 010000000200000003000000
+    EnemyInShip: 030000000400000003000000060000000500000006000000
+    RangeEnemyInShip: 030000000600000003000000040000000500000004000000
+--- !u!114 &465355375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8760066942237610673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9271a3ec52e9bc54ebf14196c751cf68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radiuses:
+  - 30
+  - 40
+  - 50
+  _count: 6
+  _boxSize: {x: 1, y: 10, z: 1}

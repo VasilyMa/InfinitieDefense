@@ -12371,6 +12371,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3475456257865214281, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475456257865214281, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475456257865214281, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475456257865214281, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475456257865214281, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3475456257865214284, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
       propertyPath: deadZone
       value: 0.1
@@ -18685,110 +18705,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].Encounters.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[1].Encounters.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].EnemyInShip.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[2].EnemyInShip.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].Encounters.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].Encounters.Array.data[1]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].Encounters.Array.data[2]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[1].Encounters.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[1].Encounters.Array.data[1]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].EnemyInShip.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].EnemyInShip.Array.data[1]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].EnemyInShip.Array.data[2]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].EnemyInShip.Array.data[3]
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].EnemyInShip.Array.data[4]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].EnemyInShip.Array.data[5]
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[2].EnemyInShip.Array.data[0]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[2].EnemyInShip.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[2].EnemyInShip.Array.data[2]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[1]
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[2]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[3]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[4]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[5]
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6524960714590515784, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: _uguiEmitter
       value: 
@@ -18803,15 +18719,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9176728929114068212, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2421908
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9176728929114068212, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.8245935
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9176728929114068212, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5672252
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9176728929114068212, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19301,6 +19217,18 @@ PrefabInstance:
     - target: {fileID: 3121484603581027730, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
       propertyPath: m_Name
       value: CameraHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5810711875778091822, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5810711875778091822, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
+      propertyPath: near clip plane
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5810711875778091822, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
+      propertyPath: orthographic size
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6596540985323703802, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}

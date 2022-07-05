@@ -8,13 +8,16 @@ namespace Client {
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<Player>> _playerFilter = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
+
         public void Run (EcsSystems systems) {
             foreach (var entity in _playerFilter.Value)
             {
                 ref var interfacePool = ref _interfacePool.Value.Get(_state.Value.EntityInterface);
                 var _joystick = interfacePool._joystick;
                 ref var player = ref _playerFilter.Pools.Inc1.Get(entity);
-                player.rigidbody.velocity = new Vector3(_joystick.Horizontal * player.MoveSpeed, player.rigidbody.velocity.y, _joystick.Vertical * player.MoveSpeed);
+                player.rigidbody.velocity = new Vector3(_joystick.Horizontal * player.MoveSpeed, player.rigidbody.velocity.y, _joystick.Vertical * player.MoveSpeed) + new Vector3(0, player.rigidbody.velocity.y, 0);
+                Debug.Log(_joystick.Horizontal);
+                Debug.Log(_joystick.Vertical);
                 if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
                 {
                     player.Transform.rotation = Quaternion.LookRotation(player.rigidbody.velocity);
