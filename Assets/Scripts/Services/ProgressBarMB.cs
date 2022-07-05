@@ -17,13 +17,9 @@ namespace Client
         [SerializeField] private float _currentAmount;
         [SerializeField] private float _maxAmount;
         [SerializeField] private GameObject _progress;
-        //private EcsPool<DeadTag> _deadPool;
-        //private EcsPool<EnemyTag> _enemyPool;
         public void Init(EcsWorld world, GameState state)
         {
             _world = world;
-            //_deadPool = world.GetPool<DeadTag>();
-            //_enemyPool = world.GetPool<EnemyTag>();
             _state = state;
         }
         public void SetMaxAmount(float value)
