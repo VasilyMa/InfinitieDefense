@@ -5,6 +5,7 @@ namespace Client {
         public GameObject resourcePanel;
         public GameObject winPanel;
         public GameObject losePanel;
+        public GameObject progressbar;
         public FloatingJoystick _joystick;
     }
 }

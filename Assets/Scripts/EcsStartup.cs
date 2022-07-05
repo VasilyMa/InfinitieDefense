@@ -55,6 +55,7 @@ namespace Client
                 .Add(new CooldownSystem())
 
                 .Add(new OnOffTowerAttack())
+                
 
                 .Add(new UnitLookingSystem())
                 .Add(new DefendersFallbackSystem())
@@ -78,6 +79,7 @@ namespace Client
                 .Add(new WaveSwitcher())
                 .Add(new EncounterSwitcher())
 
+                .Add(new CheckWeaponSystem())
                 .Add(new CheckCircleMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())

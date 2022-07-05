@@ -7,7 +7,7 @@ namespace Client
     sealed class DieSystem : IEcsRunSystem
     {
         readonly EcsWorldInject _world = default;
-
+        readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<HealthComponent, ViewComponent>, Exc<DeadTag, InactiveTag>> _unitsFilter = default;
 
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
@@ -15,7 +15,7 @@ namespace Client
         readonly EcsPoolInject<DeadTag> _deadPool = default;
         readonly EcsPoolInject<EnemyTag> _enemyPool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
-
+        readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
         public void Run (EcsSystems systems)
         {
             foreach (var entity in _unitsFilter.Value)
@@ -26,6 +26,7 @@ namespace Client
                 }
 
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
+                ref var interfaceComponent = ref _interfacePool.Value.Get(_state.Value.EntityInterface); ;
                 if (viewComponent.GameObject) viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
                 if (viewComponent.Rigidbody) viewComponent.Rigidbody.velocity = Vector3.zero;
                 if (viewComponent.Animator) viewComponent.Animator.SetTrigger("Die");
@@ -39,7 +40,7 @@ namespace Client
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
                 if (viewComponent.NavMeshAgent) viewComponent.NavMeshAgent.enabled = false;
                 if (viewComponent.Healthbar) viewComponent.Healthbar.ToggleSwitcher();
-
+                interfaceComponent.progressbar.GetComponent<ProgressBarMB>().UpdateProgressBar();
                 _deadPool.Value.Add(entity);
             }
         }
