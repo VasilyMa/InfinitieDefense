@@ -13,6 +13,7 @@ namespace Client
 
         private EcsWorldInject _world;
 
+        
         private EcsPool<Targetable> _targetablePool;
 
         private string _enemyTag = "Enemy";

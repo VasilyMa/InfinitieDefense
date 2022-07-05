@@ -22,6 +22,7 @@ namespace Client
         private EcsPool<MainTowerTag> _mainPool;
         private EcsPool<OreEventComponent> _oreEventPool;
         private EcsPool<OreMoveEvent> _moveEventPool;
+        private EcsPool<InFightTag> _fightPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -36,6 +37,7 @@ namespace Client
             _moveEventPool = world.GetPool<OreMoveEvent>();
             _playerPool = world.GetPool<Player>();
             _towerPool = world.GetPool<TowerTag>();
+            _fightPool = world.GetPool<InFightTag>();
             _mainPool = world.GetPool<MainTowerTag>();
             _canvasEvent = world.GetPool<UpgradeCanvasEvent>();
             _viewPool = world.GetPool<ViewComponent>();
@@ -94,9 +96,17 @@ namespace Client
                         _player.animator.SetBool("isIdle", false);
                         _player.animator.SetBool("isRun", false);
                         _player.animator.SetBool("isMining", true);
+                        view.isMining = true;
+                        view.isFight = false;
                         Debug.Log("Mining!");
                     }
                 }
+            }
+            else if (other.gameObject.CompareTag("Enemy"))
+            {
+                ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
+                viewComp.isMining = false;
+                viewComp.isFight = true;
             }
         }
         private void OnTriggerExit(Collider other)
@@ -119,12 +129,20 @@ namespace Client
             {
                 ref var player = ref _state.EntityPlayer;
                 ref var _player = ref _playerPool.Get(player);
+                ref var view = ref _viewPool.Get(player);
                 _player.animator.SetBool("isMining", false);
                 var filter = _world.Filter<OreComponent>();
                 foreach (int entity in filter.End())
                 {
                     _oreEventPool.Del(entity);
                 }
+                view.isMining = false;
+            }
+            else if (other.gameObject.CompareTag("Enemy"))
+            {
+                ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
+                if(!_fightPool.Has(_state.EntityPlayer))
+                    viewComp.isFight = false;
             }
         }
         private void OnTriggerStay(Collider other)
