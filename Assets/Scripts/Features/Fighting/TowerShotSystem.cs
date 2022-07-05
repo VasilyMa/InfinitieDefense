@@ -11,6 +11,7 @@ namespace Client
         readonly EcsFilterInject<Inc<TowerTag, InFightTag, Targetable, Cooldown>, Exc<DeadTag, InactiveTag, UnitTag>> _towerFilter = default;
 
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<TowerTag> _towerPool = default;
         readonly EcsPoolInject<Cooldown> _cooldownPool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
@@ -27,6 +28,7 @@ namespace Client
                 ref var viewComponent = ref _viewPool.Value.Get(towerEntity);
                 ref var targetableComponent = ref _targetablePool.Value.Get(towerEntity);
                 ref var damageComponent = ref _damagePool.Value.Get(towerEntity);
+                ref var towerComponent = ref _towerPool.Value.Get(towerEntity);
 
                 if (targetableComponent.TargetEntity == -1)
                 {
@@ -43,7 +45,7 @@ namespace Client
                 Vector3 positionBetween = Vector3.Lerp(targetableComponent.TargetObject.transform.position, viewComponent.TowerFirePoint.transform.position, 0.5f);
                 Vector3 supportPosition =  new Vector3(positionBetween.x, viewComponent.TowerFirePoint.transform.position.y + startDistance * 0.5f, positionBetween.z);
 
-                Vector3 towerFirePointOffset = new Vector3(90, 0, 0);
+                Vector3 towerFirePointOffset = new Vector3(0, 0, 0);
 
                 viewComponent.TowerFirePoint.transform.LookAt(supportPosition);
                 viewComponent.TowerFirePoint.transform.Rotate(towerFirePointOffset);
@@ -59,8 +61,7 @@ namespace Client
                 ref var projectileComponent = ref _projectilePool.Value.Add(cannonBallEntity);
                 ref var cannonBallDamageComponent = ref _damagePool.Value.Add(cannonBallEntity);
 
-                cannonBallViewComponent.GameObject = GameObject.Instantiate(Resources.Load<GameObject>("Test"), viewComponent.TowerFirePoint.transform.position, Quaternion.identity);
-
+                cannonBallViewComponent.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetCannonBallPrefabByID(towerComponent.TowerID), viewComponent.TowerFirePoint.transform.position, Quaternion.identity);
                 projectileComponent.Speed = 30;
                 projectileComponent.SpeedDecreaseFactor = 1.2f;
                 projectileComponent.SpeedIncreaseFactor = 0.8f;
