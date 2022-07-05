@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5795999319188923888}
   - component: {fileID: 5795999319188923889}
   - component: {fileID: 5795999319188923892}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ship
   m_TagString: Ship
   m_Icon: {fileID: 0}
@@ -75,9 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dd4bb5fa9cefe44a6117e638b3ec15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shipEntity: 0
-  _shipEncounter: 1
-  _shipWave: 1
+  _ecsInfoMB: {fileID: 0}
 --- !u!1001 &2652790576315341837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,6 +138,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
       propertyPath: m_Name
       value: raft1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcf2ee60560a0c94bbc587384d7bc2e1, type: 3}
