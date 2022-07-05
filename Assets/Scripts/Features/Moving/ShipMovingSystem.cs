@@ -34,6 +34,7 @@ namespace Client
                 viewComponent.GameObject.transform.position = Vector3.MoveTowards(viewComponent.GameObject.transform.position,
                                                                                     flatTargetPosition,
                                                                                     movableComponent.Speed * Time.deltaTime);
+                viewComponent.GameObject.transform.LookAt(flatTargetPosition);
             }
         }
     }

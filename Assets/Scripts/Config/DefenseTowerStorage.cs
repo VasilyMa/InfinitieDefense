@@ -4,7 +4,10 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "DefenseTowerStorage", menuName = "Configs/DefenseTowerStorage", order = 0)]
 public class DefenseTowerStorage : ScriptableObject
 {
+    [Header("Виды башен")]
     public GameObject[] TowerPrefabs;
+    [Header("Виды ядер для пушек")]
+    public GameObject[] CannonBallPrefabs;
     public Dictionary<string, DefenseTower> Towers;
 
     public void Init()
@@ -23,6 +26,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 500,
                 TowerPrefab = TowerPrefabs[0],
+                CannonBallPrefab = CannonBallPrefabs[0],
                 Upgrade = 5,
                 IsLast = false,
                 NextID = "2tower"
@@ -34,6 +38,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[1],
+                CannonBallPrefab = CannonBallPrefabs[1],
                 Upgrade = 7,
                 IsLast = false,
                 NextID = "3tower"
@@ -45,6 +50,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[2],
+                CannonBallPrefab = CannonBallPrefabs[2],
                 Upgrade = 7,
                 IsLast = false,
                 NextID = "4tower"
@@ -56,6 +62,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[3],
+                CannonBallPrefab = CannonBallPrefabs[3],
                 Upgrade = 13,
                 IsLast = false,
                 NextID = "5tower"
@@ -67,6 +74,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[4],
+                CannonBallPrefab = CannonBallPrefabs[4],
                 Upgrade = 15,
                 IsLast = false,
                 NextID = "6tower"
@@ -78,6 +86,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[5],
+                CannonBallPrefab = CannonBallPrefabs[5],
                 Upgrade = 17,
                 IsLast = false,
                 NextID = "7tower"
@@ -89,6 +98,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[6],
+                CannonBallPrefab = CannonBallPrefabs[6],
                 Upgrade = 20,
                 IsLast = false,
                 NextID = "8tower"
@@ -100,6 +110,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[7],
+                CannonBallPrefab = CannonBallPrefabs[7],
                 Upgrade = 23,
                 IsLast = false,
                 NextID = "9tower"
@@ -111,6 +122,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[8],
+                CannonBallPrefab = CannonBallPrefabs[8],
                 Upgrade = 25,
                 IsLast = false,
                 NextID = "10tower"
@@ -122,6 +134,7 @@ public class DefenseTowerStorage : ScriptableObject
                 Cooldown = 2f,
                 TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[9],
+                CannonBallPrefab = CannonBallPrefabs[9],
                 Upgrade = 30,
                 IsLast = true
             },
@@ -146,6 +159,10 @@ public class DefenseTowerStorage : ScriptableObject
     public GameObject GetTowerPrefabByID(string id)
     {
         return Towers[id].TowerPrefab;
+    }
+    public GameObject GetCannonBallPrefabByID(string id)
+    {
+        return Towers[id].CannonBallPrefab;
     }
     public int GetUpgradeByID(string id)
     {

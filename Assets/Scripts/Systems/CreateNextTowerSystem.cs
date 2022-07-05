@@ -146,6 +146,8 @@ namespace Client
                     healthComponent.CurrentValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
 
                     if (_deadPool.Value.Has(entity)) _deadPool.Value.Del(entity);
+
+                    towerComp.TowerID = _state.Value.DefenseTowers[towerIndex];
                 }
                 
 
