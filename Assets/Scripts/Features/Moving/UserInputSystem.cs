@@ -137,6 +137,7 @@ namespace Client {
         void OnClickPlay(in EcsUguiClickEvent evt)
         {
             ref var interfaceComponent = ref _interface.Value.Get(_state.Value.EntityInterface);
+            _state.Value.SetNextWave();
             interfaceComponent.progressbar.SetActive(true);
             interfaceComponent.gamePanel.SetActive(false);
             Debug.Log("Play!");
