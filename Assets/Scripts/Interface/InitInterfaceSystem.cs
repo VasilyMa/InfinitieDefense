@@ -17,10 +17,13 @@ namespace Client {
             interfaceComp.winPanel.SetActive(false);
             interfaceComp.losePanel = GameObject.Find("LosePanel");
             interfaceComp.losePanel.SetActive(false);
+            interfaceComp.gamePanel = GameObject.Find("GamePanel");
+            interfaceComp.gamePanel.SetActive(true);
             interfaceComp._joystick = GameObject.Find("Joystick").GetComponent<FloatingJoystick>();
             interfaceComp.progressbar = GameObject.Find("LevelProgress");
             interfaceComp.progressbar.GetComponent<ProgressBarMB>().SetMaxAmount(state.WaveStorage.GetAllEnemies());
             interfaceComp.progressbar.GetComponent<ProgressBarMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            interfaceComp.progressbar.SetActive(false);
             var resourcePanel = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
             }

@@ -11,16 +11,17 @@ namespace Client {
         readonly EcsFilterInject<Inc<Player>> _filter = default;
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsPoolInject<InterfaceComponent> _interface = default;
-        Vector2 startPosition = Vector2.zero;
-        Vector2 lastPosition = Vector2.zero;
-        private GameObject _joystick;
-        private GameObject _handlerJoystick;
-        private RectTransform _rectTransform;
-        private float _maxAllowedSize = 10.0f;
-        private float _speed;
-        private Vector2 _direction;
-        private Vector3 moveVector;
+
         #region Old
+        //Vector2 startPosition = Vector2.zero;
+        //Vector2 lastPosition = Vector2.zero;
+        //private GameObject _joystick;
+        //private GameObject _handlerJoystick;
+        //private RectTransform _rectTransform;
+        //private float _maxAllowedSize = 10.0f;
+        //private float _speed;
+        //private Vector2 _direction;
+        //private Vector3 moveVector;
         //[Preserve]
         //[EcsUguiDragStartEvent(Idents.Ui.TouchListener, Idents.Worlds.Events)]
         //void OnDownTouchListner(in EcsUguiDragStartEvent evt)
@@ -130,6 +131,15 @@ namespace Client {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Debug.Log("Retry!");
+        }
+        [Preserve]
+        [EcsUguiClickEvent(Idents.Ui.Play, Idents.Worlds.Events)]
+        void OnClickPlay(in EcsUguiClickEvent evt)
+        {
+            ref var interfaceComponent = ref _interface.Value.Get(_state.Value.EntityInterface);
+            interfaceComponent.progressbar.SetActive(true);
+            interfaceComponent.gamePanel.SetActive(false);
+            Debug.Log("Play!");
         }
     }
 }
