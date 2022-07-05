@@ -19005,6 +19005,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 156199819450083510, guid: 0bc27c2add5ec1e478c0f819f3073139, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a5566275b6398384f926cd408fa04259, type: 2}
+    - target: {fileID: 156199819450083510, guid: 0bc27c2add5ec1e478c0f819f3073139, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e84032be82125c44a9759edf0e9f9c31, type: 2}
     - target: {fileID: 756077696870379177, guid: 0bc27c2add5ec1e478c0f819f3073139, type: 3}
       propertyPath: m_Name
       value: LandNew
@@ -19218,20 +19226,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraHolder
       objectReference: {fileID: 0}
-    - target: {fileID: 5810711875778091822, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5810711875778091822, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
-      propertyPath: near clip plane
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5810711875778091822, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
-      propertyPath: orthographic size
-      value: 15
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6596540985323703802, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 091b8c73165a4304cbb50ded5f9be527, type: 3}
 --- !u!1001 &8923160709099671680
 PrefabInstance:

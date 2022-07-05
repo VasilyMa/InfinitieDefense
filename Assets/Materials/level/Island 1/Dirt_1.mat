@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: grass
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK TCP2_SHADOW_LIGHT_COLOR
-    TCP2_UV_NORMALS_FULL
+  m_Name: Dirt_1
+  m_Shader: {fileID: -6465566751694194690, guid: edd7abf643fa4bc4e8561d4c280c97cf, type: 3}
+  m_ShaderKeywords: TCP2_MOBILE TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK
+    TCP2_SHADOW_LIGHT_COLOR TCP2_UV_NORMALS_FULL
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: c64b619b0ce23ae4c92a230400b1239b, type: 3}
+        m_Texture: {fileID: 2800000, guid: ed0ed8cf2e2659943a78e4e0738a562c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -45,8 +45,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7854ab5382533a5458de029442d8952a, type: 3}
-        m_Scale: {x: 5, y: 5}
+        m_Texture: {fileID: 2800000, guid: 32f4d0920a670db489cf7aaec14b1bf2, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapMask:
         m_Texture: {fileID: 0}
@@ -145,7 +145,7 @@ Material:
     - _UseFresnelReflections: 1
     - _UseMatCap: 0
     - _UseMatCapMask: 0
-    - _UseMobileMode: 0
+    - _UseMobileMode: 1
     - _UseNormalMap: 0
     - _UseOcclusion: 0
     - _UseOutline: 0
@@ -156,14 +156,14 @@ Material:
     - _UseSpecular: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
-    - _Color: {r: 1, g: 0.27588767, b: 0.2688679, a: 1}
+    - _BaseColor: {r: 0.6320754, g: 0.5157974, b: 0.5157974, a: 1}
+    - _Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.5}
-    - _SColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _SColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
   m_BuildTextureStacks: []
