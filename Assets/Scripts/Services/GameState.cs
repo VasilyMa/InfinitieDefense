@@ -126,8 +126,8 @@ namespace Client
 
         public void SetNextWave()
         {
-            World.GetPool<ActivateWaveShipsEvent>().Add(World.NewEntity());
             Wave++;
+            World.GetPool<ActivateWaveShipsEvent>().Add(World.NewEntity());
             CurrentActivatedShip = 0;
         }
 
