@@ -15,6 +15,7 @@ namespace Client
         [SerializeField] private float _curHp;
         [SerializeField] private float _maxHP;
         [SerializeField] private GameObject _healthBar;
+
         private EcsPool<CameraComponent> _cameraPool = null;
         public void Init(EcsWorld world, GameState state)
         {
@@ -51,10 +52,14 @@ namespace Client
         {
             _healthBar.SetActive(!_healthBar.activeSelf);
         }
+        public void Disable()
+        {
+            if (_healthBar.activeSelf) _healthBar.SetActive(false);
+        }
         private void Update()
         {
             CameraFollow();
-            if (_curHp == _maxHP)
+            if (_curHp == _maxHP || _curHp <= 0)
                 _healthBar.SetActive(false);
             else
                 _healthBar.SetActive(true);

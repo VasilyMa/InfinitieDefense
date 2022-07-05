@@ -284,6 +284,10 @@ PrefabInstance:
       value: island_pravki
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7807442fbc1a4ed4d9c8a00f980fbc5f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7807442fbc1a4ed4d9c8a00f980fbc5f, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
