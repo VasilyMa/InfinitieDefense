@@ -50,7 +50,7 @@ namespace Client
                 }
 
                 regenerationComponent.OldHPValue = healthComponent.CurrentValue;
-                viewComponent.UpgradeParticleSystem.Play();
+                viewComponent.Regeneration.Play();
                 if (viewComponent.Healthbar) viewComponent.Healthbar.UpdateHealth(healthComponent.CurrentValue);
             }
         }

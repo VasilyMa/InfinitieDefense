@@ -15,32 +15,92 @@ public class TowerStorage : ScriptableObject
             //MELEE
             ["1tower"] = new Tower
             {
-                Radius = 30,
+                Radius = 25,
                 TowerHealth = 5000,
                 TowerPrefab = TowerPrefabs[0],
-                Upgrade = 3,
+                Upgrade = 1,
                 IsLast = false,
                 NextID = "2tower",
-                DefenderCount = 3
+                DefenderCount = 0
             },
             ["2tower"] = new Tower
             {
                 Radius = 40,
-                TowerHealth = 12000,
-                TowerPrefab = TowerPrefabs[1],
-                Upgrade = 5,
-                NextID = "3tower",
+                TowerHealth = 5000,
+                TowerPrefab = TowerPrefabs[0],
+                Upgrade = 2,
                 IsLast = false,
-                DefenderCount = 6
+                NextID = "3tower",
+                DefenderCount = 1
             },
             ["3tower"] = new Tower
             {
                 Radius = 50,
+                TowerHealth = 5000,
+                TowerPrefab = TowerPrefabs[0],
+                Upgrade = 3,
+                IsLast = false,
+                NextID = "4tower",
+                DefenderCount = 2
+            },
+            ["4tower"] = new Tower
+            {
+                Radius = 60,
+                TowerHealth = 12000,
+                TowerPrefab = TowerPrefabs[1],
+                Upgrade = 4,
+                NextID = "5tower",
+                IsLast = false,
+                DefenderCount = 3
+            },
+            ["5tower"] = new Tower
+            {
+                Radius = 65,
+                TowerHealth = 12000,
+                TowerPrefab = TowerPrefabs[1],
+                Upgrade = 5,
+                NextID = "6tower",
+                IsLast = false,
+                DefenderCount = 4
+            },
+            ["6tower"] = new Tower
+            {
+                Radius = 70,
+                TowerHealth = 12000,
+                TowerPrefab = TowerPrefabs[1],
+                Upgrade = 6,
+                NextID = "7tower",
+                IsLast = false,
+                DefenderCount = 5
+            },
+            ["7tower"] = new Tower
+            {
+                Radius = 75,
                 TowerHealth = 14000,
                 TowerPrefab = TowerPrefabs[2],
                 Upgrade = 7,
+                NextID = "8tower",
+                IsLast = false,
+                DefenderCount = 6
+            },
+            ["8tower"] = new Tower
+            {
+                Radius = 80,
+                TowerHealth = 14000,
+                TowerPrefab = TowerPrefabs[2],
+                Upgrade = 8,
+                NextID = "9tower",
+                IsLast = false,
+                DefenderCount = 7
+            },
+            ["9tower"] = new Tower
+            {
+                Radius = 85,
+                TowerHealth = 14000,
+                TowerPrefab = TowerPrefabs[2],
+                Upgrade = 999999,
                 IsLast = true,
-                DefenderCount = 9
+                DefenderCount = 8
             }
         };
     }

@@ -65,8 +65,6 @@ namespace Client
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
             targetableComponent.AllEntityInDetectedZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
 
-            Debug.Log("Записали врага в наш список");
-
             if (MeshRenderer != null)
             {
                 MeshRenderer.material = AwakenedMaterial;
@@ -77,13 +75,11 @@ namespace Client
         {
             if (other.isTrigger)
             {
-                Debug.Log("Это был триггер");
                 return;
             }
 
             if (!other.gameObject.CompareTag(_targetTag))
             {
-                Debug.Log("Чел не враг");
                 return;
             }
 
@@ -96,14 +92,10 @@ namespace Client
             _world = _ecsInfoMB.GetWorld();
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
-            Debug.Log(targetableComponent.AllEntityInDetectedZone.Count);
             targetableComponent.AllEntityInDetectedZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
-            Debug.Log(targetableComponent.AllEntityInDetectedZone.Count);
-            Debug.Log("Удалили врага из нашего списка");
 
             if (MeshRenderer != null && targetableComponent.AllEntityInDetectedZone.Count < 1)
             {
-                Debug.Log("Меняем материал");
                 MeshRenderer.material = SleepingMaterial;
             }
         }

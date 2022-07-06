@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 12997046bacb89344bd703b0e184d5b4
+guid: 119b38fc3050bec4993784d6153fc119
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TT_RTS_Units
+    second: {fileID: 2100000, guid: 41ce879e072de734aaadffb60d80b3a0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -31,7 +36,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

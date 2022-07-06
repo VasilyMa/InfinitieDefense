@@ -47,13 +47,10 @@ namespace Client
                 return;
             }
 
-            Debug.Log("В нашу MeleeAttackMB попал "+ other.name);
-
             _world = _ecsInfoMB.GetWorld();
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
             targetableComponent.AllEntityInDamageZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
-            Debug.Log("Новая энтити попала в DamageZone");
         }
 
         private void OnTriggerExit(Collider other)
@@ -72,7 +69,6 @@ namespace Client
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
             targetableComponent.AllEntityInDamageZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
-            Debug.Log("Энтити вышла из DamageZone");
         }
     }
 }

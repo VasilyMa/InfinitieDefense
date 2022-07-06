@@ -60,10 +60,8 @@ namespace Client
             }
             else if (other.gameObject.CompareTag("UpgradePoint"))
             {
-                Debug.Log("Чёрт");
                 if (!_upgradePool.Has(_state.EntityPlayer))
                 {
-                    Debug.Log("Синий Чёрт");
                     ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                     upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                     upgradeComp.Time = 0f;

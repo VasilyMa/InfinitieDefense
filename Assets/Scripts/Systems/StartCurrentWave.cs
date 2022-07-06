@@ -30,7 +30,7 @@ namespace Client {
 
                 for (int wave = 0; wave < _state.Value.WaveStorage.Waves.Count; wave++)
                 {
-                    int[] enemyInShip = _state.Value.WaveStorage.Waves[wave].EnemyInShip;
+                    int[] enemyInShip = _state.Value.WaveStorage.Waves[wave].MeleeEnemyInShip;
                     int[] rangeEnemyInShip = _state.Value.WaveStorage.Waves[wave].RangeEnemyInShip;
                     int[] encounters = _state.Value.WaveStorage.Waves[wave].Encounters;
 

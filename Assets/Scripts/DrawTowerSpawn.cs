@@ -9,21 +9,22 @@ public class DrawTowerSpawn : MonoBehaviour
     [Tooltip("Указать количество уровней и их радиус")]
     [SerializeField] private float[] _radiuses;
     [Header("Количество башен")]
-    [SerializeField] private int _count;//test
+    [SerializeField] private int _count;
     [Header("Размер Gizmos'а")]
     [SerializeField] private Vector3 _boxSize;
 
     private float _angle = 0;
-    private int _divisionColor = 1;
+    private float _divisionColor = 1;
     private Vector3 _position;
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         for (int i = 0; i < _radiuses.Length; i++)
         {
-            _angle = 0 + (90 * i);
-            _divisionColor = 1 + i;
-            Color drawColor = new Color(0.7f / _divisionColor, 0.7f / _divisionColor, 1, 1F);
+            _angle = 0 + (45 * i);
+            float floatI = i;
+            _divisionColor = 1 - (floatI / _radiuses.Length);
+            Color drawColor = new Color(0.7f * _divisionColor, 0.7f * _divisionColor, 1, 1F);
             Gizmos.color = drawColor;
             for (int j = 0; j < _count; j++)
             {

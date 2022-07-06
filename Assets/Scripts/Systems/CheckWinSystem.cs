@@ -10,11 +10,8 @@ namespace Client {
         public void Run (EcsSystems systems) {
             foreach (var item in _filterEnemies.Value)
             {
-                Debug.Log($"AllEnemies {_state.Value.WaveStorage.GetAllEnemies()}" +
-                    $"DeadEnemies { _filterEnemies.Value.GetEntitiesCount() }");
                 if (_filterEnemies.Value.GetEntitiesCount() == _state.Value.WaveStorage.GetAllEnemies())
                 {
-                    Debug.Log("Win!");
                     _winPool.Value.Add(_world.Value.NewEntity());
                 }
             }

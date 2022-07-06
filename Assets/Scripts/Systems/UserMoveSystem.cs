@@ -16,8 +16,6 @@ namespace Client {
                 var _joystick = interfacePool._joystick;
                 ref var player = ref _playerFilter.Pools.Inc1.Get(entity);
                 player.rigidbody.velocity = new Vector3(_joystick.Horizontal * player.MoveSpeed, player.rigidbody.velocity.y, _joystick.Vertical * player.MoveSpeed) + new Vector3(0, player.rigidbody.velocity.y, 0);
-                Debug.Log(_joystick.Horizontal);
-                Debug.Log(_joystick.Vertical);
                 if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
                 {
                     player.Transform.rotation = Quaternion.LookRotation(player.rigidbody.velocity);

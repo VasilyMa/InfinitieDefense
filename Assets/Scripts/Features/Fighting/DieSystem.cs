@@ -35,13 +35,15 @@ namespace Client
                 {
                     ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
                     if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
-                    interfaceComponent.progressbar.GetComponent<ProgressBarMB>().UpdateProgressBar();
                 }
 
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
                 if (viewComponent.NavMeshAgent) viewComponent.NavMeshAgent.enabled = false;
                 if (viewComponent.Healthbar) viewComponent.Healthbar.Disable();
+
                 _deadPool.Value.Add(entity);
+
+                if (_enemyPool.Value.Has(entity)) interfaceComponent.progressbar.GetComponent<ProgressBarMB>().UpdateProgressBar();
             }
         }
     }
