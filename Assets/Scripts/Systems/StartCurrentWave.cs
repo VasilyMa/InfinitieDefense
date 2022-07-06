@@ -36,7 +36,7 @@ namespace Client {
 
                 allEnemyTypes.Add(enemyInShip);
                 allEnemyTypes.Add(rangeEnemyInShip);
-
+                //todo for по волнам
                 for (int i = 0; i < enemyInShip.Length;i++)
                 {
                     var x = Mathf.Cos(_angle * Mathf.Deg2Rad) * 155;
