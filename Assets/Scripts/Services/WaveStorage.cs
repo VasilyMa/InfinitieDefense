@@ -12,7 +12,7 @@ public class WaveStorage : MonoBehaviour
         public int[] Encounters;
         [Header("Задаем ближников на каждом из кораблей")]
         [Tooltip("Количество кораблей")]
-        public int[] EnemyInShip;
+        public int[] MeleeEnemyInShip;
         [Header("Задаем дальников на каждом из кораблей")]
         [Tooltip("Количество кораблей")]
         public int[] RangeEnemyInShip;
@@ -31,7 +31,7 @@ public class WaveStorage : MonoBehaviour
 
             for (int j = 0; j < shipCount; j++)
             {
-                allEnemies += Waves[i].EnemyInShip[j] + Waves[i].RangeEnemyInShip[j];
+                allEnemies += Waves[i].MeleeEnemyInShip[j] + Waves[i].RangeEnemyInShip[j];
             }
         }
         return allEnemies;

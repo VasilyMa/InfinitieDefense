@@ -15,24 +15,108 @@ public class PlayerStorage : ScriptableObject
             ["1level"] = new PlayerData
             {
                 LVL = 1,
-                Damage = 50,
-                Speed = 3f,
-                Health = 100,
+                Damage = 10,
+                Speed = 2.5f,
+                Health = 50,
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "2level",
-                UpgradeValue = 5,
+                UpgradeValue = 1,
                 Mesh = PlayerMeshes[0]
             },
             ["2level"] = new PlayerData
             {
                 LVL = 2,
+                Damage = 20,
+                Speed = 3f,
+                Health = 70,
+                PlayerPrefab = PlayerPrefabs[1],
+                IsLast = false,
+                NextID = "3level",
+                UpgradeValue = 1,
+                Mesh = PlayerMeshes[1]
+            },
+            ["3level"] = new PlayerData
+            {
+                LVL = 3,
+                Damage = 30,
+                Speed = 3.5f,
+                Health = 90,
+                PlayerPrefab = PlayerPrefabs[1],
+                IsLast = false,
+                NextID = "4level",
+                UpgradeValue = 1,
+                Mesh = PlayerMeshes[1]
+            },
+            ["4level"] = new PlayerData
+            {
+                LVL = 4,
+                Damage = 40,
+                Speed = 3.5f,
+                Health = 110,
+                PlayerPrefab = PlayerPrefabs[1],
+                IsLast = false,
+                NextID = "5level",
+                UpgradeValue = 1,
+                Mesh = PlayerMeshes[1]
+            },
+            ["5level"] = new PlayerData
+            {
+                LVL = 5,
+                Damage = 50,
+                Speed = 3.5f,
+                Health = 130,
+                PlayerPrefab = PlayerPrefabs[1],
+                IsLast = false,
+                NextID = "6level",
+                UpgradeValue = 1,
+                Mesh = PlayerMeshes[1]
+            },
+            ["6level"] = new PlayerData
+            {
+                LVL = 6,
+                Damage = 60,
+                Speed = 3.5f,
+                Health = 150,
+                PlayerPrefab = PlayerPrefabs[1],
+                IsLast = false,
+                NextID = "7level",
+                UpgradeValue = 1,
+                Mesh = PlayerMeshes[1]
+            },
+            ["7level"] = new PlayerData
+            {
+                LVL = 7,
                 Damage = 70,
                 Speed = 3.5f,
-                Health = 120,
+                Health = 170,
+                PlayerPrefab = PlayerPrefabs[1],
+                IsLast = false,
+                NextID = "8level",
+                UpgradeValue = 1,
+                Mesh = PlayerMeshes[1]
+            },
+            ["8level"] = new PlayerData
+            {
+                LVL = 8,
+                Damage = 80,
+                Speed = 3.5f,
+                Health = 190,
+                PlayerPrefab = PlayerPrefabs[1],
+                IsLast = false,
+                NextID = "9level",
+                UpgradeValue = 1,
+                Mesh = PlayerMeshes[1]
+            },
+            ["9level"] = new PlayerData
+            {
+                LVL = 9,
+                Damage = 90,
+                Speed = 3.5f,
+                Health = 210,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = true,
-                UpgradeValue = 5,
+                UpgradeValue = 1,
                 Mesh = PlayerMeshes[1]
             },
         };

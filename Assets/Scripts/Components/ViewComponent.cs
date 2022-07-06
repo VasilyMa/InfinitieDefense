@@ -35,5 +35,6 @@ namespace Client
         public ParticleSystem UpgradeParticleSystem;
         public ParticleSystem HitParticleSystem;
         public ParticleSystem DropItemParticleSystem;
+        public ParticleSystem Regeneration;
     }
 }

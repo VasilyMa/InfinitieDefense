@@ -109,7 +109,7 @@ namespace Client
             ref var projectileComponent = ref _projectilePool.Add(arrowEntity);
             ref var arrowDamageComponent = ref _damagePool.Add(arrowEntity);
 
-            arrowViewComponent.GameObject = GameObject.Instantiate(Resources.Load<GameObject>("Test"), _arrowFirePoint.transform.position, Quaternion.identity);
+            arrowViewComponent.GameObject = GameObject.Instantiate(Resources.Load<GameObject>("Arrow"), _arrowFirePoint.transform.position, Quaternion.identity);
 
             projectileComponent.Speed = 30;
             projectileComponent.SpeedDecreaseFactor = 1.2f;

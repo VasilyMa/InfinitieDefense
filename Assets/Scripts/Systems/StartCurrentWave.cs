@@ -28,7 +28,7 @@ namespace Client {
             {
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 
-                int[] enemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].EnemyInShip;
+                int[] enemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].MeleeEnemyInShip;
                 int[] rangeEnemyInShip = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].RangeEnemyInShip;
                 int[] encounters = _state.Value.WaveStorage.Waves[_state.Value.Saves.CurrentWave].Encounters;
                

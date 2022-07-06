@@ -23,7 +23,9 @@ namespace Client
                 ref var projectileComponent = ref _projectilePool.Value.Get(projectileEntity);
                 ref var damageComponent = ref _damagePool.Value.Get(projectileEntity);
 
-                float distanceOverall = Vector3.Distance(projectileComponent.StartPosition, projectileComponent.TargetObject.transform.position);
+                if (!projectileComponent.TargetObject) projectileComponent.TargetObject = _viewPool.Value.Get(projectileComponent.TargetEntity).GameObject;
+
+                float distanceOverall = Vector3.Distance(projectileComponent.StartPosition, projectileComponent.TargetObject.transform.position); //to do esli upgradin bashnu, to Ogbect menyaetsya
 
                 float distanceCovered = Vector3.Distance(projectileComponent.StartPosition, viewComponent.GameObject.transform.position);
 
