@@ -16,7 +16,7 @@ public class TowerStorage : ScriptableObject
             ["1tower"] = new Tower
             {
                 Radius = 25,
-                TowerHealth = 5000,
+                TowerHealth = 2500,
                 TowerPrefab = TowerPrefabs[0],
                 Upgrade = 1,
                 IsLast = false,
@@ -26,7 +26,7 @@ public class TowerStorage : ScriptableObject
             ["2tower"] = new Tower
             {
                 Radius = 40,
-                TowerHealth = 5000,
+                TowerHealth = 2900,
                 TowerPrefab = TowerPrefabs[0],
                 Upgrade = 2,
                 IsLast = false,
@@ -36,7 +36,7 @@ public class TowerStorage : ScriptableObject
             ["3tower"] = new Tower
             {
                 Radius = 50,
-                TowerHealth = 5000,
+                TowerHealth = 3300,
                 TowerPrefab = TowerPrefabs[0],
                 Upgrade = 3,
                 IsLast = false,
@@ -46,7 +46,7 @@ public class TowerStorage : ScriptableObject
             ["4tower"] = new Tower
             {
                 Radius = 60,
-                TowerHealth = 12000,
+                TowerHealth = 3600,
                 TowerPrefab = TowerPrefabs[1],
                 Upgrade = 4,
                 NextID = "5tower",
@@ -56,7 +56,7 @@ public class TowerStorage : ScriptableObject
             ["5tower"] = new Tower
             {
                 Radius = 65,
-                TowerHealth = 12000,
+                TowerHealth = 3900,
                 TowerPrefab = TowerPrefabs[1],
                 Upgrade = 5,
                 NextID = "6tower",
@@ -66,7 +66,7 @@ public class TowerStorage : ScriptableObject
             ["6tower"] = new Tower
             {
                 Radius = 70,
-                TowerHealth = 12000,
+                TowerHealth = 4200,
                 TowerPrefab = TowerPrefabs[1],
                 Upgrade = 6,
                 NextID = "7tower",
@@ -76,7 +76,7 @@ public class TowerStorage : ScriptableObject
             ["7tower"] = new Tower
             {
                 Radius = 75,
-                TowerHealth = 14000,
+                TowerHealth = 4500,
                 TowerPrefab = TowerPrefabs[2],
                 Upgrade = 7,
                 NextID = "8tower",
@@ -86,7 +86,7 @@ public class TowerStorage : ScriptableObject
             ["8tower"] = new Tower
             {
                 Radius = 80,
-                TowerHealth = 14000,
+                TowerHealth = 4800,
                 TowerPrefab = TowerPrefabs[2],
                 Upgrade = 8,
                 NextID = "9tower",
@@ -96,7 +96,7 @@ public class TowerStorage : ScriptableObject
             ["9tower"] = new Tower
             {
                 Radius = 85,
-                TowerHealth = 14000,
+                TowerHealth = 5100,
                 TowerPrefab = TowerPrefabs[2],
                 Upgrade = 999999,
                 IsLast = true,

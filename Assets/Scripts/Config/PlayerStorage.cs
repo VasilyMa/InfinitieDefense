@@ -16,8 +16,8 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 1,
                 Damage = 10,
-                Speed = 2.5f,
-                Health = 50,
+                Speed = 10f,
+                Health = 100,
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "2level",
@@ -28,7 +28,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 2,
                 Damage = 20,
-                Speed = 3f,
+                Speed = 30f,
                 Health = 70,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = false,
@@ -40,7 +40,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 3,
                 Damage = 30,
-                Speed = 3.5f,
+                Speed = 12f,
                 Health = 90,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = false,
@@ -52,7 +52,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 4,
                 Damage = 40,
-                Speed = 3.5f,
+                Speed = 13f,
                 Health = 110,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = false,
@@ -64,7 +64,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 5,
                 Damage = 50,
-                Speed = 3.5f,
+                Speed = 14f,
                 Health = 130,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = false,
@@ -76,7 +76,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 6,
                 Damage = 60,
-                Speed = 3.5f,
+                Speed = 15f,
                 Health = 150,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = false,
@@ -88,7 +88,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 7,
                 Damage = 70,
-                Speed = 3.5f,
+                Speed = 16f,
                 Health = 170,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = false,
@@ -100,7 +100,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 8,
                 Damage = 80,
-                Speed = 3.5f,
+                Speed = 17f,
                 Health = 190,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = false,
@@ -112,7 +112,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 9,
                 Damage = 90,
-                Speed = 3.5f,
+                Speed = 18f,
                 Health = 210,
                 PlayerPrefab = PlayerPrefabs[1],
                 IsLast = true,

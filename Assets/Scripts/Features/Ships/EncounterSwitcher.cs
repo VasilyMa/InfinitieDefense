@@ -16,6 +16,9 @@ namespace Client
 
         readonly EcsSharedInject<GameState> _state;
 
+        private bool _encounterNeedChange = false;
+        private bool _ativateNextWaveBottome = false;
+
         public void Run (EcsSystems systems)
         {
             if (_ActiveShipsFilter.Value.GetEntitiesCount() > 0)
@@ -36,15 +39,17 @@ namespace Client
             foreach (var shipEntity in _InactiveShipsFilter.Value)
             {
                 ref var shipComponent = ref _shipPool.Value.Get(shipEntity);
-                if (shipComponent.Encounter == _state.Value.CurrentActivatedShip)
+                if (shipComponent.Encounter == _state.Value.CurrentEncounter)
                 {
                     _inactivePool.Value.Del(shipEntity);
+                    _encounterNeedChange = true;
                 }
             }
 
-            if (_InactiveShipsFilter.Value.GetEntitiesCount() > 0)
+            if (_encounterNeedChange)
             {
-                _state.Value.CurrentActivatedShip++;
+                _state.Value.SetNextEncounter();
+                _encounterNeedChange = false;
             }
         }
     }

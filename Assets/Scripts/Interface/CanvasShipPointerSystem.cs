@@ -6,12 +6,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Client {
-    sealed class CanvasPointerSystem : IEcsRunSystem {
+    sealed class CanvasShipPointerSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<CanvasPointerComponent>> _canvasfilter = default;
-        readonly EcsFilterInject<Inc<EnemyTag, UnitTag>, Exc<InactiveTag>> _enemyActiveFilter = default;
-        readonly EcsFilterInject<Inc<EnemyTag, UnitTag, InactiveTag>> _enemyInactiveFilter = default;
-        readonly EcsFilterInject<Inc<EnemyTag, UnitTag, DeadTag>> _enemyDeadFilter = default;
+        readonly EcsFilterInject<Inc<ShipTag, ShipComponent>, Exc<InactiveTag>> _enemyActiveFilter = default;
+        readonly EcsFilterInject<Inc<ShipTag, ShipComponent, InactiveTag>> _enemyInactiveFilter = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<CameraComponent> _cameraPool = default;
         public void Run (EcsSystems systems) {
@@ -58,12 +57,6 @@ namespace Client {
                 }
             }
             foreach (var enemyEntity in _enemyInactiveFilter.Value)
-            {
-                ref var viewComp = ref _viewPool.Value.Get(enemyEntity);
-                viewComp.PointerTransform.gameObject.SetActive(false);
-            }
-
-            foreach (var enemyEntity in _enemyDeadFilter.Value)
             {
                 ref var viewComp = ref _viewPool.Value.Get(enemyEntity);
                 viewComp.PointerTransform.gameObject.SetActive(false);
