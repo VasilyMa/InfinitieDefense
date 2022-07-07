@@ -17,8 +17,8 @@ namespace Client {
                 var _joystick = interfacePool._joystick;
                 ref var player = ref _playerFilter.Pools.Inc1.Get(entity);
 
-                float angle = Mathf.Atan2(_joystick.gameObject.transform.GetChild(0).transform.GetChild(0).transform.position.y - _joystick.gameObject.transform.GetChild(0).transform.position.y,
-                _joystick.gameObject.transform.GetChild(0).transform.GetChild(0).transform.position.x - _joystick.gameObject.transform.GetChild(0).transform.position.x) * Mathf.Rad2Deg - _angleOffset;
+                float angle = Mathf.Atan2(interfacePool._joystickPoint.position.y - interfacePool._joysticKCenter.position.y,
+                interfacePool._joystickPoint.position.x - interfacePool._joysticKCenter.position.x) * Mathf.Rad2Deg - _angleOffset;
 
                 if(angle < 0)
                 {

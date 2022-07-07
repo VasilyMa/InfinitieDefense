@@ -7,5 +7,7 @@ namespace Client {
         public GameObject losePanel;
         public GameObject progressbar;
         public FloatingJoystick _joystick;
+        public Transform _joystickPoint;
+        public Transform _joysticKCenter;
     }
 }

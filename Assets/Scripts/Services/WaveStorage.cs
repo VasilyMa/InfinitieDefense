@@ -7,14 +7,14 @@ public class WaveStorage : MonoBehaviour
     [System.Serializable]
     public class Test
     {
-        [Header("Указываем сколько кораблей будет на Энкаунтере")]
-        [Tooltip("Количество энкаунтеров")]
+        [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+        [Tooltip("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
         public int[] Encounters;
-        [Header("Задаем ближников на каждом из кораблей")]
-        [Tooltip("Количество кораблей")]
+        [Header("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+        [Tooltip("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
         public int[] MeleeEnemyInShip;
-        [Header("Задаем дальников на каждом из кораблей")]
-        [Tooltip("Количество кораблей")]
+        [Header("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+        [Tooltip("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
         public int[] RangeEnemyInShip;
     }
     public List<Test> Waves = new List<Test>();
@@ -28,10 +28,12 @@ public class WaveStorage : MonoBehaviour
             {
                 shipCount += encounter;
             }
+            Debug.Log(" vcsvsdvs" + shipCount);
 
             for (int j = 0; j < shipCount; j++)
             {
-                allEnemies += Waves[i].MeleeEnemyInShip[j] + Waves[i].RangeEnemyInShip[j];
+                allEnemies += Waves[i].MeleeEnemyInShip[j] 
+                + Waves[i].RangeEnemyInShip[j];
             }
         }
         return allEnemies;
