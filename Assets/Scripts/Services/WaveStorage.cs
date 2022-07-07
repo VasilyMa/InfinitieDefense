@@ -28,7 +28,7 @@ public class WaveStorage : MonoBehaviour
             {
                 shipCount += encounter;
             }
-            Debug.Log(" vcsvsdvs" + shipCount);
+            Debug.Log(" vcsvsdvs" + i);
 
             for (int j = 0; j < shipCount; j++)
             {
