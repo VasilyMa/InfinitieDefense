@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Client
 {
     /// <summary>
-    /// Работает с энтити в зоне обнаружения
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     /// </summary>
     sealed class TargetingSystem : IEcsRunSystem
     {
@@ -27,7 +27,7 @@ namespace Client
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                if (targetableComponent.TargetEntity > -1) // Если есть цель
+                if (targetableComponent.TargetEntity > -1) // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 {
                     if (targetableComponent.TargetObject == null)
                     {
@@ -42,12 +42,12 @@ namespace Client
                     }
                 }
 
-                if (_shipPool.Value.Has(entity)) // Чтобы тут кончался код для кораблей
+                if (_shipPool.Value.Has(entity)) // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 {
                     continue;
                 }
 
-                if (targetableComponent.AllEntityInDetectedZone.Count == 0 && targetableComponent.TargetEntity == -1) // Если никого в зоне обнаружения и нет цели
+                if (targetableComponent.AllEntityInDetectedZone.Count == 0 && targetableComponent.TargetEntity == -1) // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 {
                     if (_enemyPool.Value.Has(entity))
                     {
@@ -61,7 +61,7 @@ namespace Client
                         targetableComponent.TargetObject = null;
                         viewComponent.EcsInfoMB.ResetTarget();
                     }
-                    Debug.Log("Удалили старую энтити цели у "+ viewComponent.GameObject);
+//                    Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ "+ viewComponent.GameObject);
                     continue;
                 }
 
@@ -72,7 +72,7 @@ namespace Client
                     if (_deadPool.Value.Has(entityInDetectedZone))
                     {
                         allDeadEntitys.Add(entityInDetectedZone);
-                        Debug.Log("Энтити находилась в пуле мертвых");
+                        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                     }
                 }
 
@@ -91,7 +91,7 @@ namespace Client
                     targetableComponent.TargetEntity = targetableComponent.AllEntityInDetectedZone[0];
                     targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
                     viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
-                    Debug.Log("Записали новую цель");
+                    Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
                 }
             }
         }

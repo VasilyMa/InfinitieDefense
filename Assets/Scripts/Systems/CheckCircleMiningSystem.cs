@@ -24,13 +24,13 @@ namespace Client {
                     {
                         playerComp.CanMining = false;
 
-                        Debug.Log("Хрен а не майнинг");
+//                        Debug.Log("пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                     }
                     else
                     {
                         playerComp.CanMining = true;
 
-                        Debug.Log("Можно по майнить");
+//                        Debug.Log("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                     }
                 }
 
