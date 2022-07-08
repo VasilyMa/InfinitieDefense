@@ -5,12 +5,12 @@ using UnityEngine;
 public class DrawTowerSpawn : MonoBehaviour
 {
     
-    [Header("Радиус на каждом уровне")]
-    [Tooltip("Указать количество уровней и их радиус")]
+    [Header("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ")]
+    [Tooltip("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ")]
     [SerializeField] private float[] _radiuses;
-    [Header("Количество башен")]
+    [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ")]
     [SerializeField] private int _count;
-    [Header("Размер Gizmos'а")]
+    [Header("пїЅпїЅпїЅпїЅпїЅпїЅ Gizmos'пїЅ")]
     [SerializeField] private Vector3 _boxSize;
 
     private float _angle = 0;
