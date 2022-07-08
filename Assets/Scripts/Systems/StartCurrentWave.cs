@@ -19,6 +19,7 @@ namespace Client {
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
+        readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
         private float _angle = 0f;
         private float _shipAngle = 0f;
         private int _encounter = 0;
@@ -30,6 +31,7 @@ namespace Client {
 
                 for (int wave = 0; wave < _state.Value.WaveStorage.Waves.Count; wave++)
                 {
+                    _interfacePool.Value.Get(_state.Value.EntityInterface).waveCounter.GetComponent<WaveCounterMB>().UpdateWave();
                     int[] enemyInShip = _state.Value.WaveStorage.Waves[wave].MeleeEnemyInShip;
                     int[] rangeEnemyInShip = _state.Value.WaveStorage.Waves[wave].RangeEnemyInShip;
                     int[] encounters = _state.Value.WaveStorage.Waves[wave].Encounters;
