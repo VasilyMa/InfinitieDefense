@@ -27,11 +27,11 @@ namespace Client
             _currentAmount = value;
             _slider.maxValue = _maxAmount;
             _slider.value = _currentAmount;
-
         }
         public void UpdateWave()
         {
-            _currentAmount = _maxAmount - _state.GetCurrentWave();
+            if(_currentAmount>=0)
+                _currentAmount--;
             _slider.value = _currentAmount;
         }
     }

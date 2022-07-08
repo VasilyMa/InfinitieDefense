@@ -34,7 +34,6 @@ namespace Client
             _systemsFixed = new EcsSystems(_world, _gameState);
             _delHereSystems = new EcsSystems(_world, _gameState);
             
-            
             _systems
                 .Add(new CheckWinSystem())
                 .Add(new WinSystem())
@@ -103,6 +102,7 @@ namespace Client
                 .Add(new RespawnDefender())
                 .Add(new OreRespawnSystem())
                 .Add(new UpgradeCanvasSystem())
+                .Add(new CanvasShipPointerSystem())
                 .Add(new CanvasPointerSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)

@@ -6,6 +6,7 @@ namespace Client {
         public GameObject winPanel;
         public GameObject losePanel;
         public GameObject progressbar;
+        public GameObject gamePanel;
         public GameObject waveCounter;
         public FloatingJoystick _joystick;
         public Transform _joystickPoint;

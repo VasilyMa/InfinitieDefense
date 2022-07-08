@@ -27,7 +27,7 @@ namespace Client
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                if (targetableComponent.TargetEntity > -1) // ���� ���� ����
+                if (targetableComponent.TargetEntity > -1)
                 {
                     if (targetableComponent.TargetObject == null)
                     {
@@ -42,12 +42,12 @@ namespace Client
                     }
                 }
 
-                if (_shipPool.Value.Has(entity)) // ����� ��� �������� ��� ��� ��������
+                if (_shipPool.Value.Has(entity))
                 {
                     continue;
                 }
 
-                if (targetableComponent.AllEntityInDetectedZone.Count == 0 && targetableComponent.TargetEntity == -1) // ���� ������ � ���� ����������� � ��� ����
+                if (targetableComponent.AllEntityInDetectedZone.Count == 0 && targetableComponent.TargetEntity == -1)
                 {
                     if (_enemyPool.Value.Has(entity))
                     {
@@ -61,7 +61,6 @@ namespace Client
                         targetableComponent.TargetObject = null;
                         viewComponent.EcsInfoMB.ResetTarget();
                     }
-//                    Debug.Log("������� ������ ������ ���� � "+ viewComponent.GameObject);
                     continue;
                 }
 
@@ -72,7 +71,6 @@ namespace Client
                     if (_deadPool.Value.Has(entityInDetectedZone))
                     {
                         allDeadEntitys.Add(entityInDetectedZone);
-                        Debug.Log("������ ���������� � ���� �������");
                     }
                 }
 
@@ -91,7 +89,6 @@ namespace Client
                     targetableComponent.TargetEntity = targetableComponent.AllEntityInDetectedZone[0];
                     targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
                     viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
-                    Debug.Log("�������� ����� ����");
                 }
             }
         }

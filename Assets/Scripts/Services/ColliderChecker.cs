@@ -46,101 +46,116 @@ namespace Client
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Coin"))
+            switch (other.gameObject.tag)
             {
-                other.gameObject.tag = "Untagged";
-                ref var coinComp = ref _coinPool.Add(_world.NewEntity());
-                coinComp.CoinTransform = other.transform;
-            }
-            else if (other.gameObject.CompareTag("Stone"))
-            {
-                other.gameObject.tag = "Untagged";
-                ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
-                stoneComp.StoneTransform = other.transform;
-            }
-            else if (other.gameObject.CompareTag("UpgradePoint"))
-            {
-                if (!_upgradePool.Has(_state.EntityPlayer))
-                {
-                    ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
-                    upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
-                    upgradeComp.Time = 0f;
-                    upgradeComp.UpgradeTower = true;
-                }
-            }
-            else if (other.gameObject.tag == "UpgradePlayerPoint")
-            {
-                if (!_upgradePool.Has(_state.EntityPlayer))
-                {
-                    ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
-                    upgradeComp.Time = 0f;
-                    upgradeComp.UpgradeTower = false;
-                    //upgradeComp.DelayTime = 0f;
-                }
-            }
-            else if (other.gameObject.CompareTag("Ore"))
-            {
-                ref var player = ref _state.EntityPlayer;
-                ref var _player = ref _playerPool.Get(player);
-                ref var view = ref _viewPool.Get(player);
-                var filter = _world.Filter<OreComponent>();
-                var ores = _world.GetPool<OreComponent>();
-                foreach (int entity in filter.End())
-                {
-                    ref OreComponent oreComp = ref ores.Get(entity);
-                    if (other.gameObject == oreComp.prefab && view.CanMining)
+                case "Coin":
                     {
-                        _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
-                        _player.animator.SetBool("isIdle", false);
-                        _player.animator.SetBool("isRun", false);
-                        _player.animator.SetBool("isMining", true);
-                        view.isMining = true;
-                        view.isFight = false;
-                        Debug.Log("Mining!");
+                        other.gameObject.tag = "Untagged";
+                        ref var coinComp = ref _coinPool.Add(_world.NewEntity());
+                        coinComp.CoinTransform = other.transform;
+                        break;
                     }
-                }
-            }
-            else if (other.gameObject.CompareTag("Enemy"))
-            {
-                ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
-                viewComp.isMining = false;
-                viewComp.isFight = true;
+                case "Stone":
+                    {
+                        other.gameObject.tag = "Untagged";
+                        ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
+                        stoneComp.StoneTransform = other.transform;
+                        break;
+                    }
+                case "UpgradePoint":
+                    {
+                        if (!_upgradePool.Has(_state.EntityPlayer))
+                        {
+                            ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
+                            upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
+                            upgradeComp.Time = 0f;
+                            upgradeComp.UpgradeTower = true;
+                        }
+                        break;
+                    }
+                case "UpgradePlayerPoint":
+                    {
+                        if (!_upgradePool.Has(_state.EntityPlayer))
+                        {
+                            ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
+                            upgradeComp.Time = 0f;
+                            upgradeComp.UpgradeTower = false;
+                            //upgradeComp.DelayTime = 0f;
+                        }
+                        break;
+                    }
+                case "Enemy":
+                    {
+                        ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
+                        viewComp.isMining = false;
+                        viewComp.isFight = true;
+                        break;
+                    }
+                case "Ore":
+                    {
+                        ref var player = ref _state.EntityPlayer;
+                        ref var _player = ref _playerPool.Get(player);
+                        ref var view = ref _viewPool.Get(player);
+                        var filter = _world.Filter<OreComponent>();
+                        var ores = _world.GetPool<OreComponent>();
+                        foreach (int entity in filter.End())
+                        {
+                            ref OreComponent oreComp = ref ores.Get(entity);
+                            if (other.gameObject == oreComp.prefab && view.CanMining)
+                            {
+                                _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
+                                _player.animator.SetBool("isIdle", false);
+                                _player.animator.SetBool("isRun", false);
+                                _player.animator.SetBool("isMining", true);
+                                view.isMining = true;
+                                view.isFight = false;
+                                Debug.Log("Mining!");
+                            }
+                        }
+                        break;
+                    }
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.CompareTag("UpgradePoint"))
+            switch (other.gameObject.tag)
             {
-                if (_upgradePool.Has(_state.EntityPlayer))
-                {
-                    _upgradePool.Del(_state.EntityPlayer);
-                }
-            }
-            else if (other.gameObject.tag == "UpgradePlayerPoint")
-            {
-                if (_upgradePool.Has(_state.EntityPlayer))
-                {
-                    _upgradePool.Del(_state.EntityPlayer);
-                }
-            }
-            else if (other.gameObject.CompareTag("Ore"))
-            {
-                ref var player = ref _state.EntityPlayer;
-                ref var _player = ref _playerPool.Get(player);
-                ref var view = ref _viewPool.Get(player);
-                _player.animator.SetBool("isMining", false);
-                var filter = _world.Filter<OreComponent>();
-                foreach (int entity in filter.End())
-                {
-                    _oreEventPool.Del(entity);
-                }
-                view.isMining = false;
-            }
-            else if (other.gameObject.CompareTag("Enemy"))
-            {
-                ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
-                if(!_fightPool.Has(_state.EntityPlayer))
-                    viewComp.isFight = false;
+                case "UpgradePoint":
+                    {
+                        if (_upgradePool.Has(_state.EntityPlayer))
+                        {
+                            _upgradePool.Del(_state.EntityPlayer);
+                        }
+                        break;
+                    }
+                case "UpgradePlayerPoint":
+                    {
+                        if (_upgradePool.Has(_state.EntityPlayer))
+                        {
+                            _upgradePool.Del(_state.EntityPlayer);
+                        }
+                        break;
+                    }
+                case "Enemy":
+                    {
+                        ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
+                        if (!_fightPool.Has(_state.EntityPlayer)) viewComp.isFight = false;
+                        break;
+                    }
+                case "Ore":
+                    {
+                        ref var player = ref _state.EntityPlayer;
+                        ref var _player = ref _playerPool.Get(player);
+                        ref var view = ref _viewPool.Get(player);
+                        _player.animator.SetBool("isMining", false);
+                        var filter = _world.Filter<OreComponent>();
+                        foreach (int entity in filter.End())
+                        {
+                            _oreEventPool.Del(entity);
+                        }
+                        view.isMining = false;
+                        break;
+                    }
             }
         }
         private void OnTriggerStay(Collider other)

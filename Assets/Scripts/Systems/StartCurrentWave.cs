@@ -19,7 +19,6 @@ namespace Client {
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
-        readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
         private float _angle = 0f;
         private float _shipAngle = 0f;
         private int _encounter = 0;
@@ -31,7 +30,6 @@ namespace Client {
 
                 for (int wave = 0; wave < _state.Value.WaveStorage.Waves.Count; wave++)
                 {
-                    _interfacePool.Value.Get(_state.Value.EntityInterface).waveCounter.GetComponent<WaveCounterMB>().UpdateWave();
                     int[] enemyInShip = _state.Value.WaveStorage.Waves[wave].MeleeEnemyInShip;
                     int[] rangeEnemyInShip = _state.Value.WaveStorage.Waves[wave].RangeEnemyInShip;
                     int[] encounters = _state.Value.WaveStorage.Waves[wave].Encounters;
@@ -72,6 +70,9 @@ namespace Client {
                         viewComponent.EcsInfoMB = ship.GetComponent<EcsInfoMB>();
                         viewComponent.EcsInfoMB.Init(_world);
                         viewComponent.EcsInfoMB.SetEntity(shipEntity);
+
+                        if (!ship.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform) Debug.LogError("На корабле нет CanvasPointer'a");
+                        viewComponent.PointerTransform = ship.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform;
 
                         _inactivePool.Value.Add(shipEntity);
 
@@ -119,6 +120,10 @@ namespace Client {
                                         enemyViewComponent.GameObject = enemy;
                                         enemyViewComponent.Animator = enemy.GetComponent<Animator>();
                                         enemyViewComponent.Animator.SetBool("Melee", true);
+
+                                        damageComponent.Value = 10f;
+
+                                        healthComponent.MaxValue = 20;
                                         break;
                                     }
                                 case "Range":
@@ -127,6 +132,10 @@ namespace Client {
                                         enemyViewComponent.GameObject = enemy;
                                         enemyViewComponent.Animator = enemy.GetComponent<Animator>();
                                         enemyViewComponent.Animator.SetBool("Range", true);
+
+                                        damageComponent.Value = 7f;
+
+                                        healthComponent.MaxValue = 10;
                                         break;
                                     }
                             }
@@ -141,10 +150,7 @@ namespace Client {
 
                             targetWeightComponent.Value = 5;
 
-                            healthComponent.MaxValue = 20;
                             healthComponent.CurrentValue = healthComponent.MaxValue;
-
-                            damageComponent.Value = 5f;
 
                             movableComponent.Speed = 5f;
 
