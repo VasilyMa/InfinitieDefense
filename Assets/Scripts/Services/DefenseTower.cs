@@ -6,6 +6,7 @@ public class DefenseTower
 {
     public int TowerHealth;
     public GameObject TowerPrefab;
+    public Mesh TowerMesh;
     public GameObject CannonBallPrefab;
     public int Radius;
     public int Damage;

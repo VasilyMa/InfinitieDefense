@@ -19,6 +19,7 @@ namespace Client
         public bool isMining;
         public Outline Outline;
         public MeshFilter MeshFilter;
+        public MeshFilter ModelMeshFilter;
         public LineRenderer LineRenderer;
 
         public MeleeAttackMB AttackMB;

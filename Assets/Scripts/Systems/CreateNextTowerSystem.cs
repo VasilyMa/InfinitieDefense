@@ -23,6 +23,9 @@ namespace Client
         readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
         readonly EcsFilterInject<Inc<CircleComponent>> _circleFilter = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
+
+        private string Model;
+
         public void Run(EcsSystems systems)
         {
             foreach (var entity in _filter.Value)
@@ -32,7 +35,7 @@ namespace Client
                 int towerIndex = filterComp.TowerIndex;
                 ref var radiusComp = ref _radiusPool.Value.Get(entity);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
-                if (viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
+                //if (viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
 
                 if (!_targetWeightPool.Value.Has(entity))
                 {
@@ -89,7 +92,21 @@ namespace Client
                     ref var healthComponent = ref _healthWeightPool.Value.Get(entity);
 
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
-                    viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
+
+                    //EEEEEXPERIMEEENTS
+
+                    if (!viewComp.GameObject)
+                    {
+                        viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
+                        viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
+                    }
+                    else
+                    {
+                        viewComp.ModelMeshFilter.mesh = _state.Value.DefenseTowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
+                    }
+
+                    //End of the Experiment
+
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
