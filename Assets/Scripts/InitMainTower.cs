@@ -92,6 +92,7 @@ namespace Client
                     {
                         circle++;
                         towerCount = 0;
+                        Angle = circle * 45;
                     }
                     int towerEntity = _world.Value.NewEntity();
                     _state.Value.TowersEntity[i] = towerEntity;
@@ -101,15 +102,17 @@ namespace Client
                     ref var upgradeTowerComponent = ref _upgradeCanvasPool.Value.Add(towerEntity);
                     ref var tComp = ref _tPool.Value.Add(towerEntity);
 
-                    var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radiusComp.Radius;//переделать постановку
-                    var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
+                    var radius = _state.Value.TowerStorage.GetRadiusByID((circle + 1).ToString() + "tower");
+
+                    var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;//переделать постановку
+                    var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;
                     tComp.Position = new Vector3(x, 0, z);
                     tComp.Circle = circle;
                     
 
                     upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0.1f, z), Quaternion.identity);
                     tComp.UpgradePointGO = upgradePoint;
-                    if(circle > _state.Value.HighCircle)
+                    if(circle > _state.Value.Saves.Circle)
                     {
                         upgradePoint.SetActive(false);
                     }
@@ -126,9 +129,6 @@ namespace Client
 
                     Angle += 360 / 6;
                     towerCount++;
-                    circle++;
-                    Angle = 0;
-                    
                 }
             }
 

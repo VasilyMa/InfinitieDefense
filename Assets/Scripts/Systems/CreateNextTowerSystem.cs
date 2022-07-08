@@ -23,6 +23,7 @@ namespace Client
         readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
         readonly EcsFilterInject<Inc<CircleComponent>> _circleFilter = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
+        readonly EcsPoolInject<NewTowerCircleEvent> _circlePool = default;
         public void Run(EcsSystems systems)
         {
             foreach (var entity in _filter.Value)
@@ -64,6 +65,11 @@ namespace Client
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                     targetWeightComponent.Value = 0;
+
+                    //todo
+                    _state.Value.Saves.Circle++;
+                    _state.Value.Saves.SaveCircle(_state.Value.Saves.Circle);
+                    _circlePool.Value.Add(_world.Value.NewEntity());
                 }
                 else
                 {
@@ -154,7 +160,7 @@ namespace Client
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);
                 //radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius * 2, radiusComp.Radius * 2, 1);
 
-                // Создаем отображение для зоны обнаружения
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 Mesh mesh = new Mesh();
                 viewComp.MeshFilter = viewComp.GameObject.GetComponent<MeshFilter>();
                 viewComp.MeshFilter.mesh = mesh;
@@ -215,7 +221,7 @@ namespace Client
                     viewComp.LineRenderer.SetPositions(circleVerticesv);
                     viewComp.LineRenderer.loop = true;
                 }
-                // Закончили создание зоны обнаружения
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
                 _filter.Pools.Inc1.Del(entity);
 

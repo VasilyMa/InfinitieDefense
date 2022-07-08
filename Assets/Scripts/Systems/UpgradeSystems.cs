@@ -5,11 +5,13 @@ using Leopotam.EcsLite.Di;
 namespace Client {
     sealed class UpgradeSystems : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
+        readonly EcsWorldInject _world = default;
         readonly EcsFilterInject<Inc<UpgradeComponent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<NewTowerCircleEvent> _circlePool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
