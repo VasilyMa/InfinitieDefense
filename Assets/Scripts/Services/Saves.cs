@@ -123,6 +123,18 @@ namespace Client
 
             File.WriteAllText(path, JsonUtility.ToJson(Save));
         }
+        public void SaveUpgrades(int[] value)
+        {
+            TowersUpgrade = new int[value.Length];
+            Save.TowersUpgrade = new int[value.Length];
+            for (int i = 0; i < value.Length;i++)
+            {
+                TowersUpgrade[i] = value[i];
+                Save.TowersUpgrade[i] = value[i];
+            }
+
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
 
         #endregion
         public void InitSave()
