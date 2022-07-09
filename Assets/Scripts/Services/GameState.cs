@@ -65,6 +65,9 @@ namespace Client
             Saves.InitSave();
             CurrentPlayerID = "1level";
             PlayerUpgrade = 0;
+            CoinCount = Saves.Coin;
+            RockCount = Saves.Rock;
+            Debug.Log("Save " + Saves.Rock + "State " + RockCount);
         }
 
         public void InitDefenseTowers()

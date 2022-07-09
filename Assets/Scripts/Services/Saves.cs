@@ -21,6 +21,8 @@ namespace Client
         public string[] TowerID;
         public int CurrentWave;
         public int Circle;
+        public int Rock;
+        public int Coin;
 
         public SaveSettings Save = new SaveSettings();
         public string path;
@@ -106,6 +108,20 @@ namespace Client
 
             File.WriteAllText(path, JsonUtility.ToJson(Save));
         }
+        public void SaveRock(int value)
+        {
+            Rock = value;
+            Save.Rock = value;
+
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
+        public void SaveCoin(int value)
+        {
+            Coin = value;
+            Save.Coin = value;
+
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
 
         #endregion
         public void InitSave()
@@ -130,6 +146,8 @@ namespace Client
                 PlayerID = Save.PlayerID;
                 CurrentWave = Save.CurrentWave;
                 Circle = Save.Circle;
+                Rock = Save.Rock;
+                Coin = Save.Coin;
             }
             //если нет, то записываем значения в SaveSettings и создаем файлик
             else
@@ -144,6 +162,8 @@ namespace Client
                 PlayerID = "1level";
                 CurrentWave = 0;
                 Circle = 0;
+                Rock = 0;
+                Coin = 0;
 
 
                 Save.Sounds = Sounds;
@@ -156,6 +176,8 @@ namespace Client
                 Save.PlayerID = PlayerID;
                 Save.CurrentWave = CurrentWave;
                 Save.Circle = Circle;
+                Save.Rock = Rock;
+                Save.Coin = Coin;
 
                 File.WriteAllText(path, JsonUtility.ToJson(Save));
             }
@@ -195,6 +217,8 @@ namespace Client
             public string[] TowerID;
             public int CurrentWave;
             public int Circle;
+            public int Rock;
+            public int Coin;
         }
     }
 }
