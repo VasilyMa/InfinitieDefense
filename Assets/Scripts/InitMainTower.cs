@@ -17,6 +17,7 @@ namespace Client
         readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradeCanvasPool = default;
         readonly EcsPoolInject<CircleComponent> _circlePool = default;
+        readonly EcsPoolInject<CreateNextTowerEvent> _createNextTowerPool = default;
         private float Angle = 0;
 
         public void Init (EcsSystems systems)
@@ -129,6 +130,13 @@ namespace Client
 
                     Angle += 360 / 6;
                     towerCount++;
+
+                    if(_state.Value.DefenseTowers[i] != "empty")
+                    {
+                        ref var createTowerComp = ref _createNextTowerPool.Value.Add(_state.Value.TowersEntity[i]);
+                        createTowerComp.TowerIndex = i;
+                        createTowerComp.Change = false;
+                    }
                 }
             }
 

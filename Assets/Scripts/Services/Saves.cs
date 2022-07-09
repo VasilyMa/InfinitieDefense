@@ -19,6 +19,7 @@ namespace Client
         public int TutorialState;
         public string PlayerID;
         public string[] TowerID;
+        public int[] TowersUpgrade;
         public int CurrentWave;
         public int Circle;
         public int Rock;
@@ -148,6 +149,14 @@ namespace Client
                 Circle = Save.Circle;
                 Rock = Save.Rock;
                 Coin = Save.Coin;
+
+                TowerID = new string[Save.TowerID.Length];
+                TowersUpgrade = new int[Save.TowersUpgrade.Length];
+                for (int i = 0; i < TowerID.Length;i++)
+                {
+                    TowerID[i] = Save.TowerID[i];
+                    TowersUpgrade[i] = Save.TowersUpgrade[i];
+                }
             }
             //если нет, то записываем значения в SaveSettings и создаем файлик
             else
@@ -179,6 +188,8 @@ namespace Client
                 Save.Rock = Rock;
                 Save.Coin = Coin;
 
+                CreateTowerID();
+
                 File.WriteAllText(path, JsonUtility.ToJson(Save));
             }
         }
@@ -202,6 +213,28 @@ namespace Client
             }
             return sceneNumber;
         }
+        public void CreateTowerID()
+        {
+            TowerID = new string[55];
+            Save.TowerID = new string[55];
+            TowersUpgrade = new int[55];
+            Save.TowersUpgrade = new int[55];
+            for (int i = 0; i < TowerID.Length;i++)
+            {
+                if(i == 0)
+                {
+                    TowerID[i] = "1tower";
+                    Save.TowerID[i] = "1tower";
+                }
+                else
+                {
+                    TowerID[i] = "empty";
+                    Save.TowerID[i] = "empty";
+                }
+                TowersUpgrade[i] = 0;
+                Save.TowersUpgrade[i] = 0;
+            }
+        }
 
         [Serializable]
         public class SaveSettings
@@ -215,6 +248,7 @@ namespace Client
             public int TutorialState;
             public string PlayerID;
             public string[] TowerID;
+            public int[] TowersUpgrade;
             public int CurrentWave;
             public int Circle;
             public int Rock;

@@ -8,7 +8,7 @@ namespace Client {
         readonly EcsWorldInject _world = default;
         readonly EcsFilterInject<Inc<UpgradeComponent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
-        readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
+        //readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<NewTowerCircleEvent> _circlePool = default;
