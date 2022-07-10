@@ -23,8 +23,7 @@ namespace Client
         public int RockCount = 0;
         public int CoinCount = 0;
         public int CurrentActivatedShip = 0;
-        private int Wave = 0;
-        private int _currentUpgradeTower = 0;
+        public int Wave = 0;
         public List<Transform> CoinTransformList = new List<Transform>();
         public List<Transform> StoneTransformList = new List<Transform>();
         public GameObject[] DefendersGOs;
@@ -65,8 +64,9 @@ namespace Client
         private void InitSaves()
         {
             Saves.InitSave();
-            CurrentPlayerID = "1level";
+            CurrentPlayerID = Saves.PlayerID;
             PlayerUpgrade = 0;
+            Wave = Saves.CurrentWave;
             CoinCount = Saves.Coin;
             RockCount = Saves.Rock;
             Debug.Log("Save " + Saves.Rock + "State " + RockCount);
