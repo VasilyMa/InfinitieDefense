@@ -17,6 +17,7 @@ namespace Client
         readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradeCanvasPool = default;
         readonly EcsPoolInject<CircleComponent> _circlePool = default;
+        readonly EcsPoolInject<CreateNextTowerEvent> _createNextTowerPool = default;
         private float Angle = 0;
 
         public void Init (EcsSystems systems)
@@ -81,11 +82,19 @@ namespace Client
 
             targetWeightComponent.Value = 0;
 
+            int circle = 0;
+            int towerCount = 0;
             for (int i = 0; i < _state.Value.TowersEntity.Length;i++)
             {
                 if(i == 0) _state.Value.TowersEntity[i] = entity;
                 else
                 {
+                    if(towerCount == 6)
+                    {
+                        circle++;
+                        towerCount = 0;
+                        Angle = circle * 45;
+                    }
                     int towerEntity = _world.Value.NewEntity();
                     _state.Value.TowersEntity[i] = towerEntity;
                     ref var viewComp = ref _viewPool.Value.Add(towerEntity);
@@ -93,24 +102,41 @@ namespace Client
                     _radiusPool.Value.Add(towerEntity);
                     ref var upgradeTowerComponent = ref _upgradeCanvasPool.Value.Add(towerEntity);
                     ref var tComp = ref _tPool.Value.Add(towerEntity);
-                    
-                    var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
-                    var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radiusComp.Radius;
+
+                    var radius = _state.Value.TowerStorage.GetRadiusByID((circle + 1).ToString() + "tower");
+
+                    var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;//переделать постановку
+                    var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;
                     tComp.Position = new Vector3(x, 0, z);
+                    tComp.Circle = circle;
+                    
 
                     upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0.1f, z), Quaternion.identity);
+                    tComp.UpgradePointGO = upgradePoint;
+                    if(circle > _state.Value.Saves.Circle)
+                    {
+                        upgradePoint.SetActive(false);
+                    }
                     upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
                     upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
                     upgradeTowerComponent.point = upgradePoint.gameObject;
                     upgradeTowerComponent.upgrade = upgradeInfo;
-                    
+
                     upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
                     upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
                     upgradePointMB.TowerIndex = i;
                     upgradeTowerComponent.Index = upgradePointMB.TowerIndex;
                     viewComp.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
 
-                    Angle += 360 / (_state.Value.TowerCount - 1);
+                    Angle += 360 / 6;
+                    towerCount++;
+
+                    if(_state.Value.DefenseTowers[i] != "empty")
+                    {
+                        ref var createTowerComp = ref _createNextTowerPool.Value.Add(_state.Value.TowersEntity[i]);
+                        createTowerComp.TowerIndex = i;
+                        createTowerComp.Change = false;
+                    }
                 }
             }
 

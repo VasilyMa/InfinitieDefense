@@ -6,5 +6,7 @@ namespace Client
     {
         public Vector3 Position;
         public string TowerID;
+        public int Circle;
+        public GameObject UpgradePointGO;
     }
 }

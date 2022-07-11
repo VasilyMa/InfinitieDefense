@@ -19677,6 +19677,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6524960714590515784, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _towerCount
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524960714590515784, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: _uguiEmitter
       value: 
       objectReference: {fileID: 1698714584}

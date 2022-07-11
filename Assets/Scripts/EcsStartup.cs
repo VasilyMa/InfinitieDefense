@@ -105,6 +105,9 @@ namespace Client
                 .Add(new CanvasShipPointerSystem())
                 .Add(new CanvasPointerSystem())
 
+                .Add(new NewTowersCircleSystem())
+                .Add(new SavesSystem())
+
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
                 .DelHere<ActivateWaveShipsEvent>()
