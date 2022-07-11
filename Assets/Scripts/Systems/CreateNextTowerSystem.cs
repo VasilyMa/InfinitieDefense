@@ -35,7 +35,7 @@ namespace Client
                 int towerIndex = filterComp.TowerIndex;
                 ref var radiusComp = ref _radiusPool.Value.Get(entity);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
-                //if (viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
+                if (viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
 
                 if (!_targetWeightPool.Value.Has(entity))
                 {
@@ -93,18 +93,19 @@ namespace Client
 
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
 
+                    viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
                     //EEEEEXPERIMEEENTS
-
-                    if (!viewComp.GameObject)
-                    {
-                        viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
-                        viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
-                    }
-                    else
-                    {
-                        viewComp.ModelMeshFilter.mesh = _state.Value.DefenseTowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
-                    }
-
+                    //
+                    //if (!viewComp.GameObject)
+                    //{
+                    //    viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
+                    //    viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
+                    //}
+                    //else
+                    //{
+                    //    viewComp.ModelMeshFilter.mesh = _state.Value.DefenseTowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
+                    //}
+                    //
                     //End of the Experiment
 
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
