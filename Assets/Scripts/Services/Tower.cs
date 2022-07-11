@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tower
 {
+    public int TowerLevel;
     public int TowerHealth;
     public GameObject TowerPrefab;
     public int Radius;

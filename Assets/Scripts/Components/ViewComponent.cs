@@ -9,6 +9,7 @@ namespace Client
         public Rigidbody Rigidbody;
         public Animator Animator;
         public HealthbarMB Healthbar;
+        public LevelMB Level;
         public Transform Transform;
         public Transform PointerTransform;
         public Transform WeaponHolder;

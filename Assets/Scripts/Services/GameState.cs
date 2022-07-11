@@ -34,7 +34,7 @@ namespace Client
         public int[] TowersEntity;
         public int TowerCount;
         public string CurrentPlayerID;
-        public int PlayerUpgrade;
+        public int PlayerLevel;
         public int AllEnemies;
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, 
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, WaveStorage waveStorage,
@@ -64,7 +64,7 @@ namespace Client
         {
             Saves.InitSave();
             CurrentPlayerID = "1level";
-            PlayerUpgrade = 0;
+            PlayerLevel = 0;
         }
 
         public void InitDefenseTowers()
@@ -115,11 +115,11 @@ namespace Client
         }
         public void UpgradePlayer()
         {
-            PlayerUpgrade++;
+            PlayerLevel++;
             int neededUpgradeValue = PlayerStorage.GetUpgradeByID(CurrentPlayerID);
-            if(PlayerUpgrade == neededUpgradeValue)
+            if(PlayerLevel == neededUpgradeValue)
             {
-                PlayerUpgrade = 0;
+                PlayerLevel = 0;
                 World.GetPool<CreateNewPlayerEvent>().Add(EntityPlayer);
             }
         }

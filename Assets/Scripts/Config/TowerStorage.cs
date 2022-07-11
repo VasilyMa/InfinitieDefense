@@ -15,6 +15,7 @@ public class TowerStorage : ScriptableObject
             //MELEE
             ["1tower"] = new Tower
             {
+                TowerLevel = 1,
                 Radius = 25,
                 TowerHealth = 2500,
                 TowerPrefab = TowerPrefabs[0],
@@ -25,6 +26,7 @@ public class TowerStorage : ScriptableObject
             },
             ["2tower"] = new Tower
             {
+                TowerLevel = 2,
                 Radius = 40,
                 TowerHealth = 2900,
                 TowerPrefab = TowerPrefabs[0],
@@ -35,6 +37,7 @@ public class TowerStorage : ScriptableObject
             },
             ["3tower"] = new Tower
             {
+                TowerLevel = 3,
                 Radius = 50,
                 TowerHealth = 3300,
                 TowerPrefab = TowerPrefabs[0],
@@ -45,6 +48,7 @@ public class TowerStorage : ScriptableObject
             },
             ["4tower"] = new Tower
             {
+                TowerLevel = 4,
                 Radius = 60,
                 TowerHealth = 3600,
                 TowerPrefab = TowerPrefabs[1],
@@ -55,6 +59,7 @@ public class TowerStorage : ScriptableObject
             },
             ["5tower"] = new Tower
             {
+                TowerLevel = 5,
                 Radius = 65,
                 TowerHealth = 3900,
                 TowerPrefab = TowerPrefabs[1],
@@ -65,6 +70,7 @@ public class TowerStorage : ScriptableObject
             },
             ["6tower"] = new Tower
             {
+                TowerLevel = 6,
                 Radius = 70,
                 TowerHealth = 4200,
                 TowerPrefab = TowerPrefabs[1],
@@ -75,6 +81,7 @@ public class TowerStorage : ScriptableObject
             },
             ["7tower"] = new Tower
             {
+                TowerLevel = 7,
                 Radius = 75,
                 TowerHealth = 4500,
                 TowerPrefab = TowerPrefabs[2],
@@ -85,6 +92,7 @@ public class TowerStorage : ScriptableObject
             },
             ["8tower"] = new Tower
             {
+                TowerLevel = 8,
                 Radius = 80,
                 TowerHealth = 4800,
                 TowerPrefab = TowerPrefabs[2],
@@ -95,6 +103,7 @@ public class TowerStorage : ScriptableObject
             },
             ["9tower"] = new Tower
             {
+                TowerLevel = 9,
                 Radius = 85,
                 TowerHealth = 5100,
                 TowerPrefab = TowerPrefabs[2],
@@ -132,5 +141,8 @@ public class TowerStorage : ScriptableObject
     {
         return Towers[id].DefenderCount;
     }
-    
+    public int GetLevelByID(string id)
+    {
+        return Towers[id].TowerLevel;
+    }
 }

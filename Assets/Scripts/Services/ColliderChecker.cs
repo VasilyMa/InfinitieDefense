@@ -109,6 +109,7 @@ namespace Client
                                 _player.animator.SetBool("isMining", true);
                                 view.isMining = true;
                                 view.isFight = false;
+                                _fightPool.Del(player);
                                 Debug.Log("Mining!");
                             }
                         }
@@ -179,6 +180,8 @@ namespace Client
                         Debug.Log("Mining!");
                     }
                 }
+                if(_fightPool.Has(_state.EntityPlayer))
+                    _fightPool.Del(_state.EntityPlayer);
             }
         }
     }

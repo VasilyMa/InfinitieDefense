@@ -62,6 +62,9 @@ namespace Client
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
+                    viewComp.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                     targetWeightComponent.Value = 0;
                 }
@@ -96,6 +99,10 @@ namespace Client
                     viewComp.Healthbar.SetMaxHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+                    viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
+                    viewComp.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                     damageComponent.Value = _state.Value.DefenseTowerStorage.GetDamageByID(_state.Value.DefenseTowers[towerIndex]);
 

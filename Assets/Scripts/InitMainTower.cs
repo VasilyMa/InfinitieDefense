@@ -76,7 +76,9 @@ namespace Client
             viewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
-
+            viewComponent.Level = mainTower.GetComponent<LevelMB>();
+            viewComponent.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(towerID));
+            viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
             ref var targetWeightComponent = ref _world.Value.GetPool<TargetWeightComponent>().Add(entity);
 
             targetWeightComponent.Value = 0;

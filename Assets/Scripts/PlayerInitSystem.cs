@@ -56,10 +56,13 @@ namespace Client
             viewComponent.WeaponHolder = GameObject.Find("WeaponHolder").transform;
             viewComponent.Animator = PlayerGo.GetComponent<Animator>();
             viewComponent.Healthbar = PlayerGo.GetComponent<HealthbarMB>();
+            viewComponent.Level = PlayerGo.GetComponent<LevelMB>();
             viewComponent.Healthbar.SetMaxHealth(_state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));
             viewComponent.Healthbar.SetHealth(_state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));
             viewComponent.Healthbar.ToggleSwitcher();
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.Level.UpdateLevel(_state.Value.PlayerLevel);
+            viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
             viewComponent.EcsInfoMB.Init(_world);
             viewComponent.EcsInfoMB.SetEntity(playerEntity);
@@ -68,7 +71,7 @@ namespace Client
             viewComponent.HitParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(1).GetComponent<ParticleSystem>();
             viewComponent.DropItemParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(2).GetComponent<ParticleSystem>();
             viewComponent.Regeneration = PlayerGo.transform.GetChild(4).transform.GetChild(3).GetComponent<ParticleSystem>();
-
+            
             pointerComponent.player = PlayerGo;
 
             targetWeightComponent.Value = 5;
