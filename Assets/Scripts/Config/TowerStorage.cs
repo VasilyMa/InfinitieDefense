@@ -4,7 +4,10 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "TowerStorage", menuName = "Configs/TowerStorage", order = 0)]
 public class TowerStorage : ScriptableObject
 {
+    [Header("Виды замков")]
     public GameObject[] TowerPrefabs;
+    [Header("Меши замков")]
+    public Mesh[] TowerMeshs;
     public GameObject DefenderPrefab;
     public Dictionary<string, Tower> Towers;
 

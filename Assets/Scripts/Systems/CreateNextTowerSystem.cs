@@ -36,7 +36,6 @@ namespace Client
                 int towerIndex = filterComp.TowerIndex;
                 ref var radiusComp = ref _radiusPool.Value.Get(entity);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
-                if (viewComp.GameObject != null) GameObject.Destroy(viewComp.GameObject);
 
                 if (!_targetWeightPool.Value.Has(entity))
                 {
@@ -47,10 +46,18 @@ namespace Client
 
                 viewComp.UpgradeParticleSystem.Play();
                 
-                if (towerIndex == 0)
+                if (towerIndex == 0) // main tower
                 {
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.TowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
-                    viewComp.GameObject = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), Vector3.zero, Quaternion.identity);
+
+                    ref var towerComp = ref _towerPool.Value.Get(entity);
+                    towerComp.Level++;
+
+                    if (!viewComp.GameObject)
+                    {
+                        viewComp.GameObject = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), Vector3.zero, Quaternion.identity);
+                    }
+
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     foreach (var entityCircle in _circleFilter.Value)
@@ -70,11 +77,9 @@ namespace Client
                     targetWeightComponent.Value = 0;
 
                     //todo
-                    _state.Value.Saves.Circle++;
-                    _state.Value.Saves.SaveCircle(_state.Value.Saves.Circle);
                     _circlePool.Value.Add(_world.Value.NewEntity());
                 }
-                else
+                else // defence towers
                 {
                     ref var towerComp = ref _towerPool.Value.Get(entity);
                     if (!_targetablePool.Value.Has(entity))
@@ -103,20 +108,16 @@ namespace Client
                     {
                         _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
                     }
-                    viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
-                    //EEEEEXPERIMEEENTS
-                    //
-                    //if (!viewComp.GameObject)
-                    //{
-                    //    viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
-                    //    viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
-                    //}
-                    //else
-                    //{
-                    //    viewComp.ModelMeshFilter.mesh = _state.Value.DefenseTowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
-                    //}
-                    //
-                    //End of the Experiment
+                    
+                    if (!viewComp.GameObject)
+                    {
+                        viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
+                        viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
+                    }
+                    else
+                    {
+                        viewComp.ModelMeshFilter.mesh = _state.Value.DefenseTowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
+                    }
 
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();

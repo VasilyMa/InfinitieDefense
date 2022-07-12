@@ -5,20 +5,23 @@ using Leopotam.EcsLite.Di;
 namespace Client {
     sealed class NewTowersCircleSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
-        readonly EcsFilterInject<Inc<NewTowerCircleEvent>> _f = default;
-        readonly EcsFilterInject<Inc<TowerTag>> _filter = default;
+        readonly EcsFilterInject<Inc<NewTowerCircleEvent>> _newTowerCircleFilter = default;
+        readonly EcsFilterInject<Inc<TowerTag>, Exc<MainTowerTag>> _towerFilter = default;
+        readonly EcsPoolInject<TowerTag> _towerPool = default;
         public void Run (EcsSystems systems) {
-            foreach(var _ in _f.Value)
+            foreach(var eventEntity in _newTowerCircleFilter.Value)
             {
-                foreach(var entity in _filter.Value)
+                foreach(var towerEntity in _towerFilter.Value)
                 {
-                    ref var towerComp = ref _filter.Pools.Inc1.Get(entity);
-                    if(towerComp.Circle == _state.Value.Saves.Circle)
+                    ref var towerComp = ref _towerFilter.Pools.Inc1.Get(towerEntity);
+                    ref var mainTowerComp = ref _towerPool.Value.Get(_state.Value.TowersEntity[0]);
+
+                    if (towerComp.CircleRadiusLevel <= mainTowerComp.Level - 1)
                     {
                         towerComp.UpgradePointGO.SetActive(true);
                     }
                 }
-                _f.Pools.Inc1.Del(_);
+                _newTowerCircleFilter.Pools.Inc1.Del(eventEntity);
             }
         }
     }

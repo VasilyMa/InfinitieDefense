@@ -141,7 +141,6 @@ namespace Client
 
         public void SetNextWave()
         {
-            // нужен фильтр - readonly EcsFilterInject<Inc<ShipTag, InactiveTag, CurrentWaveTag>> _InactiveShipsFilter = default;
             EcsFilter inactiveShipsFilter = World.Filter<ShipTag>().Inc<InactiveTag>().Inc<CurrentWaveTag>().End();
             foreach (var inactiveShip in inactiveShipsFilter)
             {

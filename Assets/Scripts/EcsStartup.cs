@@ -55,7 +55,6 @@ namespace Client
 
                 .Add(new OnOffTowerAttack())
                 
-
                 .Add(new UnitLookingSystem())
                 .Add(new DefendersFallbackSystem())
 

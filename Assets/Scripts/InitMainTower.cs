@@ -9,11 +9,11 @@ namespace Client
     {
         readonly EcsSharedInject<GameState> _state;
         readonly EcsWorldInject _world = default;
-        readonly EcsPoolInject<MainTowerTag> _towerPool = default;
+        readonly EcsPoolInject<MainTowerTag> _mainTowerPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
-        readonly EcsPoolInject<TowerTag> _tPool = default;
+        readonly EcsPoolInject<TowerTag> _towerPool = default;
         readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradeCanvasPool = default;
         readonly EcsPoolInject<CircleComponent> _circlePool = default;
@@ -22,52 +22,49 @@ namespace Client
 
         public void Init (EcsSystems systems)
         {
-            var entity = _world.Value.NewEntity();
+            var mainTowerEntity = _world.Value.NewEntity();
             string towerID = _state.Value.DefenseTowers[0];
             //_state.Value.CurrentTowerID = towerID;
             
-            ref var towerComp = ref _towerPool.Value.Add(entity);
-            ref var upgradeComponent = ref _upgradeCanvasPool.Value.Add(entity);
-            
-            towerComp.DefendersPositions = new Vector3[10];
+            ref var mainTowerComp = ref _mainTowerPool.Value.Add(mainTowerEntity);
+            ref var upgradeComponent = ref _upgradeCanvasPool.Value.Add(mainTowerEntity);
+            ref var towerComp = ref _towerPool.Value.Add(mainTowerEntity);
+            towerComp.Level = 1;
+            mainTowerComp.DefendersPositions = new Vector3[10];
 
-            for (int d = 0; d < towerComp.DefendersPositions.Length;d++)
+            for (int d = 0; d < mainTowerComp.DefendersPositions.Length;d++)
             {
                 var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 7;
                 var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 7;
                 
                 Angle += 360 / 10;
 
-                var ent = _world.Value.NewEntity();
-                ref var defComp = ref _defenderPool.Value.Add(ent);
-                defComp.Position = new Vector3(x, 0, z);
-                _state.Value.DefendersEntity[d] = ent;
+                var defenderEntity = _world.Value.NewEntity();
+                ref var defenderComp = ref _defenderPool.Value.Add(defenderEntity);
+                defenderComp.Position = new Vector3(x, 0, z);
+                _state.Value.DefendersEntity[d] = defenderEntity;
             }
 
-            ref var radiusComp = ref _radiusPool.Value.Add(entity);
+            ref var radiusComp = ref _radiusPool.Value.Add(mainTowerEntity);
             radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(towerID);
 
-            ref var healthComponent = ref _healthPool.Value.Add(entity);
+            ref var healthComponent = ref _healthPool.Value.Add(mainTowerEntity);
             healthComponent.MaxValue = _state.Value.TowerStorage.GetHealthByID(towerID);
             healthComponent.CurrentValue = healthComponent.MaxValue;
 
-            GameObject upgradePoint = null;
-            UpgradePointMB upgradePointMB = null;
-            UpgradeCanvasMB upgradeInfo = null;
-
             var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
-            upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0.1f, 0), Quaternion.identity);
-            upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
+            var upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0.1f, 0), Quaternion.identity);
+            var upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
             upgradeComponent.point = upgradePoint.gameObject;
             upgradeComponent.upgrade = upgradeInfo;
             upgradeComponent.Index = 0;
             upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
             upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("empty"));
 
-            upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
+            var upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
             upgradePointMB.TowerIndex = 0;
 
-            ref var viewComponent = ref _viewPool.Value.Add(entity);
+            ref var viewComponent = ref _viewPool.Value.Add(mainTowerEntity);
             viewComponent.GameObject = mainTower;
             viewComponent.Transform = mainTower.transform;
             Angle = 0;
@@ -78,22 +75,22 @@ namespace Client
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
 
-            ref var targetWeightComponent = ref _world.Value.GetPool<TargetWeightComponent>().Add(entity);
+            ref var targetWeightComponent = ref _world.Value.GetPool<TargetWeightComponent>().Add(mainTowerEntity);
 
             targetWeightComponent.Value = 0;
 
-            int circle = 0;
+            int circleRadiusLevel = 0;
             int towerCount = 0;
             for (int i = 0; i < _state.Value.TowersEntity.Length;i++)
             {
-                if(i == 0) _state.Value.TowersEntity[i] = entity;
+                if(i == 0) _state.Value.TowersEntity[i] = mainTowerEntity;
                 else
                 {
                     if(towerCount == 6)
                     {
-                        circle++;
+                        circleRadiusLevel++;
                         towerCount = 0;
-                        Angle = circle * 45;
+                        Angle = circleRadiusLevel * 45;
                     }
                     int towerEntity = _world.Value.NewEntity();
                     _state.Value.TowersEntity[i] = towerEntity;
@@ -101,22 +98,23 @@ namespace Client
                     _healthPool.Value.Add(towerEntity);
                     _radiusPool.Value.Add(towerEntity);
                     ref var upgradeTowerComponent = ref _upgradeCanvasPool.Value.Add(towerEntity);
-                    ref var tComp = ref _tPool.Value.Add(towerEntity);
+                    ref var tComp = ref _towerPool.Value.Add(towerEntity);
 
-                    var radius = _state.Value.TowerStorage.GetRadiusByID((circle + 1).ToString() + "tower");
+                    var radius = _state.Value.TowerStorage.GetRadiusByID((circleRadiusLevel + 1).ToString() + "tower");
 
                     var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;//переделать постановку
                     var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;
                     tComp.Position = new Vector3(x, 0, z);
-                    tComp.Circle = circle;
+                    tComp.CircleRadiusLevel = circleRadiusLevel;
                     
 
                     upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0.1f, z), Quaternion.identity);
                     tComp.UpgradePointGO = upgradePoint;
-                    if(circle > _state.Value.Saves.Circle)
+                    if (circleRadiusLevel > _state.Value.Saves.TowersUpgrade[0])
                     {
                         upgradePoint.SetActive(false);
                     }
+
                     upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
                     upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
                     upgradeTowerComponent.point = upgradePoint.gameObject;
