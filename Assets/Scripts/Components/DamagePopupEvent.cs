@@ -4,5 +4,6 @@ namespace Client {
         public int DamageAmount;
         public GameObject DamageObject;
         public Vector3 target;
+        public float timeOut;
     }
 }

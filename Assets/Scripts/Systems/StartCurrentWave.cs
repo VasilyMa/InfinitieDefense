@@ -169,9 +169,11 @@ namespace Client {
                             enemyViewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
                             enemyViewComponent.Healthbar.ToggleSwitcher();
                             enemyViewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                            enemyViewComponent.DamagePopups = new List<GameObject>();
                             for (int y = 0; y < enemyViewComponent.Transform.GetChild(0).transform.childCount; y++)
                             {
-                                enemyViewComponent.DamagePopups.Add(enemy.transform.GetChild(0).transform.GetChild(y).gameObject);
+                                var popup = enemyViewComponent.Transform.GetChild(0).transform.GetChild(y).gameObject;
+                                enemyViewComponent.DamagePopups.Add(popup);
                                 enemyViewComponent.DamagePopups[y].SetActive(false);
                             }
                             

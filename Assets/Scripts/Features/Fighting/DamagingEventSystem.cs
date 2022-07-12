@@ -46,9 +46,23 @@ namespace Client
 
                 healthPointComponent.CurrentValue -= damagingEventComponent.DamageValue;
                 viewComp.Healthbar.UpdateHealth(healthPointComponent.CurrentValue);
+                GameObject popup = null;
+                foreach (var item in viewComp.DamagePopups)
+                {
+                    if (!item.activeSelf)
+                    {
+                        popup = item;
+                        break;
+                    }
+                }
+
                 ref var popupComp = ref _popupEvent.Value.Add(_world.Value.NewEntity());
+                popup.gameObject.transform.position = viewComp.GameObject.transform.position;
                 popupComp.DamageAmount = (int)damagingEventComponent.DamageValue;
                 popupComp.target = new Vector3(viewComp.Transform.position.x + Random.Range(-3, 3), viewComp.Transform.position.y + Random.Range(1, 4), viewComp.Transform.position.z + Random.Range(-3, 3));
+                popupComp.DamageObject = popup;
+                popupComp.timeOut = 1f;
+
                 if (_targetablePool.Value.Has(damagingEventComponent.TargetEntity))
                 {
                     ref var targetingEvent = ref _targetingEventPool.Value.Add(_world.Value.NewEntity());
