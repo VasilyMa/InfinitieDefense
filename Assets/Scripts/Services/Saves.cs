@@ -18,8 +18,13 @@ namespace Client
         public int SceneNumber;
         public int TutorialState;
         public string PlayerID;
+        public int PlayerUpgrade;
         public string[] TowerID;
+        public int[] TowersUpgrade;
         public int CurrentWave;
+        public int Circle;
+        public int Rock;
+        public int Coin;
 
         public SaveSettings Save = new SaveSettings();
         public string path;
@@ -98,6 +103,46 @@ namespace Client
 
             File.WriteAllText(path, JsonUtility.ToJson(Save));
         }
+        public void SaveCircle(int value)
+        {
+            Save.Circle = value;
+            Circle = value;
+
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
+        public void SaveRock(int value)
+        {
+            Rock = value;
+            Save.Rock = value;
+
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
+        public void SaveCoin(int value)
+        {
+            Coin = value;
+            Save.Coin = value;
+
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
+        public void SaveUpgrades(int[] value)
+        {
+            TowersUpgrade = new int[value.Length];
+            Save.TowersUpgrade = new int[value.Length];
+            for (int i = 0; i < value.Length;i++)
+            {
+                TowersUpgrade[i] = value[i];
+                Save.TowersUpgrade[i] = value[i];
+            }
+
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
+        public void SavePlayerUpgrade(int value)
+        {
+            PlayerUpgrade = value;
+            Save.PlayerUpgrade = value;
+
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
 
         #endregion
         public void InitSave()
@@ -121,6 +166,18 @@ namespace Client
                 TutorialState = Save.TutorialState;
                 PlayerID = Save.PlayerID;
                 CurrentWave = Save.CurrentWave;
+                Circle = Save.Circle;
+                Rock = Save.Rock;
+                Coin = Save.Coin;
+                PlayerUpgrade = Save.PlayerUpgrade;
+
+                TowerID = new string[Save.TowerID.Length];
+                TowersUpgrade = new int[Save.TowersUpgrade.Length];
+                for (int i = 0; i < TowerID.Length;i++)
+                {
+                    TowerID[i] = Save.TowerID[i];
+                    TowersUpgrade[i] = Save.TowersUpgrade[i];
+                }
             }
             //если нет, то записываем значения в SaveSettings и создаем файлик
             else
@@ -134,6 +191,10 @@ namespace Client
                 TutorialState = 1;
                 PlayerID = "1level";
                 CurrentWave = 0;
+                Circle = 0;
+                Rock = 0;
+                Coin = 0;
+                PlayerUpgrade = 0;
 
 
                 Save.Sounds = Sounds;
@@ -144,7 +205,13 @@ namespace Client
                 Save.SceneNumber = SceneNumber;
                 Save.TutorialState = TutorialState;
                 Save.PlayerID = PlayerID;
+                Save.PlayerUpgrade = PlayerUpgrade;
                 Save.CurrentWave = CurrentWave;
+                Save.Circle = Circle;
+                Save.Rock = Rock;
+                Save.Coin = Coin;
+
+                CreateTowerID();
 
                 File.WriteAllText(path, JsonUtility.ToJson(Save));
             }
@@ -169,6 +236,28 @@ namespace Client
             }
             return sceneNumber;
         }
+        public void CreateTowerID()
+        {
+            TowerID = new string[55];
+            Save.TowerID = new string[55];
+            TowersUpgrade = new int[55];
+            Save.TowersUpgrade = new int[55];
+            for (int i = 0; i < TowerID.Length;i++)
+            {
+                if(i == 0)
+                {
+                    TowerID[i] = "1tower";
+                    Save.TowerID[i] = "1tower";
+                }
+                else
+                {
+                    TowerID[i] = "empty";
+                    Save.TowerID[i] = "empty";
+                }
+                TowersUpgrade[i] = 0;
+                Save.TowersUpgrade[i] = 0;
+            }
+        }
 
         [Serializable]
         public class SaveSettings
@@ -181,8 +270,13 @@ namespace Client
             public int SceneNumber;
             public int TutorialState;
             public string PlayerID;
+            public int PlayerUpgrade;
             public string[] TowerID;
+            public int[] TowersUpgrade;
             public int CurrentWave;
+            public int Circle;
+            public int Rock;
+            public int Coin;
         }
     }
 }

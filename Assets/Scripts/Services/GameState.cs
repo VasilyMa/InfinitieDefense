@@ -51,9 +51,11 @@ namespace Client
             PlayerStorage.Init();
             TowerStorage.Init();
             DefenseTowerStorage.Init();
+            
+            
+            InitSaves();
             InitDefenseTowers();
             InitDefenders();
-            InitSaves();
         }
         public void InitDefenders()
         {
@@ -63,8 +65,12 @@ namespace Client
         private void InitSaves()
         {
             Saves.InitSave();
-            CurrentPlayerID = "1level";
+            CurrentPlayerID = Saves.PlayerID;
             PlayerLevel = 0;
+            CurrentWave = Saves.CurrentWave;
+            CoinCount = Saves.Coin;
+            RockCount = Saves.Rock;
+            Debug.Log("Save " + Saves.Rock + "State " + RockCount);
         }
 
         public void InitDefenseTowers()
@@ -74,10 +80,8 @@ namespace Client
             TowersEntity = new int[TowerCount];
             for (int i = 0; i < DefenseTowers.Length;i++)
             {
-                if(i == 0) DefenseTowers[i] = "1tower";
-                else DefenseTowers[i] = "empty";
-
-                TowersUpgrade[i] = 0;
+                DefenseTowers[i] = Saves.TowerID[i];
+                TowersUpgrade[i] = Saves.TowersUpgrade[i];
             }
 
         }
@@ -111,6 +115,7 @@ namespace Client
                 TowersUpgrade[towerIndex] = 0;
                 ref var createNextTowerComp = ref World.GetPool<CreateNextTowerEvent>().Add(TowersEntity[towerIndex]);
                 createNextTowerComp.TowerIndex = towerIndex;
+                createNextTowerComp.Change = true;
             }
         }
         public void UpgradePlayer()

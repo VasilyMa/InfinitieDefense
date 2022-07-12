@@ -95,6 +95,7 @@ namespace Client
 
                 .Add(new DamagingEventSystem())
                 .Add(new TargetingEventSystem())
+                .Add(new DamagePopupSystem())
 
                 .Add(new ReloadSystem())
                 .Add(new DieSystem())
@@ -104,6 +105,9 @@ namespace Client
                 .Add(new UpgradeCanvasSystem())
                 .Add(new CanvasShipPointerSystem())
                 .Add(new CanvasPointerSystem())
+
+                .Add(new NewTowersCircleSystem())
+                .Add(new SavesSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()

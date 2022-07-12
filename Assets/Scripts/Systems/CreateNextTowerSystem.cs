@@ -23,6 +23,10 @@ namespace Client
         readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
         readonly EcsFilterInject<Inc<CircleComponent>> _circleFilter = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
+        readonly EcsPoolInject<NewTowerCircleEvent> _circlePool = default;
+
+        private string Model;
+
         public void Run(EcsSystems systems)
         {
             foreach (var entity in _filter.Value)
@@ -67,6 +71,11 @@ namespace Client
                     viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                     targetWeightComponent.Value = 0;
+
+                    //todo
+                    _state.Value.Saves.Circle++;
+                    _state.Value.Saves.SaveCircle(_state.Value.Saves.Circle);
+                    _circlePool.Value.Add(_world.Value.NewEntity());
                 }
                 else
                 {
@@ -92,7 +101,26 @@ namespace Client
                     ref var healthComponent = ref _healthWeightPool.Value.Get(entity);
 
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
+
+                    if (filterComp.Change)
+                    {
+                        _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
+                    }
                     viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
+                    //EEEEEXPERIMEEENTS
+                    //
+                    //if (!viewComp.GameObject)
+                    //{
+                    //    viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
+                    //    viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
+                    //}
+                    //else
+                    //{
+                    //    viewComp.ModelMeshFilter.mesh = _state.Value.DefenseTowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
+                    //}
+                    //
+                    //End of the Experiment
+
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
@@ -161,7 +189,6 @@ namespace Client
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);
                 //radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius * 2, radiusComp.Radius * 2, 1);
 
-                // —оздаем отображение дл€ зоны обнаружени€
                 Mesh mesh = new Mesh();
                 viewComp.MeshFilter = viewComp.GameObject.GetComponent<MeshFilter>();
                 viewComp.MeshFilter.mesh = mesh;
@@ -222,7 +249,6 @@ namespace Client
                     viewComp.LineRenderer.SetPositions(circleVerticesv);
                     viewComp.LineRenderer.loop = true;
                 }
-                // «акончили создание зоны обнаружени€
 
                 _filter.Pools.Inc1.Del(entity);
 

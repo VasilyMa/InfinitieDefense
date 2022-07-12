@@ -18,7 +18,7 @@ namespace Client
         readonly EcsPoolInject<Targetable> _targetablePool = default;
 
         readonly EcsSharedInject<GameState> _state = default;
-        
+        readonly EcsPoolInject<DamagePopupEvent> _popupEvent = default;
         public void Run (EcsSystems systems)
         {
             foreach (var entity in _damagingEventFilter.Value)
@@ -43,10 +43,12 @@ namespace Client
                 {
                     damagingEventComponent.DamageValue = healthPointComponent.CurrentValue;
                 }
-               
+
                 healthPointComponent.CurrentValue -= damagingEventComponent.DamageValue;
                 viewComp.Healthbar.UpdateHealth(healthPointComponent.CurrentValue);
-
+                ref var popupComp = ref _popupEvent.Value.Add(_world.Value.NewEntity());
+                popupComp.DamageAmount = (int)damagingEventComponent.DamageValue;
+                popupComp.target = new Vector3(viewComp.Transform.position.x + Random.Range(-3, 3), viewComp.Transform.position.y + Random.Range(1, 4), viewComp.Transform.position.z + Random.Range(-3, 3));
                 if (_targetablePool.Value.Has(damagingEventComponent.TargetEntity))
                 {
                     ref var targetingEvent = ref _targetingEventPool.Value.Add(_world.Value.NewEntity());

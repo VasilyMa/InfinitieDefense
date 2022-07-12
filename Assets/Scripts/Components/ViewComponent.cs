@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,7 @@ namespace Client
         public Animator Animator;
         public HealthbarMB Healthbar;
         public LevelMB Level;
+        public List<GameObject> DamagePopups;
         public Transform Transform;
         public Transform PointerTransform;
         public Transform WeaponHolder;
@@ -20,6 +22,7 @@ namespace Client
         public bool isMining;
         public Outline Outline;
         public MeshFilter MeshFilter;
+        public MeshFilter ModelMeshFilter;
         public LineRenderer LineRenderer;
 
         public MeleeAttackMB AttackMB;

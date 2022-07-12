@@ -71,7 +71,8 @@ namespace Client
             viewComponent.HitParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(1).GetComponent<ParticleSystem>();
             viewComponent.DropItemParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(2).GetComponent<ParticleSystem>();
             viewComponent.Regeneration = PlayerGo.transform.GetChild(4).transform.GetChild(3).GetComponent<ParticleSystem>();
-            
+            //viewComponent.DamagePopup = GameObject.Find("CanvasDamagePopup");
+            //viewComponent.DamagePopup.SetActive(false);
             pointerComponent.player = PlayerGo;
 
             targetWeightComponent.Value = 5;
@@ -99,6 +100,20 @@ namespace Client
             cooldown.maxValue = 2f;
             cooldown.currentValue = 0;
             _reloadPool.Value.Add(_state.Value.EntityPlayer);
+
+            //todo заполнить ресхолдер монетками и камнями
+            for (int i = 0; i < _state.Value.RockCount;i++)
+            {
+                var rockTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RockPrefab, new Vector3(0, i * 0.6f, 0), Quaternion.identity,player.ResHolderTransform).GetComponent<Transform>();
+                rockTransform.localPosition = new Vector3(0, i * 0.6f, 0);
+                _state.Value.StoneTransformList.Add(rockTransform);
+            }
+            for (int i = 0; i < _state.Value.CoinCount;i++)
+            {
+                var coinTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.GoldPrefab, new Vector3(0, _state.Value.RockCount * 0.6f + i * 0.3f, 0), Quaternion.identity, player.ResHolderTransform).GetComponent<Transform>();
+                coinTransform.localPosition = new Vector3(0, _state.Value.RockCount * 0.6f + i * 0.3f, 0);
+                _state.Value.CoinTransformList.Add(coinTransform);
+            }
         }
     }
 }
