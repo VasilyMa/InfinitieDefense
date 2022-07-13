@@ -23,7 +23,7 @@ namespace Client
         public int RockCount = 0;
         public int CoinCount = 0;
         public int CurrentEncounter = 0;
-        private int CurrentWave = 0;
+        private int CurrentWave = -1;
         private int _currentUpgradeTower = 0;
         public List<Transform> CoinTransformList = new List<Transform>();
         public List<Transform> StoneTransformList = new List<Transform>();
@@ -141,7 +141,6 @@ namespace Client
 
         public void SetNextWave()
         {
-            // нужен фильтр - readonly EcsFilterInject<Inc<ShipTag, InactiveTag, CurrentWaveTag>> _InactiveShipsFilter = default;
             EcsFilter inactiveShipsFilter = World.Filter<ShipTag>().Inc<InactiveTag>().Inc<CurrentWaveTag>().End();
             foreach (var inactiveShip in inactiveShipsFilter)
             {
@@ -161,7 +160,5 @@ namespace Client
         {
             return CurrentWave;
         }
-
-
     }
 }

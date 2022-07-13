@@ -27,6 +27,7 @@ namespace Client {
             interfaceComp.progressbar = GameObject.Find("LevelProgress");
             interfaceComp.progressbar.GetComponent<ProgressBarMB>().SetMaxAmount(state.WaveStorage.GetAllEnemies());
             interfaceComp.progressbar.GetComponent<ProgressBarMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            interfaceComp.progressbar.SetActive(true);
             interfaceComp.waveCounter.GetComponent<WaveCounterMB>().SetMaxAmount(state.WaveStorage.Waves.Count);
             interfaceComp.waveCounter.GetComponent<WaveCounterMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             var resourcePanel = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();

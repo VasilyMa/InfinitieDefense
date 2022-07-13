@@ -4,9 +4,10 @@ namespace Client
 {
     struct TowerTag
     {
+        public int Level;
         public Vector3 Position;
         public string TowerID;
-        public int Circle;
+        public int CircleRadiusLevel;
         public GameObject UpgradePointGO;
     }
 }

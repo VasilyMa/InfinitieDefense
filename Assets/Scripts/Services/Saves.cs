@@ -22,7 +22,6 @@ namespace Client
         public string[] TowerID;
         public int[] TowersUpgrade;
         public int CurrentWave;
-        public int Circle;
         public int Rock;
         public int Coin;
 
@@ -103,13 +102,6 @@ namespace Client
 
             File.WriteAllText(path, JsonUtility.ToJson(Save));
         }
-        public void SaveCircle(int value)
-        {
-            Save.Circle = value;
-            Circle = value;
-
-            File.WriteAllText(path, JsonUtility.ToJson(Save));
-        }
         public void SaveRock(int value)
         {
             Rock = value;
@@ -166,7 +158,6 @@ namespace Client
                 TutorialState = Save.TutorialState;
                 PlayerID = Save.PlayerID;
                 CurrentWave = Save.CurrentWave;
-                Circle = Save.Circle;
                 Rock = Save.Rock;
                 Coin = Save.Coin;
                 PlayerUpgrade = Save.PlayerUpgrade;
@@ -191,7 +182,6 @@ namespace Client
                 TutorialState = 1;
                 PlayerID = "1level";
                 CurrentWave = 0;
-                Circle = 0;
                 Rock = 0;
                 Coin = 0;
                 PlayerUpgrade = 0;
@@ -207,7 +197,6 @@ namespace Client
                 Save.PlayerID = PlayerID;
                 Save.PlayerUpgrade = PlayerUpgrade;
                 Save.CurrentWave = CurrentWave;
-                Save.Circle = Circle;
                 Save.Rock = Rock;
                 Save.Coin = Coin;
 

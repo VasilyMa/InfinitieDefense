@@ -44,6 +44,7 @@ namespace Client
             _upgradeCanvasPool = world.GetPool<CanvasUpgradeComponent>();
             _world = world;
         }
+
         private void OnTriggerEnter(Collider other)
         {
             switch (other.gameObject.tag)
@@ -182,6 +183,29 @@ namespace Client
                 }
                 if(_fightPool.Has(_state.EntityPlayer))
                     _fightPool.Del(_state.EntityPlayer);
+            }
+        }
+
+        public void StartMining()
+        {
+            ref var player = ref _state.EntityPlayer;
+            ref var _player = ref _playerPool.Get(player);
+            ref var view = ref _viewPool.Get(player);
+            var filter = _world.Filter<OreComponent>();
+            var ores = _world.GetPool<OreComponent>();
+            foreach (int entity in filter.End())
+            {
+                ref OreComponent oreComp = ref ores.Get(entity);
+                if (view.CanMining)
+                {
+                    _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
+                    _player.animator.SetBool("isIdle", false);
+                    _player.animator.SetBool("isRun", false);
+                    _player.animator.SetBool("isMining", true);
+                    view.isMining = true;
+                    view.isFight = false;
+                    Debug.Log("Mining!");
+                }
             }
         }
     }
