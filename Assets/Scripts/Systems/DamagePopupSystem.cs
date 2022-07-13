@@ -16,10 +16,17 @@ namespace Client {
                 damageComp.DamageObject.SetActive(true);
                 damageComp.DamageObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = damageComp.DamageAmount.ToString();
                 damageComp.DamageObject.transform.position = Vector3.MoveTowards(damageComp.DamageObject.transform.position, damageComp.target, 2 * Time.deltaTime);
-                damageComp.DamageObject.transform.localScale = Vector3.Lerp(damageComp.DamageObject.transform.localScale, damageComp.DamageObject.transform.localScale * 1.75f, 1.5f * Time.deltaTime);
                 damageComp.DamageObject.transform.LookAt(damageComp.DamageObject.transform.position + cameraComp.CameraTransform.forward);
                 if (damageComp.timeOut > 0)
+                {
                     damageComp.timeOut -= Time.deltaTime;
+                    if(damageComp.timeOut >= 0.5f)
+                        damageComp.DamageObject.transform.localScale = Vector3.Lerp(damageComp.DamageObject.transform.localScale, damageComp.DamageObject.transform.localScale * 1.5f, 1.5f * Time.deltaTime);
+                    else if (damageComp.timeOut < 0.5f)
+                    {
+                        damageComp.DamageObject.transform.localScale = Vector3.Lerp(damageComp.DamageObject.transform.localScale, damageComp.DamageObject.transform.localScale * -0.75f, 1.5f * Time.deltaTime);
+                    }
+                }
                 else if (damageComp.timeOut <= 0)
                 {
                     damageComp.timeOut = 0;

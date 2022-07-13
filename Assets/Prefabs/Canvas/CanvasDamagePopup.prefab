@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2584633757141308414}
   - component: {fileID: 2584633757141308413}
   - component: {fileID: 3796653860957297656}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: CanvasDamagePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 2230989362745921856}
   - component: {fileID: 4136740565073440416}
   - component: {fileID: 5437750324978987619}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: DamageAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 3958630095822160175}
   - component: {fileID: 1637435395083929259}
   - component: {fileID: 3715425502553868136}
-  m_Layer: 12
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

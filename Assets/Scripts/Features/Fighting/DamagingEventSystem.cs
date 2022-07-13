@@ -64,7 +64,7 @@ namespace Client
                 popupComp.DamageObject = popup;
                 popupComp.DamageObject.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
                 popupComp.DamageObject.transform.localScale = new Vector3(0.01f, 0.01f, 1);
-                popupComp.timeOut = 1f;
+                popupComp.timeOut = 1.5f;
 
 
                 if (_targetablePool.Value.Has(damagingEventComponent.TargetEntity))
