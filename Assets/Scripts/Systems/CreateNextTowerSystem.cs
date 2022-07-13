@@ -9,7 +9,7 @@ namespace Client
     {
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsWorldInject _world = default;
-        readonly EcsFilterInject<Inc<CreateNextTowerEvent>> _filter = default;
+        readonly EcsFilterInject<Inc<CreateNextTowerEvent>> _CreateNextTowerFilter = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
         readonly EcsPoolInject<TowerTag> _towerPool = default;
@@ -29,20 +29,20 @@ namespace Client
 
         public void Run(EcsSystems systems)
         {
-            foreach (var entity in _filter.Value)
+            foreach (var eventEntity in _CreateNextTowerFilter.Value)
             {
-                ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
+                ref var filterComp = ref _CreateNextTowerFilter.Pools.Inc1.Get(eventEntity);
 
                 int towerIndex = filterComp.TowerIndex;
-                ref var radiusComp = ref _radiusPool.Value.Get(entity);
-                ref var viewComp = ref _viewPool.Value.Get(entity);
+                ref var radiusComp = ref _radiusPool.Value.Get(eventEntity);
+                ref var viewComp = ref _viewPool.Value.Get(eventEntity);
 
-                if (!_targetWeightPool.Value.Has(entity))
+                if (!_targetWeightPool.Value.Has(eventEntity))
                 {
-                    _targetWeightPool.Value.Add(entity);
+                    _targetWeightPool.Value.Add(eventEntity);
                 }
 
-                ref var targetWeightComponent = ref _targetWeightPool.Value.Get(entity);
+                ref var targetWeightComponent = ref _targetWeightPool.Value.Get(eventEntity);
 
                 viewComp.UpgradeParticleSystem.Play();
                 
@@ -50,13 +50,13 @@ namespace Client
                 {
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.TowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
 
-                    ref var towerComp = ref _towerPool.Value.Get(entity);
+                    ref var towerComp = ref _towerPool.Value.Get(eventEntity);
                     towerComp.Level++;
 
                     if (!viewComp.GameObject)
                     {
                         viewComp.GameObject = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), Vector3.zero, Quaternion.identity);
-                        viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
+                        viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(2).GetComponent<MeshFilter>();
                     }
                     else
                     {
@@ -73,7 +73,7 @@ namespace Client
 
                     viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();
                     viewComp.EcsInfoMB.Init(_world);
-                    viewComp.EcsInfoMB.SetEntity(entity);
+                    viewComp.EcsInfoMB.SetEntity(eventEntity);
                     viewComp.Healthbar = viewComp.GameObject.GetComponent<HealthbarMB>();
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
@@ -96,26 +96,28 @@ namespace Client
                 }
                 else // defence towers
                 {
-                    ref var towerComp = ref _towerPool.Value.Get(entity);
-                    if (!_targetablePool.Value.Has(entity))
+                    ref var towerComp = ref _towerPool.Value.Get(eventEntity);
+                    towerComp.Level++;
+
+                    if (!_targetablePool.Value.Has(eventEntity))
                     {
-                        _targetablePool.Value.Add(entity);
+                        _targetablePool.Value.Add(eventEntity);
                     }
 
-                    if (!_damagePool.Value.Has(entity))
+                    if (!_damagePool.Value.Has(eventEntity))
                     {
-                        _damagePool.Value.Add(entity);
+                        _damagePool.Value.Add(eventEntity);
                     }
 
-                    if (!_cooldownPool.Value.Has(entity))
+                    if (!_cooldownPool.Value.Has(eventEntity))
                     {
-                        _cooldownPool.Value.Add(entity);
+                        _cooldownPool.Value.Add(eventEntity);
                     }
 
-                    ref var targetableComponent = ref _targetablePool.Value.Get(entity);
-                    ref var damageComponent = ref _damagePool.Value.Get(entity);
-                    ref var cooldownComponent = ref _cooldownPool.Value.Get(entity);
-                    ref var healthComponent = ref _healthWeightPool.Value.Get(entity);
+                    ref var targetableComponent = ref _targetablePool.Value.Get(eventEntity);
+                    ref var damageComponent = ref _damagePool.Value.Get(eventEntity);
+                    ref var cooldownComponent = ref _cooldownPool.Value.Get(eventEntity);
+                    ref var healthComponent = ref _healthWeightPool.Value.Get(eventEntity);
 
                     _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
 
@@ -157,7 +159,7 @@ namespace Client
 
                     viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();
                     viewComp.EcsInfoMB.Init(_world);
-                    viewComp.EcsInfoMB.SetEntity(entity);
+                    viewComp.EcsInfoMB.SetEntity(eventEntity);
 
                     viewComp.TowerAttackMB = viewComp.GameObject.GetComponentInChildren<TowerAttackMB>();
                     viewComp.DamageZone = viewComp.TowerAttackMB.GetComponent<SphereCollider>();
@@ -201,7 +203,7 @@ namespace Client
                     healthComponent.MaxValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
                     healthComponent.CurrentValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
 
-                    if (_deadPool.Value.Has(entity)) _deadPool.Value.Del(entity);
+                    if (_deadPool.Value.Has(eventEntity)) _deadPool.Value.Del(eventEntity);
 
                     towerComp.TowerID = _state.Value.DefenseTowers[towerIndex];
                 }
@@ -271,7 +273,7 @@ namespace Client
                     viewComp.LineRenderer.loop = true;
                 }
 
-                _filter.Pools.Inc1.Del(entity);
+                _CreateNextTowerFilter.Pools.Inc1.Del(eventEntity);
 
             }
         }

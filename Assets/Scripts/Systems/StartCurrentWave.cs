@@ -94,7 +94,14 @@ namespace Client {
                         {
                             var ex = Mathf.Cos(_shipAngle * Mathf.Deg2Rad) * 2;
                             var ez = Mathf.Sin(_shipAngle * Mathf.Deg2Rad) * 2;
-                            _shipAngle += 360 / enemyInShip[i];
+                            if (enemyInShip[i] == 0)
+                            {
+                                _shipAngle += 360;
+                            }
+                            else
+                            {
+                                _shipAngle += 360 / enemyInShip[i];
+                            }
 
                             GameObject enemy = null;
 

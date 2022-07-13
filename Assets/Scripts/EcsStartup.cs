@@ -113,6 +113,7 @@ namespace Client
                 .DelHere<ActivateWaveShipsEvent>()
                 .DelHere<DamagingEvent>()
                 .DelHere<TargetingEvent>()
+                .DelHere<CreateNextTowerEvent>()
                 ;
             _systemsFixed
                 .Add(new UserMoveSystem())

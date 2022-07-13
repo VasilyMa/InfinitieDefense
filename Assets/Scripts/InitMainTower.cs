@@ -66,7 +66,7 @@ namespace Client
 
             ref var viewComponent = ref _viewPool.Value.Add(mainTowerEntity);
             viewComponent.GameObject = mainTower;
-            viewComponent.ModelMeshFilter = viewComponent.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
+            viewComponent.ModelMeshFilter = viewComponent.GameObject.transform.GetChild(2).GetComponent<MeshFilter>();
             viewComponent.Transform = mainTower.transform;
             Angle = 0;
 
@@ -103,13 +103,13 @@ namespace Client
                         towerCount = 0;
                         Angle = circleRadiusLevel * 45;
                     }
-                    int towerEntity = _world.Value.NewEntity();
-                    _state.Value.TowersEntity[i] = towerEntity;
-                    ref var viewComp = ref _viewPool.Value.Add(towerEntity);
-                    _healthPool.Value.Add(towerEntity);
-                    _radiusPool.Value.Add(towerEntity);
-                    ref var upgradeTowerComponent = ref _upgradeCanvasPool.Value.Add(towerEntity);
-                    ref var tComp = ref _towerPool.Value.Add(towerEntity);
+                    int defenseTowerEntity = _world.Value.NewEntity();
+                    _state.Value.TowersEntity[i] = defenseTowerEntity;
+                    ref var viewComp = ref _viewPool.Value.Add(defenseTowerEntity);
+                    _healthPool.Value.Add(defenseTowerEntity);
+                    _radiusPool.Value.Add(defenseTowerEntity);
+                    ref var upgradeTowerComponent = ref _upgradeCanvasPool.Value.Add(defenseTowerEntity);
+                    ref var tComp = ref _towerPool.Value.Add(defenseTowerEntity);
 
                     var radius = _state.Value.TowerStorage.GetRadiusByID((circleRadiusLevel + 1).ToString() + "tower");
 
