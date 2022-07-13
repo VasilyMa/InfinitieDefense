@@ -15,12 +15,13 @@ namespace Client {
             Ores.Add(allOres);
             foreach (var ore in allOres)
             {
-                int amount = Random.Range(2, 7);
+                int amount = Random.Range(4, 4);
                 var oresEntity = _world.Value.NewEntity();
                 _orePool.Value.Add(oresEntity);
                 ref var orePool = ref _orePool.Value.Get(oresEntity);
                 orePool.prefab = ore;
                 orePool.amount = amount;
+                orePool.IsEnable = false;
             }
         }
     }

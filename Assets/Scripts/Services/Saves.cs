@@ -181,7 +181,7 @@ namespace Client
                 SceneNumber = 1;
                 TutorialState = 1;
                 PlayerID = "1level";
-                CurrentWave = 0;
+                CurrentWave = -1;
                 Rock = 0;
                 Coin = 0;
                 PlayerUpgrade = 0;

@@ -59,7 +59,7 @@ namespace Client
             upgradeComponent.upgrade = upgradeInfo;
             upgradeComponent.Index = 0;
             upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("empty"));
+            upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("1tower"));
 
             var upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
             upgradePointMB.TowerIndex = 0;

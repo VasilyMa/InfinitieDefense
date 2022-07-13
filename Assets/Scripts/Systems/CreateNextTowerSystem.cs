@@ -119,8 +119,6 @@ namespace Client
                     ref var cooldownComponent = ref _cooldownPool.Value.Get(eventEntity);
                     ref var healthComponent = ref _healthWeightPool.Value.Get(eventEntity);
 
-                    _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
-
                     if (filterComp.Change)
                     {
                         _state.Value.DefenseTowers[towerIndex] = _state.Value.DefenseTowerStorage.GetNextIDByID(_state.Value.DefenseTowers[towerIndex]);
@@ -130,6 +128,7 @@ namespace Client
                     {
                         viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
                         viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
+                        viewComp.Transform = viewComp.GameObject.transform;
                     }
                     else
                     {

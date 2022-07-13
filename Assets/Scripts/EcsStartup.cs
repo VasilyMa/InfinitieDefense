@@ -100,7 +100,7 @@ namespace Client
                 .Add(new DieSystem())
                 .Add(new DroppedGoldSystem())
                 .Add(new RespawnDefender())
-                .Add(new OreRespawnSystem())
+                //.Add(new OreRespawnSystem())
                 .Add(new UpgradeCanvasSystem())
                 .Add(new CanvasShipPointerSystem())
                 .Add(new CanvasPointerSystem())

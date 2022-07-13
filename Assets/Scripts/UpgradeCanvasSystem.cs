@@ -11,7 +11,15 @@ namespace Client {
             foreach (var entity in _filter.Value)
             {
                 ref var canvasComp = ref _filter.Pools.Inc1.Get(entity);
-                canvasComp.upgrade.UpdateUpgradePoint(_state.Value.TowersUpgrade[canvasComp.Index], _state.Value.DefenseTowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[canvasComp.Index]));
+
+                if (canvasComp.Index == 0)
+                {
+                    canvasComp.upgrade.UpdateUpgradePoint(_state.Value.TowersUpgrade[canvasComp.Index], _state.Value.TowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[canvasComp.Index]));
+                }
+                else
+                {
+                    canvasComp.upgrade.UpdateUpgradePoint(_state.Value.TowersUpgrade[canvasComp.Index], _state.Value.DefenseTowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[canvasComp.Index]));
+                }
             }
             
         }
