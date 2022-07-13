@@ -6,6 +6,7 @@ public class Tower
 {
     public int TowerHealth;
     public GameObject TowerPrefab;
+    public Mesh TowerMesh;
     public int Radius;
     public int Upgrade;
     public bool IsLast;

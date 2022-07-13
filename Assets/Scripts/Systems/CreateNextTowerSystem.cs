@@ -56,6 +56,11 @@ namespace Client
                     if (!viewComp.GameObject)
                     {
                         viewComp.GameObject = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), Vector3.zero, Quaternion.identity);
+                        viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
+                    }
+                    else
+                    {
+                        viewComp.ModelMeshFilter.mesh = _state.Value.TowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
                     }
 
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();

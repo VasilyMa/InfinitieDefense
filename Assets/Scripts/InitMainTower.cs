@@ -66,6 +66,7 @@ namespace Client
 
             ref var viewComponent = ref _viewPool.Value.Add(mainTowerEntity);
             viewComponent.GameObject = mainTower;
+            viewComponent.ModelMeshFilter = viewComponent.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
             viewComponent.Transform = mainTower.transform;
             Angle = 0;
 

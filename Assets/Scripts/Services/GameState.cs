@@ -23,7 +23,7 @@ namespace Client
         public int RockCount = 0;
         public int CoinCount = 0;
         public int CurrentEncounter = 0;
-        private int CurrentWave = 0;
+        private int CurrentWave = -1;
         private int _currentUpgradeTower = 0;
         public List<Transform> CoinTransformList = new List<Transform>();
         public List<Transform> StoneTransformList = new List<Transform>();
@@ -160,7 +160,5 @@ namespace Client
         {
             return CurrentWave;
         }
-
-
     }
 }

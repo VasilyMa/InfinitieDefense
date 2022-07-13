@@ -17,7 +17,6 @@ namespace Client
         readonly EcsSharedInject<GameState> _state;
 
         private bool _encounterNeedChange = false;
-        private bool _ativateNextWaveBottome = false;
 
         public void Run (EcsSystems systems)
         {
@@ -41,6 +40,7 @@ namespace Client
                 ref var shipComponent = ref _shipPool.Value.Get(shipEntity);
                 if (shipComponent.Encounter == _state.Value.CurrentEncounter)
                 {
+                    Debug.Log("Мы удалили инактив на корабле");
                     _inactivePool.Value.Del(shipEntity);
                     _encounterNeedChange = true;
                 }
