@@ -8,6 +8,7 @@ namespace Client {
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<Player>> _playerFilter = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
         private float _angleOffset = 30f;
 
         public void Run (EcsSystems systems) {
@@ -16,7 +17,7 @@ namespace Client {
                 ref var interfacePool = ref _interfacePool.Value.Get(_state.Value.EntityInterface);
                 var _joystick = interfacePool._joystick;
                 ref var player = ref _playerFilter.Pools.Inc1.Get(entity);
-
+                ref var viewComponent = ref _viewPool.Value.Get(entity);
                 float angle = Mathf.Atan2(interfacePool._joystickPoint.position.y - interfacePool._joysticKCenter.position.y,
                 interfacePool._joystickPoint.position.x - interfacePool._joysticKCenter.position.x) * Mathf.Rad2Deg - _angleOffset;
 
@@ -42,17 +43,23 @@ namespace Client {
                     player.animator.SetBool("isIdle", false);
                     player.animator.SetBool("isMining", false);
                     player.animator.SetBool("isRun", true);
+                    if(viewComponent.WayTrack.particleCount == 0)
+                        viewComponent.WayTrack.Play();
                 }
                 else if (player.animator.GetBool("isMining"))
                 {
                     player.animator.SetBool("isRun", false);
                     player.animator.SetBool("isIdle", false);
+                    viewComponent.WayTrack.Stop();
                 }
                 else if (!player.animator.GetBool("isMining"))
                 {
                     player.animator.SetBool("isRun", false);
                     player.animator.SetBool("isIdle", true);
+                    viewComponent.WayTrack.Stop();
                 }
+                else
+                    viewComponent.WayTrack.Stop();
                 //Debug.Log("Drag!");
             }
             

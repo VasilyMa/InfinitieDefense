@@ -71,6 +71,7 @@ namespace Client
             viewComponent.HitParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(1).GetComponent<ParticleSystem>();
             viewComponent.DropItemParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(2).GetComponent<ParticleSystem>();
             viewComponent.Regeneration = PlayerGo.transform.GetChild(4).transform.GetChild(3).GetComponent<ParticleSystem>();
+            viewComponent.WayTrack = PlayerGo.transform.GetChild(4).transform.GetChild(4).GetComponent<ParticleSystem>();
             viewComponent.DamagePopups = new List<GameObject>();
             for (int y = 0; y < viewComponent.Transform.GetChild(3).transform.GetChild(0).transform.childCount; y++)
             {

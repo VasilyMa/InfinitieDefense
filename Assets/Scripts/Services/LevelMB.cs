@@ -13,7 +13,7 @@ namespace Client
         private GameState _state;
         [SerializeField] private Text _textAmount;
         [SerializeField] private GameObject _levelObject;
-
+        private string level;
         private EcsPool<CameraComponent> _cameraPool = null;
         public void Init(EcsWorld world, GameState state)
         {
@@ -23,7 +23,8 @@ namespace Client
         }
         public void UpdateLevel(int currentLevel)
         {
-            _textAmount.text = "Level" + currentLevel;
+            level = $"Level {currentLevel}";
+            _textAmount.text = level;
         }
         private void CameraFollow()
         {

@@ -40,5 +40,6 @@ namespace Client
         public ParticleSystem HitParticleSystem;
         public ParticleSystem DropItemParticleSystem;
         public ParticleSystem Regeneration;
+        public ParticleSystem WayTrack;
     }
 }
