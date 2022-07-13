@@ -23,6 +23,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["1tower"] = new DefenseTower
             {
+                LevelTower = 1,
                 Radius = 12,
                 Damage = 1,
                 Cooldown = 5f,
@@ -36,6 +37,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["2tower"] = new DefenseTower
             {
+                LevelTower = 2,
                 Radius = 14,
                 Damage = 5,
                 Cooldown = 5f,
@@ -49,6 +51,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["3tower"] = new DefenseTower
             {
+                LevelTower = 3,
                 Radius = 16,
                 Damage = 5,
                 Cooldown = 5f,
@@ -62,6 +65,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["4tower"] = new DefenseTower
             {
+                LevelTower = 4,
                 Radius = 18,
                 Damage = 7,
                 Cooldown = 4f,
@@ -75,6 +79,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["5tower"] = new DefenseTower
             {
+                LevelTower = 5,
                 Radius = 20,
                 Damage = 7,
                 Cooldown = 4f,
@@ -88,6 +93,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["6tower"] = new DefenseTower
             {
+                LevelTower = 6,
                 Radius = 22,
                 Damage = 10,
                 Cooldown = 5f,
@@ -101,6 +107,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["7tower"] = new DefenseTower
             {
+                LevelTower = 7,
                 Radius = 24,
                 Damage = 10,
                 Cooldown = 5f,
@@ -114,6 +121,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["8tower"] = new DefenseTower
             {
+                LevelTower = 8,
                 Radius = 26,
                 Damage = 10,
                 Cooldown = 4f,
@@ -127,6 +135,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["9tower"] = new DefenseTower
             {
+                LevelTower = 9,
                 Radius = 28,
                 Damage = 10,
                 Cooldown = 4f,
@@ -140,6 +149,7 @@ public class DefenseTowerStorage : ScriptableObject
             },
             ["10tower"] = new DefenseTower
             {
+                LevelTower = 10,
                 Radius = 30,
                 Damage = 20,
                 Cooldown = 6f,
@@ -192,5 +202,8 @@ public class DefenseTowerStorage : ScriptableObject
     {
         return Towers[id].NextID;
     }
-
+    public int GetLevelByID(string id)
+    {
+        return Towers[id].LevelTower;
+    }
 }

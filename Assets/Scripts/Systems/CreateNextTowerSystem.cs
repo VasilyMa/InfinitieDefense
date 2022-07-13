@@ -136,7 +136,7 @@ namespace Client
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                     viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
-                    viewComp.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.Level.UpdateLevel(_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
                     viewComp.DamagePopups = new List<GameObject>();

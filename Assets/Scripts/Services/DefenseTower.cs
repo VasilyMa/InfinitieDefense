@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DefenseTower
 {
+    public int LevelTower;
     public int TowerHealth;
     public GameObject TowerPrefab;
     public Mesh TowerMesh;
