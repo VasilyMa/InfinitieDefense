@@ -80,8 +80,14 @@ namespace Client
             viewComponent.Level = mainTower.GetComponent<LevelMB>();
             viewComponent.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(towerID));
             viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.DamagePopups = new List<GameObject>();
             ref var targetWeightComponent = ref _world.Value.GetPool<TargetWeightComponent>().Add(entity);
-
+            for (int y = 0; y < viewComponent.Transform.GetChild(1).transform.childCount; y++)
+            {
+                var popup = viewComponent.Transform.GetChild(1).transform.GetChild(y).gameObject;
+                viewComponent.DamagePopups.Add(popup);
+                viewComponent.DamagePopups[y].SetActive(false);
+            }
             targetWeightComponent.Value = 0;
 
             int circle = 0;
