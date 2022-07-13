@@ -23,6 +23,10 @@ namespace Client
         }
         public void UpdateLevel(int currentLevel)
         {
+            if(currentLevel <= 0)
+               _levelObject.SetActive(false);
+            else
+                _levelObject.SetActive(true);
             level = $"Level {currentLevel}";
             _textAmount.text = level;
         }

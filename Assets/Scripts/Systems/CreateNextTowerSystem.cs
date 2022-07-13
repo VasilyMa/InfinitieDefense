@@ -69,6 +69,13 @@ namespace Client
                     viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
                     viewComp.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    viewComp.DamagePopups = new List<GameObject>();
+                    for (int y = 0; y < viewComp.Transform.GetChild(1).transform.childCount; y++)
+                    {
+                        var popup = viewComp.Transform.GetChild(1).transform.GetChild(y).gameObject;
+                        viewComp.DamagePopups.Add(popup);
+                        viewComp.DamagePopups[y].SetActive(false);
+                    }
 
                     targetWeightComponent.Value = 0;
 
@@ -131,6 +138,14 @@ namespace Client
                     viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
                     viewComp.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+                    viewComp.DamagePopups = new List<GameObject>();
+                    for (int y = 0; y < viewComp.Transform.GetChild(6).transform.childCount; y++)
+                    {
+                        var popup = viewComp.Transform.GetChild(6).transform.GetChild(y).gameObject;
+                        viewComp.DamagePopups.Add(popup);
+                        viewComp.DamagePopups[y].SetActive(false);
+                    }
 
                     damageComponent.Value = _state.Value.DefenseTowerStorage.GetDamageByID(_state.Value.DefenseTowers[towerIndex]);
 
