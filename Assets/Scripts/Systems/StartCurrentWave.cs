@@ -23,6 +23,8 @@ namespace Client {
         private float _shipAngle = 0f;
         private int _encounter = 0;
         private int _enemyCountInEncounter = 0;
+        private int _enemySpawnRadius = 100;
+
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -38,8 +40,8 @@ namespace Client {
                     {
                         _angle += Random.Range(30,360 / enemyInShip.Length + 20);
 
-                        var x = Mathf.Cos(_angle * Mathf.Deg2Rad) * 155;
-                        var z = Mathf.Sin(_angle * Mathf.Deg2Rad) * 155;
+                        var x = Mathf.Cos(_angle * Mathf.Deg2Rad) * _enemySpawnRadius;
+                        var z = Mathf.Sin(_angle * Mathf.Deg2Rad) * _enemySpawnRadius;
                         var ship = GameObject.Instantiate(_state.Value.EnemyConfig.ShipPrefab, new Vector3(x, 0, z), Quaternion.identity);
                         
 

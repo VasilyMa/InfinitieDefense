@@ -91,6 +91,7 @@ namespace Client
             targetWeightComponent.Value = 0;
 
             int circleRadiusLevel = 0;
+            int angleOffset = 90;
             int towerCount = 0;
             for (int i = 0; i < _state.Value.TowersEntity.Length;i++)
             {
@@ -101,7 +102,7 @@ namespace Client
                     {
                         circleRadiusLevel++;
                         towerCount = 0;
-                        Angle = circleRadiusLevel * 45;
+                        Angle = circleRadiusLevel * angleOffset;
                     }
                     int defenseTowerEntity = _world.Value.NewEntity();
                     _state.Value.TowersEntity[i] = defenseTowerEntity;

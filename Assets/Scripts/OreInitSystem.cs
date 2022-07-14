@@ -2,17 +2,22 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 using System.Collections.Generic;
-namespace Client {
-    sealed class OreInitSystem : IEcsInitSystem {
+
+namespace Client
+{
+    sealed class OreInitSystem : IEcsInitSystem
+    {
         readonly EcsSharedInject<GameState> _state;
         readonly EcsWorldInject _world = default;
         readonly EcsPoolInject<OreComponent> _orePool = default;
         private string Ore;
-        public void Init (EcsSystems systems) {
+        public void Init (EcsSystems systems)
+        {
             List<GameObject[]> Ores = new List<GameObject[]>();
             var allOres = GameObject.FindGameObjectsWithTag(nameof(Ore));
 
             Ores.Add(allOres);
+
             foreach (var ore in allOres)
             {
                 int amount = Random.Range(4, 4);

@@ -5,13 +5,15 @@ using UnityEngine;
 public class DrawTowerSpawn : MonoBehaviour
 {
     
-    [Header("������ �� ������ ������")]
-    [Tooltip("������� ���������� ������� � �� ������")]
+    [Header("Main Tower level count, bro")]
+    [Tooltip("Specify Main Tower level count and it radius")]
     [SerializeField] private float[] _radiuses;
-    [Header("���������� �����")]
+    [Header("How many Defense Towers at each Main Tower levels")]
     [SerializeField] private int _count;
-    [Header("������ Gizmos'�")]
+    [Header("Size of Gizmos box")]
     [SerializeField] private Vector3 _boxSize;
+    [Header("Angle offset for Gizmos boxes")]
+    [SerializeField] private float _angleOffset;
 
     private float _angle = 0;
     private float _divisionColor = 1;
@@ -21,7 +23,7 @@ public class DrawTowerSpawn : MonoBehaviour
     {
         for (int i = 0; i < _radiuses.Length; i++)
         {
-            _angle = 0 + (45 * i);
+            _angle = 0 + (_angleOffset * i);
             float floatI = i;
             _divisionColor = 1 - (floatI / _radiuses.Length);
             Color drawColor = new Color(0.7f * _divisionColor, 0.7f * _divisionColor, 1, 1F);

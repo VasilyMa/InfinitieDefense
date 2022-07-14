@@ -593,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7869104043701649955, guid: 032c4c651f590424eb10276975aaef79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -59.228058
+      value: -43.5
       objectReference: {fileID: 0}
     - target: {fileID: 7869104043701649955, guid: 032c4c651f590424eb10276975aaef79, type: 3}
       propertyPath: m_LocalPosition.y
@@ -601,7 +601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7869104043701649955, guid: 032c4c651f590424eb10276975aaef79, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -62.95137
+      value: -55.3
       objectReference: {fileID: 0}
     - target: {fileID: 7869104043701649955, guid: 032c4c651f590424eb10276975aaef79, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1635,7 +1635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &259108198
 Transform:
   m_ObjectHideFlags: 0
@@ -9392,7 +9392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -50.97619
+      value: -35.24813
       objectReference: {fileID: 0}
     - target: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9400,7 +9400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -69.49803
+      value: -61.84666
       objectReference: {fileID: 0}
     - target: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11662,7 +11662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -73.02055
+      value: -57.292496
       objectReference: {fileID: 0}
     - target: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11670,7 +11670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -49.177406
+      value: -41.526035
       objectReference: {fileID: 0}
     - target: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12487,6 +12487,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 465355375, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _angleOffset
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 465355375, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _radiuses.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465355375, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _radiuses.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 465355375, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _radiuses.Array.data[1]
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 465355375, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _radiuses.Array.data[2]
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 465355375, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _radiuses.Array.data[3]
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 465355375, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _radiuses.Array.data[4]
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 465355375, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _radiuses.Array.data[5]
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.size
       value: 3

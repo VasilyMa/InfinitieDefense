@@ -19,7 +19,7 @@ public class TowerStorage : ScriptableObject
             ["1tower"] = new Tower
             {
                 TowerLevel = 1,
-                Radius = 25,
+                Radius = 20,
                 TowerHealth = 2500,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
@@ -31,7 +31,7 @@ public class TowerStorage : ScriptableObject
             ["2tower"] = new Tower
             {
                 TowerLevel = 2,
-                Radius = 40,
+                Radius = 35,
                 TowerHealth = 2900,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
@@ -43,7 +43,7 @@ public class TowerStorage : ScriptableObject
             ["3tower"] = new Tower
             {
                 TowerLevel = 3,
-                Radius = 50,
+                Radius = 45,
                 TowerHealth = 3300,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
@@ -55,7 +55,7 @@ public class TowerStorage : ScriptableObject
             ["4tower"] = new Tower
             {
                 TowerLevel = 4,
-                Radius = 60,
+                Radius = 55,
                 TowerHealth = 3600,
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
@@ -72,57 +72,9 @@ public class TowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
                 Upgrade = 5,
-                NextID = "6tower",
-                IsLast = false,
+                IsLast = true,
                 DefenderCount = 4
             },
-            ["6tower"] = new Tower
-            {
-                TowerLevel = 6,
-                Radius = 70,
-                TowerHealth = 4200,
-                TowerPrefab = TowerPrefabs[1],
-                TowerMesh = TowerMeshs[1],
-                Upgrade = 6,
-                NextID = "7tower",
-                IsLast = false,
-                DefenderCount = 5
-            },
-            ["7tower"] = new Tower
-            {
-                TowerLevel = 7,
-                Radius = 75,
-                TowerHealth = 4500,
-                TowerPrefab = TowerPrefabs[2],
-                TowerMesh = TowerMeshs[2],
-                Upgrade = 7,
-                NextID = "8tower",
-                IsLast = false,
-                DefenderCount = 6
-            },
-            ["8tower"] = new Tower
-            {
-                TowerLevel = 8,
-                Radius = 80,
-                TowerHealth = 4800,
-                TowerPrefab = TowerPrefabs[2],
-                TowerMesh = TowerMeshs[2],
-                Upgrade = 8,
-                NextID = "9tower",
-                IsLast = false,
-                DefenderCount = 7
-            },
-            ["9tower"] = new Tower
-            {
-                TowerLevel = 9,
-                Radius = 85,
-                TowerHealth = 5100,
-                TowerPrefab = TowerPrefabs[2],
-                TowerMesh = TowerMeshs[2],
-                Upgrade = 999999,
-                IsLast = true,
-                DefenderCount = 8
-            }
         };
     }
     public int GetRadiusByID(string id)
