@@ -59,18 +59,18 @@ namespace Client
                     }
                 }
 
-                if (isOver) continue;
-
-                ref var popupComp = ref _popupEvent.Value.Add(_world.Value.NewEntity());
-                //popup.gameObject.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
-                //popup.gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 1);
-                popupComp.DamageAmount = (int)damagingEventComponent.DamageValue;
-                popupComp.target = new Vector3(viewComp.Transform.position.x + Random.Range(-3, 3), viewComp.Transform.position.y + Random.Range(3, 6), viewComp.Transform.position.z + Random.Range(-3, 3));
-                popupComp.DamageObject = popup;
-                popupComp.DamageObject.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
-                popupComp.DamageObject.transform.localScale = new Vector3(0.01f, 0.01f, 1);
-                popupComp.timeOut = 1.5f;
-
+                if (isOver)
+                {
+                    ref var popupComp = ref _popupEvent.Value.Add(_world.Value.NewEntity());
+                    //popup.gameObject.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
+                    //popup.gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 1);
+                    popupComp.DamageAmount = (int)damagingEventComponent.DamageValue;
+                    popupComp.target = new Vector3(viewComp.Transform.position.x + Random.Range(-3, 3), viewComp.Transform.position.y + Random.Range(3, 6), viewComp.Transform.position.z + Random.Range(-3, 3));
+                    popupComp.DamageObject = popup;
+                    popupComp.DamageObject.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
+                    popupComp.DamageObject.transform.localScale = new Vector3(0.01f, 0.01f, 1);
+                    popupComp.timeOut = 1.5f;
+                }
 
                 if (_targetablePool.Value.Has(damagingEventComponent.TargetEntity))
                 {
