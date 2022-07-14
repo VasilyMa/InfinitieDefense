@@ -121,7 +121,7 @@ namespace Client
 
                     upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0.1f, z), Quaternion.identity);
                     tComp.UpgradePointGO = upgradePoint;
-                    if (circleRadiusLevel > _state.Value.Saves.TowersUpgrade[0])
+                    if (circleRadiusLevel > towerComp.Level - 1)
                     {
                         upgradePoint.SetActive(false);
                     }

@@ -14,8 +14,12 @@ namespace Client
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
         readonly EcsPoolInject<EnemyTag> _enemyPool = default;
-        readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
+        readonly EcsPoolInject<Player> _playerPool = default;
+        readonly EcsPoolInject<MainTowerTag> _mainTowerPool = default;
+
+        readonly EcsPoolInject<LoseEvent> _losePool = default;
+        readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
         public void Run (EcsSystems systems)
         {
             foreach (var entity in _unitsFilter.Value)
@@ -44,6 +48,9 @@ namespace Client
                 _deadPool.Value.Add(entity);
 
                 if (_enemyPool.Value.Has(entity)) interfaceComponent.progressbar.GetComponent<ProgressBarMB>().UpdateProgressBar();
+
+                if (_playerPool.Value.Has(entity)) _losePool.Value.Add(_world.Value.NewEntity());
+                if (_mainTowerPool.Value.Has(entity)) _losePool.Value.Add(_world.Value.NewEntity());
             }
         }
     }

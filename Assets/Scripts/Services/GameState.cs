@@ -51,9 +51,10 @@ namespace Client
             PlayerStorage.Init();
             TowerStorage.Init();
             DefenseTowerStorage.Init();
-            
-            
-            InitSaves();
+
+            CurrentPlayerID = "1level";
+
+            //InitSaves();
             InitDefenseTowers();
             InitDefenders();
         }
@@ -62,7 +63,7 @@ namespace Client
             DefendersEntity = new int[10];
             DefendersGOs = new GameObject[10];
         }
-        private void InitSaves()
+        /*private void InitSaves()
         {
             Saves.InitSave();
             CurrentPlayerID = Saves.PlayerID;
@@ -71,7 +72,7 @@ namespace Client
             CoinCount = Saves.Coin;
             RockCount = Saves.Rock;
             Debug.Log("Save " + Saves.Rock + "State " + RockCount);
-        }
+        }*/
 
         public void InitDefenseTowers()
         {
@@ -80,8 +81,17 @@ namespace Client
             TowersEntity = new int[TowerCount];
             for (int i = 0; i < DefenseTowers.Length;i++)
             {
-                DefenseTowers[i] = Saves.TowerID[i];
-                TowersUpgrade[i] = Saves.TowersUpgrade[i];
+                /*DefenseTowers[i] = Saves.TowerID[i];
+                TowersUpgrade[i] = Saves.TowersUpgrade[i];*/
+                if (i == 0)
+                {
+                    DefenseTowers[i] = "1tower";
+                }
+                else
+                {
+                    DefenseTowers[i] = "empty";
+                }
+                TowersUpgrade[i] = 0;
             }
 
         }

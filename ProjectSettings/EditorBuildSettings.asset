@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/1 - Iceland.unity
     guid: 2c69a111c29e5774ebc5da6d49894be8
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Levels/2 - Oasis.unity
     guid: a320125f3778dc84aa4c8afd7a6da1b2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Levels/3 - Wasteland.unity
     guid: 741274a5c97b60e47852c339bf1ebd92
   m_configObjects: {}

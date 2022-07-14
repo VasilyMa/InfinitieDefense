@@ -48,18 +48,18 @@ namespace Client
                 viewComp.Healthbar.UpdateHealth(healthPointComponent.CurrentValue);
 
                 GameObject popup = null;
-                bool isOver = false;
+                bool popupIsOver = true;
                 foreach (var item in viewComp.DamagePopups)
                 {
                     if (!item.activeSelf)
                     {
                         popup = item;
-                        isOver = true;
+                        popupIsOver = false;
                         break;
                     }
                 }
 
-                if (isOver)
+                if (!popupIsOver)
                 {
                     ref var popupComp = ref _popupEvent.Value.Add(_world.Value.NewEntity());
                     //popup.gameObject.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
