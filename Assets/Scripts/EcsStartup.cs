@@ -78,7 +78,7 @@ namespace Client
                 .Add(new EncounterSwitcher())
 
                 .Add(new CheckWeaponSystem())
-                .Add(new CheckCircleMiningSystem())
+                //.Add(new CheckCircleMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new ItemMoveToBagSystem())

@@ -102,15 +102,15 @@ namespace Client
                         foreach (int entity in filter.End())
                         {
                             ref OreComponent oreComp = ref ores.Get(entity);
-                            if (other.gameObject == oreComp.prefab && view.CanMining)
+                            if (other.gameObject == oreComp.prefab && !_fightPool.Has(player))
                             {
                                 _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
                                 _player.animator.SetBool("isIdle", false);
                                 _player.animator.SetBool("isRun", false);
                                 _player.animator.SetBool("isMining", true);
-                                view.isMining = true;
-                                view.isFight = false;
                                 _fightPool.Del(player);
+                                view.isMining = true;
+                                break;
                                 Debug.Log("Mining!");
                             }
                         }
@@ -172,7 +172,7 @@ namespace Client
                 foreach (int entity in filter.End())
                 {
                     ref OreComponent oreComp = ref ores.Get(entity);
-                    if (other.gameObject == oreComp.prefab && view.CanMining)
+                    if (other.gameObject == oreComp.prefab && view.CanMining && !_fightPool.Has(player))
                     {
                         _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
                         _player.animator.SetBool("isIdle", false);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "TowerStorage", menuName = "Configs/TowerStorage", order = 0)]
 public class TowerStorage : ScriptableObject
@@ -10,6 +11,8 @@ public class TowerStorage : ScriptableObject
     public Mesh[] TowerMeshs;
     public GameObject DefenderPrefab;
     public Dictionary<string, Tower> Towers;
+    [Header("Спрайт ресурсов")]
+    public Sprite ImageResoures;
 
     public void Init()
     {
@@ -26,7 +29,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 1,
                 IsLast = false,
                 NextID = "2tower",
-                DefenderCount = 0
+                DefenderCount = 0,
+                ImageResource = ImageResoures
             },
             ["2tower"] = new Tower
             {
@@ -38,7 +42,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 2,
                 IsLast = false,
                 NextID = "3tower",
-                DefenderCount = 1
+                DefenderCount = 1,
+                ImageResource = ImageResoures
             },
             ["3tower"] = new Tower
             {
@@ -50,7 +55,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 3,
                 IsLast = false,
                 NextID = "4tower",
-                DefenderCount = 2
+                DefenderCount = 2,
+                ImageResource = ImageResoures
             },
             ["4tower"] = new Tower
             {
@@ -62,7 +68,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 4,
                 NextID = "5tower",
                 IsLast = false,
-                DefenderCount = 3
+                DefenderCount = 3,
+                ImageResource = ImageResoures
             },
             ["5tower"] = new Tower
             {
@@ -74,7 +81,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 5,
                 NextID = "6tower",
                 IsLast = false,
-                DefenderCount = 4
+                DefenderCount = 4,
+                ImageResource = ImageResoures
             },
             ["6tower"] = new Tower
             {
@@ -86,7 +94,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 6,
                 NextID = "7tower",
                 IsLast = false,
-                DefenderCount = 5
+                DefenderCount = 5,
+                ImageResource = ImageResoures
             },
             ["7tower"] = new Tower
             {
@@ -98,7 +107,9 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 7,
                 NextID = "8tower",
                 IsLast = false,
-                DefenderCount = 6
+                DefenderCount = 6,
+                ImageResource = ImageResoures
+
             },
             ["8tower"] = new Tower
             {
@@ -110,7 +121,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 8,
                 NextID = "9tower",
                 IsLast = false,
-                DefenderCount = 7
+                DefenderCount = 7,
+                ImageResource = ImageResoures
             },
             ["9tower"] = new Tower
             {
@@ -121,7 +133,8 @@ public class TowerStorage : ScriptableObject
                 TowerMesh = TowerMeshs[2],
                 Upgrade = 999999,
                 IsLast = true,
-                DefenderCount = 8
+                DefenderCount = 8,
+                ImageResource = ImageResoures
             }
         };
     }
@@ -160,5 +173,9 @@ public class TowerStorage : ScriptableObject
     public int GetLevelByID(string id)
     {
         return Towers[id].TowerLevel;
+    }
+    public Sprite GetImageByID(string id)
+    {
+        return Towers[id].ImageResource;
     }
 }

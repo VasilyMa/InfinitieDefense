@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "DefenseTowerStorage", menuName = "Configs/DefenseTowerStorage", order = 0)]
 public class DefenseTowerStorage : ScriptableObject
@@ -11,6 +12,8 @@ public class DefenseTowerStorage : ScriptableObject
     [Header("Виды ядер для пушек")]
     public GameObject[] CannonBallPrefabs;
     public Dictionary<string, DefenseTower> Towers;
+    [Header("Спрайты ресурсов")]
+    public Sprite ImageResources;
 
     public void Init()
     {
@@ -33,7 +36,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[0],
                 Upgrade = 2,
                 IsLast = false,
-                NextID = "2tower"
+                NextID = "2tower",
+                ImageResource = ImageResources
             },
             ["2tower"] = new DefenseTower
             {
@@ -47,7 +51,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[1],
                 Upgrade = 3,
                 IsLast = false,
-                NextID = "3tower"
+                NextID = "3tower",
+                ImageResource = ImageResources
             },
             ["3tower"] = new DefenseTower
             {
@@ -61,7 +66,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[2],
                 Upgrade = 4,
                 IsLast = false,
-                NextID = "4tower"
+                NextID = "4tower",
+                ImageResource = ImageResources
             },
             ["4tower"] = new DefenseTower
             {
@@ -75,7 +81,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[3],
                 Upgrade = 5,
                 IsLast = false,
-                NextID = "5tower"
+                NextID = "5tower",
+                ImageResource = ImageResources
             },
             ["5tower"] = new DefenseTower
             {
@@ -89,7 +96,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[4],
                 Upgrade = 6,
                 IsLast = false,
-                NextID = "6tower"
+                NextID = "6tower",
+                ImageResource = ImageResources
             },
             ["6tower"] = new DefenseTower
             {
@@ -103,7 +111,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[5],
                 Upgrade = 7,
                 IsLast = false,
-                NextID = "7tower"
+                NextID = "7tower",
+                ImageResource = ImageResources
             },
             ["7tower"] = new DefenseTower
             {
@@ -117,7 +126,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[6],
                 Upgrade = 8,
                 IsLast = false,
-                NextID = "8tower"
+                NextID = "8tower",
+                ImageResource = ImageResources
             },
             ["8tower"] = new DefenseTower
             {
@@ -131,7 +141,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[7],
                 Upgrade = 9,
                 IsLast = false,
-                NextID = "9tower"
+                NextID = "9tower",
+                ImageResource = ImageResources
             },
             ["9tower"] = new DefenseTower
             {
@@ -145,7 +156,8 @@ public class DefenseTowerStorage : ScriptableObject
                 CannonBallPrefab = CannonBallPrefabs[8],
                 Upgrade = 10,
                 IsLast = false,
-                NextID = "10tower"
+                NextID = "10tower",
+                ImageResource = ImageResources
             },
             ["10tower"] = new DefenseTower
             {
@@ -205,5 +217,9 @@ public class DefenseTowerStorage : ScriptableObject
     public int GetLevelByID(string id)
     {
         return Towers[id].LevelTower;
+    }
+    public Sprite GetImageByID(string id)
+    {
+        return Towers[id].ImageResource;
     }
 }
