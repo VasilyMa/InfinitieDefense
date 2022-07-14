@@ -27,17 +27,17 @@ TagManager:
   - Allies
   - Water
   - UI
-  - Enemies
+  - Unit
   - Dead
   - Ground
   - foliage
   - Invisible Wall
   - Ship
-  - AlwaysVisible
-  - 
-  - 
-  - 
-  - 
+  - Tower
+  - DetectionZone
+  - UpgradePoint
+  - Player
+  - Ore
   - 
   - 
   - 

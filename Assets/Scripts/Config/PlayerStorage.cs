@@ -15,7 +15,7 @@ public class PlayerStorage : ScriptableObject
             ["1level"] = new PlayerData
             {
                 LVL = 1,
-                Damage = 10,
+                Damage = 2,
                 Speed = 10f,
                 Health = 100,
                 PlayerPrefab = PlayerPrefabs[0],
@@ -27,7 +27,7 @@ public class PlayerStorage : ScriptableObject
             ["2level"] = new PlayerData
             {
                 LVL = 2,
-                Damage = 20,
+                Damage = 3,
                 Speed = 30f,
                 Health = 70,
                 PlayerPrefab = PlayerPrefabs[1],
@@ -39,7 +39,7 @@ public class PlayerStorage : ScriptableObject
             ["3level"] = new PlayerData
             {
                 LVL = 3,
-                Damage = 30,
+                Damage = 4,
                 Speed = 12f,
                 Health = 90,
                 PlayerPrefab = PlayerPrefabs[1],
@@ -51,7 +51,7 @@ public class PlayerStorage : ScriptableObject
             ["4level"] = new PlayerData
             {
                 LVL = 4,
-                Damage = 40,
+                Damage = 5,
                 Speed = 13f,
                 Health = 110,
                 PlayerPrefab = PlayerPrefabs[1],
@@ -63,7 +63,7 @@ public class PlayerStorage : ScriptableObject
             ["5level"] = new PlayerData
             {
                 LVL = 5,
-                Damage = 50,
+                Damage = 7,
                 Speed = 14f,
                 Health = 130,
                 PlayerPrefab = PlayerPrefabs[1],
@@ -75,7 +75,7 @@ public class PlayerStorage : ScriptableObject
             ["6level"] = new PlayerData
             {
                 LVL = 6,
-                Damage = 60,
+                Damage = 10,
                 Speed = 15f,
                 Health = 150,
                 PlayerPrefab = PlayerPrefabs[1],
@@ -87,7 +87,7 @@ public class PlayerStorage : ScriptableObject
             ["7level"] = new PlayerData
             {
                 LVL = 7,
-                Damage = 70,
+                Damage = 15,
                 Speed = 16f,
                 Health = 170,
                 PlayerPrefab = PlayerPrefabs[1],
@@ -99,7 +99,7 @@ public class PlayerStorage : ScriptableObject
             ["8level"] = new PlayerData
             {
                 LVL = 8,
-                Damage = 80,
+                Damage = 20,
                 Speed = 17f,
                 Health = 190,
                 PlayerPrefab = PlayerPrefabs[1],

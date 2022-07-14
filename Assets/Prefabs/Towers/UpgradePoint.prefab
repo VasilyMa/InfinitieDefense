@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5230301392983540600}
   - component: {fileID: 5230301392983540601}
   - component: {fileID: 1168562673}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: UpgradePoint
   m_TagString: UpgradePoint
   m_Icon: {fileID: 0}

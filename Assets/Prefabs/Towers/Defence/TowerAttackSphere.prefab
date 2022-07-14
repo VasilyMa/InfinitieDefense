@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6599418357123128286}
   - component: {fileID: 1827388701736567920}
   - component: {fileID: 3382047949049976966}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TowerAttackSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,4 +57,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd521bdbc33db14fa573aa88b56e462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainGameObject: {fileID: 0}
   _ecsInfoMB: {fileID: 0}

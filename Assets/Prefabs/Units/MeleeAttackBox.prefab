@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6442236409384228115}
   - component: {fileID: 9211863385763597602}
   - component: {fileID: 4109426749047996453}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MeleeAttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,5 +58,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainGameObject: {fileID: 0}
-  _animator: {fileID: 0}
   _ecsInfoMB: {fileID: 0}

@@ -10,6 +10,7 @@ namespace Client
     {
         [SerializeField] private GameObject _mainGameObject;
         [SerializeField] private EcsInfoMB _ecsInfoMB;
+        [SerializeField] private Animator _animator;
 
         private EcsWorldInject _world;
 
@@ -23,6 +24,9 @@ namespace Client
         {
             if (_mainGameObject == null) _mainGameObject = transform.parent.gameObject;
             if (_ecsInfoMB == null) _ecsInfoMB = _mainGameObject.GetComponent<EcsInfoMB>();
+            if (_animator == null) _animator = _mainGameObject.GetComponent<Animator>();
+
+            _animator.SetBool("Range", true);
 
             if (_mainGameObject.CompareTag(_enemyTag))
             {

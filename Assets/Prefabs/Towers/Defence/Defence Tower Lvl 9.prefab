@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1794657074614358075}
   - component: {fileID: 6846774691347157350}
   - component: {fileID: 7888526580937902028}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Defence Tower Lvl 9
   m_TagString: Friendly
   m_Icon: {fileID: 0}

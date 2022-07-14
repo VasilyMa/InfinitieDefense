@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1407072258479135646}
   - component: {fileID: 927839352783695196}
   - component: {fileID: 2959378454121784000}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RangeAttackSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

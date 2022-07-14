@@ -109,6 +109,8 @@ namespace Client
             ref var projectileComponent = ref _projectilePool.Add(arrowEntity);
             ref var arrowDamageComponent = ref _damagePool.Add(arrowEntity);
 
+            if (!targetableComponent.TargetObject) return;
+
             arrowViewComponent.GameObject = GameObject.Instantiate(Resources.Load<GameObject>("Arrow"), _arrowFirePoint.transform.position, Quaternion.identity);
 
             projectileComponent.Speed = 30;
@@ -116,6 +118,7 @@ namespace Client
             projectileComponent.SpeedIncreaseFactor = 0.8f;
             projectileComponent.OwnerEntity = GetEntity();
             projectileComponent.StartPosition = _arrowFirePoint.transform.position;
+
             projectileComponent.SupportPosition = Vector3.Lerp(gameObject.transform.position, targetableComponent.TargetObject.transform.position, 0.5f) + new Vector3(0, 5, 0);
             projectileComponent.TargetEntity = targetableComponent.TargetEntity;
             projectileComponent.TargetObject = targetableComponent.TargetObject;

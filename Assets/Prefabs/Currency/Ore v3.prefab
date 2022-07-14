@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6422450611542627814}
   - component: {fileID: 880778680759946052}
   - component: {fileID: 7879362127655401364}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Ore v3
   m_TagString: Ore
   m_Icon: {fileID: 0}
@@ -111,9 +111,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7002673819108456982, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -4795602770403834234, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -2474918989700731556, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -2240853467504374854, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
       propertyPath: m_Name
       value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
