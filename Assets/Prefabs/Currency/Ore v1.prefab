@@ -115,17 +115,33 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: -4509897361669249285, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -4191126574054394647, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
       propertyPath: m_Layer
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -4191126574054394647, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -3765406054777184854, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: -3765406054777184854, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -1263557533861590803, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
       propertyPath: m_Layer
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -1263557533861590803, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
       propertyPath: m_Name
@@ -134,6 +150,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
       propertyPath: m_Layer
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de79b8eacda276e46ad8f21c1d82fdae, type: 3}

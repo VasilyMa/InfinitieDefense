@@ -49,7 +49,7 @@ namespace Client
 
                 if (_enemyPool.Value.Has(entity)) interfaceComponent.progressbar.GetComponent<ProgressBarMB>().UpdateProgressBar();
 
-                if (_playerPool.Value.Has(entity)) _losePool.Value.Add(_world.Value.NewEntity());
+                if (_playerPool.Value.Has(entity)) ; //to do player respawn on bottom
                 if (_mainTowerPool.Value.Has(entity)) _losePool.Value.Add(_world.Value.NewEntity());
             }
         }

@@ -17,15 +17,19 @@ namespace Client {
                 ref var oreComp = ref _filter.Pools.Inc2.Get(entity);
                 ref var moveComp = ref _movePool.Value.Add(_world.Value.NewEntity());
                 ref var viewComp = ref _viewPool.Value.Get(_state.Value.EntityPlayer);
-                oreComp.amount--;
-                var stone = (GameObject)GameObject.Instantiate(Resources.Load("Stone"), new Vector3(oreComp.prefab.transform.position.x, oreComp.prefab.transform.position.y + Random.Range(0.5f, 1.2f), oreComp.prefab.transform.position.z), Quaternion.identity);
                 
+                var stone = (GameObject)GameObject.Instantiate(Resources.Load("Stone"), new Vector3(oreComp.prefab.transform.position.x, oreComp.prefab.transform.position.y + Random.Range(0.5f, 1.2f), oreComp.prefab.transform.position.z), Quaternion.identity);
+
+                oreComp.OreParts[oreComp.MaxAmount - oreComp.CurrentAmount].SetActive(false);
+
+                oreComp.CurrentAmount--;
+
                 moveComp.stone = stone;
                 moveComp.TargetPosition = new Vector3(oreComp.prefab.transform.position.x + Random.Range(-4, 4), oreComp.prefab.transform.position.y, oreComp.prefab.transform.position.z + Random.Range(-4, 4));
                 moveComp.Speed = 10f;
                 moveComp.outTime = 0.5f;
 
-                if (oreComp.amount <= 0) 
+                if (oreComp.CurrentAmount <= 0) 
                 { 
                     oreComp.prefab.GetComponent<SphereCollider>().enabled = false;
                     oreComp.prefab.gameObject.SetActive(false);

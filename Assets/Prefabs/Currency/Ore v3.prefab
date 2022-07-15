@@ -115,17 +115,33 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: -7002673819108456982, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -4795602770403834234, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
       propertyPath: m_Layer
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -4795602770403834234, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -2474918989700731556, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: -2474918989700731556, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -2240853467504374854, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
       propertyPath: m_Layer
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -2240853467504374854, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
       propertyPath: m_Name
@@ -134,6 +150,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
       propertyPath: m_Layer
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 163b2fd0b73484c448b7e02adaf83675, type: 3}

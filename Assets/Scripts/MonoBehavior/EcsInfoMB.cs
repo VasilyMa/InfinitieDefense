@@ -16,12 +16,16 @@ namespace Client
 
         private EcsPool<ViewComponent> _viewPool;
         private EcsPool<Projectile> _projectilePool;
+        private EcsPool<ContextToolComponent> _contextToolPool;
 
         [SerializeField] private int _gameObjectEntity;
 
         [SerializeField] private int _targetEntity;
         [SerializeField] private GameObject _targetObject;
         [SerializeField] private GameObject _arrowFirePoint;
+
+        [Header("1 - Pickaxe; 2 - Sword; 3 - Bow")]
+        [SerializeField] private GameObject[] _contextTools = new GameObject[3];
 
         public void Init(EcsWorldInject world)
         {
@@ -31,6 +35,16 @@ namespace Client
             _damagePool = world.Value.GetPool<DamageComponent>();
             _viewPool = world.Value.GetPool<ViewComponent>();
             _projectilePool = world.Value.GetPool<Projectile>();
+            _contextToolPool = world.Value.GetPool<ContextToolComponent>();
+        }
+
+        public void InitTools(int entity)
+        {
+            ref var contextToolComponent = ref _contextToolPool.Get(entity);
+            contextToolComponent.ActiveTool = ContextToolComponent.Tool.empty;
+            contextToolComponent.Pickaxe = _contextTools[0];
+            contextToolComponent.Sword = _contextTools[1];
+            contextToolComponent.Bow = _contextTools[2];
         }
 
         public void SetEntity(int entity)

@@ -23,6 +23,7 @@ namespace Client
         private EcsPool<OreEventComponent> _oreEventPool;
         private EcsPool<OreMoveEvent> _moveEventPool;
         private EcsPool<InFightTag> _fightPool;
+        private EcsPool<ContextToolComponent> _contextToolPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -42,6 +43,7 @@ namespace Client
             _canvasEvent = world.GetPool<UpgradeCanvasEvent>();
             _viewPool = world.GetPool<ViewComponent>();
             _upgradeCanvasPool = world.GetPool<CanvasUpgradeComponent>();
+            _contextToolPool = world.GetPool<ContextToolComponent>();
             _world = world;
         }
 
@@ -97,6 +99,7 @@ namespace Client
                         ref var player = ref _state.EntityPlayer;
                         ref var _player = ref _playerPool.Get(player);
                         ref var view = ref _viewPool.Get(player);
+                        ref var contextToolComponent = ref _contextToolPool.Get(_state.EntityPlayer);
                         var filter = _world.Filter<OreComponent>();
                         var ores = _world.GetPool<OreComponent>();
                         foreach (int entity in filter.End())
@@ -108,6 +111,7 @@ namespace Client
                                 _player.animator.SetBool("isIdle", false);
                                 _player.animator.SetBool("isRun", false);
                                 _player.animator.SetBool("isMining", true);
+                                contextToolComponent.ActiveTool = ContextToolComponent.Tool.pickaxe;
                                 view.isMining = true;
                                 view.isFight = false;
                                 _fightPool.Del(player);

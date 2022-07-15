@@ -21,6 +21,10 @@ namespace Client
         readonly EcsPoolInject<CanvasPointerComponent> _pointerPool = default;
         readonly EcsPoolInject<HPRegeneration> _regenerationPool = default;
         readonly EcsPoolInject<UnitTag> _unitPool = default;
+        readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
+
+        private Vector3 _spawnPoint = new Vector3(0, 2, -10);
+
         public void Init (EcsSystems systems) 
         {
             var playerEntity = _playerPool.Value.GetWorld().NewEntity();
@@ -37,7 +41,8 @@ namespace Client
             ref var damageComponent = ref _damagePool.Value.Add(playerEntity);
             ref var targetableComponent = ref _targetablePool.Value.Add(playerEntity);
             ref var regenerationComponent = ref _regenerationPool.Value.Add(playerEntity);
-            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), new Vector3(0,2,-10), Quaternion.identity);
+            ref var contextToolComponent = ref _contextToolPool.Value.Add(playerEntity);
+            var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), _spawnPoint, Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
             player.playerMB = PlayerGo.GetComponent<PlayerMB>();
@@ -49,6 +54,7 @@ namespace Client
             player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            player.RespawnPoint = _spawnPoint;
 
             viewComponent.GameObject = PlayerGo;
             viewComponent.Rigidbody = PlayerGo.GetComponent<Rigidbody>();
@@ -66,6 +72,7 @@ namespace Client
             viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
             viewComponent.EcsInfoMB.Init(_world);
             viewComponent.EcsInfoMB.SetEntity(playerEntity);
+            viewComponent.EcsInfoMB.InitTools(playerEntity);
             viewComponent.SkinnedMeshRenderer = PlayerGo.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
             viewComponent.UpgradeParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(0).GetComponent<ParticleSystem>();
             viewComponent.HitParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(1).GetComponent<ParticleSystem>();

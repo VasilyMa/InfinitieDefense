@@ -20,13 +20,22 @@ namespace Client
 
             foreach (var ore in allOres)
             {
-                int amount = Random.Range(4, 4);
+                int amount = 4;
                 var oresEntity = _world.Value.NewEntity();
                 _orePool.Value.Add(oresEntity);
                 ref var orePool = ref _orePool.Value.Get(oresEntity);
                 orePool.prefab = ore;
-                orePool.amount = amount;
+                orePool.MaxAmount = amount;
+                orePool.CurrentAmount = amount;
                 orePool.IsEnable = false;
+
+                // we write parts of ore
+                GameObject oreModel = ore.transform.GetChild(0).gameObject;
+                orePool.OreParts = new GameObject[oreModel.transform.childCount];
+                for (int i = 0; i < oreModel.transform.childCount; i++)
+                {
+                    orePool.OreParts[i] = oreModel.transform.GetChild(i).gameObject;
+                }
             }
         }
     }
