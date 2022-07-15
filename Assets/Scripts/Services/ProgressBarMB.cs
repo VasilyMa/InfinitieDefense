@@ -25,7 +25,7 @@ namespace Client
         public void SetMaxAmount(float value)
         {
             _maxAmount = value;
-            _currentAmount = value;
+            _currentAmount = value - value;
             _slider.maxValue = _maxAmount;
             _slider.value = _currentAmount;
 
@@ -33,7 +33,8 @@ namespace Client
         public void UpdateProgressBar()
         {
             var filter = _world.Filter<EnemyTag>().Inc<DeadTag>().End();
-            _currentAmount = _state.WaveStorage.GetAllEnemies() - filter.GetEntitiesCount();
+            _currentAmount++;
+            //_currentAmount = _state.WaveStorage.GetAllEnemies() - filter.GetEntitiesCount();
             _slider.value = _currentAmount;
         }
     }
