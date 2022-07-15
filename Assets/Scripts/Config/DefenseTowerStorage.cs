@@ -22,7 +22,8 @@ public class DefenseTowerStorage : ScriptableObject
             ["empty"] = new DefenseTower
             {
                 NextID = "1tower",
-                Upgrade = 1
+                Upgrade = 1,
+                ImageResource = ImageResources
             },
             ["1tower"] = new DefenseTower
             {

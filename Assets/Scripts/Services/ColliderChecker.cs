@@ -172,7 +172,7 @@ namespace Client
                 foreach (int entity in filter.End())
                 {
                     ref OreComponent oreComp = ref ores.Get(entity);
-                    if (other.gameObject == oreComp.prefab && view.CanMining && !_fightPool.Has(player))
+                    if (other.gameObject == oreComp.prefab && !_fightPool.Has(player))
                     {
                         _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
                         _player.animator.SetBool("isIdle", false);
