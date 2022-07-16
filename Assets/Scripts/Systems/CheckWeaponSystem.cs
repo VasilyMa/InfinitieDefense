@@ -19,6 +19,8 @@ namespace Client {
                 ref var contextToolComponent = ref _contextToolPool.Value.Get(playerEntity);
                 ref var activateContextToolComponent = ref _activateContextToolPool.Value.Get(playerEntity);
 
+                //to do delet the switch and use CurrentActiveTool in ContextToolComponent
+
                 switch (activateContextToolComponent.ActiveTool)
                 {
                     case ContextToolComponent.Tool.pickaxe:

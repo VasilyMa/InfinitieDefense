@@ -9,5 +9,7 @@ namespace Client
         public GameObject Pickaxe;
         public GameObject Sword;
         public GameObject Bow;
+
+        //to do add CurrentActiveTool for fast work "CheckWeaponSystem
     }
 }
