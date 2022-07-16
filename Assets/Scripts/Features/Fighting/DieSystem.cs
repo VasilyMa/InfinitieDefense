@@ -17,6 +17,9 @@ namespace Client
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<MainTowerTag> _mainTowerPool = default;
+        readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
+        readonly EcsPoolInject<RespawnEvent> _respawnEventPool = default;
+        readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
 
         readonly EcsPoolInject<LoseEvent> _losePool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
@@ -49,8 +52,12 @@ namespace Client
 
                 if (_enemyPool.Value.Has(entity)) interfaceComponent.progressbar.GetComponent<ProgressBarMB>().UpdateProgressBar();
 
-                if (_playerPool.Value.Has(entity)) ; //to do player respawn on bottom
                 if (_mainTowerPool.Value.Has(entity)) _losePool.Value.Add(_world.Value.NewEntity());
+
+                if (_resurrectablePool.Value.Has(entity))
+                {
+                    _respawnEventPool.Value.Add(entity);
+                }
             }
         }
     }

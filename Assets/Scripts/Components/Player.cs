@@ -5,7 +5,6 @@ namespace Client {
         public PlayerMB playerMB;
         public MeleeAttackMB AttackMonoBehaviour;
         public Vector3 direction;
-        public Vector3 RespawnPoint;
         public Rigidbody rigidbody;
         public Animator animator;
         public float MoveSpeed;

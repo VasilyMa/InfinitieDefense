@@ -39,7 +39,7 @@ namespace Client {
                     {
                         ref var player = ref _filterPlayer.Pools.Inc1.Get(entityPlayer);
                         player.animator.SetBool("isMining", false);
-                        player.animator.SetBool("isIdle", true);
+                        //player.animator.SetBool("isIdle", true);
                         viewComp.isMining = false;
                     }
                 }

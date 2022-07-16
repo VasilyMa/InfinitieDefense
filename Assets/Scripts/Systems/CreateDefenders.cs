@@ -20,6 +20,7 @@ namespace Client {
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<UnitTag> _unitPool = default;
         readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
+        readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
 
         //todo components
 
@@ -48,6 +49,11 @@ namespace Client {
                         ref var movableComponent = ref _movablePool.Value.Add(defenderEntity);
                         ref var damageComponent = ref _damagePool.Value.Add(defenderEntity);
                         ref var targetableComponent = ref _targetablePool.Value.Add(defenderEntity);
+                        ref var resurrectableComponent = ref _resurrectablePool.Value.Add(defenderEntity);
+
+                        resurrectableComponent.SpawnPosition = defenderComp.Position;
+                        resurrectableComponent.MaxCooldown = 5;
+                        resurrectableComponent.CurrentCooldown = resurrectableComponent.MaxCooldown;
 
                         targetableComponent.TargetEntity = -1;
                         targetableComponent.TargetObject = null;
@@ -66,6 +72,8 @@ namespace Client {
                         viewComponent.Animator = viewComponent.GameObject.GetComponent<Animator>();
                         viewComponent.Animator.SetBool("Melee", true);
 
+                        viewComponent.BaseLayer = viewComponent.GameObject.layer;
+
                         viewComponent.EcsInfoMB = viewComponent.GameObject.GetComponent<EcsInfoMB>();
                         viewComponent.EcsInfoMB.Init(_world);
                         viewComponent.EcsInfoMB.SetEntity(defenderEntity);
@@ -76,7 +84,7 @@ namespace Client {
 
                         viewComponent.Outline = viewComponent.GameObject.GetComponent<Outline>();
 
-                        healthComponent.MaxValue = 35;
+                        healthComponent.MaxValue = 5;
                         healthComponent.CurrentValue = healthComponent.MaxValue;
 
                         viewComponent.Healthbar = viewComponent.GameObject.GetComponent<HealthbarMB>();

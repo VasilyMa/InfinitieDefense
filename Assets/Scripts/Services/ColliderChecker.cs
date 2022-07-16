@@ -23,7 +23,7 @@ namespace Client
         private EcsPool<OreEventComponent> _oreEventPool;
         private EcsPool<OreMoveEvent> _moveEventPool;
         private EcsPool<InFightTag> _fightPool;
-        private EcsPool<ContextToolComponent> _contextToolPool;
+        private EcsPool<ActivateContextToolEvent> _activateContextToolPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -43,7 +43,7 @@ namespace Client
             _canvasEvent = world.GetPool<UpgradeCanvasEvent>();
             _viewPool = world.GetPool<ViewComponent>();
             _upgradeCanvasPool = world.GetPool<CanvasUpgradeComponent>();
-            _contextToolPool = world.GetPool<ContextToolComponent>();
+            _activateContextToolPool = world.GetPool<ActivateContextToolEvent>();
             _world = world;
         }
 
@@ -99,7 +99,7 @@ namespace Client
                         ref var player = ref _state.EntityPlayer;
                         ref var _player = ref _playerPool.Get(player);
                         ref var view = ref _viewPool.Get(player);
-                        ref var contextToolComponent = ref _contextToolPool.Get(_state.EntityPlayer);
+                        ref var activateContextToolComponent = ref _activateContextToolPool.Add(_state.EntityPlayer);
                         var filter = _world.Filter<OreComponent>();
                         var ores = _world.GetPool<OreComponent>();
                         foreach (int entity in filter.End())
@@ -108,10 +108,10 @@ namespace Client
                             if (other.gameObject == oreComp.prefab && view.CanMining)
                             {
                                 _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
-                                _player.animator.SetBool("isIdle", false);
-                                _player.animator.SetBool("isRun", false);
+                                //_player.animator.SetBool("isIdle", false);
+                                //_player.animator.SetBool("isRun", false);
                                 _player.animator.SetBool("isMining", true);
-                                contextToolComponent.ActiveTool = ContextToolComponent.Tool.pickaxe;
+                                activateContextToolComponent.ActiveTool = ContextToolComponent.Tool.pickaxe;
                                 view.isMining = true;
                                 view.isFight = false;
                                 _fightPool.Del(player);
@@ -179,8 +179,8 @@ namespace Client
                     if (other.gameObject == oreComp.prefab && view.CanMining)
                     {
                         _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
-                        _player.animator.SetBool("isIdle", false);
-                        _player.animator.SetBool("isRun", false);
+                        //_player.animator.SetBool("isIdle", false);
+                        //_player.animator.SetBool("isRun", false);
                         _player.animator.SetBool("isMining", true);
                         Debug.Log("Mining!");
                     }
@@ -203,8 +203,8 @@ namespace Client
                 if (view.CanMining)
                 {
                     _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
-                    _player.animator.SetBool("isIdle", false);
-                    _player.animator.SetBool("isRun", false);
+                    //_player.animator.SetBool("isIdle", false);
+                    //_player.animator.SetBool("isRun", false);
                     _player.animator.SetBool("isMining", true);
                     view.isMining = true;
                     view.isFight = false;

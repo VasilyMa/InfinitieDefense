@@ -41,7 +41,6 @@ namespace Client
         public void InitTools(int entity)
         {
             ref var contextToolComponent = ref _contextToolPool.Get(entity);
-            contextToolComponent.ActiveTool = ContextToolComponent.Tool.empty;
             contextToolComponent.Pickaxe = _contextTools[0];
             contextToolComponent.Sword = _contextTools[1];
             contextToolComponent.Bow = _contextTools[2];
@@ -114,16 +113,17 @@ namespace Client
         public void ArrowShooting()
         {
             _world = GetWorld();
-            int arrowEntity = _world.Value.NewEntity();
 
             ref var targetableComponent = ref _targetablePool.Get(GetEntity());
             ref var damageComponent = ref _damagePool.Get(GetEntity());
 
+            if (!targetableComponent.TargetObject) return;
+
+            int arrowEntity = _world.Value.NewEntity();
+
             ref var arrowViewComponent = ref _viewPool.Add(arrowEntity);
             ref var projectileComponent = ref _projectilePool.Add(arrowEntity);
             ref var arrowDamageComponent = ref _damagePool.Add(arrowEntity);
-
-            if (!targetableComponent.TargetObject) return;
 
             arrowViewComponent.GameObject = GameObject.Instantiate(Resources.Load<GameObject>("Arrow"), _arrowFirePoint.transform.position, Quaternion.identity);
 

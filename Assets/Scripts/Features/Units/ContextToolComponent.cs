@@ -6,8 +6,6 @@ namespace Client
     {
         public enum Tool { pickaxe, sword, bow, empty };
 
-        public Tool ActiveTool;
-
         public GameObject Pickaxe;
         public GameObject Sword;
         public GameObject Bow;

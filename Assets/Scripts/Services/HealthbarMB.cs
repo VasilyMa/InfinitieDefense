@@ -56,6 +56,10 @@ namespace Client
         {
             if (_healthBar.activeSelf) _healthBar.SetActive(false);
         }
+        public void Enableble()
+        {
+            if (!_healthBar.activeSelf) _healthBar.SetActive(true);
+        }
         private void Update()
         {
             CameraFollow();

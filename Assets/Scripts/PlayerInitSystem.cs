@@ -22,6 +22,7 @@ namespace Client
         readonly EcsPoolInject<HPRegeneration> _regenerationPool = default;
         readonly EcsPoolInject<UnitTag> _unitPool = default;
         readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
+        readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
 
         private Vector3 _spawnPoint = new Vector3(0, 2, -10);
 
@@ -42,6 +43,7 @@ namespace Client
             ref var targetableComponent = ref _targetablePool.Value.Add(playerEntity);
             ref var regenerationComponent = ref _regenerationPool.Value.Add(playerEntity);
             ref var contextToolComponent = ref _contextToolPool.Value.Add(playerEntity);
+            ref var resurrectableComponent = ref _resurrectablePool.Value.Add(playerEntity);
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), _spawnPoint, Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
@@ -54,7 +56,11 @@ namespace Client
             player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            player.RespawnPoint = _spawnPoint;
+
+            resurrectableComponent.SpawnPosition = _spawnPoint;
+            resurrectableComponent.MaxCooldown = 5;
+            resurrectableComponent.CurrentCooldown = resurrectableComponent.MaxCooldown;
+            resurrectableComponent.OnSpawnPosition = true;
 
             viewComponent.GameObject = PlayerGo;
             viewComponent.Rigidbody = PlayerGo.GetComponent<Rigidbody>();
@@ -80,6 +86,9 @@ namespace Client
             viewComponent.Regeneration = PlayerGo.transform.GetChild(4).transform.GetChild(3).GetComponent<ParticleSystem>();
             viewComponent.WayTrack = PlayerGo.transform.GetChild(4).transform.GetChild(4).GetComponent<ParticleSystem>();
             viewComponent.DamagePopups = new List<GameObject>();
+
+            viewComponent.BaseLayer = viewComponent.GameObject.layer;
+
             for (int y = 0; y < viewComponent.Transform.GetChild(3).transform.GetChild(0).transform.childCount; y++)
             {
                 var popup = viewComponent.Transform.GetChild(3).transform.GetChild(0).transform.GetChild(y).gameObject;

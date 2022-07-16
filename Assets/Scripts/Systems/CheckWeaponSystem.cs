@@ -8,16 +8,18 @@ namespace Client {
         readonly EcsFilterInject<Inc<Player, InFightTag>> _playerInFight = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;*/
 
-        readonly EcsFilterInject<Inc<Player, ContextToolComponent>> _playerFilter = default;
+        readonly EcsFilterInject<Inc<Player, ContextToolComponent, ActivateContextToolEvent>> _playerFilter = default;
         readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
+        readonly EcsPoolInject<ActivateContextToolEvent> _activateContextToolPool = default;
 
         public void Run (EcsSystems systems)
         {
             foreach (var playerEntity in _playerFilter.Value)
             {
                 ref var contextToolComponent = ref _contextToolPool.Value.Get(playerEntity);
+                ref var activateContextToolComponent = ref _activateContextToolPool.Value.Get(playerEntity);
 
-                switch (contextToolComponent.ActiveTool)
+                switch (activateContextToolComponent.ActiveTool)
                 {
                     case ContextToolComponent.Tool.pickaxe:
                         if (!contextToolComponent.Pickaxe.activeSelf)
@@ -52,6 +54,8 @@ namespace Client {
                         contextToolComponent.Bow.SetActive(false);
                         break;
                 }
+
+                _activateContextToolPool.Value.Del(playerEntity);
             }
 
             /*foreach (var entity in _playerFilter.Value)

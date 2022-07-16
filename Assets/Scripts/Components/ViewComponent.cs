@@ -9,10 +9,11 @@ namespace Client
         public GameObject GameObject;
         public Rigidbody Rigidbody;
         public Animator Animator;
+        public Transform Transform;
+        public int BaseLayer;
         public HealthbarMB Healthbar;
         public LevelMB Level;
         public List<GameObject> DamagePopups;
-        public Transform Transform;
         public Transform PointerTransform;
         public Transform WeaponHolder;
         public float MoveSpeed;
