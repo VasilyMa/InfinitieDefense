@@ -9,5 +9,6 @@ namespace Client {
         public Vector3 TargetPosition;
         public bool Coin;
         public float Speed;
+        public GameObject Object; 
     }
 }

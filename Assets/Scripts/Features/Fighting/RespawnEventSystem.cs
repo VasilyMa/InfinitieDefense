@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Client
 {
     sealed class RespawnEventSystem : IEcsRunSystem
-    {        
+    {
+        readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<Resurrectable, RespawnEvent, DeadTag>> _respawnEventFilter = default;
 
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
@@ -41,7 +42,6 @@ namespace Client
                 if (viewComponent.Outline) viewComponent.Outline.enabled = true;
                 if (viewComponent.NavMeshAgent) viewComponent.NavMeshAgent.enabled = true;
                 if (viewComponent.Healthbar) viewComponent.Healthbar.Enableble();
-
                 _deadPool.Value.Del(respawningEntity);
                 _respawnPool.Value.Del(respawningEntity);
             }

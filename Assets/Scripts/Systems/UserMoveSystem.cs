@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Client {
     sealed class UserMoveSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
-        readonly EcsFilterInject<Inc<Player>> _playerFilter = default;
+        readonly EcsFilterInject<Inc<Player>, Exc<DeadTag>> _playerFilter = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         private float _angleOffset = 30f;

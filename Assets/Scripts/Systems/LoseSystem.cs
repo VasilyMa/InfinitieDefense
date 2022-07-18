@@ -12,7 +12,6 @@ namespace Client {
             foreach (var entity in _loseFilter.Value)
             {
                 ref var interfaceComp = ref _interfacePool.Value.Get(_state.Value.EntityInterface);
-                _dropPool.Value.Add(_state.Value.EntityPlayer);
                 //Time.timeScale = 0;
                 //interfaceComp.losePanel.SetActive(true);
             }

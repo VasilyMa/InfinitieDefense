@@ -23,8 +23,8 @@ namespace Client
         private EcsPool<OreEventComponent> _oreEventPool;
         private EcsPool<OreMoveEvent> _moveEventPool;
         private EcsPool<InFightTag> _fightPool;
+        private EcsPool<DeadTag> _deadPool;
         private EcsPool<ActivateContextToolEvent> _activateContextToolPool;
-        private EcsPool<InMiningTag> _miningPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -43,9 +43,9 @@ namespace Client
             _mainPool = world.GetPool<MainTowerTag>();
             _canvasEvent = world.GetPool<UpgradeCanvasEvent>();
             _viewPool = world.GetPool<ViewComponent>();
+            _deadPool = world.GetPool<DeadTag>();
             _upgradeCanvasPool = world.GetPool<CanvasUpgradeComponent>();
             _activateContextToolPool = world.GetPool<ActivateContextToolEvent>();
-            _miningPool = world.GetPool<InMiningTag>(); // to do InMiningTag if we go to mining ore
             _world = world;
         }
 
@@ -55,6 +55,10 @@ namespace Client
             {
                 case "Coin":
                     {
+                        if (_deadPool.Has(_state.EntityPlayer))
+                        {
+                            break;
+                        }
                         other.gameObject.tag = "Untagged";
                         ref var coinComp = ref _coinPool.Add(_world.NewEntity());
                         coinComp.CoinTransform = other.transform;
@@ -62,6 +66,10 @@ namespace Client
                     }
                 case "Stone":
                     {
+                        if (_deadPool.Has(_state.EntityPlayer))
+                        {
+                            break;
+                        }
                         other.gameObject.tag = "Untagged";
                         ref var stoneComp = ref _stonePool.Add(_world.NewEntity());
                         stoneComp.StoneTransform = other.transform;
@@ -92,8 +100,6 @@ namespace Client
                 case "Enemy":
                     {
                         ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
-                        viewComp.isMining = false;
-                        viewComp.isFight = true;
                         break;
                     }
                 case "Ore":
@@ -107,16 +113,14 @@ namespace Client
                         foreach (int entity in filter.End())
                         {
                             ref OreComponent oreComp = ref ores.Get(entity);
-                            if (other.gameObject == oreComp.prefab && !_fightPool.Has(player) && !_miningPool.Has(player))
+                            if (other.gameObject == oreComp.prefab && !_fightPool.Has(player))
                             {
-                                _miningPool.Add(player);
                                 Debug.Log("Майним руду");
                                 _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
-                                //_player.animator.SetBool("isIdle", false);
-                                //_player.animator.SetBool("isRun", false);
+                                _player.animator.SetBool("isIdle", false);
+                                _player.animator.SetBool("isRun", false);
                                 _player.animator.SetBool("isMining", true);
                                 activateContextToolComponent.ActiveTool = ContextToolComponent.Tool.pickaxe;
-                                view.isMining = true;
                                 break;
                             }
                         }
@@ -152,14 +156,12 @@ namespace Client
                     }
                 case "Ore":
                     {
-                        var playerFilter = _world.Filter<Player>().Inc<InMiningTag>().Exc<InFightTag>().End();
+                        var playerFilter = _world.Filter<Player>().Exc<InFightTag>().End();
                         foreach (var player in playerFilter)
                         {
                             ref var _player = ref _playerPool.Get(player);
                             ref var _view = ref _viewPool.Get(player);
                             _player.animator.SetBool("isMining", false);
-                            _view.isMining = false;
-                            _miningPool.Del(player);
                         }
                         var filter = _world.Filter<OreComponent>();
                         foreach (int entity in filter.End())
@@ -174,7 +176,7 @@ namespace Client
         {
             if (other.gameObject.CompareTag("Ore"))
             {
-                var playerFilter = _world.Filter<Player>().Inc<InMiningTag>().Exc<InFightTag>().End(); //находим игрока без компонента в бою
+                var playerFilter = _world.Filter<Player>().Exc<InFightTag>().End(); //находим игрока без компонента в бою
                 var filter = _world.Filter<OreComponent>();
                 var ores = _world.GetPool<OreComponent>();
                 foreach (int entity in filter.End())

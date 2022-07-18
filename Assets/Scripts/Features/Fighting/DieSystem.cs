@@ -20,6 +20,7 @@ namespace Client
         readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
         readonly EcsPoolInject<RespawnEvent> _respawnEventPool = default;
         readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
+        readonly EcsPoolInject<DropByDie> _dropPool = default;
 
         readonly EcsPoolInject<LoseEvent> _losePool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
@@ -57,6 +58,10 @@ namespace Client
                 if (_resurrectablePool.Value.Has(entity))
                 {
                     _respawnEventPool.Value.Add(entity);
+                }
+                if (_deadPool.Value.Has(_state.Value.EntityPlayer))
+                {
+                    _dropPool.Value.Add(_state.Value.EntityPlayer);
                 }
             }
         }
