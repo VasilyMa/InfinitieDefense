@@ -6,10 +6,12 @@ using UnityEngine.UI;
 namespace Client {
     sealed class UserMoveSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
+
         readonly EcsFilterInject<Inc<Player>> _playerFilter = default;
+
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
-        private float _angleOffset = 30f;
+        readonly EcsPoolInject<CameraComponent> _cameraPool = default;
 
         public void Run (EcsSystems systems) {
             foreach (var entity in _playerFilter.Value)
@@ -18,43 +20,40 @@ namespace Client {
                 var _joystick = interfacePool._joystick;
                 ref var player = ref _playerFilter.Pools.Inc1.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
+                ref var cameraComponent = ref _cameraPool.Value.Get(_state.Value.EntityCamera);
 
-                float angle = Mathf.Atan2(  interfacePool._joystickPoint.position.y - interfacePool._joysticKCenter.position.y,
-                                            interfacePool._joystickPoint.position.x - interfacePool._joysticKCenter.position.x)
-                                                                                                                                * Mathf.Rad2Deg - _angleOffset;
+                Vector3 cameraRight = cameraComponent.CameraTransform.right;
+                Vector3 cameraForward = cameraComponent.CameraTransform.forward;
 
-                if(angle < 0)
-                {
-                    angle += 360;
-                }
-                else
-                {
-                    angle -= 360;
-                }
+                cameraRight.y = 0;
+                cameraForward.y = 0;
 
-                float radius = new Vector2(_joystick.Horizontal, _joystick.Vertical).sqrMagnitude;
-                var x = Mathf.Cos((angle) * Mathf.Deg2Rad) * radius;
-                var z = Mathf.Sin((angle) * Mathf.Deg2Rad) * radius;
+                // Vector3 for movement regarding the camera
+                Vector3 movementVector = cameraForward.normalized * _joystick.Vertical + cameraRight.normalized * _joystick.Horizontal;
+                movementVector = Vector3.ClampMagnitude(movementVector, 1);
 
-                player.rigidbody.velocity = new Vector3(x * player.MoveSpeed, 
-                                                        player.rigidbody.velocity.y, 
-                                                        z * player.MoveSpeed);
+                player.rigidbody.velocity = new Vector3(movementVector.x * player.MoveSpeed,
+                                                        player.rigidbody.velocity.y,
+                                                        movementVector.z * player.MoveSpeed);
 
-                // to do fix this full bullshit
-                Vector2 joystickMoveDirection = new Vector2(x, z);
+                // Vector3 for correct aim moving
+                Vector3 relativeVector = viewComponent.Transform.InverseTransformDirection(movementVector);
 
-                player.animator.SetFloat("RunX", viewComponent.Transform.forward.x * joystickMoveDirection.x);
-                player.animator.SetFloat("RunZ", viewComponent.Transform.right.z * joystickMoveDirection.y);
-                // end of the to do
+                player.animator.SetFloat("RunX", relativeVector.x);
+                player.animator.SetFloat("RunZ", relativeVector.z);
 
                 if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
                 {
                     player.Transform.rotation = Quaternion.LookRotation(player.rigidbody.velocity);
                     player.animator.SetBool("isIdle", false);
-                    player.animator.SetBool("isMining", false);
                     player.animator.SetBool("isRun", true);
-                    if(viewComponent.WayTrack.particleCount == 0)
+
+                    if (viewComponent.WayTrack.particleCount == 0)
+                    {
+                        viewComponent.WayTrack.transform.parent = null;
+                        viewComponent.WayTrack.transform.position = viewComponent.Transform.position;
                         viewComponent.WayTrack.Play();
+                    }
                 }
                 else if (player.animator.GetBool("isMining"))
                 {

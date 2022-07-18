@@ -57,7 +57,6 @@ namespace Client
 
                 .Add(new OnOffTowerAttack())
                 
-                .Add(new UnitLookingSystem())
                 .Add(new DefendersFallbackSystem())
 
                 .Add(new UnitMovingSystem())
@@ -111,6 +110,8 @@ namespace Client
                 .Add(new NewTowersCircleSystem())
                 .Add(new SavesSystem())
 
+                .Add(new VibrationEventSystem())
+
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()
                 .DelHere<ActivateWaveShipsEvent>()
@@ -120,6 +121,7 @@ namespace Client
                 ;
             _systemsFixed
                 .Add(new UserMoveSystem())
+                .Add(new UnitLookingSystem())
                 ;
 
 #if UNITY_EDITOR

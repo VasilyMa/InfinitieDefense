@@ -15,11 +15,9 @@ namespace Client
         readonly EcsPoolInject<DeadTag> _deadPool = default;
         readonly EcsPoolInject<EnemyTag> _enemyPool = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
-        readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<MainTowerTag> _mainTowerPool = default;
         readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
         readonly EcsPoolInject<RespawnEvent> _respawnEventPool = default;
-        readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
 
         readonly EcsPoolInject<LoseEvent> _losePool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;

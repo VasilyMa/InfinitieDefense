@@ -10,7 +10,6 @@ namespace Client
         readonly EcsPoolInject<Movable> _movablePool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
-        readonly EcsPoolInject<EnemyTag> _enemyPool = default;
 
         public void Run (EcsSystems systems)
         {
