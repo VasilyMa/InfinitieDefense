@@ -99,4 +99,3 @@ crashlytics-build.properties
 # Exceptions
 !*.dll
 !*.obj
-Assets/Other Assets/NiceVibrations/Plugins/Windows/x64/nice_vibrations_editor_plugin.dll
