@@ -8,6 +8,8 @@ namespace Client
     {
         readonly EcsWorldInject _world = default;
 
+        readonly EcsSharedInject<GameState> _state;
+
         readonly EcsFilterInject<Inc<DamagingEvent>> _damagingEventFilter = default;
 
         readonly EcsPoolInject<DamagingEvent> _damagingEventPool = default;
@@ -16,9 +18,8 @@ namespace Client
 
         readonly EcsPoolInject<TargetingEvent> _targetingEventPool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
-
-        readonly EcsSharedInject<GameState> _state = default;
         readonly EcsPoolInject<DamagePopupEvent> _popupEvent = default;
+        readonly EcsPoolInject<VibrationEvent> _vibrationPool = default;
         public void Run (EcsSystems systems)
         {
             foreach (var entity in _damagingEventFilter.Value)
@@ -70,6 +71,12 @@ namespace Client
                     popupComp.DamageObject.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
                     popupComp.DamageObject.transform.localScale = new Vector3(0.01f, 0.01f, 1);
                     popupComp.timeOut = 1.5f;
+                }
+
+                if (damagingEventComponent.DamagingEntity == _state.Value.EntityPlayer)
+                {
+                    ref var vibrationEvent = ref _vibrationPool.Value.Add(entity);
+                    vibrationEvent.Vibration = VibrationEvent.VibrationType.MediumImpact;
                 }
 
                 if (_targetablePool.Value.Has(damagingEventComponent.TargetEntity))

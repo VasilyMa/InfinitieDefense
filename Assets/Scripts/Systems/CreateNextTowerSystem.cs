@@ -20,9 +20,7 @@ namespace Client
         readonly EcsPoolInject<HealthComponent> _healthWeightPool = default;
         readonly EcsPoolInject<CreateDefenderEvent> _defenderPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
-        readonly EcsFilterInject<Inc<CanvasUpgradeComponent, UpgradeCanvasEvent>> _canvasFilter = default;
         readonly EcsFilterInject<Inc<CircleComponent>> _circleFilter = default;
-        readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePool = default;
         readonly EcsPoolInject<NewTowerCircleEvent> _circlePool = default;
 
         private string Model;

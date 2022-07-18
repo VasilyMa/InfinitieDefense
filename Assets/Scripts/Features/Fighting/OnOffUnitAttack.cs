@@ -38,14 +38,12 @@ namespace Client
                     if (!_inFightPool.Value.Has(entity)) _inFightPool.Value.Add(entity);
                     if (!_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Add(entity);
                     viewComponent.Animator.SetBool("Attack", true);
-                    viewComponent.Animator.SetBool("InFihgt", true);
                 }
                 else
                 {
                     if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
                     if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
                     viewComponent.Animator.SetBool("Attack", false);
-                    viewComponent.Animator.SetBool("InFihgt", false);
                 }
             }
         }

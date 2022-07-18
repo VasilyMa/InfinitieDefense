@@ -78,7 +78,11 @@ namespace Client
             viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
             viewComponent.EcsInfoMB.Init(_world);
             viewComponent.EcsInfoMB.SetEntity(playerEntity);
+
+            contextToolComponent.ToolsPool = new GameObject[viewComponent.EcsInfoMB.GetToolCount()];
+            contextToolComponent.CurrentActiveTool = ContextToolComponent.Tool.empty;
             viewComponent.EcsInfoMB.InitTools(playerEntity);
+
             viewComponent.SkinnedMeshRenderer = PlayerGo.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
             viewComponent.UpgradeParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(0).GetComponent<ParticleSystem>();
             viewComponent.HitParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(1).GetComponent<ParticleSystem>();
@@ -95,6 +99,7 @@ namespace Client
                 viewComponent.DamagePopups.Add(popup);
                 viewComponent.DamagePopups[y].SetActive(false);
             }
+
 
             pointerComponent.player = PlayerGo;
 

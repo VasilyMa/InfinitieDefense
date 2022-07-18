@@ -9,7 +9,6 @@ namespace Client
         readonly EcsFilterInject<Inc<CameraComponent>> _cameraFilter = default;
 
         readonly EcsPoolInject<CameraComponent> _cameraPool = default;
-        readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<Player> _playerPool = default;
 
         readonly EcsSharedInject<GameState> _state;

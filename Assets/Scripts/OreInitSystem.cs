@@ -8,8 +8,14 @@ namespace Client
     sealed class OreInitSystem : IEcsInitSystem
     {
         readonly EcsSharedInject<GameState> _state;
+
         readonly EcsWorldInject _world = default;
+
         readonly EcsPoolInject<OreComponent> _orePool = default;
+        readonly EcsPoolInject<ViewComponent> _viewPool = default;
+
+        private int _amount = 4;
+
         private string Ore;
         public void Init (EcsSystems systems)
         {
@@ -20,17 +26,20 @@ namespace Client
 
             foreach (var ore in allOres)
             {
-                int amount = 4;
                 var oresEntity = _world.Value.NewEntity();
-                _orePool.Value.Add(oresEntity);
-                ref var orePool = ref _orePool.Value.Get(oresEntity);
+                ref var orePool = ref _orePool.Value.Add(oresEntity);
+                ref var viewComponent = ref _viewPool.Value.Add(oresEntity);
+
+                viewComponent.GameObject = ore;
+                viewComponent.EcsInfoMB = ore.GetComponent<EcsInfoMB>();
+                viewComponent.EcsInfoMB.Init(_world);
+                viewComponent.EcsInfoMB.SetEntity(oresEntity);
+
                 orePool.prefab = ore;
-                orePool.MaxAmount = amount;
-                orePool.CurrentAmount = amount;
+                orePool.MaxAmount = _amount;
+                orePool.CurrentAmount = _amount;
                 orePool.IsEnable = false;
 
-                // to do ECSInfo
-                // we write parts of ore
                 GameObject oreModel = ore.transform.GetChild(0).gameObject;
                 orePool.OreParts = new GameObject[oreModel.transform.childCount];
                 for (int i = 0; i < oreModel.transform.childCount; i++)

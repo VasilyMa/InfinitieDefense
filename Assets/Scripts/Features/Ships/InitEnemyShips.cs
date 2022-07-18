@@ -1,7 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Client
 {
@@ -9,10 +8,7 @@ namespace Client
     {
         readonly EcsWorldInject _world = default;
 
-        readonly EcsFilterInject<Inc<EnemyTag, UnitTag, ShipComponent, InactiveTag>, Exc<DeadTag>> _enemyUnitsFilter = default;
-
         readonly EcsPoolInject<InactiveTag> _inactivePool = default;
-        readonly EcsPoolInject<ShipComponent> _shipPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
 
         readonly EcsSharedInject<GameState> _state;

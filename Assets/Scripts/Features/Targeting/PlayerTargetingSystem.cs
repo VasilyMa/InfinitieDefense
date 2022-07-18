@@ -12,9 +12,6 @@ namespace Client
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
-        readonly EcsPoolInject<EnemyTag> _enemyPool = default;
-
-        readonly EcsSharedInject<GameState> _state;
 
         public void Run (EcsSystems systems)
         {

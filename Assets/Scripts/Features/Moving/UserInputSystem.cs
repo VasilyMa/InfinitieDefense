@@ -1,14 +1,11 @@
-using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Unity.Ugui;
 using UnityEngine;
 using UnityEngine.Scripting;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 namespace Client {
     sealed class UserInputSystem : EcsUguiCallbackSystem
     {
-        readonly EcsFilterInject<Inc<Player>> _filter = default;
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsPoolInject<InterfaceComponent> _interface = default;
 

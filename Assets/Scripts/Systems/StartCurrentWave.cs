@@ -23,7 +23,7 @@ namespace Client {
         private float _shipAngle = 0f;
         private int _encounter = 0;
         private int _enemyCountInEncounter = 0;
-        private int _enemySpawnRadius = 100;
+        private int _enemySpawnRadius = 110;
 
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)

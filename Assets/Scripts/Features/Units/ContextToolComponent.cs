@@ -11,8 +11,6 @@ namespace Client
 
         public Tool CurrentActiveTool;
 
-        public GameObject Pickaxe;
-        public GameObject Sword;
-        public GameObject Bow;
+        public GameObject[] ToolsPool;
     }
 }

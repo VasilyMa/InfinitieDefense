@@ -101,10 +101,9 @@ namespace Client
                         ref var player = ref _state.EntityPlayer;
                         ref var _player = ref _playerPool.Get(player);
                         ref var view = ref _viewPool.Get(player);
-                        ref var activateContextToolComponent = ref _activateContextToolPool.Add(_state.EntityPlayer);
                         var filter = _world.Filter<OreComponent>();
                         var ores = _world.GetPool<OreComponent>();
-                        foreach (int entity in filter.End())
+                        foreach (int entity in filter.End()) //to do rework find oreEntity with help EcsInfo on the gameObject
                         {
                             ref OreComponent oreComp = ref ores.Get(entity);
                             if (other.gameObject == oreComp.prefab && !_fightPool.Has(player) && !_miningPool.Has(player))
@@ -115,6 +114,7 @@ namespace Client
                                 //_player.animator.SetBool("isIdle", false);
                                 //_player.animator.SetBool("isRun", false);
                                 _player.animator.SetBool("isMining", true);
+                                ref var activateContextToolComponent = ref _activateContextToolPool.Add(_state.EntityPlayer);
                                 activateContextToolComponent.ActiveTool = ContextToolComponent.Tool.pickaxe;
                                 view.isMining = true;
                                 break;

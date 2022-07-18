@@ -6,7 +6,6 @@ namespace Client
 {
     sealed class WaveSwitcher : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<ActivateWaveShipsEvent>> _activateWaveShipsEventFilter = default;
 
         readonly EcsFilterInject<Inc<EnemyTag, ShipTag, ShipComponent>> _shipsFilter = default;
 
