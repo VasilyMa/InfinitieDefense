@@ -1,5 +1,5 @@
 namespace Client {
-    struct DropComponent {
+    struct DropEvent {
         // add your data here.
     }
 }

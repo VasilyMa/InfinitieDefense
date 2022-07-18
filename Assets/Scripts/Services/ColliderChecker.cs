@@ -104,7 +104,7 @@ namespace Client
                         foreach (int entity in filter.End())
                         {
                             ref OreComponent oreComp = ref ores.Get(entity);
-                            if (other.gameObject == oreComp.prefab && !_fightPool.Has(player))
+                            if (other.gameObject == oreComp.prefab && !_fightPool.Has(player) && !_miningPool.Has(player))
                             {
                                 _miningPool.Add(player);
                                 _player.playerMB.InitMiningEvent(entity, oreComp.prefab);

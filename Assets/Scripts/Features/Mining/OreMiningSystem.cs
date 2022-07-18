@@ -11,6 +11,7 @@ namespace Client {
         readonly EcsPoolInject<OreMoveEvent> _movePool = default;
         readonly EcsPoolInject<OreMinedTag> _minedPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<InMiningTag> _miningPool = default;
         public void Run (EcsSystems systems) {
             foreach (var entity in _filter.Value)
             {
@@ -37,6 +38,7 @@ namespace Client {
                         player.animator.SetBool("isMining", false);
                         player.animator.SetBool("isIdle", true);
                         viewComp.isMining = false;
+                        _miningPool.Value.Del(entityPlayer);
                     }
                 }
                 _filter.Pools.Inc1.Del(entity);

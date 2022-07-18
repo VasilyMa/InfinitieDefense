@@ -6,17 +6,20 @@ namespace Client
 {
     sealed class OnOffUnitAttack : IEcsRunSystem
     {
+        readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<UnitTag, Targetable>, Exc<InactiveTag, DeadTag>> _inFightFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<InFightTag> _inFightPool = default;
         readonly EcsPoolInject<IsNotMovableTag> _isNotMovablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<InMiningTag> _miningPool  = default;
 
         public void Run (EcsSystems systems)
         {
             foreach (var entity in _inFightFilter.Value)
             {
+                _miningPool.Value.Del(_state.Value.EntityPlayer);
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 

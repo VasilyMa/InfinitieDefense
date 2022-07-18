@@ -6,7 +6,7 @@ namespace Client {
     sealed class LoseSystem : IEcsRunSystem {
         readonly EcsFilterInject<Inc<LoseEvent>> _loseFilter = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
-        readonly EcsPoolInject<DropComponent> _dropPool = default;
+        readonly EcsPoolInject<DropByDie> _dropPool = default;
         readonly EcsSharedInject<GameState> _state;
         public void Run (EcsSystems systems) {
             foreach (var entity in _loseFilter.Value)

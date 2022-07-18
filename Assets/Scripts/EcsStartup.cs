@@ -39,6 +39,8 @@ namespace Client
                 .Add(new WinSystem())
                 //.Add(new CheckLoseSystem())
                 .Add(new LoseSystem())
+                .Add(new UserDropSystem())
+                .Add(new DropResourcesSystem())
                 .Add(new InitMainTower())
 
                 .Add(new StartWaveSystem())
