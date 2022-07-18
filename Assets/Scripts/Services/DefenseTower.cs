@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DefenseTower
 {
@@ -15,4 +16,5 @@ public class DefenseTower
     public int Upgrade;
     public bool IsLast;
     public string NextID;
+    public Sprite ImageResource;
 }

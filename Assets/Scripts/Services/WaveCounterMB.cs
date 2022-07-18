@@ -41,7 +41,7 @@ namespace Client
             for (int i = 0; i < counts.Count; i++)
             {
                 if(!counts[i].activeSelf)
-                    _container.GetComponent<GridLayoutGroup>().spacing = new Vector2(_container.GetComponent<GridLayoutGroup>().spacing.x + 7.5f, 0);
+                    _container.GetComponent<GridLayoutGroup>().spacing = new Vector2(_container.GetComponent<GridLayoutGroup>().spacing.x + 2.5f, 0);
             }
             
         }

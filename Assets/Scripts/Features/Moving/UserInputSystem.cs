@@ -138,7 +138,7 @@ namespace Client {
         {
             ref var interfaceComponent = ref _interface.Value.Get(_state.Value.EntityInterface);
             _state.Value.SetNextWave();
-            interfaceComponent.waveCounter.GetComponent<WaveCounterMB>().UpdateWave();
+            //interfaceComponent.waveCounter.GetComponent<WaveCounterMB>().UpdateWave();
             interfaceComponent.progressbar.SetActive(true);
             //interfaceComponent.gamePanel.SetActive(false);
             Debug.Log("Play!");

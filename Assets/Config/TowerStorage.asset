@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: -153830957423991239, guid: 5cad676fc11230148b8ab401224fcfb3, type: 3}
   - {fileID: -5741174448488666723, guid: 3b220dc54e8ca2245815a152c2dd56d0, type: 3}
   DefenderPrefab: {fileID: 2881775947377203435, guid: 73217cd2f437a234eb6ed6f5543395be, type: 3}
+  ImageResoures: {fileID: 21300000, guid: eb644068a668ef34a8d603bb66c8a04a, type: 3}

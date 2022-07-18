@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "TowerStorage", menuName = "Configs/TowerStorage", order = 0)]
 public class TowerStorage : ScriptableObject
@@ -10,6 +11,8 @@ public class TowerStorage : ScriptableObject
     public Mesh[] TowerMeshs;
     public GameObject DefenderPrefab;
     public Dictionary<string, Tower> Towers;
+    [Header("Спрайт ресурсов")]
+    public Sprite ImageResoures;
 
     public void Init()
     {
@@ -26,7 +29,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 1,
                 IsLast = false,
                 NextID = "2tower",
-                DefenderCount = 0
+                DefenderCount = 0,
+                ImageResource = ImageResoures
             },
             ["2tower"] = new Tower
             {
@@ -38,7 +42,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 2,
                 IsLast = false,
                 NextID = "3tower",
-                DefenderCount = 1
+                DefenderCount = 1,
+                ImageResource = ImageResoures
             },
             ["3tower"] = new Tower
             {
@@ -50,7 +55,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 3,
                 IsLast = false,
                 NextID = "4tower",
-                DefenderCount = 2
+                DefenderCount = 2,
+                ImageResource = ImageResoures
             },
             ["4tower"] = new Tower
             {
@@ -62,7 +68,8 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 4,
                 NextID = "5tower",
                 IsLast = false,
-                DefenderCount = 3
+                DefenderCount = 3,
+                ImageResource = ImageResoures
             },
             ["5tower"] = new Tower
             {
@@ -72,9 +79,63 @@ public class TowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
                 Upgrade = 5,
-                IsLast = true,
-                DefenderCount = 4
+                NextID = "6tower",
+                IsLast = false,
+                DefenderCount = 4,
+                ImageResource = ImageResoures
             },
+            ["6tower"] = new Tower
+            {
+                TowerLevel = 6,
+                Radius = 70,
+                TowerHealth = 4200,
+                TowerPrefab = TowerPrefabs[1],
+                TowerMesh = TowerMeshs[1],
+                Upgrade = 6,
+                NextID = "7tower",
+                IsLast = false,
+                DefenderCount = 5,
+                ImageResource = ImageResoures
+            },
+            ["7tower"] = new Tower
+            {
+                TowerLevel = 7,
+                Radius = 75,
+                TowerHealth = 4500,
+                TowerPrefab = TowerPrefabs[2],
+                TowerMesh = TowerMeshs[2],
+                Upgrade = 7,
+                NextID = "8tower",
+                IsLast = false,
+                DefenderCount = 6,
+                ImageResource = ImageResoures
+
+            },
+            ["8tower"] = new Tower
+            {
+                TowerLevel = 8,
+                Radius = 80,
+                TowerHealth = 4800,
+                TowerPrefab = TowerPrefabs[2],
+                TowerMesh = TowerMeshs[2],
+                Upgrade = 8,
+                NextID = "9tower",
+                IsLast = false,
+                DefenderCount = 7,
+                ImageResource = ImageResoures
+            },
+            ["9tower"] = new Tower
+            {
+                TowerLevel = 9,
+                Radius = 85,
+                TowerHealth = 5100,
+                TowerPrefab = TowerPrefabs[2],
+                TowerMesh = TowerMeshs[2],
+                Upgrade = 999999,
+                IsLast = true,
+                DefenderCount = 8,
+                ImageResource = ImageResoures
+            }
         };
     }
     public int GetRadiusByID(string id)
@@ -112,5 +173,9 @@ public class TowerStorage : ScriptableObject
     public int GetLevelByID(string id)
     {
         return Towers[id].TowerLevel;
+    }
+    public Sprite GetImageByID(string id)
+    {
+        return Towers[id].ImageResource;
     }
 }

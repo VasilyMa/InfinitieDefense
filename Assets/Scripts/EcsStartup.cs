@@ -39,6 +39,8 @@ namespace Client
                 .Add(new WinSystem())
                 //.Add(new CheckLoseSystem())
                 .Add(new LoseSystem())
+                .Add(new UserDropSystem())
+                .Add(new DropResourcesSystem())
                 .Add(new InitMainTower())
 
                 .Add(new StartWaveSystem())
@@ -78,7 +80,7 @@ namespace Client
                 .Add(new EncounterSwitcher())
 
                 .Add(new CheckWeaponSystem())
-                .Add(new CheckCircleMiningSystem())
+                //.Add(new CheckCircleMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
                 .Add(new ItemMoveToBagSystem())

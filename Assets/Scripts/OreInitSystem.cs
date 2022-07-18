@@ -29,6 +29,7 @@ namespace Client
                 orePool.CurrentAmount = amount;
                 orePool.IsEnable = false;
 
+                // to do ECSInfo
                 // we write parts of ore
                 GameObject oreModel = ore.transform.GetChild(0).gameObject;
                 orePool.OreParts = new GameObject[oreModel.transform.childCount];

@@ -45,3 +45,4 @@ MonoBehaviour:
   - {fileID: 8110628226672979183, guid: d5b9cbe74990838498f1c7e7d12cffc5, type: 3}
   - {fileID: 7990198988384905397, guid: d27fcdf1a9ecacb47b6f50122f4273d9, type: 3}
   - {fileID: 7990198988384905397, guid: d27fcdf1a9ecacb47b6f50122f4273d9, type: 3}
+  ImageResources: {fileID: 21300000, guid: 5fa8411aafb6bf04bae052734df95224, type: 3}
