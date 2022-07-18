@@ -41,6 +41,7 @@ namespace Client
         public void InitTools(int entity)
         {
             ref var contextToolComponent = ref _contextToolPool.Get(entity);
+
             contextToolComponent.Pickaxe = _contextTools[0];
             contextToolComponent.Sword = _contextTools[1];
             contextToolComponent.Bow = _contextTools[2];

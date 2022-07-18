@@ -8,16 +8,18 @@ namespace Client {
         readonly EcsFilterInject<Inc<Player, InFightTag>> _playerInFight = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;*/
 
-        readonly EcsFilterInject<Inc<Player, ContextToolComponent, ActivateContextToolEvent>> _playerFilter = default;
+        readonly EcsFilterInject<Inc<Player, ContextToolComponent, ActivateContextToolEvent>> _ActivateContextToolFilter = default;
         readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
         readonly EcsPoolInject<ActivateContextToolEvent> _activateContextToolPool = default;
 
         public void Run (EcsSystems systems)
         {
-            foreach (var playerEntity in _playerFilter.Value)
+            foreach (var playerEntity in _ActivateContextToolFilter.Value)
             {
                 ref var contextToolComponent = ref _contextToolPool.Value.Get(playerEntity);
                 ref var activateContextToolComponent = ref _activateContextToolPool.Value.Get(playerEntity);
+
+
 
                 //to do delet the switch and use CurrentActiveTool in ContextToolComponent
 
