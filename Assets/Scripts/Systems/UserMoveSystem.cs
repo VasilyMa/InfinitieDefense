@@ -18,8 +18,10 @@ namespace Client {
                 var _joystick = interfacePool._joystick;
                 ref var player = ref _playerFilter.Pools.Inc1.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
-                float angle = Mathf.Atan2(interfacePool._joystickPoint.position.y - interfacePool._joysticKCenter.position.y,
-                interfacePool._joystickPoint.position.x - interfacePool._joysticKCenter.position.x) * Mathf.Rad2Deg - _angleOffset;
+
+                float angle = Mathf.Atan2(  interfacePool._joystickPoint.position.y - interfacePool._joysticKCenter.position.y,
+                                            interfacePool._joystickPoint.position.x - interfacePool._joysticKCenter.position.x)
+                                                                                                                                * Mathf.Rad2Deg - _angleOffset;
 
                 if(angle < 0)
                 {
@@ -29,13 +31,21 @@ namespace Client {
                 {
                     angle -= 360;
                 }
+
                 float radius = new Vector2(_joystick.Horizontal, _joystick.Vertical).sqrMagnitude;
                 var x = Mathf.Cos((angle) * Mathf.Deg2Rad) * radius;
                 var z = Mathf.Sin((angle) * Mathf.Deg2Rad) * radius;
 
                 player.rigidbody.velocity = new Vector3(x * player.MoveSpeed, 
-                player.rigidbody.velocity.y, 
-                z * player.MoveSpeed);
+                                                        player.rigidbody.velocity.y, 
+                                                        z * player.MoveSpeed);
+
+                // to do fix this full bullshit
+                Vector2 joystickMoveDirection = new Vector2(x, z);
+
+                player.animator.SetFloat("RunX", viewComponent.Transform.forward.x * joystickMoveDirection.x);
+                player.animator.SetFloat("RunZ", viewComponent.Transform.right.z * joystickMoveDirection.y);
+                // end of the to do
 
                 if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
                 {

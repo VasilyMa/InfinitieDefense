@@ -79,7 +79,7 @@ namespace Client
                 .Add(new WaveSwitcher())
                 .Add(new EncounterSwitcher())
 
-                .Add(new CheckWeaponSystem())
+                .Add(new ActivateContextToolEventSystem())
                 //.Add(new CheckCircleMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())

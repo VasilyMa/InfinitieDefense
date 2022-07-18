@@ -38,13 +38,19 @@ namespace Client
             _contextToolPool = world.Value.GetPool<ContextToolComponent>();
         }
 
+        public int GetToolCount()
+        {
+            return _contextTools.Length;
+        }
+
         public void InitTools(int entity)
         {
             ref var contextToolComponent = ref _contextToolPool.Get(entity);
 
-            contextToolComponent.Pickaxe = _contextTools[0];
-            contextToolComponent.Sword = _contextTools[1];
-            contextToolComponent.Bow = _contextTools[2];
+            for (int i = 0; i < _contextTools.Length; i++)
+            {
+                contextToolComponent.ToolsPool[i] = _contextTools[i];
+            }
         }
 
         public void SetEntity(int entity)
