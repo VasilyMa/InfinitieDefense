@@ -195,8 +195,6 @@ namespace Client
                         }
                     }
                 }
-                if(_fightPool.Has(_state.EntityPlayer))
-                    _fightPool.Del(_state.EntityPlayer);
             }
         }
 
