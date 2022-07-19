@@ -8,7 +8,7 @@ namespace Client {
         readonly EcsFilterInject<Inc<CreateNewPlayerEvent>> _filter = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<Player> _playerPool = default;
-
+        readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -21,7 +21,12 @@ namespace Client {
                 playerComp.health = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
                 viewComp.UpgradeParticleSystem.Play();
                 //viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
-
+                foreach (var item in _filterPoint.Value)
+                {
+                    _filterPoint.Pools.Inc1.Get(item).Point.GetComponent<PlayerUpgradePointMB>().
+                        UpdateLevelInfo(_state.Value.PlayerStorage.
+                        GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
+                }
                 _filter.Pools.Inc1.Del(entity);
             }
         }

@@ -23,7 +23,7 @@ namespace Client
         readonly EcsPoolInject<UnitTag> _unitPool = default;
         readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
         readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
-
+        readonly EcsPoolInject<UpgradePlayerPointComponent> _upgradePlayerPointPool = default;
         private Vector3 _spawnPoint = new Vector3(0, 2, -10);
 
         public void Init (EcsSystems systems) 
@@ -44,6 +44,7 @@ namespace Client
             ref var regenerationComponent = ref _regenerationPool.Value.Add(playerEntity);
             ref var contextToolComponent = ref _contextToolPool.Value.Add(playerEntity);
             ref var resurrectableComponent = ref _resurrectablePool.Value.Add(playerEntity);
+            ref var upgradePlayerPointComponent= ref _upgradePlayerPointPool.Value.Add(_world.Value.NewEntity());
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), _spawnPoint, Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
@@ -62,6 +63,10 @@ namespace Client
             resurrectableComponent.CurrentCooldown = resurrectableComponent.MaxCooldown;
             resurrectableComponent.OnSpawnPosition = true;
 
+            upgradePlayerPointComponent.Point = GameObject.FindGameObjectWithTag("UpgradePlayerPoint");
+            upgradePlayerPointComponent.Point.GetComponent<PlayerUpgradePointMB>().UpdateLevelInfo(_state.Value.PlayerStorage.GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
+            upgradePlayerPointComponent.Point.GetComponent<PlayerUpgradePointMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+
             viewComponent.GameObject = PlayerGo;
             viewComponent.Rigidbody = PlayerGo.GetComponent<Rigidbody>();
             viewComponent.Transform = PlayerGo.transform;
@@ -73,7 +78,7 @@ namespace Client
             viewComponent.Healthbar.SetHealth(_state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));
             viewComponent.Healthbar.ToggleSwitcher();
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            viewComponent.Level.UpdateLevel(_state.Value.PlayerLevel);
+            viewComponent.Level.UpdateLevel(_state.Value.PlayerExperience);
             viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
             viewComponent.EcsInfoMB.Init(_world);

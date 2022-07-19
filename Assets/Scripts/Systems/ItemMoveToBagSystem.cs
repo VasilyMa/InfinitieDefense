@@ -18,8 +18,8 @@ namespace Client {
                 filterComp._t += Time.deltaTime * 3f;
 
                 filterComp.Transform.localPosition = new Vector3(x, y, z);
-
-                if(filterComp._t >= 1)
+                filterComp.Transform.localRotation = new Quaternion(0, 0, 0, 0);
+                if (filterComp._t >= 1)
                 {
                     if(filterComp.Coin)
                     {
@@ -31,6 +31,7 @@ namespace Client {
                         foreach(var item in _state.Value.CoinTransformList)
                         {
                             item.localPosition = new Vector3(0, item.localPosition.y + 0.6f, 0);
+                            item.localRotation = new Quaternion(0, 0, 0, 0);
                         }
                         _state.Value.StoneTransformList.Add(filterComp.Transform);
                         interComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();

@@ -10,6 +10,7 @@ namespace Client {
         //readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -86,6 +87,13 @@ namespace Client {
                             _state.Value.CoinCount--;
                             intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                             _state.Value.UpgradePlayer();
+                            viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
+                            foreach (var item in _filterPoint.Value)
+                            {
+                                _filterPoint.Pools.Inc1.Get(item).Point.GetComponent<PlayerUpgradePointMB>().
+                                    UpdateLevelInfo(_state.Value.PlayerStorage.
+                                    GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
+                            }
                         }
                         //viewComp.DropItemParticleSystem.Stop();
                         viewComp.DropItemParticleSystem.Play();
