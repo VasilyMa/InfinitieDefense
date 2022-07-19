@@ -105,7 +105,7 @@ namespace Client
                         _player.animator.SetBool("isMining", false);
                         break;
                     }
-                case "Ore":
+                /*case "Ore":
                     {
                         ref var player = ref _state.EntityPlayer;
                         ref var _player = ref _playerPool.Get(player);
@@ -118,7 +118,7 @@ namespace Client
                             if (other.gameObject == oreComp.prefab && !_fightPool.Has(player))
                             {
                                 Debug.Log("Майним руду");
-                                _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
+                                //_player.playerMB.InitMiningEvent(entity, oreComp.prefab);
                                 _player.animator.SetBool("isIdle", false);
                                 _player.animator.SetBool("isRun", false);
                                 _player.animator.SetBool("isMining", true);
@@ -128,7 +128,7 @@ namespace Client
                             }
                         }
                         break;
-                    }
+                    }*/
             }
         }
         private void OnTriggerExit(Collider other)
@@ -157,13 +157,12 @@ namespace Client
                         if (!_fightPool.Has(_state.EntityPlayer)) viewComp.isFight = false;
                         break;
                     }
-                case "Ore":
+                /*case "Ore":
                     {
                         var playerFilter = _world.Filter<Player>().Exc<InFightTag>().End();
                         foreach (var player in playerFilter)
                         {
                             ref var _player = ref _playerPool.Get(player);
-                            ref var _view = ref _viewPool.Get(player);
                             _player.animator.SetBool("isMining", false);
                         }
                         var filter = _world.Filter<OreComponent>();
@@ -172,10 +171,10 @@ namespace Client
                             _oreEventPool.Del(entity);
                         }
                         break;
-                    }
+                    }*/
             }
         }
-        private void OnTriggerStay(Collider other)
+        /*private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.CompareTag("Ore"))
             {
@@ -185,13 +184,13 @@ namespace Client
                 foreach (int entity in filter.End())
                 {
                     ref OreComponent oreComp = ref ores.Get(entity);
-                    foreach (var player in playerFilter) 
+                    foreach (var player in playerFilter)
                     {
                         ref var _player = ref _playerPool.Get(player);
                         ref var view = ref _viewPool.Get(player);
                         if (other.gameObject == oreComp.prefab)
                         {
-                            _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
+                            //_player.playerMB.InitMiningEvent(entity, oreComp.prefab);
                             _player.animator.SetBool("isIdle", false);
                             _player.animator.SetBool("isRun", false);
                             _player.animator.SetBool("isMining", true);
@@ -199,7 +198,7 @@ namespace Client
                     }
                 }
             }
-        }
+        }*/
 
         public void StartMining()
         {
@@ -213,7 +212,7 @@ namespace Client
                 ref OreComponent oreComp = ref ores.Get(entity);
                 if (view.CanMining)
                 {
-                    _player.playerMB.InitMiningEvent(entity, oreComp.prefab);
+                    //_player.playerMB.InitMiningEvent(entity, oreComp.prefab);
                     //_player.animator.SetBool("isIdle", false);
                     //_player.animator.SetBool("isRun", false);
                     _player.animator.SetBool("isMining", true);

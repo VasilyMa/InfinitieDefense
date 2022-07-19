@@ -18,7 +18,11 @@ namespace Client
         private EcsPool<Projectile> _projectilePool;
         private EcsPool<ContextToolComponent> _contextToolPool;
 
+        private EcsPool<OreEventComponent> _oreEventPool;
+
         [SerializeField] private int _gameObjectEntity;
+
+        [SerializeField] private int _currentMiningOresEntity = -1;
 
         [SerializeField] private int _targetEntity;
         [SerializeField] private GameObject _targetObject;
@@ -36,6 +40,7 @@ namespace Client
             _viewPool = world.Value.GetPool<ViewComponent>();
             _projectilePool = world.Value.GetPool<Projectile>();
             _contextToolPool = world.Value.GetPool<ContextToolComponent>();
+            _oreEventPool = world.Value.GetPool<OreEventComponent>();
         }
 
         public int GetToolCount()
@@ -68,9 +73,14 @@ namespace Client
             return _world;
         }
 
-        public GameObject GetTargetObject()
+        public void SetCurrentMiningOre(int entity)
         {
-            return _targetObject;
+            _currentMiningOresEntity = entity;
+        }
+
+        public int GetCurrentMiningOre()
+        {
+            return _currentMiningOresEntity;
         }
 
         public void SetTarget(int entity, GameObject gameObject)
@@ -102,6 +112,20 @@ namespace Client
         {
             _targetEntity = -1;
             _targetObject = null;
+        }
+
+        public void MiningEvent()
+        {
+            var oreEntity = GetCurrentMiningOre();
+
+            if (oreEntity > 0)
+            {
+                ref var oreEvent = ref _oreEventPool.Add(GetCurrentMiningOre());
+            }
+            else
+            {
+                Debug.Log("An error occurred during mining");
+            }
         }
 
         public void DealDamagingEvent()

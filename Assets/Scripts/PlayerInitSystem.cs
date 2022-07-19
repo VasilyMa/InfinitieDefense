@@ -24,7 +24,7 @@ namespace Client
         readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
         readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
 
-        private Vector3 _spawnPoint = new Vector3(0, 2, -10);
+        private Vector3 _spawnPoint = new Vector3(0, 0, -10);
 
         public void Init (EcsSystems systems) 
         {
@@ -47,7 +47,7 @@ namespace Client
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), _spawnPoint, Quaternion.identity);
 
             player.Transform = PlayerGo.transform;
-            player.playerMB = PlayerGo.GetComponent<PlayerMB>();
+            //player.playerMB = PlayerGo.GetComponent<PlayerMB>();
             player.rigidbody = PlayerGo.GetComponent<Rigidbody>();
             player.MoveSpeed = _state.Value.PlayerStorage.GetSpeedByID(_state.Value.CurrentPlayerID);
             player.RotateSpeed = 10f;
@@ -55,7 +55,7 @@ namespace Client
             player.health = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
             player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
-            player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            //player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
             resurrectableComponent.SpawnPosition = _spawnPoint;
             resurrectableComponent.MaxCooldown = 5;
@@ -73,7 +73,7 @@ namespace Client
             viewComponent.Healthbar.SetHealth(_state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));
             viewComponent.Healthbar.ToggleSwitcher();
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            viewComponent.Level.UpdateLevel(_state.Value.PlayerLevel);
+            viewComponent.Level.UpdateLevel(_state.Value.PlayerExperience);
             viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
             viewComponent.EcsInfoMB.Init(_world);

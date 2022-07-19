@@ -77,7 +77,6 @@ namespace Client
                 .Add(new WaveSwitcher())
                 .Add(new EncounterSwitcher())
 
-                .Add(new ActivateContextToolEventSystem())
                 //.Add(new CheckCircleMiningSystem())
                 .Add(new UserInputSystem())
                 .Add(new AddCoinSystem())
@@ -123,6 +122,7 @@ namespace Client
             _systemsFixed
                 .Add(new UserMoveSystem())
                 .Add(new UnitLookingSystem())
+                .Add(new ActivateContextToolEventSystem())
                 ;
 
 #if UNITY_EDITOR
