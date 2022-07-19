@@ -8758,11 +8758,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 046b97289d9e6e44292670e1a46a22d8, type: 3}
---- !u!4 &1622254435 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6422450611542627814, guid: f7fa059b49d2c504aae17199720b2f9f, type: 3}
-  m_PrefabInstance: {fileID: 1636818976}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1635315397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3489658445307379284, guid: dbd05d84d1772a1478ffda44fafecb89, type: 3}
@@ -8928,19 +8923,19 @@ Transform:
   - {fileID: 166115431}
   - {fileID: 27296764}
   - {fileID: 1226058386}
-  - {fileID: 1668331521}
   - {fileID: 197595830}
   - {fileID: 692557192}
-  - {fileID: 1489871494}
+  - {fileID: 1668331521}
   - {fileID: 851460411}
+  - {fileID: 1489871494}
   - {fileID: 151651902}
   - {fileID: 700334689}
-  - {fileID: 1244742034}
+  - {fileID: 919385113}
   - {fileID: 712936443}
   - {fileID: 332000294}
   - {fileID: 1148595753}
   - {fileID: 1494678778}
-  - {fileID: 1622254435}
+  - {fileID: 1244742034}
   - {fileID: 1793813306}
   m_Father: {fileID: 0}
   m_RootOrder: 8
