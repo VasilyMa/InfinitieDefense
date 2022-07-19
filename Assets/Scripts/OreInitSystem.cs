@@ -31,6 +31,7 @@ namespace Client
                 ref var viewComponent = ref _viewPool.Value.Add(oresEntity);
 
                 viewComponent.GameObject = ore;
+                viewComponent.Animator = ore.GetComponent<Animator>();
                 viewComponent.EcsInfoMB = ore.GetComponent<EcsInfoMB>();
                 viewComponent.EcsInfoMB.Init(_world);
                 viewComponent.EcsInfoMB.SetEntity(oresEntity);

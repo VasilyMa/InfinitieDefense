@@ -16,6 +16,7 @@ namespace Client {
             foreach (var entity in _filter.Value)
             {
                 ref var oreComp = ref _filter.Pools.Inc2.Get(entity);
+                ref var oreViewComp = ref _viewPool.Value.Get(entity);
                 ref var moveComp = ref _movePool.Value.Add(_world.Value.NewEntity());
                 ref var viewComp = ref _viewPool.Value.Get(_state.Value.EntityPlayer);
                 
@@ -24,6 +25,7 @@ namespace Client {
                 oreComp.OreParts[oreComp.MaxAmount - oreComp.CurrentAmount].SetActive(false);
 
                 oreComp.CurrentAmount--;
+                oreViewComp.Animator.SetTrigger("Extract");
 
                 moveComp.stone = stone;
                 moveComp.TargetPosition = new Vector3(oreComp.prefab.transform.position.x + Random.Range(-4, 4), oreComp.prefab.transform.position.y, oreComp.prefab.transform.position.z + Random.Range(-4, 4));
