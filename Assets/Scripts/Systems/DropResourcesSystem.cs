@@ -11,21 +11,15 @@ namespace Client {
             {
                 ref var _dropComp = ref _dropPool.Value.Get(entity);
                 var target = _dropComp.TargetPosition;
-                var startPos = _dropComp.StartPosition;
                 var speed = _dropComp.Speed;
-                foreach (var stone in _dropComp.Transform)
-                {
-                    stone.SetParent(null);
-                    stone.position = Vector3.MoveTowards(stone.position, target, speed * Time.deltaTime);
-                    
-                }
-                for (int i = 0; i < _dropComp.Transform.Count; i++)
-                {
-                    if (_dropComp.Transform[i].parent == null && _dropComp.Transform[i].position == target)
-                    {
-
-                    }
-                }
+                var stone = _dropComp.Object;
+                if(stone.transform.parent != null)
+                    stone.transform.SetParent(null);
+                stone.transform.position = Vector3.MoveTowards(stone.transform.position, target, speed * Time.deltaTime);
+                speed += 0.5f;
+                //stone.transform.position = new Vector3(target.x, target.y, target.z);
+                if (stone.transform.position == target)
+                    _filter.Pools.Inc1.Del(entity);
             }
         }
     }
