@@ -6,7 +6,6 @@ namespace Client
 {
     sealed class RespawnEventSystem : IEcsRunSystem
     {
-        readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<Resurrectable, RespawnEvent, DeadTag>> _respawnEventFilter = default;
 
         readonly EcsPoolInject<ViewComponent> _viewPool = default;

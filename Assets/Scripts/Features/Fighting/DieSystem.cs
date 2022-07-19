@@ -18,7 +18,6 @@ namespace Client
         readonly EcsPoolInject<MainTowerTag> _mainTowerPool = default;
         readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
         readonly EcsPoolInject<RespawnEvent> _respawnEventPool = default;
-        readonly EcsPoolInject<DefenderComponent> _defenderPool = default;
         readonly EcsPoolInject<DropByDie> _dropPool = default;
 
         readonly EcsPoolInject<LoseEvent> _losePool = default;
