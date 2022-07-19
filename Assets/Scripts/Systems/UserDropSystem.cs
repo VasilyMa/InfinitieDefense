@@ -36,7 +36,7 @@ namespace Client {
                 {
                     ref var _dropComp = ref _dropPool.Value.Add(_world.Value.NewEntity());
                     _dropComp.StartPosition = _viewComp.Transform.position;
-                    _dropComp.TargetPosition = new Vector3(_viewComp.GameObject.transform.position.x + Random.Range(-4, 4), _viewComp.GameObject.transform.position.y, _viewComp.GameObject.transform.position.z + Random.Range(-4, 4)); ;
+                    _dropComp.TargetPosition = new Vector3(_viewComp.GameObject.transform.position.x + Random.Range(-2, 2), _viewComp.GameObject.transform.position.y, _viewComp.GameObject.transform.position.z + Random.Range(-2, 2)); ;
                     _dropComp.Speed = 7f;
                     _dropComp.Object = _playerComp.ResHolderTransform.GetChild(i).gameObject;
                     if (_dropComp.Object.CompareTag("Coin"))

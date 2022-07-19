@@ -99,7 +99,10 @@ namespace Client
                     }
                 case "Enemy":
                     {
+                        ref var player = ref _state.EntityPlayer;
                         ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
+                        ref var _player = ref _playerPool.Get(player);
+                        _player.animator.SetBool("isMining", false);
                         break;
                     }
                 case "Ore":
