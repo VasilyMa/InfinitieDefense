@@ -27,6 +27,7 @@ namespace Client {
                         UpdateLevelInfo(_state.Value.PlayerStorage.
                         GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
                 }
+                viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
                 _filter.Pools.Inc1.Del(entity);
             }
         }
