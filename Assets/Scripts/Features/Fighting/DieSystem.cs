@@ -35,7 +35,11 @@ namespace Client
                 ref var interfaceComponent = ref _interfacePool.Value.Get(_state.Value.EntityInterface); ;
                 if (viewComponent.GameObject) viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
                 if (viewComponent.Rigidbody) viewComponent.Rigidbody.velocity = Vector3.zero;
-                if (viewComponent.Animator) viewComponent.Animator.SetTrigger("Die");
+                if (viewComponent.Animator)
+                {
+                    viewComponent.Animator.SetTrigger("Die");
+                    viewComponent.Animator.SetLayerWeight(1, 0);
+                }
 
                 if (_enemyPool.Value.Has(entity))
                 {
