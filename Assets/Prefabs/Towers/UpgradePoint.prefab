@@ -520,6 +520,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasUpgradePoint
       objectReference: {fileID: 0}
+    - target: {fileID: 6419223342745935871, guid: 0e12f5359d7eb48439898a0f477360dd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e12f5359d7eb48439898a0f477360dd, type: 3}
 --- !u!224 &3161125502034615035 stripped
