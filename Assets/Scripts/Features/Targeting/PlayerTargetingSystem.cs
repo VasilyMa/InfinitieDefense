@@ -45,12 +45,19 @@ namespace Client
 
                 List<int> allDeadEntitys = new List<int>();
 
+                bool targetInDamageZone = false;
+
                 foreach (var entityInDamageZone in targetableComponent.AllEntityInDamageZone)
                 {
                     if (_deadPool.Value.Has(entityInDamageZone))
                     {
                         allDeadEntitys.Add(entityInDamageZone);
                         Debug.Log("Энтити находилась в пуле мертвых");
+                    }
+
+                    if (_viewPool.Value.Get(entityInDamageZone).GameObject == targetableComponent.TargetObject)
+                    {
+                        targetInDamageZone = true;
                     }
                 }
 
@@ -61,7 +68,17 @@ namespace Client
 
                 if (targetableComponent.AllEntityInDamageZone.Count == 0)
                 {
+                    targetableComponent.TargetEntity = -1;
+                    targetableComponent.TargetObject = null;
+                    viewComponent.EcsInfoMB.ResetTarget();
                     continue;
+                }
+
+                if (!targetInDamageZone)
+                {
+                    targetableComponent.TargetEntity = targetableComponent.AllEntityInDamageZone[0];
+                    targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
+                    viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
                 }
 
                 if (targetableComponent.TargetEntity < 1)
