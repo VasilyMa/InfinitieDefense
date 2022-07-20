@@ -102,9 +102,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameObjectEntity: 0
+  _currentMiningOresEntity: -1
   _targetEntity: 0
   _targetObject: {fileID: 0}
   _arrowFirePoint: {fileID: 0}
+  _contextTools:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!136 &5427053995781348075
 CapsuleCollider:
   m_ObjectHideFlags: 0

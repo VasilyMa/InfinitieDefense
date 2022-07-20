@@ -59,7 +59,6 @@ namespace Client
                         break;
                     }
                 }
-
                 if (!popupIsOver)
                 {
                     ref var popupComp = ref _popupEvent.Value.Add(_world.Value.NewEntity());
