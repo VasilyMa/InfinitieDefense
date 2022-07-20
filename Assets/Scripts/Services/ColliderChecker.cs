@@ -200,7 +200,7 @@ namespace Client
             }
         }*/
 
-        public void StartMining()
+        /*public void StartMining()
         {
             ref var player = ref _state.EntityPlayer;
             ref var _player = ref _playerPool.Get(player);
@@ -221,6 +221,6 @@ namespace Client
                     Debug.Log("Mining!");
                 }
             }
-        }
+        }*/
     }
 }

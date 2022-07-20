@@ -5,12 +5,18 @@ using Leopotam.EcsLite.Di;
 namespace Client {
     sealed class UpgradeSystems : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
+
+        readonly EcsWorldInject _world = default;
+
         readonly EcsFilterInject<Inc<UpgradeComponent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
         //readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
+
+        readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
+
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -68,6 +74,7 @@ namespace Client {
                                 GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
                                 _state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                                 _state.Value.CoinCount--;
+                                _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                             }
                             else
@@ -75,6 +82,7 @@ namespace Client {
                                 GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
                                 _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                                 _state.Value.RockCount--;
+                                _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                                 RelocateCoinInResourceHolder();
                             }
@@ -85,6 +93,7 @@ namespace Client {
                             GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
                             _state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                             _state.Value.CoinCount--;
+                            _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                             intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                             _state.Value.UpgradePlayer();
                             viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));

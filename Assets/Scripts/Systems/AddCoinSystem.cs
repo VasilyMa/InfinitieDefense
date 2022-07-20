@@ -5,10 +5,16 @@ using Leopotam.EcsLite.Di;
 namespace Client {
     sealed class AddCoinSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
+
+        readonly EcsWorldInject _world = default;
+
         readonly EcsFilterInject<Inc<AddCoinEvent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
         readonly EcsPoolInject<MoveToBagComponent> _moveToBagPool = default;
+
+        readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
+
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -27,6 +33,7 @@ namespace Client {
                 // _state.Value.CoinTransformList.Add(filterComp.CoinTransform);
                 filterComp.CoinTransform.SetSiblingIndex(_state.Value.CoinCount + _state.Value.RockCount);
                 _state.Value.CoinCount++;
+                _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.LightImpact;
                 // intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                 _filter.Pools.Inc1.Del(entity);
             }

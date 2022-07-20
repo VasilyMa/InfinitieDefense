@@ -6,7 +6,6 @@ namespace Client
 {
     sealed class ActivateContextToolEventSystem : IEcsRunSystem
     {
-
         readonly EcsFilterInject<Inc<ContextToolComponent, ActivateContextToolEvent, ViewComponent>> _ActivateContextToolFilter = default;
         readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
         readonly EcsPoolInject<ActivateContextToolEvent> _activateContextToolPool = default;

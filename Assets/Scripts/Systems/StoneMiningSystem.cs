@@ -5,11 +5,17 @@ using Leopotam.EcsLite.Di;
 namespace Client {
     sealed class StoneMiningSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state = default;
+
+        readonly EcsWorldInject _world = default;
+
         readonly EcsFilterInject<Inc<StoneMiningEvent>> _filter = default;
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intComp = default;
         readonly EcsPoolInject<MoveToBagComponent> _moveToBagPool = default;
         readonly EcsFilterInject<Inc<OreMoveEvent>> _moveEventFilter = default;
+
+        readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
+
         public void Run (EcsSystems systems) {
 
             foreach (var entity in _filter.Value)
@@ -40,6 +46,7 @@ namespace Client {
                 // }
                 filterComp.StoneTransform.SetSiblingIndex(_state.Value.RockCount);
                 _state.Value.RockCount++;
+                _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.LightImpact;
                 // intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                 //todo добавить перемещение камня за спину
                 _filter.Pools.Inc1.Del(entity);
