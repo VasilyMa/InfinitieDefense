@@ -12,6 +12,9 @@ namespace Client {
         readonly EcsPoolInject<OreMinedTag> _minedPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<InMiningTag> _miningPool = default;
+
+        readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
+
         public void Run (EcsSystems systems) {
             foreach (var entity in _filter.Value)
             {
@@ -31,6 +34,8 @@ namespace Client {
                 moveComp.TargetPosition = new Vector3(oreComp.prefab.transform.position.x + Random.Range(-4, 4), oreComp.prefab.transform.position.y, oreComp.prefab.transform.position.z + Random.Range(-4, 4));
                 moveComp.Speed = 10f;
                 moveComp.outTime = 0.5f;
+
+                _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.LightImpact;
 
                 if (oreComp.CurrentAmount <= 0) 
                 { 

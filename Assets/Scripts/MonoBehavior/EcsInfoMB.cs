@@ -28,6 +28,8 @@ namespace Client
         [SerializeField] private GameObject _targetObject;
         [SerializeField] private GameObject _arrowFirePoint;
 
+        [SerializeField] private ParticleSystem OreMining;
+
         [Header("1 - Pickaxe; 2 - Sword; 3 - Bow")]
         [SerializeField] private GameObject[] _contextTools = new GameObject[3];
 
@@ -120,6 +122,7 @@ namespace Client
 
             if (oreEntity > 0)
             {
+                OreMining.Play();
                 ref var oreEvent = ref _oreEventPool.Add(GetCurrentMiningOre());
             }
             else

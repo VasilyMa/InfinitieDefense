@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 58
   m_IsActive: 1
 --- !u!4 &7481588590073244206
 Transform:
@@ -62,7 +62,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 58
   m_IsActive: 1
 --- !u!4 &2019789984658293371
 Transform:
@@ -101,7 +101,7 @@ GameObject:
   m_TagString: Friendly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 58
   m_IsActive: 1
 --- !u!4 &8072899949149505955
 Transform:
@@ -187,6 +187,7 @@ MonoBehaviour:
   _targetEntity: 0
   _targetObject: {fileID: 0}
   _arrowFirePoint: {fileID: 0}
+  OreMining: {fileID: 0}
   _contextTools:
   - {fileID: 0}
   - {fileID: 0}
@@ -378,6 +379,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &2862243207403189960 stripped
@@ -399,6 +412,10 @@ PrefabInstance:
     - target: {fileID: 1485960151706735194, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584633757076107699, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 2584633757141308384, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
       propertyPath: m_Pivot.x
@@ -488,9 +505,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasHealthbar
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     - target: {fileID: 2584633757141308414, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368224499176119513, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390466048737448841, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cef39901bac8764cb1b16e248f66857, type: 3}
@@ -533,6 +562,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8072899949149505955}
     m_Modifications:
+    - target: {fileID: 3362721617315627904, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032527359826892458, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032527359826894060, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032527359826897866, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032527359826915966, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     - target: {fileID: 7491417595675409529, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -580,6 +629,10 @@ PrefabInstance:
     - target: {fileID: 9080804737192272878, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
       propertyPath: m_Name
       value: ParticlesCreation
+      objectReference: {fileID: 0}
+    - target: {fileID: 9080804737192272878, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2afe3f885136e7b458240c2a47227bbc, type: 3}
@@ -683,6 +736,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &146741194282728663 stripped
@@ -784,6 +849,18 @@ PrefabInstance:
     - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
       propertyPath: m_Name
       value: CanvasDamagePopup (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
@@ -887,6 +964,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &1936401100775523539 stripped
@@ -988,6 +1077,18 @@ PrefabInstance:
     - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
       propertyPath: m_Name
       value: CanvasDamagePopup (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
@@ -1091,6 +1192,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &2260771032957626857 stripped
@@ -1193,6 +1306,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &7445680474357769331 stripped
@@ -1263,6 +1388,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63e0c496d4e6187449607f2084f8f05d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e0c496d4e6187449607f2084f8f05d, type: 3}
 --- !u!4 &5570808158811179841 stripped
@@ -1277,9 +1406,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8072899949149505955}
     m_Modifications:
+    - target: {fileID: 2328657899780746927, guid: d90fa52312a953545b76c54d9335cad0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     - target: {fileID: 3896813941647449415, guid: d90fa52312a953545b76c54d9335cad0, type: 3}
       propertyPath: m_Name
       value: Cannon1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3896813941647449415, guid: d90fa52312a953545b76c54d9335cad0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 4422415050143156221, guid: d90fa52312a953545b76c54d9335cad0, type: 3}
       propertyPath: m_RootOrder
@@ -1324,6 +1461,10 @@ PrefabInstance:
     - target: {fileID: 4422415050143156221, guid: d90fa52312a953545b76c54d9335cad0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784639757544219348, guid: d90fa52312a953545b76c54d9335cad0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d90fa52312a953545b76c54d9335cad0, type: 3}
@@ -1427,6 +1568,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &9200732613498821388 stripped
@@ -1528,6 +1681,18 @@ PrefabInstance:
     - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
       propertyPath: m_Name
       value: CanvasDamagePopup (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
@@ -1631,6 +1796,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &9081057397833685450 stripped
@@ -1732,6 +1909,18 @@ PrefabInstance:
     - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
       propertyPath: m_Name
       value: CanvasDamagePopup (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
@@ -1835,6 +2024,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &5153271557640783441 stripped
@@ -1936,6 +2137,18 @@ PrefabInstance:
     - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
       propertyPath: m_Name
       value: CanvasDamagePopup (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
@@ -2051,6 +2264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: 9ff0e983796b9004384c0b9c1a0a8a7b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     - target: {fileID: 5437750324978987619, guid: 9ff0e983796b9004384c0b9c1a0a8a7b, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -2074,6 +2291,14 @@ PrefabInstance:
     - target: {fileID: 5437750324978987619, guid: 9ff0e983796b9004384c0b9c1a0a8a7b, type: 3}
       propertyPath: m_FontData.m_FontStyle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: 9ff0e983796b9004384c0b9c1a0a8a7b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: 9ff0e983796b9004384c0b9c1a0a8a7b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ff0e983796b9004384c0b9c1a0a8a7b, type: 3}
@@ -2108,6 +2333,10 @@ PrefabInstance:
     - target: {fileID: 177856083739833981, guid: 218cf10fa47fea84fa2116fba828fee2, type: 3}
       propertyPath: m_Name
       value: EnemyDetecter
+      objectReference: {fileID: 0}
+    - target: {fileID: 177856083739833981, guid: 218cf10fa47fea84fa2116fba828fee2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 3402339551144899426, guid: 218cf10fa47fea84fa2116fba828fee2, type: 3}
       propertyPath: m_RootOrder
@@ -2182,6 +2411,10 @@ PrefabInstance:
     - target: {fileID: 3179552175089219092, guid: 3d9954353a20d0341b08e14303a81ee1, type: 3}
       propertyPath: m_Name
       value: TowerAttackSphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179552175089219092, guid: 3d9954353a20d0341b08e14303a81ee1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 6599418357123128286, guid: 3d9954353a20d0341b08e14303a81ee1, type: 3}
       propertyPath: m_RootOrder
@@ -2329,6 +2562,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &5921707384636596973 stripped
@@ -2430,6 +2675,18 @@ PrefabInstance:
     - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
       propertyPath: m_Name
       value: CanvasDamagePopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
@@ -2533,6 +2790,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &6089215906568444184 stripped
@@ -2635,6 +2904,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDamagePopup (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
 --- !u!224 &6083063561043669469 stripped
@@ -2736,6 +3017,18 @@ PrefabInstance:
     - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
       propertyPath: m_Name
       value: CanvasDamagePopup (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584633757141308412, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233265595749729441, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721951808314471946, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44cf4e018287a941aa39c922dba6b19, type: 3}
