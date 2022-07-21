@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3990703539696012948}
   - component: {fileID: 8882976104160722052}
   - component: {fileID: 3953731571758904410}
-  - component: {fileID: 8868325978086816679}
   - component: {fileID: -92148341288030579}
   - component: {fileID: -5844029721058633970}
   - component: {fileID: -3494050853200185106}
+  - component: {fileID: 6458705079086939191}
   m_Layer: 12
   m_Name: Defence Tower Lvl 10
   m_TagString: Friendly
@@ -102,23 +102,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameObjectEntity: 0
+  _currentMiningOresEntity: -1
   _targetEntity: 0
   _targetObject: {fileID: 0}
   _arrowFirePoint: {fileID: 0}
---- !u!136 &8868325978086816679
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4335280981600228398}
-  m_Material: {fileID: 13400000, guid: d81a2a1fa8453294d98a9630c217d8f3, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.5
-  m_Height: 6.49
-  m_Direction: 1
-  m_Center: {x: 0.02390325, y: 1.74, z: 0.004383266}
+  _contextTools:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!208 &-92148341288030579
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -184,6 +175,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6458705079086939191
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4335280981600228398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &3329470381316342199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2783344871223273794, guid: 6e8f55642fe09054ea338bbbe8a74518, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2783344871223273794, guid: 6e8f55642fe09054ea338bbbe8a74518, type: 3}
       propertyPath: m_LocalPosition.z

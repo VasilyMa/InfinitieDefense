@@ -158,7 +158,7 @@ namespace Client
 
             arrowViewComponent.GameObject = GameObject.Instantiate(Resources.Load<GameObject>("Arrow"), _arrowFirePoint.transform.position, Quaternion.identity);
 
-            projectileComponent.Speed = 30;
+            projectileComponent.Speed = 20;
             projectileComponent.SpeedDecreaseFactor = 1.2f;
             projectileComponent.SpeedIncreaseFactor = 0.8f;
             projectileComponent.OwnerEntity = GetEntity();

@@ -16,7 +16,7 @@ public class PlayerStorage : ScriptableObject
             {
                 LVL = 1,
                 Damage = 2,
-                Speed = 10f,
+                Speed = 6f,
                 Health = 100,
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,

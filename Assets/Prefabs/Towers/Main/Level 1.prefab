@@ -21,7 +21,7 @@ GameObject:
   m_Name: Level 1
   m_TagString: Friendly
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5141948047038541876
@@ -98,8 +98,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.5493326, y: 3.2740107, z: 3.5582104}
-  m_Center: {x: -0.060129404, y: 1.6191969, z: 0.009348631}
+  m_Size: {x: 2.3, y: 2, z: 2.3}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &6864653029941975571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1.7, y: 0.5, z: 1.7}
+  m_Extents: {x: 1.15, y: 0.5, z: 1.15}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

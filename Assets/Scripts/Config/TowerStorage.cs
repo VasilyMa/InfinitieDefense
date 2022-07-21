@@ -22,7 +22,7 @@ public class TowerStorage : ScriptableObject
             ["1tower"] = new Tower
             {
                 TowerLevel = 1,
-                Radius = 20,
+                Radius = 10,
                 TowerHealth = 2500,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
@@ -35,7 +35,7 @@ public class TowerStorage : ScriptableObject
             ["2tower"] = new Tower
             {
                 TowerLevel = 2,
-                Radius = 35,
+                Radius = 15,
                 TowerHealth = 2900,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
@@ -48,7 +48,7 @@ public class TowerStorage : ScriptableObject
             ["3tower"] = new Tower
             {
                 TowerLevel = 3,
-                Radius = 45,
+                Radius = 20,
                 TowerHealth = 3300,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],

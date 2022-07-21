@@ -23,7 +23,7 @@ namespace Client {
         private float _shipAngle = 0f;
         private int _encounter = 0;
         private int _enemyCountInEncounter = 0;
-        private int _enemySpawnRadius = 110;
+        private int _enemySpawnRadius = 60;
 
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
@@ -59,7 +59,7 @@ namespace Client {
                         targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
 
                         ref var movableComponent = ref _world.Value.GetPool<Movable>().Add(shipEntity);
-                        movableComponent.Speed = 10f;
+                        movableComponent.Speed = 15f;
 
                         ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
                         shipComponent.Encounter = _encounter;
@@ -113,80 +113,81 @@ namespace Client {
                             _unitPool.Value.Add(enemyEntity);
                             _inactivePool.Value.Add(enemyEntity);
 
-                            ref var enemyTargetableComponent = ref _targetablePool.Value.Add(enemyEntity);
-                            ref var enemyMovableComponent = ref _movablePool.Value.Add(enemyEntity);
-                            ref var enemyViewComponent = ref _viewPool.Value.Add(enemyEntity);
-                            ref var enemyShipComponent = ref _shipPool.Value.Add(enemyEntity);
-                            ref var healthComponent = ref _healthPool.Value.Add(enemyEntity);
-                            ref var damageComponent = ref _damagePool.Value.Add(enemyEntity);
-                            ref var targetWeightComponent = ref _targetWeightPool.Value.Add(enemyEntity);
+                            ref var unitTargetableComponent = ref _targetablePool.Value.Add(enemyEntity);
+                            ref var unitMovableComponent = ref _movablePool.Value.Add(enemyEntity);
+                            ref var unitViewComponent = ref _viewPool.Value.Add(enemyEntity);
+                            ref var unitShipComponent = ref _shipPool.Value.Add(enemyEntity);
+                            ref var unitHealthComponent = ref _healthPool.Value.Add(enemyEntity);
+                            ref var unitDamageComponent = ref _damagePool.Value.Add(enemyEntity);
+                            ref var unitTargetWeightComponent = ref _targetWeightPool.Value.Add(enemyEntity);
 
                             switch (enemies[j])
                             {
                                 case "Melee":
                                     {
                                         enemy = GameObject.Instantiate(_state.Value.EnemyConfig.EnemyPrefab, ship.transform);
-                                        enemyViewComponent.GameObject = enemy;
-                                        enemyViewComponent.Animator = enemy.GetComponent<Animator>();
-                                        enemyViewComponent.Animator.SetBool("Melee", true);
+                                        unitViewComponent.GameObject = enemy;
+                                        unitViewComponent.Animator = enemy.GetComponent<Animator>();
+                                        unitViewComponent.Animator.SetBool("Melee", true);
 
-                                        damageComponent.Value = 10f;
+                                        unitDamageComponent.Value = 10f;
 
-                                        healthComponent.MaxValue = 20;
+                                        unitHealthComponent.MaxValue = 20;
                                         break;
                                     }
                                 case "Range":
                                     {
                                         enemy = GameObject.Instantiate(_state.Value.EnemyConfig.RangeEnemyPrefab, ship.transform);
-                                        enemyViewComponent.GameObject = enemy;
-                                        enemyViewComponent.Animator = enemy.GetComponent<Animator>();
-                                        enemyViewComponent.Animator.SetBool("Range", true);
+                                        unitViewComponent.GameObject = enemy;
+                                        unitViewComponent.Animator = enemy.GetComponent<Animator>();
+                                        unitViewComponent.Animator.SetBool("Range", true);
 
-                                        damageComponent.Value = 7f;
+                                        unitDamageComponent.Value = 7f;
 
-                                        healthComponent.MaxValue = 10;
+                                        unitHealthComponent.MaxValue = 10;
                                         break;
                                     }
                             }
 
                             enemy.transform.localPosition = new Vector3(ex, 0, ez);
 
-                            enemyTargetableComponent.TargetEntity = _state.Value.TowersEntity[0];
-                            enemyTargetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
+                            unitTargetableComponent.TargetEntity = _state.Value.TowersEntity[0];
+                            unitTargetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
 
-                            enemyTargetableComponent.AllEntityInDetectedZone = new List<int>();
-                            enemyTargetableComponent.AllEntityInDamageZone = new List<int>();
+                            unitTargetableComponent.AllEntityInDetectedZone = new List<int>();
+                            unitTargetableComponent.AllEntityInDamageZone = new List<int>();
 
-                            targetWeightComponent.Value = 5;
+                            unitTargetWeightComponent.Value = 5;
 
-                            healthComponent.CurrentValue = healthComponent.MaxValue;
+                            unitHealthComponent.CurrentValue = unitHealthComponent.MaxValue;
 
-                            movableComponent.Speed = 5f;
+                            unitMovableComponent.Speed = 1f;
 
-                            enemyViewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
-                            enemyViewComponent.Transform = enemy.GetComponent<Transform>();
-                            enemyViewComponent.Outline = enemy.GetComponent<Outline>();
-                            enemyViewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();
-                            enemyViewComponent.NavMeshAgent = enemy.GetComponent<NavMeshAgent>();
-                            enemyViewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
-                            enemyViewComponent.EcsInfoMB.Init(_world);
-                            enemyViewComponent.EcsInfoMB.SetEntity(enemyEntity);
-                            enemyViewComponent.EcsInfoMB.SetTarget(enemyTargetableComponent.TargetEntity, enemyTargetableComponent.TargetObject);
-                            enemyViewComponent.PointerTransform = enemy.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform;
-                            enemyViewComponent.Healthbar = enemy.GetComponent<HealthbarMB>();
-                            enemyViewComponent.Healthbar.SetMaxHealth(healthComponent.MaxValue);
-                            enemyViewComponent.Healthbar.SetHealth(healthComponent.MaxValue);
-                            enemyViewComponent.Healthbar.ToggleSwitcher();
-                            enemyViewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                            enemyViewComponent.DamagePopups = new List<GameObject>();
-                            for (int y = 0; y < enemyViewComponent.Transform.GetChild(0).transform.childCount; y++)
+                            unitViewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
+                            unitViewComponent.Transform = enemy.GetComponent<Transform>();
+                            unitViewComponent.Outline = enemy.GetComponent<Outline>();
+                            unitViewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();
+                            unitViewComponent.NavMeshAgent = enemy.GetComponent<NavMeshAgent>();
+                            unitViewComponent.NavMeshAgent.speed = unitTargetWeightComponent.Value;
+                            unitViewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
+                            unitViewComponent.EcsInfoMB.Init(_world);
+                            unitViewComponent.EcsInfoMB.SetEntity(enemyEntity);
+                            unitViewComponent.EcsInfoMB.SetTarget(unitTargetableComponent.TargetEntity, unitTargetableComponent.TargetObject);
+                            unitViewComponent.PointerTransform = enemy.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.transform;
+                            unitViewComponent.Healthbar = enemy.GetComponent<HealthbarMB>();
+                            unitViewComponent.Healthbar.SetMaxHealth(unitHealthComponent.MaxValue);
+                            unitViewComponent.Healthbar.SetHealth(unitHealthComponent.MaxValue);
+                            unitViewComponent.Healthbar.ToggleSwitcher();
+                            unitViewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                            unitViewComponent.DamagePopups = new List<GameObject>();
+                            for (int y = 0; y < unitViewComponent.Transform.GetChild(0).transform.childCount; y++)
                             {
-                                var popup = enemyViewComponent.Transform.GetChild(0).transform.GetChild(y).gameObject;
-                                enemyViewComponent.DamagePopups.Add(popup);
-                                enemyViewComponent.DamagePopups[y].SetActive(false);
+                                var popup = unitViewComponent.Transform.GetChild(0).transform.GetChild(y).gameObject;
+                                unitViewComponent.DamagePopups.Add(popup);
+                                unitViewComponent.DamagePopups[y].SetActive(false);
                             }
                             
-                            enemyShipComponent.Encounter = _encounter;
+                            unitShipComponent.Encounter = _encounter;
 
                             shipComponent.EnemyUnitsEntitys.Add(enemyEntity);
 
