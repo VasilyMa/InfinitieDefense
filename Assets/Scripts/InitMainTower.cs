@@ -53,7 +53,7 @@ namespace Client
             healthComponent.CurrentValue = healthComponent.MaxValue;
 
             var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
-            var upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0.1f, 0), Quaternion.identity);
+            var upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0.1f, -3.5f), Quaternion.identity); // to do del magic number
             var upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
             upgradeComponent.point = upgradePoint.gameObject;
             upgradeComponent.upgrade = upgradeInfo;
@@ -121,7 +121,7 @@ namespace Client
                     tComp.CircleRadiusLevel = circleRadiusLevel;
                     
 
-                    upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0.1f, z), Quaternion.identity);
+                    upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(x, 0.1f, z - 3.5f), Quaternion.identity); // to do del magic number
                     tComp.UpgradePointGO = upgradePoint;
                     if (circleRadiusLevel > towerComp.Level - 1)
                     {
@@ -139,7 +139,6 @@ namespace Client
                     upgradePointMB.TowerIndex = i;
                     upgradeTowerComponent.Index = upgradePointMB.TowerIndex;
                     viewComp.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
-                    
                     
                     Angle += 360 / 6;
                     towerCount++;
