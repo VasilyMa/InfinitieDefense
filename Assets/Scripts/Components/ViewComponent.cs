@@ -14,6 +14,7 @@ namespace Client
         public HealthbarMB Healthbar;
         public LevelMB Level;
         public GameObject LevelPopup;
+        public GameObject ResourcesTimer;
         public List<GameObject> DamagePopups;
         public Transform PointerTransform;
         public Transform WeaponHolder;

@@ -94,6 +94,13 @@ namespace Client
             viewComponent.DropItemParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(2).GetComponent<ParticleSystem>();
             viewComponent.Regeneration = PlayerGo.transform.GetChild(4).transform.GetChild(3).GetComponent<ParticleSystem>();
             viewComponent.WayTrack = PlayerGo.transform.GetChild(4).transform.GetChild(4).GetComponent<ParticleSystem>();
+
+            viewComponent.LevelPopup = PlayerGo.transform.GetChild(3).transform.GetChild(3).transform.gameObject;
+            viewComponent.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.LevelPopup.SetActive(false);
+
+
+
             viewComponent.DamagePopups = new List<GameObject>();
 
             viewComponent.BaseLayer = viewComponent.GameObject.layer;
