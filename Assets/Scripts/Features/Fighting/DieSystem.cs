@@ -19,7 +19,9 @@ namespace Client
         readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
         readonly EcsPoolInject<RespawnEvent> _respawnEventPool = default;
         readonly EcsPoolInject<DropByDie> _dropPool = default;
+        readonly EcsPoolInject<DropableItem> _dropableItemPool = default;
 
+        readonly EcsPoolInject<DropEvent> _dropEventPool = default;
         readonly EcsPoolInject<LoseEvent> _losePool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
         public void Run (EcsSystems systems)
@@ -61,9 +63,20 @@ namespace Client
                 {
                     _respawnEventPool.Value.Add(entity);
                 }
+
                 if (_deadPool.Value.Has(_state.Value.EntityPlayer))
                 {
                     _dropPool.Value.Add(_state.Value.EntityPlayer);
+                }
+
+                // Drop item
+                if (_dropableItemPool.Value.Has(entity))
+                {
+                    ref var dropableItem = ref _dropableItemPool.Value.Get(entity);
+
+                    ref var dropEvent = ref _dropEventPool.Value.Add(_world.Value.NewEntity());
+                    dropEvent.Point = viewComponent.Transform.position;
+                    dropEvent.Item = dropableItem.Item;
                 }
             }
         }

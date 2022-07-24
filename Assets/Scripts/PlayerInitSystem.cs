@@ -54,7 +54,6 @@ namespace Client
             player.RotateSpeed = 10f;
             player.damage = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
             player.health = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
-            player.ResHolderTransform = PlayerGo.transform.GetChild(2).transform;
             player.animator = PlayerGo.GetComponent<Animator>();
             //player.playerMB.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
@@ -83,24 +82,25 @@ namespace Client
             viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
             viewComponent.EcsInfoMB.Init(_world);
             viewComponent.EcsInfoMB.SetEntity(playerEntity);
+            player.ResHolderTransform = viewComponent.EcsInfoMB.GetResHolder();
 
             contextToolComponent.ToolsPool = new GameObject[viewComponent.EcsInfoMB.GetToolCount()];
             contextToolComponent.CurrentActiveTool = ContextToolComponent.Tool.empty;
             viewComponent.EcsInfoMB.InitTools(playerEntity);
 
             viewComponent.SkinnedMeshRenderer = PlayerGo.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
-            viewComponent.UpgradeParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(0).GetComponent<ParticleSystem>();
-            viewComponent.HitParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(1).GetComponent<ParticleSystem>();
-            viewComponent.DropItemParticleSystem = PlayerGo.transform.GetChild(4).transform.GetChild(2).GetComponent<ParticleSystem>();
-            viewComponent.Regeneration = PlayerGo.transform.GetChild(4).transform.GetChild(3).GetComponent<ParticleSystem>();
-            viewComponent.WayTrack = PlayerGo.transform.GetChild(4).transform.GetChild(4).GetComponent<ParticleSystem>();
+            viewComponent.UpgradeParticleSystem = PlayerGo.transform.GetChild(3).transform.GetChild(0).GetComponent<ParticleSystem>();
+            viewComponent.HitParticleSystem = PlayerGo.transform.GetChild(3).transform.GetChild(1).GetComponent<ParticleSystem>();
+            viewComponent.DropItemParticleSystem = PlayerGo.transform.GetChild(3).transform.GetChild(2).GetComponent<ParticleSystem>();
+            viewComponent.Regeneration = PlayerGo.transform.GetChild(3).transform.GetChild(3).GetComponent<ParticleSystem>();
+            viewComponent.WayTrack = PlayerGo.transform.GetChild(3).transform.GetChild(4).GetComponent<ParticleSystem>();
             viewComponent.DamagePopups = new List<GameObject>();
 
             viewComponent.BaseLayer = viewComponent.GameObject.layer;
 
-            for (int y = 0; y < viewComponent.Transform.GetChild(3).transform.GetChild(0).transform.childCount; y++)
+            for (int y = 0; y < viewComponent.Transform.GetChild(2).transform.GetChild(0).transform.childCount; y++)
             {
-                var popup = viewComponent.Transform.GetChild(3).transform.GetChild(0).transform.GetChild(y).gameObject;
+                var popup = viewComponent.Transform.GetChild(2).transform.GetChild(0).transform.GetChild(y).gameObject;
                 viewComponent.DamagePopups.Add(popup);
                 viewComponent.DamagePopups[y].SetActive(false);
             }

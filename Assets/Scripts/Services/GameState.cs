@@ -16,6 +16,7 @@ namespace Client
         public int EntityCamera;
         public TowerStorage TowerStorage;
         public InterfaceStorage InterfaceStorage;
+        public DropableItemStorage DropableItemStorage;
         public PlayerStorage PlayerStorage;
         public DefenseTowerStorage DefenseTowerStorage;
         public WaveStorage WaveStorage;
@@ -36,13 +37,14 @@ namespace Client
         public string CurrentPlayerID;
         public int PlayerExperience;
         public int AllEnemies;
-        public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, 
+        public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, DropableItemStorage dropableItemStorage,
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, WaveStorage waveStorage,
         EnemyConfig enemyConfig)
         {
             World = world;
             TowerStorage = towerStorage;
             InterfaceStorage = interfaceStorage;
+            DropableItemStorage = dropableItemStorage;
             PlayerStorage = playerStorage;
             DefenseTowerStorage = defenseTowerStorage;
             TowerCount = towerCount;

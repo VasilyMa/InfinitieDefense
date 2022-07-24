@@ -35,7 +35,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
                 CannonBallPrefab = CannonBallPrefabs[0],
-                Upgrade = 2,
+                Upgrade = 1,
                 IsLast = false,
                 NextID = "2tower",
                 ImageResource = ImageResources
@@ -50,7 +50,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
                 CannonBallPrefab = CannonBallPrefabs[1],
-                Upgrade = 3,
+                Upgrade = 1,
                 IsLast = false,
                 NextID = "3tower",
                 ImageResource = ImageResources
@@ -65,7 +65,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[2],
                 TowerMesh = TowerMeshs[2],
                 CannonBallPrefab = CannonBallPrefabs[2],
-                Upgrade = 4,
+                Upgrade = 1,
                 IsLast = false,
                 NextID = "4tower",
                 ImageResource = ImageResources
@@ -80,7 +80,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[3],
                 TowerMesh = TowerMeshs[3],
                 CannonBallPrefab = CannonBallPrefabs[3],
-                Upgrade = 5,
+                Upgrade = 1,
                 IsLast = false,
                 NextID = "5tower",
                 ImageResource = ImageResources
@@ -95,83 +95,9 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[4],
                 TowerMesh = TowerMeshs[4],
                 CannonBallPrefab = CannonBallPrefabs[4],
-                Upgrade = 6,
-                IsLast = false,
-                NextID = "6tower",
+                Upgrade = 1,
+                IsLast = true,
                 ImageResource = ImageResources
-            },
-            ["6tower"] = new DefenseTower
-            {
-                LevelTower = 6,
-                Radius = 22,
-                Damage = 10,
-                Cooldown = 5f,
-                TowerHealth = 1000,
-                TowerPrefab = TowerPrefabs[5],
-                TowerMesh = TowerMeshs[5],
-                CannonBallPrefab = CannonBallPrefabs[5],
-                Upgrade = 7,
-                IsLast = false,
-                NextID = "7tower",
-                ImageResource = ImageResources
-            },
-            ["7tower"] = new DefenseTower
-            {
-                LevelTower = 7,
-                Radius = 24,
-                Damage = 10,
-                Cooldown = 5f,
-                TowerHealth = 1300,
-                TowerPrefab = TowerPrefabs[6],
-                TowerMesh = TowerMeshs[6],
-                CannonBallPrefab = CannonBallPrefabs[6],
-                Upgrade = 8,
-                IsLast = false,
-                NextID = "8tower",
-                ImageResource = ImageResources
-            },
-            ["8tower"] = new DefenseTower
-            {
-                LevelTower = 8,
-                Radius = 26,
-                Damage = 10,
-                Cooldown = 4f,
-                TowerHealth = 1300,
-                TowerPrefab = TowerPrefabs[7],
-                TowerMesh = TowerMeshs[7],
-                CannonBallPrefab = CannonBallPrefabs[7],
-                Upgrade = 9,
-                IsLast = false,
-                NextID = "9tower",
-                ImageResource = ImageResources
-            },
-            ["9tower"] = new DefenseTower
-            {
-                LevelTower = 9,
-                Radius = 28,
-                Damage = 10,
-                Cooldown = 4f,
-                TowerHealth = 1600,
-                TowerPrefab = TowerPrefabs[8],
-                TowerMesh = TowerMeshs[8],
-                CannonBallPrefab = CannonBallPrefabs[8],
-                Upgrade = 10,
-                IsLast = false,
-                NextID = "10tower",
-                ImageResource = ImageResources
-            },
-            ["10tower"] = new DefenseTower
-            {
-                LevelTower = 10,
-                Radius = 30,
-                Damage = 20,
-                Cooldown = 6f,
-                TowerHealth = 1600,
-                TowerPrefab = TowerPrefabs[9],
-                TowerMesh = TowerMeshs[9],
-                CannonBallPrefab = CannonBallPrefabs[9],
-                Upgrade = 999999,
-                IsLast = true
             },
         };
     }

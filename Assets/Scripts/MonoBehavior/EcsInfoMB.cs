@@ -30,6 +30,8 @@ namespace Client
 
         [SerializeField] private ParticleSystem OreMining;
 
+        [SerializeField] private Transform ResHolderTransform;
+
         [Header("1 - Pickaxe; 2 - Sword; 3 - Bow")]
         [SerializeField] private GameObject[] _contextTools = new GameObject[3];
 
@@ -48,6 +50,11 @@ namespace Client
         public int GetToolCount()
         {
             return _contextTools.Length;
+        }
+
+        public Transform GetResHolder()
+        {
+            return ResHolderTransform;
         }
 
         public void InitTools(int entity)

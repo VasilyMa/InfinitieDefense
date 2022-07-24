@@ -13,6 +13,7 @@ namespace Client
         [SerializeField] EcsUguiEmitter _uguiEmitter;
         [SerializeField] private TowerStorage _towerStorage;
         [SerializeField] private InterfaceStorage _interfaceStorage;
+        [SerializeField] private DropableItemStorage _dropableItemStorage;
         [SerializeField] private PlayerStorage _playerStorage;
         [SerializeField] private DefenseTowerStorage _defenseTowerStorage;
         [SerializeField] private EnemyConfig _enemyConfig;
@@ -28,7 +29,7 @@ namespace Client
         {
             _waveStorage = gameObject.GetComponent<WaveStorage>();
             _world = new EcsWorld();
-            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, 
+            _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _dropableItemStorage,
             _playerStorage, _defenseTowerStorage, _towerCount, _waveStorage, _enemyConfig);
             _systems = new EcsSystems (_world, _gameState);
             _systemsFixed = new EcsSystems(_world, _gameState);

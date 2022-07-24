@@ -19,6 +19,7 @@ namespace Client {
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
+        readonly EcsPoolInject<DropableItem> _dropableItemPool = default;
         private float _angle = 0f;
         private float _shipAngle = 0f;
         private int _encounter = 0;
@@ -142,9 +143,14 @@ namespace Client {
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
                                         unitViewComponent.Animator.SetBool("Range", true);
 
+                                        ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
+                                        dropableItemComponent.Item = DropableItem.ItemType.Bow;
+
                                         unitDamageComponent.Value = 7f;
 
                                         unitHealthComponent.MaxValue = 10;
+
+
                                         break;
                                     }
                             }
