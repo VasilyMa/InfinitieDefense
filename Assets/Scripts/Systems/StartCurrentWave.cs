@@ -131,6 +131,9 @@ namespace Client {
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
                                         unitViewComponent.Animator.SetBool("Melee", true);
 
+                                        ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
+                                        dropableItemComponent.Item = DropableItem.ItemType.Sword;
+
                                         unitDamageComponent.Value = 10f;
 
                                         unitHealthComponent.MaxValue = 20;

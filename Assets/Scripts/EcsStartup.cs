@@ -97,10 +97,15 @@ namespace Client
                 .Add(new DamagePopupSystem())
 
                 .Add(new ReloadSystem())
+
                 .Add(new DieSystem())
                 .Add(new UserDropSystem())
                 .Add(new DropResourcesSystem())
                 .Add(new DroppedGoldSystem())
+                .Add(new DropEventSystem()) // AnyWeaponDrop
+
+                .Add(new PickUpNewWeaponEventSystem())
+
                 //.Add(new RespawnDefender())
                 .Add(new RespawnEventSystem())
                 //.Add(new OreRespawnSystem())

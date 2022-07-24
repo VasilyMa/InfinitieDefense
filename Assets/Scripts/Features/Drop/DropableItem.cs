@@ -1,6 +1,6 @@
 namespace Client
 {
-    struct DropableItem
+    public struct DropableItem
     {
         public enum ItemType
         {

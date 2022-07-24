@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DropableItemStorage
   m_EditorClassIdentifier: 
   DroppedWeaponPrefab:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2753329130675758992, guid: 71136983a77902b4a819f233a33dcb7d, type: 3}
+  - {fileID: 2250044428036549770, guid: 98fc2d3d641599a4eb1a0b1ffdb78bc0, type: 3}

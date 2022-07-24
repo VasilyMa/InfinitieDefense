@@ -24,6 +24,7 @@ namespace Client
         readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
         readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
         readonly EcsPoolInject<UpgradePlayerPointComponent> _upgradePlayerPointPool = default;
+        readonly EcsPoolInject<PlayerWeapon> _playerWeaponPool = default;
         private Vector3 _spawnPoint = new Vector3(0, 0, -10);
 
         public void Init (EcsSystems systems) 
@@ -84,6 +85,8 @@ namespace Client
             viewComponent.EcsInfoMB.SetEntity(playerEntity);
             player.ResHolderTransform = viewComponent.EcsInfoMB.GetResHolder();
 
+            InitializePlayerWeapon(playerEntity);
+
             contextToolComponent.ToolsPool = new GameObject[viewComponent.EcsInfoMB.GetToolCount()];
             contextToolComponent.CurrentActiveTool = ContextToolComponent.Tool.empty;
             viewComponent.EcsInfoMB.InitTools(playerEntity);
@@ -104,7 +107,6 @@ namespace Client
                 viewComponent.DamagePopups.Add(popup);
                 viewComponent.DamagePopups[y].SetActive(false);
             }
-
 
             pointerComponent.player = PlayerGo;
 
@@ -147,6 +149,42 @@ namespace Client
                 coinTransform.localPosition = new Vector3(0, _state.Value.RockCount * 0.6f + i * 0.3f, 0);
                 _state.Value.CoinTransformList.Add(coinTransform);
             }
+
+            SetRangeSetup(playerEntity);
+        }
+
+        private void SetMeleeSetup(int playerEntity)
+        {
+            ref var viewComponent = ref _viewPool.Value.Get(playerEntity);
+            ref var playerWeaponComponent = ref _playerWeaponPool.Value.Get(playerEntity);
+
+            playerWeaponComponent.MeleeAttackMB.gameObject.SetActive(true);
+            viewComponent.Animator.SetBool("Melee", true);
+
+            playerWeaponComponent.RangeAttackMB.gameObject.SetActive(false);
+            viewComponent.Animator.SetBool("Range", false);
+        }
+
+        private void SetRangeSetup(int playerEntity)
+        {
+            ref var viewComponent = ref _viewPool.Value.Get(playerEntity);
+            ref var playerWeaponComponent = ref _playerWeaponPool.Value.Get(playerEntity);
+
+            playerWeaponComponent.MeleeAttackMB.gameObject.SetActive(false);
+            viewComponent.Animator.SetBool("Melee", false);
+
+            playerWeaponComponent.RangeAttackMB.gameObject.SetActive(true);
+            viewComponent.Animator.SetBool("Range", true);
+        }
+
+        private void InitializePlayerWeapon(int playerEntity)
+        {
+            ref var playerWeaponComponent = ref _playerWeaponPool.Value.Add(playerEntity);
+
+            ref var viewComponent = ref _viewPool.Value.Get(playerEntity);
+
+            playerWeaponComponent.MeleeAttackMB = viewComponent.Transform.GetComponentInChildren<MeleeAttackMB>();
+            playerWeaponComponent.RangeAttackMB = viewComponent.Transform.GetComponentInChildren<RangeAttackMB>();
         }
     }
 }
