@@ -60,7 +60,28 @@ namespace Client {
                 if (filterComp.DelayTime < 2f)
                 {
                     filterComp.DelayTime += Time.deltaTime * 2f;
+                    if (filterComp.UpgradeTower)
+                    {
+                        if (filterComp.TowerIndex == 0)
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime);
+                        else if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime);
+                    }
+                    else if (!filterComp.UpgradeTower)
+                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime);
                     return;
+                }
+                if (_state.Value.CoinCount != 0 || _state.Value.RockCount != 0)
+                {
+                    if (filterComp.UpgradeTower)
+                    {
+                        if (filterComp.TowerIndex == 0)
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 1.5f);
+                        else if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 1.5f);
+                    }
+                    else if (!filterComp.UpgradeTower)
+                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 1.5f);
                 }
 
                 if (filterComp.Time == 0)
@@ -76,6 +97,7 @@ namespace Client {
                                 _state.Value.CoinCount--;
                                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
+                                _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                             }
                             else
                             {
@@ -83,6 +105,8 @@ namespace Client {
                                 _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                                 _state.Value.RockCount--;
                                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+                                if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
+                                    _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                                 RelocateCoinInResourceHolder();
                             }
@@ -109,11 +133,13 @@ namespace Client {
                     }
                     else
                     {
+                        _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                         _filter.Pools.Inc1.Del(entity);
                     }
                 }
                 filterComp.Time += Time.deltaTime * 2f;
-                if(filterComp.Time >= 1f)
+                if (filterComp.Time >= 3f)
                 {
                     filterComp.Time = 0f;
                 }

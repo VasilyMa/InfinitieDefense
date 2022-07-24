@@ -99,7 +99,10 @@ namespace Client
             viewComponent.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.LevelPopup.SetActive(false);
 
-
+            viewComponent.ResourcesTimer = PlayerGo.transform.GetChild(3).transform.GetChild(4).transform.gameObject;
+            viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+            viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.ResourcesTimer.SetActive(true);
 
             viewComponent.DamagePopups = new List<GameObject>();
 

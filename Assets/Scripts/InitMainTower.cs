@@ -90,6 +90,7 @@ namespace Client
             viewComponent.LevelPopup.SetActive(false);
 
             viewComponent.ResourcesTimer = mainTower.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
+            viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
             viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.ResourcesTimer.SetActive(true);
 

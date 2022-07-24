@@ -77,7 +77,7 @@ namespace Client
                     }
                 case "UpgradePoint":
                     {
-                        if (!_upgradePool.Has(_state.EntityPlayer))
+                        if (!_upgradePool.Has(_state.EntityPlayer) && _state.CoinCount != 0 ||_state.RockCount != 0)
                         {
                             ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                             upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
@@ -88,7 +88,7 @@ namespace Client
                     }
                 case "UpgradePlayerPoint":
                     {
-                        if (!_upgradePool.Has(_state.EntityPlayer))
+                        if (!_upgradePool.Has(_state.EntityPlayer) && _state.CoinCount != 0)
                         {
                             ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                             upgradeComp.Time = 0f;
@@ -137,6 +137,8 @@ namespace Client
             {
                 case "UpgradePoint":
                     {
+                        if (_viewPool.Has(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]))
+                            _viewPool.Get(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                         if (_upgradePool.Has(_state.EntityPlayer))
                         {
                             _upgradePool.Del(_state.EntityPlayer);
@@ -145,6 +147,8 @@ namespace Client
                     }
                 case "UpgradePlayerPoint":
                     {
+                        if(_viewPool.Has(_state.EntityPlayer))
+                            _viewPool.Get(_state.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                         if (_upgradePool.Has(_state.EntityPlayer))
                         {
                             _upgradePool.Del(_state.EntityPlayer);
