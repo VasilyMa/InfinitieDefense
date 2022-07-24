@@ -57,18 +57,18 @@ namespace Client {
                     neededResource = _state.Value.CoinCount;
                 }
 
-                if (filterComp.DelayTime < 2f)
+                if (filterComp.DelayTime < 4f)
                 {
                     filterComp.DelayTime += Time.deltaTime * 2f;
                     if (filterComp.UpgradeTower)
                     {
                         if (filterComp.TowerIndex == 0)
-                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime);
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
                         else if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
-                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime);
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
                     }
                     else if (!filterComp.UpgradeTower)
-                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime);
+                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
                     return;
                 }
                 if (_state.Value.CoinCount != 0 || _state.Value.RockCount != 0)
@@ -76,12 +76,12 @@ namespace Client {
                     if (filterComp.UpgradeTower)
                     {
                         if (filterComp.TowerIndex == 0)
-                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 1.5f);
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
                         else if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
-                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 1.5f);
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
                     }
                     else if (!filterComp.UpgradeTower)
-                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 1.5f);
+                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
                 }
 
                 if (filterComp.Time == 0)
@@ -139,7 +139,7 @@ namespace Client {
                     }
                 }
                 filterComp.Time += Time.deltaTime * 2f;
-                if (filterComp.Time >= 3f)
+                if (filterComp.Time >= 4f)
                 {
                     filterComp.Time = 0f;
                 }
