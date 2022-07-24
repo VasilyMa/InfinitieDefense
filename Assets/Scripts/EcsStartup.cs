@@ -90,6 +90,7 @@ namespace Client
                 .Add(new CreateNextTowerSystem())
                 .Add(new CreateNewPlayer())
                 .Add(new CreateDefenders())
+                .Add(new LevelPopupSystem())
 
                 .Add(new DamagingEventSystem())
                 .Add(new TargetingEventSystem())

@@ -7,7 +7,7 @@ using Leopotam.EcsLite.Di;
 
 namespace Client
 {
-    public class LevelMB : MonoBehaviour
+    public class LevelPopupMB : MonoBehaviour
     {
         private EcsWorld _world;
         private GameState _state;
@@ -23,11 +23,11 @@ namespace Client
         }
         public void UpdateLevel(int currentLevel)
         {
-            if(currentLevel <= 0)
-               _levelObject.SetActive(false);
+            if (currentLevel <= 0)
+                _levelObject.SetActive(false);
             else
                 _levelObject.SetActive(true);
-            level = $"Level {currentLevel}";
+            level = $"New Level {currentLevel}";
             _textAmount.text = level;
         }
         private void CameraFollow()
@@ -38,7 +38,11 @@ namespace Client
 
         private void Update()
         {
-            //CameraFollow();
+            CameraFollow();
+        }
+        public Text GetText()
+        {
+            return _textAmount;
         }
     }
 }

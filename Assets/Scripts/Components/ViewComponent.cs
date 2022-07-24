@@ -13,6 +13,7 @@ namespace Client
         public int BaseLayer;
         public HealthbarMB Healthbar;
         public LevelMB Level;
+        public GameObject LevelPopup;
         public List<GameObject> DamagePopups;
         public Transform PointerTransform;
         public Transform WeaponHolder;

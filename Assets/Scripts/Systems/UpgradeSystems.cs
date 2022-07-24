@@ -96,7 +96,7 @@ namespace Client {
                             _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                             intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                             _state.Value.UpgradePlayer();
-                            viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
+                            //viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
                             foreach (var item in _filterPoint.Value)
                             {
                                 _filterPoint.Pools.Inc1.Get(item).Point.GetComponent<PlayerUpgradePointMB>().

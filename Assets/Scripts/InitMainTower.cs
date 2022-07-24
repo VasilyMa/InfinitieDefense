@@ -79,9 +79,14 @@ namespace Client
 
             ref var targetWeightComponent = ref _world.Value.GetPool<TargetWeightComponent>().Add(mainTowerEntity);
 
-            viewComponent.Level = mainTower.GetComponent<LevelMB>();
-            viewComponent.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(towerID));
-            viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            //viewComponent.Level = mainTower.GetComponent<LevelMB>();
+            //viewComponent.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(towerID));
+            //viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+            viewComponent.LevelPopup = mainTower.transform.GetChild(0).transform.GetChild(2).transform.gameObject;
+            viewComponent.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.LevelPopup.SetActive(false);
+
             viewComponent.DamagePopups = new List<GameObject>();
             for (int y = 0; y < viewComponent.Transform.GetChild(1).transform.childCount; y++)
             {
