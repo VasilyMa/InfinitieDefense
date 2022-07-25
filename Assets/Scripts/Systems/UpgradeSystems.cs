@@ -20,139 +20,107 @@ namespace Client {
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
+                
                 ref var filterComp = ref _filter.Pools.Inc1.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
                 ref var intComp = ref _intPool.Value.Get(_state.Value.EntityInterface);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
-                int neededResource = 0;
-                if (filterComp.UpgradeTower) //если апгрейдим башни
+                if (intComp._joystick.Horizontal == 0 && intComp._joystick.Vertical == 0)
                 {
-                    if (filterComp.TowerIndex == 0) //главная башня
+
+                    int neededResource = 0;
+                    if (filterComp.UpgradeTower) //если апгрейдим башни
                     {
-                        if (_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                        if (filterComp.TowerIndex == 0) //главная башня
+                        {
+                            if (_state.Value.TowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                            {
+                                _filter.Pools.Inc1.Del(entity);
+                                return;
+                            }
+                            neededResource = _state.Value.CoinCount;
+                        }
+                        else //защитные башни
+                        {
+                            if (_state.Value.DefenseTowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
+                            {
+                                _filter.Pools.Inc1.Del(entity);
+                                return;
+                            }
+                            neededResource = _state.Value.RockCount;
+                        }
+
+                    }
+                    else // если апгрейдим игрока
+                    {
+                        if (_state.Value.PlayerStorage.GetIsLastByID(_state.Value.CurrentPlayerID))
                         {
                             _filter.Pools.Inc1.Del(entity);
                             return;
                         }
                         neededResource = _state.Value.CoinCount;
                     }
-                    else //защитные башни
+
+                    if (filterComp.DelayTime < 4f)
                     {
-                        if (_state.Value.DefenseTowerStorage.GetIsLastByID(_state.Value.DefenseTowers[filterComp.TowerIndex]))
-                        {
-                            _filter.Pools.Inc1.Del(entity);
-                            return;
-                        }
-                        neededResource = _state.Value.RockCount;
-                    }
-                    
-                }
-                else // если апгрейдим игрока
-                {
-                    if (_state.Value.PlayerStorage.GetIsLastByID(_state.Value.CurrentPlayerID))
-                    {
-                        _filter.Pools.Inc1.Del(entity);
+                        filterComp.DelayTime += Time.deltaTime * 2f;
                         return;
                     }
-                    neededResource = _state.Value.CoinCount;
-                }
+                    if (filterComp.Time == 0)
+                    {
+                        if (neededResource > 0)
+                        {
+                            if (filterComp.UpgradeTower)
+                            {
+                                if (filterComp.TowerIndex == 0)
+                                {
+                                    //GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
+                                    //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
+                                    _state.Value.CoinCount--;
+                                    _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+                                    intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
+                                }
+                                else
+                                {
+                                    GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
+                                    _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
+                                    _state.Value.RockCount--;
+                                    _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
 
-                if (filterComp.DelayTime < 4f)
-                {
-                    filterComp.DelayTime += Time.deltaTime * 2f;
-                    if (filterComp.UpgradeTower)
-                    {
-                        if (filterComp.TowerIndex == 0 && _state.Value.CoinCount != 0)
-                        {
-                            //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime / 2);
-                            _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(filterComp.DelayTime / 2);
-                        }  
-                        else if (_state.Value.RockCount >= 1)
-                        {
-                            //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime / 2);
-                            _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(filterComp.DelayTime / 2);
-                        }
-                            
-                    }
-                    else if (!filterComp.UpgradeTower && _state.Value.CoinCount != 0)
-                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
-                    return;
-                }
-                if (filterComp.UpgradeTower)
-                {
-                    if (filterComp.TowerIndex == 0 && _state.Value.CoinCount != 0)
-                    {
-                        //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
-                        _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(filterComp.Time / 2f);
-                    }
-                    else if (_state.Value.RockCount >= 1)
-                    {
-                        //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
-                        _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(filterComp.DelayTime / 2);
-                    }  
-                }
-                else if (!filterComp.UpgradeTower && _state.Value.CoinCount > 0)
-                    _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
-
-                if (filterComp.Time == 0)
-                {
-                    if (neededResource > 0)
-                    {
-                        if (filterComp.UpgradeTower)
-                        {
-                            if (filterComp.TowerIndex == 0)
+                                    intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
+                                    RelocateCoinInResourceHolder();
+                                }
+                                _state.Value.UpgradeTower(filterComp.TowerIndex);
+                            }
+                            else
                             {
                                 //GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
                                 //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                                 _state.Value.CoinCount--;
                                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
-                                _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(0);
+                                _state.Value.UpgradePlayer();
+                                //viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
+                                foreach (var item in _filterPoint.Value)
+                                {
+                                    _filterPoint.Pools.Inc1.Get(item).Point.GetComponent<PlayerUpgradePointMB>().
+                                        UpdateLevelInfo(_state.Value.PlayerStorage.
+                                        GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
+                                }
                             }
-                            else
-                            {
-                                GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
-                                _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
-                                _state.Value.RockCount--;
-                                _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(0);
-                                _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
-                                
-                                intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
-                                RelocateCoinInResourceHolder();
-                            }
-                            _state.Value.UpgradeTower(filterComp.TowerIndex);
+                            //viewComp.DropItemParticleSystem.Stop();
+                            viewComp.DropItemParticleSystem.Play();
                         }
                         else
                         {
-                            //GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
-                            //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
-                            _state.Value.CoinCount--;
-                            _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
-                            intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
-                            _state.Value.UpgradePlayer();
-                            //viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
-                            foreach (var item in _filterPoint.Value)
-                            {
-                                _filterPoint.Pools.Inc1.Get(item).Point.GetComponent<PlayerUpgradePointMB>().
-                                    UpdateLevelInfo(_state.Value.PlayerStorage.
-                                    GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
-                            }
+                            _filter.Pools.Inc1.Del(entity);
                         }
-                        //viewComp.DropItemParticleSystem.Stop();
-                        viewComp.DropItemParticleSystem.Play();
                     }
-                    else
+                    filterComp.Time += Time.deltaTime * 2f;
+                    if (filterComp.Time >= 4f)
                     {
-                        //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
-                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
-                        _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(0);
-                        _filter.Pools.Inc1.Del(entity);
+                        filterComp.Time = 0f;
                     }
-                }
-                filterComp.Time += Time.deltaTime * 2f;
-                if (filterComp.Time >= 4f)
-                {
-                    filterComp.Time = 0f;
                 }
             }
             void RelocateCoinInResourceHolder()

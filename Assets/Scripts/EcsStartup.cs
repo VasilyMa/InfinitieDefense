@@ -116,7 +116,7 @@ namespace Client
                 .Add(new CoinPickupSystem())
                 .Add(new NewTowersCircleSystem())
                 .Add(new SavesSystem())
-
+                .Add(new UpgradeTimerSystem())
                 .Add(new VibrationEventSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)

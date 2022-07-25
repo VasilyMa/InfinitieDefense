@@ -18,6 +18,7 @@ namespace Client
         private EcsPool<ActivateContextToolEvent> _activateContextToolPool;
         private EcsPool<CoinPickupEvent> _coinPickupEventPool;
         private EcsPool<CanvasUpgradeComponent> _upgradeCanvasPool;
+        private EcsPool<UpgradeTimerEvent> _timerPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -31,6 +32,7 @@ namespace Client
             _upgradeCanvasPool = world.GetPool<CanvasUpgradeComponent>();
             _activateContextToolPool = world.GetPool<ActivateContextToolEvent>();
             _coinPickupEventPool = world.GetPool<CoinPickupEvent>();
+            _timerPool = world.GetPool<UpgradeTimerEvent>();
             _world = world;
         }
 
@@ -71,6 +73,9 @@ namespace Client
                             upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
                             upgradeComp.Time = 0f;
                             upgradeComp.UpgradeTower = true;
+                            ref var timerComp = ref _timerPool.Add(_world.NewEntity());
+                            timerComp.Entity = _state.TowersEntity[upgradeComp.TowerIndex];
+                            timerComp.TimeToUpgrade = 0;
                         }
                         break;
                     }
@@ -81,6 +86,9 @@ namespace Client
                             ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                             upgradeComp.Time = 0f;
                             upgradeComp.UpgradeTower = false;
+                            ref var timerComp = ref _timerPool.Add(_world.NewEntity());
+                            timerComp.Entity = _state.TowersEntity[upgradeComp.TowerIndex];
+                            timerComp.TimeToUpgrade = 0;
                         }
                         break;
                     }
@@ -101,10 +109,7 @@ namespace Client
                 case "UpgradePoint":
                     {
                         _upgradeCanvasPool.Get(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]).timerResources.ResourcesDrop(0);
-                        //if (_state.DefenseTowerStorage.GetLevelByID(_state.DefenseTowers[other.GetComponent<UpgradePointMB>().TowerIndex]) >= 1)
-                        //{
-                        //    _viewPool.Get(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
-                        //}
+                        
                         if (_upgradePool.Has(_state.EntityPlayer))
                         {
                             _upgradePool.Del(_state.EntityPlayer);
