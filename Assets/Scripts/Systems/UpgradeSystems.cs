@@ -14,7 +14,7 @@ namespace Client {
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
-
+        readonly EcsPoolInject<CanvasUpgradeComponent> _canvasFilter = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
 
         public void Run (EcsSystems systems) {
@@ -62,23 +62,36 @@ namespace Client {
                     filterComp.DelayTime += Time.deltaTime * 2f;
                     if (filterComp.UpgradeTower)
                     {
-                        if (filterComp.TowerIndex == 0)
-                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
-                        else if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
-                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
+                        if (filterComp.TowerIndex == 0 && _state.Value.CoinCount != 0)
+                        {
+                            //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime / 2);
+                            _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(filterComp.DelayTime / 2);
+                        }  
+                        else if (_state.Value.RockCount >= 1)
+                        {
+                            //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime / 2);
+                            _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(filterComp.DelayTime / 2);
+                        }
+                            
                     }
-                    else if (!filterComp.UpgradeTower)
+                    else if (!filterComp.UpgradeTower && _state.Value.CoinCount != 0)
                         _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
                     return;
                 }
                 if (filterComp.UpgradeTower)
                 {
                     if (filterComp.TowerIndex == 0 && _state.Value.CoinCount != 0)
-                        _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
-                    else if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1 && _state.Value.RockCount != 0)
-                        _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
+                    {
+                        //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
+                        _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(filterComp.Time / 2f);
+                    }
+                    else if (_state.Value.RockCount >= 1)
+                    {
+                        //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
+                        _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(filterComp.DelayTime / 2);
+                    }  
                 }
-                else if (!filterComp.UpgradeTower)
+                else if (!filterComp.UpgradeTower && _state.Value.CoinCount > 0)
                     _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
 
                 if (filterComp.Time == 0)
@@ -94,16 +107,16 @@ namespace Client {
                                 _state.Value.CoinCount--;
                                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
-                                _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                                _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(0);
                             }
                             else
                             {
                                 GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
                                 _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                                 _state.Value.RockCount--;
+                                _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(0);
                                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
-                                if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
-                                    _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                                
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                                 RelocateCoinInResourceHolder();
                             }
@@ -130,8 +143,9 @@ namespace Client {
                     }
                     else
                     {
-                        _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                        //_viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                         _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                        _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).timerResources.ResourcesDrop(0);
                         _filter.Pools.Inc1.Del(entity);
                     }
                 }

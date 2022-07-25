@@ -93,11 +93,11 @@ namespace Client
                     levelPop.TimeOut = 2f;
                     levelPop.LevelPopUp.SetActive(true);
 
-                    viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
+                    /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
                     viewComp.ResourcesTimer.SetActive(true);
-
+                    */
                     viewComp.DamagePopups = new List<GameObject>();
                     for (int y = 0; y < viewComp.Transform.GetChild(1).transform.childCount; y++)
                     {
@@ -175,11 +175,11 @@ namespace Client
                     levelPop.TimeOut = 2f;
                     levelPop.LevelPopUp.SetActive(true);
 
-                    viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
+                    /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
                     viewComp.ResourcesTimer.SetActive(true);
-
+                    */
 
                     viewComp.DamagePopups = new List<GameObject>();
                     for (int y = 0; y < viewComp.GameObject.transform.GetChild(6).transform.childCount; y++)

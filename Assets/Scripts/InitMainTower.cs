@@ -55,12 +55,18 @@ namespace Client
             var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
             var upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0.1f, -2.5f), Quaternion.identity); // to do del magic number
             var upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
+            var resourcesTimer = upgradePoint.transform.GetChild(3).GetComponent<TimerResourcesMB>();
+            upgradeComponent.timerResources = resourcesTimer;
             upgradeComponent.point = upgradePoint.gameObject;
             upgradeComponent.upgrade = upgradeInfo;
             upgradeComponent.Index = 0;
             upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
             upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("1tower"), _state.Value.DefenseTowerStorage.GetImageByID("1tower"));
             upgradeInfo.SetMaxAmount(_state.Value.DefenseTowerStorage.GetUpgradeByID("1tower"));
+
+            resourcesTimer.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            resourcesTimer.ResourcesDrop(0);
+            
 
             var upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
             upgradePointMB.TowerIndex = 0;
@@ -89,10 +95,10 @@ namespace Client
             viewComponent.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.LevelPopup.SetActive(false);
 
-            viewComponent.ResourcesTimer = mainTower.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
+            /*viewComponent.ResourcesTimer = mainTower.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
             viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
             viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
-            viewComponent.ResourcesTimer.SetActive(true);
+            viewComponent.ResourcesTimer.SetActive(true);*/
 
             viewComponent.DamagePopups = new List<GameObject>();
             for (int y = 0; y < viewComponent.Transform.GetChild(1).transform.childCount; y++)
@@ -142,8 +148,14 @@ namespace Client
 
                     upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
                     upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
+                    var resourcesTimerTower = upgradePoint.transform.GetChild(3).GetComponent<TimerResourcesMB>();
+                    upgradeTowerComponent.timerResources = resourcesTimerTower;
                     upgradeTowerComponent.point = upgradePoint.gameObject;
                     upgradeTowerComponent.upgrade = upgradeInfo;
+
+                    resourcesTimerTower.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    resourcesTimerTower.ResourcesDrop(0);
+                    
 
                     upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
                     upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID), _state.Value.DefenseTowerStorage.GetImageByID(towerID));
