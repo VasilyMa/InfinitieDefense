@@ -142,8 +142,11 @@ namespace Client
             {
                 case "UpgradePoint":
                     {
-                        if(_state.DefenseTowerStorage.GetLevelByID(_state.DefenseTowers[other.GetComponent<UpgradePointMB>().TowerIndex]) >= 1)
-                            _viewPool.Get(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                        _upgradeCanvasPool.Get(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]).timerResources.ResourcesDrop(0);
+                        //if (_state.DefenseTowerStorage.GetLevelByID(_state.DefenseTowers[other.GetComponent<UpgradePointMB>().TowerIndex]) >= 1)
+                        //{
+                        //    _viewPool.Get(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                        //}
                         if (_upgradePool.Has(_state.EntityPlayer))
                         {
                             _upgradePool.Del(_state.EntityPlayer);
