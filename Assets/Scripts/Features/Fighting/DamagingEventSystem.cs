@@ -20,6 +20,7 @@ namespace Client
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<DamagePopupEvent> _popupEvent = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationPool = default;
+
         public void Run (EcsSystems systems)
         {
             foreach (var entity in _damagingEventFilter.Value)
@@ -77,6 +78,7 @@ namespace Client
                     ref var vibrationEvent = ref _vibrationPool.Value.Add(entity);
                     vibrationEvent.Vibration = VibrationEvent.VibrationType.MediumImpact;
                 }
+
 
                 if (_targetablePool.Value.Has(damagingEventComponent.TargetEntity))
                 {
