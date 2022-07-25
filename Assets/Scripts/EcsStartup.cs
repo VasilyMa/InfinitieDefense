@@ -40,7 +40,7 @@ namespace Client
                 .Add(new WinSystem())
                 //.Add(new CheckLoseSystem())
                 .Add(new LoseSystem())
-                
+                .Add(new InitInterfaceSystem())
                 .Add(new InitMainTower())
 
                 .Add(new StartWaveSystem())
@@ -49,7 +49,7 @@ namespace Client
                 .Add(new InitCamera())
                 .Add(new PlayerInitSystem())
                 .Add(new OreInitSystem())
-                .Add(new InitInterfaceSystem())
+                
                 //.Add(new RadiusInitSystem())
 
                 .Add(new HPRegenerationSystem())

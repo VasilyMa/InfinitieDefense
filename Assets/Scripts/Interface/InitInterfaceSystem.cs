@@ -12,6 +12,7 @@ namespace Client {
             state.EntityInterface = entity;
 
             ref var interfaceComp = ref world.GetPool<InterfaceComponent>().Add(entity);
+            
             interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
             interfaceComp.winPanel = GameObject.Find("WinPanel");
             interfaceComp.winPanel.SetActive(false);
@@ -32,6 +33,14 @@ namespace Client {
             interfaceComp.waveCounter.GetComponent<WaveCounterMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             var resourcePanel = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            }
+            //tutorial there
+            ref var tutorialComp = ref world.GetPool<TutorialComponent>().Add(entity);
+            tutorialComp.Tutorial = GameObject.Find("Tutorial");
+            tutorialComp.TextHolder = GameObject.Find("TextHolder");
+            tutorialComp.HandObject = GameObject.Find("Hand");
+            tutorialComp.HoleObject = GameObject.Find("Hole");
+            tutorialComp.TutorialStage = state.Saves.TutorialStage;
+            tutorialComp.Animator = tutorialComp.Tutorial.GetComponent<Animator>();
+        }
     }
 }
