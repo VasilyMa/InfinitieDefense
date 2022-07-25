@@ -70,6 +70,8 @@ namespace Client
                 projectileComponent.SupportPosition = supportPosition;
                 projectileComponent.TargetEntity = targetableComponent.TargetEntity;
                 projectileComponent.TargetObject = targetableComponent.TargetObject;
+                projectileComponent.IsExploding = true;
+                projectileComponent.ExplosionValue = ExplosionEvent.Size.Medium;
 
                 cannonBallDamageComponent.Value = damageComponent.Value;
 

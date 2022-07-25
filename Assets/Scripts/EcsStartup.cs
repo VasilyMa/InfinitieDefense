@@ -17,6 +17,7 @@ namespace Client
         [SerializeField] private PlayerStorage _playerStorage;
         [SerializeField] private DefenseTowerStorage _defenseTowerStorage;
         [SerializeField] private EnemyConfig _enemyConfig;
+        [SerializeField] private ExplosionStorage _explosionStorage;
         [SerializeField] private int _towerCount;
         private WaveStorage _waveStorage;
         EcsSystems _systems;
@@ -30,7 +31,7 @@ namespace Client
             _waveStorage = gameObject.GetComponent<WaveStorage>();
             _world = new EcsWorld();
             _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _dropableItemStorage,
-            _playerStorage, _defenseTowerStorage, _towerCount, _waveStorage, _enemyConfig);
+            _playerStorage, _defenseTowerStorage, _towerCount, _waveStorage, _enemyConfig, _explosionStorage);
             _systems = new EcsSystems (_world, _gameState);
             _systemsFixed = new EcsSystems(_world, _gameState);
             _delHereSystems = new EcsSystems(_world, _gameState);
@@ -65,6 +66,7 @@ namespace Client
                 .Add(new OnOffUnitAttack())
 
                 .Add(new ProjectileFlyingSystem())
+                .Add(new ExplosionEventSystem())
 
                 .Add(new TargetingSystem())
                 .Add(new PlayerTargetingSystem())

@@ -26,6 +26,8 @@ namespace Client
                 ref var viewComponent = ref _viewPool.Value.Get(playerEntity);
                 ref var playerWeaponComponent = ref _playerWeaponPool.Value.Get(playerEntity);
 
+                // to do ay clear AllEnemyInDamageZone if weapon was changed
+
                 switch (pickUpNewWeaponEvent.WeaponType)
                 {
                     case DropableItem.ItemType.Sword:
