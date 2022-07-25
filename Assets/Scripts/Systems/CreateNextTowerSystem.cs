@@ -23,6 +23,8 @@ namespace Client
         readonly EcsFilterInject<Inc<CircleComponent>> _circleFilter = default;
         readonly EcsPoolInject<NewTowerCircleEvent> _circlePool = default;
         readonly EcsPoolInject<LevelUpEvent> _levelUpPool = default;
+        readonly EcsFilterInject<Inc<UpgradeTimerEvent>> _timerPool = default;
+        readonly EcsPoolInject<UpgradeComponent> _upgradePool = default;
 
         private string Model;
 
@@ -91,8 +93,9 @@ namespace Client
                     levelPop.Text = levelPop.LevelPopUp.GetComponent<LevelPopupMB>().GetText();
                     levelPop.target = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 10f, viewComp.GameObject.transform.position.z);
                     levelPop.TimeOut = 2f;
-                    levelPop.LevelPopUp.SetActive(true);
-
+                    levelPop.LevelPopUp.SetActive(true); 
+                    
+                    
                     /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
@@ -108,7 +111,22 @@ namespace Client
 
                     targetWeightComponent.Value = 0;
 
+
+
+
                     //todo
+                    if (_state.Value.CoinCount > 0)
+                    {
+                        foreach (var item in _timerPool.Value)
+                        {
+                            ref var timerComp = ref _timerPool.Pools.Inc1.Get(item);
+                            timerComp.TimeToUpgrade = 0f;
+                        }
+                    }
+                    ref var upgradeComp = ref _upgradePool.Value.Get(_state.Value.EntityPlayer);
+                    upgradeComp.DelayTime = 0f;
+                    upgradeComp.Time = 0f;
+
                     _circlePool.Value.Add(_world.Value.NewEntity());
                 }
                 else // defence towers
@@ -190,6 +208,19 @@ namespace Client
                     }
 
                     damageComponent.Value = _state.Value.DefenseTowerStorage.GetDamageByID(_state.Value.DefenseTowers[towerIndex]);
+                    if (_state.Value.RockCount > 0)
+                    {
+                        foreach (var item in _timerPool.Value)
+                        {
+                            ref var timerComp = ref _timerPool.Pools.Inc1.Get(item);
+                            timerComp.Entity = _state.Value.TowersEntity[towerIndex];
+                            timerComp.TimeToUpgrade = 0f;
+                        }
+                        ref var upgradeComp = ref _upgradePool.Value.Get(_state.Value.EntityPlayer);
+                        upgradeComp.DelayTime = 0f;
+                        upgradeComp.Time = 0f;
+                    }
+                    
 
                     viewComp.EcsInfoMB = viewComp.GameObject.GetComponent<EcsInfoMB>();
                     viewComp.EcsInfoMB.Init(_world);

@@ -25,12 +25,13 @@ namespace Client
         readonly EcsPoolInject<Resurrectable> _resurrectablePool = default;
         readonly EcsPoolInject<UpgradePlayerPointComponent> _upgradePlayerPointPool = default;
         readonly EcsPoolInject<PlayerWeapon> _playerWeaponPool = default;
+        readonly EcsPoolInject<CanvasUpgradeComponent> _upgradeCanvasPool = default;
         private Vector3 _spawnPoint = new Vector3(0, 0, -10);
 
         public void Init (EcsSystems systems) 
         {
             var playerEntity = _playerPool.Value.GetWorld().NewEntity();
-
+            //var upgradeEntity = _upgradePlayerPointPool.Value.GetWorld().NewEntity();
             _state.Value.EntityPlayer = playerEntity;
 
             _unitPool.Value.Add(playerEntity);
@@ -45,8 +46,10 @@ namespace Client
             ref var regenerationComponent = ref _regenerationPool.Value.Add(playerEntity);
             ref var contextToolComponent = ref _contextToolPool.Value.Add(playerEntity);
             ref var resurrectableComponent = ref _resurrectablePool.Value.Add(playerEntity);
-            ref var upgradePlayerPointComponent= ref _upgradePlayerPointPool.Value.Add(_world.Value.NewEntity());
+            ref var upgradePlayerPointComponent = ref _upgradePlayerPointPool.Value.Add(playerEntity);
+            ref var upgradeComponent = ref _upgradeCanvasPool.Value.Add(playerEntity);
             var PlayerGo = GameObject.Instantiate(_state.Value.PlayerStorage.GetPlayerByID(_state.Value.CurrentPlayerID), _spawnPoint, Quaternion.identity);
+
 
             player.Transform = PlayerGo.transform;
             //player.playerMB = PlayerGo.GetComponent<PlayerMB>();
@@ -66,6 +69,10 @@ namespace Client
             upgradePlayerPointComponent.Point = GameObject.FindGameObjectWithTag("UpgradePlayerPoint");
             upgradePlayerPointComponent.Point.GetComponent<PlayerUpgradePointMB>().UpdateLevelInfo(_state.Value.PlayerStorage.GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
             upgradePlayerPointComponent.Point.GetComponent<PlayerUpgradePointMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            upgradeComponent.timerResources = upgradePlayerPointComponent.Point.transform.GetChild(2).GetComponent<TimerResourcesMB>();
+            upgradeComponent.timerResources.ResourcesDrop(0);
+            upgradeComponent.timerResources.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            
 
             viewComponent.GameObject = PlayerGo;
             viewComponent.Rigidbody = PlayerGo.GetComponent<Rigidbody>();

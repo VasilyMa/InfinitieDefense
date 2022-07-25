@@ -88,6 +88,7 @@ namespace Client
                 .Add(new CameraFollowSystem())
 
                 .Add(new UpgradeSystems())
+                .Add(new UpgradeTimerSystem())
                 .Add(new CreateNextTowerSystem())
                 .Add(new CreateNewPlayer())
                 .Add(new CreateDefenders())
@@ -116,7 +117,6 @@ namespace Client
                 .Add(new CoinPickupSystem())
                 .Add(new NewTowersCircleSystem())
                 .Add(new SavesSystem())
-
                 .Add(new VibrationEventSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
