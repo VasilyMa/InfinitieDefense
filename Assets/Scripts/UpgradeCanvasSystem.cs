@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace Client {
     sealed class UpgradeCanvasSystem : IEcsRunSystem {
         readonly EcsSharedInject<GameState> _state;
-        readonly EcsFilterInject<Inc<CanvasUpgradeComponent>> _filter = default;
+        readonly EcsFilterInject<Inc<CanvasUpgradeComponent>, Exc<Player>> _filter = default;
         public void Run (EcsSystems systems) {
 
             foreach (var entity in _filter.Value)

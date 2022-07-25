@@ -9,6 +9,7 @@ namespace Client {
         readonly EcsPoolInject<CanvasUpgradeComponent> _canvasPool = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
         public void Run (EcsSystems systems) {
+            
             foreach (var entity in _filterTimer.Value)
             {
                 ref var interfaceComp = ref _interfacePool.Value.Get(_state.Value.EntityInterface);
@@ -17,16 +18,21 @@ namespace Client {
                 {
                     if (timerComp.TimeToUpgrade < 4f)
                     {
-                        _canvasPool.Value.Get(timerComp.Entity).timerResources.ResourcesDrop(timerComp.TimeToUpgrade/2);
+                        _canvasPool.Value.Get(timerComp.Entity).timerResources.ResourcesDrop(timerComp.TimeToUpgrade / 2);
                         timerComp.TimeToUpgrade += Time.deltaTime * 2f;
                     }
                     else if (timerComp.TimeToUpgrade >= 4f)
                     {
                         _canvasPool.Value.Get(timerComp.Entity).timerResources.ResourcesDrop(0);
-                        _filterTimer.Pools.Inc1.Del(entity);
                     }
                 }
+                else
+                {
+                    timerComp.TimeToUpgrade = 0f;
+                    _canvasPool.Value.Get(timerComp.Entity).timerResources.ResourcesDrop(0);
+                }
             }
+
         }
     }
 }

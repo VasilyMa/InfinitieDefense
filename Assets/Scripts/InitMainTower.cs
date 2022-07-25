@@ -56,6 +56,8 @@ namespace Client
             var upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0.1f, -2.5f), Quaternion.identity); // to do del magic number
             var upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
             var resourcesTimer = upgradePoint.transform.GetChild(3).GetComponent<TimerResourcesMB>();
+
+
             upgradeComponent.timerResources = resourcesTimer;
             upgradeComponent.point = upgradePoint.gameObject;
             upgradeComponent.upgrade = upgradeInfo;

@@ -19,6 +19,7 @@ namespace Client
         private EcsPool<CoinPickupEvent> _coinPickupEventPool;
         private EcsPool<CanvasUpgradeComponent> _upgradeCanvasPool;
         private EcsPool<UpgradeTimerEvent> _timerPool;
+        private EcsPool<UpgradePlayerPointComponent> _playerUpgradePool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -33,6 +34,7 @@ namespace Client
             _activateContextToolPool = world.GetPool<ActivateContextToolEvent>();
             _coinPickupEventPool = world.GetPool<CoinPickupEvent>();
             _timerPool = world.GetPool<UpgradeTimerEvent>();
+            _playerUpgradePool = world.GetPool<UpgradePlayerPointComponent>();
             _world = world;
         }
 
@@ -67,27 +69,43 @@ namespace Client
                     }
                 case "UpgradePoint":
                     {
-                        if (!_upgradePool.Has(_state.EntityPlayer))
+                        if (other.GetComponent<UpgradePointMB>().TowerIndex == 0)
                         {
-                            ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
-                            upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
-                            upgradeComp.Time = 0f;
-                            upgradeComp.UpgradeTower = true;
-                            ref var timerComp = ref _timerPool.Add(_world.NewEntity());
-                            timerComp.Entity = _state.TowersEntity[upgradeComp.TowerIndex];
-                            timerComp.TimeToUpgrade = 0;
+                            if (!_upgradePool.Has(_state.EntityPlayer) && _state.CoinCount > 0)
+                            {
+                                ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
+                                upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
+                                upgradeComp.Time = 0f;
+                                upgradeComp.UpgradeTower = true;
+                                ref var timerComp = ref _timerPool.Add(_world.NewEntity());
+                                timerComp.Entity = _state.TowersEntity[upgradeComp.TowerIndex];
+                                timerComp.TimeToUpgrade = 0;
+                            }
+                        }
+                        else if (other.GetComponent<UpgradePointMB>().TowerIndex > 0)
+                        {
+                            if (!_upgradePool.Has(_state.EntityPlayer) && _state.RockCount > 0)
+                            {
+                                ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
+                                upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
+                                upgradeComp.Time = 0f;
+                                upgradeComp.UpgradeTower = true;
+                                ref var timerComp = ref _timerPool.Add(_world.NewEntity());
+                                timerComp.Entity = _state.TowersEntity[upgradeComp.TowerIndex];
+                                timerComp.TimeToUpgrade = 0;
+                            }
                         }
                         break;
                     }
                 case "UpgradePlayerPoint":
                     {
-                        if (!_upgradePool.Has(_state.EntityPlayer))
+                        if (!_upgradePool.Has(_state.EntityPlayer) && _state.CoinCount > 0)
                         {
                             ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                             upgradeComp.Time = 0f;
                             upgradeComp.UpgradeTower = false;
                             ref var timerComp = ref _timerPool.Add(_world.NewEntity());
-                            timerComp.Entity = _state.TowersEntity[upgradeComp.TowerIndex];
+                            timerComp.Entity = _state.EntityPlayer;
                             timerComp.TimeToUpgrade = 0;
                         }
                         break;
@@ -109,7 +127,11 @@ namespace Client
                 case "UpgradePoint":
                     {
                         _upgradeCanvasPool.Get(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]).timerResources.ResourcesDrop(0);
-                        
+                        var filter = _world.Filter<UpgradeTimerEvent>().End();
+                        foreach (var entity in filter)
+                        {
+                            _timerPool.Del(entity);
+                        }
                         if (_upgradePool.Has(_state.EntityPlayer))
                         {
                             _upgradePool.Del(_state.EntityPlayer);
@@ -118,8 +140,12 @@ namespace Client
                     }
                 case "UpgradePlayerPoint":
                     {
-                        if(_viewPool.Has(_state.EntityPlayer))
-                            _viewPool.Get(_state.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                        _upgradeCanvasPool.Get(_state.EntityPlayer).timerResources.ResourcesDrop(0);
+                        var filter = _world.Filter<UpgradeTimerEvent>().End();
+                        foreach (var entity in filter)
+                        {
+                            _timerPool.Del(entity);
+                        }
                         if (_upgradePool.Has(_state.EntityPlayer))
                         {
                             _upgradePool.Del(_state.EntityPlayer);

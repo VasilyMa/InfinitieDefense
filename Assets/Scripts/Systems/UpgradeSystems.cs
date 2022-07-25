@@ -16,7 +16,7 @@ namespace Client {
         readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _canvasFilter = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
-
+        
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -27,7 +27,6 @@ namespace Client {
                 ref var viewComp = ref _viewPool.Value.Get(entity);
                 if (intComp._joystick.Horizontal == 0 && intComp._joystick.Vertical == 0)
                 {
-
                     int neededResource = 0;
                     if (filterComp.UpgradeTower) //если апгрейдим башни
                     {
@@ -117,10 +116,15 @@ namespace Client {
                         }
                     }
                     filterComp.Time += Time.deltaTime * 2f;
-                    if (filterComp.Time >= 4f)
+                    if (filterComp.Time >= 1f)
                     {
                         filterComp.Time = 0f;
                     }
+                }
+                else
+                {
+                    filterComp.DelayTime = 0f;
+                    filterComp.Time = 0f;
                 }
             }
             void RelocateCoinInResourceHolder()

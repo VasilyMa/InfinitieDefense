@@ -14,6 +14,7 @@ namespace Client
         public int EntityInterface;
         public int EntityPlayer;
         public int EntityCamera;
+        public int EntityPlayerUpgradePoint;
         public TowerStorage TowerStorage;
         public InterfaceStorage InterfaceStorage;
         public DropableItemStorage DropableItemStorage;
