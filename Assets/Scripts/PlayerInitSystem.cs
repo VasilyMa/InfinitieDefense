@@ -166,7 +166,7 @@ namespace Client
                 _state.Value.CoinTransformList.Add(coinTransform);
             }
 
-            SetRangeSetup(playerEntity);
+            SetMeleeSetup(playerEntity);
         }
 
         private void SetMeleeSetup(int playerEntity)

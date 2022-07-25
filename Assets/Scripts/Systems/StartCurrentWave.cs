@@ -131,9 +131,13 @@ namespace Client {
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
                                         unitViewComponent.Animator.SetBool("Melee", true);
 
-                                        ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
-                                        dropableItemComponent.Item = DropableItem.ItemType.Sword;
-
+                                        // 10% chanse on drop weapon
+                                        if (Random.Range(1, 10) > 5)
+                                        {
+                                            ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
+                                            dropableItemComponent.Item = DropableItem.ItemType.Sword;
+                                        }
+                                        
                                         unitDamageComponent.Value = 10f;
 
                                         unitHealthComponent.MaxValue = 20;
@@ -146,8 +150,12 @@ namespace Client {
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
                                         unitViewComponent.Animator.SetBool("Range", true);
 
-                                        ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
-                                        dropableItemComponent.Item = DropableItem.ItemType.Bow;
+                                        // 10% chanse on drop weapon
+                                        if (Random.Range(1, 10) > 5)
+                                        {
+                                            ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
+                                            dropableItemComponent.Item = DropableItem.ItemType.Bow;
+                                        }
 
                                         unitDamageComponent.Value = 7f;
 
