@@ -27,7 +27,7 @@ namespace Client {
                 filterComp.CoinTransform.SetParent(playerComp.ResHolderTransform);
                 moveToBagComp.StartPosition = moveToBagComp.Transform.localPosition;
                 moveToBagComp.TargetPosition = new Vector3(0, _state.Value.CoinCount * 0.3f + _state.Value.RockCount * 0.6f, 0);
-                //_state.Value.CoinCount++;
+                _state.Value.CoinCount++;
                 moveToBagComp.Coin = true;
 
                 // _state.Value.CoinTransformList.Add(filterComp.CoinTransform);

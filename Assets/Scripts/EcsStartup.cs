@@ -107,7 +107,7 @@ namespace Client
                 .Add(new UpgradeCanvasSystem())
                 .Add(new CanvasShipPointerSystem())
                 .Add(new CanvasPointerSystem())
-
+                .Add(new CoinPickupSystem())
                 .Add(new NewTowersCircleSystem())
                 .Add(new SavesSystem())
 

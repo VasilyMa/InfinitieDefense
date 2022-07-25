@@ -25,6 +25,7 @@ namespace Client
         private EcsPool<InFightTag> _fightPool;
         private EcsPool<DeadTag> _deadPool;
         private EcsPool<ActivateContextToolEvent> _activateContextToolPool;
+        private EcsPool<CoinPickupEvent> _coinPickupEventPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -46,6 +47,7 @@ namespace Client
             _deadPool = world.GetPool<DeadTag>();
             _upgradeCanvasPool = world.GetPool<CanvasUpgradeComponent>();
             _activateContextToolPool = world.GetPool<ActivateContextToolEvent>();
+            _coinPickupEventPool = world.GetPool<CoinPickupEvent>();
             _world = world;
         }
 
@@ -60,8 +62,11 @@ namespace Client
                             break;
                         }
                         other.gameObject.tag = "Untagged";
-                        ref var coinComp = ref _coinPool.Add(_world.NewEntity());
-                        coinComp.CoinTransform = other.transform;
+                        ref var coinComp = ref _coinPickupEventPool.Add(_world.NewEntity());
+                        coinComp.CoinObject = other.gameObject;
+                        coinComp.Speed = 30f;
+                        //ref var coinComp = ref _coinPool.Add(_world.NewEntity());
+                        //coinComp.CoinTransform = other.transform;
                         break;
                     }
                 case "Stone":
@@ -77,7 +82,7 @@ namespace Client
                     }
                 case "UpgradePoint":
                     {
-                        if (!_upgradePool.Has(_state.EntityPlayer) && _state.CoinCount != 0 ||_state.RockCount != 0)
+                        if (!_upgradePool.Has(_state.EntityPlayer))
                         {
                             ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                             upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
@@ -88,7 +93,7 @@ namespace Client
                     }
                 case "UpgradePlayerPoint":
                     {
-                        if (!_upgradePool.Has(_state.EntityPlayer) && _state.CoinCount != 0)
+                        if (!_upgradePool.Has(_state.EntityPlayer))
                         {
                             ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                             upgradeComp.Time = 0f;
@@ -137,7 +142,7 @@ namespace Client
             {
                 case "UpgradePoint":
                     {
-                        if (_viewPool.Has(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]))
+                        if(_state.DefenseTowerStorage.GetLevelByID(_state.DefenseTowers[other.GetComponent<UpgradePointMB>().TowerIndex]) >= 1)
                             _viewPool.Get(_state.TowersEntity[other.GetComponent<UpgradePointMB>().TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                         if (_upgradePool.Has(_state.EntityPlayer))
                         {
