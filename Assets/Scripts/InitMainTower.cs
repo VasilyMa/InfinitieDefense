@@ -77,11 +77,23 @@ namespace Client
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
 
+
+
             ref var targetWeightComponent = ref _world.Value.GetPool<TargetWeightComponent>().Add(mainTowerEntity);
 
-            viewComponent.Level = mainTower.GetComponent<LevelMB>();
-            viewComponent.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(towerID));
-            viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            //viewComponent.Level = mainTower.GetComponent<LevelMB>();
+            //viewComponent.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(towerID));
+            //viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+            viewComponent.LevelPopup = mainTower.transform.GetChild(0).transform.GetChild(2).transform.gameObject;
+            viewComponent.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.LevelPopup.SetActive(false);
+
+            viewComponent.ResourcesTimer = mainTower.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
+            viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+            viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.ResourcesTimer.SetActive(true);
+
             viewComponent.DamagePopups = new List<GameObject>();
             for (int y = 0; y < viewComponent.Transform.GetChild(1).transform.childCount; y++)
             {

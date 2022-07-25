@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Leopotam.EcsLite;
-using Leopotam.EcsLite.Di;
-
-namespace Client
-{
-    public class LevelMB : MonoBehaviour
+namespace Client {
+    public class TimerResourcesMB : MonoBehaviour
     {
         private EcsWorld _world;
         private GameState _state;
-        [SerializeField] private Text _textAmount;
+        [SerializeField] private Image _image;
         [SerializeField] private GameObject _levelObject;
         private string level;
         private EcsPool<CameraComponent> _cameraPool = null;
@@ -21,14 +18,10 @@ namespace Client
             _state = state;
             _cameraPool = _world.GetPool<CameraComponent>();
         }
-        public void UpdateLevel(int currentLevel)
+        public void ResourcesDrop(float resourcesTimer)
         {
-            if(currentLevel <= 0)
-               _levelObject.SetActive(false);
-            else
-                _levelObject.SetActive(true);
-            level = $"Level {currentLevel}";
-            _textAmount.text = level;
+            _image.fillAmount = resourcesTimer / 2;
+            //_image.fillAmount = Mathf.Lerp(_image.fillAmount, resourcesTimer, Time.deltaTime * 5);
         }
         private void CameraFollow()
         {
@@ -38,7 +31,8 @@ namespace Client
 
         private void Update()
         {
-            //CameraFollow();
+            CameraFollow();
         }
     }
 }
+

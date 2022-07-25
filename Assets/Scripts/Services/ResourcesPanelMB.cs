@@ -22,7 +22,7 @@ namespace Client
         }
         public void UpdateGold()
         {
-            _goldAmount.text = ($"{_state.CoinCount}/0");
+            _goldAmount.text = ($"{_state.CoinCount}");
         }
     }
 }

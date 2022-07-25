@@ -91,6 +91,7 @@ namespace Client
                 .Add(new CreateNextTowerSystem())
                 .Add(new CreateNewPlayer())
                 .Add(new CreateDefenders())
+                .Add(new LevelPopupSystem())
 
                 .Add(new DamagingEventSystem())
                 .Add(new TargetingEventSystem())
@@ -112,7 +113,7 @@ namespace Client
                 .Add(new UpgradeCanvasSystem())
                 .Add(new CanvasShipPointerSystem())
                 .Add(new CanvasPointerSystem())
-
+                .Add(new CoinPickupSystem())
                 .Add(new NewTowersCircleSystem())
                 .Add(new SavesSystem())
 

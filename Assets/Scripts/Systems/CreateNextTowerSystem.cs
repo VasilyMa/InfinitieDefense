@@ -22,6 +22,7 @@ namespace Client
         readonly EcsPoolInject<DeadTag> _deadPool = default;
         readonly EcsFilterInject<Inc<CircleComponent>> _circleFilter = default;
         readonly EcsPoolInject<NewTowerCircleEvent> _circlePool = default;
+        readonly EcsPoolInject<LevelUpEvent> _levelUpPool = default;
 
         private string Model;
 
@@ -76,9 +77,27 @@ namespace Client
                     viewComp.Healthbar.SetMaxHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.SetHealth(_state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
-                    viewComp.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
-                    viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    //viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
+                    //viewComp.Level.UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    //viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+                    viewComp.LevelPopup = viewComp.GameObject.transform.GetChild(0).transform.GetChild(2).transform.gameObject;
+                    viewComp.LevelPopup.GetComponent<LevelPopupMB>().UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    ref var levelPop = ref _levelUpPool.Value.Add(_world.Value.NewEntity());
+                    levelPop.LevelPopUp = viewComp.LevelPopup;
+                    levelPop.LevelPopUp.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
+                    levelPop.LevelPopUp.GetComponent<LevelPopupMB>().UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    levelPop.Text = levelPop.LevelPopUp.GetComponent<LevelPopupMB>().GetText();
+                    levelPop.target = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 10f, viewComp.GameObject.transform.position.z);
+                    levelPop.TimeOut = 2f;
+                    levelPop.LevelPopUp.SetActive(true);
+
+                    viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
+                    viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                    viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    viewComp.ResourcesTimer.SetActive(true);
+
                     viewComp.DamagePopups = new List<GameObject>();
                     for (int y = 0; y < viewComp.Transform.GetChild(1).transform.childCount; y++)
                     {
@@ -140,9 +159,27 @@ namespace Client
                     viewComp.Healthbar.SetHealth(_state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]));
                     viewComp.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
 
-                    viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
-                    viewComp.Level.UpdateLevel(_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
-                    viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    //viewComp.Level = viewComp.GameObject.GetComponent<LevelMB>();
+                    //viewComp.Level.UpdateLevel(_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    //viewComp.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+                    viewComp.LevelPopup = viewComp.GameObject.transform.GetChild(0).transform.GetChild(2).transform.gameObject;
+                    viewComp.LevelPopup.GetComponent<LevelPopupMB>().UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    viewComp.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    ref var levelPop = ref _levelUpPool.Value.Add(_world.Value.NewEntity());
+                    levelPop.LevelPopUp = viewComp.LevelPopup;
+                    levelPop.LevelPopUp.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
+                    levelPop.LevelPopUp.GetComponent<LevelPopupMB>().UpdateLevel(_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]));
+                    levelPop.Text = levelPop.LevelPopUp.GetComponent<LevelPopupMB>().GetText();
+                    levelPop.target = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 10f, viewComp.GameObject.transform.position.z);
+                    levelPop.TimeOut = 2f;
+                    levelPop.LevelPopUp.SetActive(true);
+
+                    viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
+                    viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                    viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+                    viewComp.ResourcesTimer.SetActive(true);
+
 
                     viewComp.DamagePopups = new List<GameObject>();
                     for (int y = 0; y < viewComp.GameObject.transform.GetChild(6).transform.childCount; y++)

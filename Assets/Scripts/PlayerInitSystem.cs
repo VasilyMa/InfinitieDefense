@@ -78,8 +78,8 @@ namespace Client
             viewComponent.Healthbar.SetHealth(_state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));
             viewComponent.Healthbar.ToggleSwitcher();
             viewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            viewComponent.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
-            viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            //viewComponent.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
+            //viewComponent.Level.Init(systems.GetWorld(), systems.GetShared<GameState>());
             viewComponent.EcsInfoMB = PlayerGo.GetComponent<EcsInfoMB>();
             viewComponent.EcsInfoMB.Init(_world);
             viewComponent.EcsInfoMB.SetEntity(playerEntity);
@@ -97,6 +97,15 @@ namespace Client
             viewComponent.DropItemParticleSystem = PlayerGo.transform.GetChild(3).transform.GetChild(2).GetComponent<ParticleSystem>();
             viewComponent.Regeneration = PlayerGo.transform.GetChild(3).transform.GetChild(3).GetComponent<ParticleSystem>();
             viewComponent.WayTrack = PlayerGo.transform.GetChild(3).transform.GetChild(4).GetComponent<ParticleSystem>();
+
+            viewComponent.LevelPopup = PlayerGo.transform.GetChild(2).transform.GetChild(3).transform.gameObject;
+            viewComponent.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.LevelPopup.SetActive(false);
+
+            viewComponent.ResourcesTimer = PlayerGo.transform.GetChild(2).transform.GetChild(4).transform.gameObject;
+            viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+            viewComponent.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            viewComponent.ResourcesTimer.SetActive(true);
             viewComponent.DamagePopups = new List<GameObject>();
 
             viewComponent.BaseLayer = viewComponent.GameObject.layer;

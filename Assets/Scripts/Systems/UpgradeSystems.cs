@@ -57,11 +57,29 @@ namespace Client {
                     neededResource = _state.Value.CoinCount;
                 }
 
-                if (filterComp.DelayTime < 2f)
+                if (filterComp.DelayTime < 4f)
                 {
                     filterComp.DelayTime += Time.deltaTime * 2f;
+                    if (filterComp.UpgradeTower)
+                    {
+                        if (filterComp.TowerIndex == 0)
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
+                        else if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
+                            _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
+                    }
+                    else if (!filterComp.UpgradeTower)
+                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.DelayTime/2);
                     return;
                 }
+                if (filterComp.UpgradeTower)
+                {
+                    if (filterComp.TowerIndex == 0 && _state.Value.CoinCount != 0)
+                        _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
+                    else if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1 && _state.Value.RockCount != 0)
+                        _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
+                }
+                else if (!filterComp.UpgradeTower)
+                    _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(filterComp.Time / 2f);
 
                 if (filterComp.Time == 0)
                 {
@@ -71,11 +89,12 @@ namespace Client {
                         {
                             if (filterComp.TowerIndex == 0)
                             {
-                                GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
-                                _state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
+                                //GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
+                                //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                                 _state.Value.CoinCount--;
                                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
+                                _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                             }
                             else
                             {
@@ -83,6 +102,8 @@ namespace Client {
                                 _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                                 _state.Value.RockCount--;
                                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+                                if (_state.Value.DefenseTowerStorage.GetLevelByID(_state.Value.DefenseTowers[filterComp.TowerIndex]) >= 1)
+                                    _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                                 RelocateCoinInResourceHolder();
                             }
@@ -90,13 +111,13 @@ namespace Client {
                         }
                         else
                         {
-                            GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
-                            _state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
+                            //GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
+                            //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                             _state.Value.CoinCount--;
                             _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                             intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                             _state.Value.UpgradePlayer();
-                            viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
+                            //viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
                             foreach (var item in _filterPoint.Value)
                             {
                                 _filterPoint.Pools.Inc1.Get(item).Point.GetComponent<PlayerUpgradePointMB>().
@@ -109,11 +130,13 @@ namespace Client {
                     }
                     else
                     {
+                        _viewPool.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
+                        _viewPool.Value.Get(_state.Value.EntityPlayer).ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                         _filter.Pools.Inc1.Del(entity);
                     }
                 }
                 filterComp.Time += Time.deltaTime * 2f;
-                if(filterComp.Time >= 1f)
+                if (filterComp.Time >= 4f)
                 {
                     filterComp.Time = 0f;
                 }
