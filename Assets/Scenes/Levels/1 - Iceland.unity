@@ -7590,6 +7590,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4369397120629641588, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 192.82
+      objectReference: {fileID: 0}
     - target: {fileID: 4479321114431979962, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7702,6 +7706,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasController
       objectReference: {fileID: 0}
+    - target: {fileID: 5922778951679510081, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6265458943291844984, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7750,6 +7758,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7238510579511235923, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8635551773156080151, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7774,6 +7786,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8851079283544923246, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1177728a461a991409a02008adf689c9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
 --- !u!4 &1439834366 stripped
