@@ -34,7 +34,7 @@ namespace Client {
             var resourcePanel = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
             //tutorial there
-            ref var tutorialComp = ref world.GetPool<TutorialComponent>().Add(entity);
+            ref var tutorialComp = ref world.GetPool<TutorialComponent>().Add(world.NewEntity());
             tutorialComp.Tutorial = GameObject.Find("Tutorial");
             tutorialComp.TextHolder = GameObject.Find("TextHolder");
             tutorialComp.HandObject = GameObject.Find("Hand");
