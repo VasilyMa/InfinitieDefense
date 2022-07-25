@@ -31,7 +31,7 @@ namespace Client {
                 }
                 //viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
 
-                viewComp.LevelPopup = viewComp.GameObject.transform.GetChild(2).transform.GetChild(3).transform.gameObject;
+                viewComp.LevelPopup = viewComp.GameObject.transform.GetChild(1).transform.GetChild(3).transform.gameObject;
                 viewComp.LevelPopup.GetComponent<LevelPopupMB>().UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
                 viewComp.LevelPopup.GetComponent<LevelPopupMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
                 ref var levelPop = ref _levelUpPool.Value.Add(_world.Value.NewEntity());
@@ -43,6 +43,7 @@ namespace Client {
                 levelPop.TimeOut = 2f;
                 levelPop.LevelPopUp.SetActive(true);
 
+                viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
 
                 _filter.Pools.Inc1.Del(entity);
             }
