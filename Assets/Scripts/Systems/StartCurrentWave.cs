@@ -186,6 +186,7 @@ namespace Client {
                             unitViewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();
                             unitViewComponent.NavMeshAgent = enemy.GetComponent<NavMeshAgent>();
                             unitViewComponent.NavMeshAgent.speed = unitTargetWeightComponent.Value;
+                            unitViewComponent.BodyCollider = enemy.GetComponent<CapsuleCollider>();
                             unitViewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
                             unitViewComponent.EcsInfoMB.Init(_world);
                             unitViewComponent.EcsInfoMB.SetEntity(enemyEntity);
@@ -197,6 +198,7 @@ namespace Client {
                             unitViewComponent.Healthbar.ToggleSwitcher();
                             unitViewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                             unitViewComponent.DamagePopups = new List<GameObject>();
+                            
                             for (int y = 0; y < unitViewComponent.Transform.GetChild(0).transform.childCount; y++)
                             {
                                 var popup = unitViewComponent.Transform.GetChild(0).transform.GetChild(y).gameObject;

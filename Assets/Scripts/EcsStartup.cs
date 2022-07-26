@@ -109,7 +109,7 @@ namespace Client
                 .Add(new DropEventSystem()) // AnyWeaponDrop
 
                 .Add(new PickUpNewWeaponEventSystem())
-
+                .Add(new CorpseRemoveSystem())
                 //.Add(new RespawnDefender())
                 .Add(new RespawnEventSystem())
                 //.Add(new OreRespawnSystem())

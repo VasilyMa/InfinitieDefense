@@ -25,7 +25,7 @@ namespace Client
         readonly EcsPoolInject<LevelUpEvent> _levelUpPool = default;
         readonly EcsFilterInject<Inc<UpgradeTimerEvent>> _timerPool = default;
         readonly EcsPoolInject<UpgradeComponent> _upgradePool = default;
-
+        readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePoint = default;
         private string Model;
 
         public void Run(EcsSystems systems)
@@ -37,7 +37,7 @@ namespace Client
                 int towerIndex = filterComp.TowerIndex;
                 ref var radiusComp = ref _radiusPool.Value.Get(eventEntity);
                 ref var viewComp = ref _viewPool.Value.Get(eventEntity);
-
+                ref var upgradePointComp = ref _upgradePoint.Value.Get(_state.Value.TowersEntity[towerIndex]);
                 if (!_targetWeightPool.Value.Has(eventEntity))
                 {
                     _targetWeightPool.Value.Add(eventEntity);
@@ -96,6 +96,7 @@ namespace Client
                     levelPop.LevelPopUp.SetActive(true); 
                     
                     
+
                     /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
@@ -110,10 +111,6 @@ namespace Client
                     }
 
                     targetWeightComponent.Value = 0;
-
-
-
-
                     //todo
                     if (_state.Value.CoinCount > 0)
                     {
@@ -126,7 +123,10 @@ namespace Client
                     ref var upgradeComp = ref _upgradePool.Value.Get(_state.Value.EntityPlayer);
                     upgradeComp.DelayTime = 0f;
                     upgradeComp.Time = 0f;
-
+                    if (_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]) == 9)
+                    {
+                        upgradePointComp.point.SetActive(false);
+                    }
                     _circlePool.Value.Add(_world.Value.NewEntity());
                 }
                 else // defence towers
@@ -271,6 +271,11 @@ namespace Client
                     if (_deadPool.Value.Has(eventEntity)) _deadPool.Value.Del(eventEntity);
 
                     towerComp.TowerID = _state.Value.DefenseTowers[towerIndex];
+
+                    if (_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]) == 5)
+                    {
+                        upgradePointComp.point.SetActive(false);
+                    }
                 }
                 
 
