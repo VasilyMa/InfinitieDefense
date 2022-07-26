@@ -94,9 +94,19 @@ namespace Client
                     levelPop.Text = levelPop.LevelPopUp.GetComponent<LevelPopupMB>().GetText();
                     levelPop.target = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 10f, viewComp.GameObject.transform.position.z);
                     levelPop.TimeOut = 2f;
-                    levelPop.LevelPopUp.SetActive(true); 
-                    
-                    
+                    levelPop.LevelPopUp.SetActive(true);
+
+                    foreach (var item in _tutorPool.Value)
+                    {
+                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                        if (_state.Value.Saves.TutorialStage <= 7)
+                        {
+                            GameObject.Destroy(tutorComp.TutorialCursor);
+                            tutorComp.TutorialStage = 8;
+                            _state.Value.Saves.TutorialStage = 8;
+                            _state.Value.Saves.SaveTutorial(8);
+                        }
+                    }
 
                     /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
@@ -197,12 +207,12 @@ namespace Client
                     foreach (var item in _tutorPool.Value)
                     {
                         ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                        if (_state.Value.Saves.TutorialStage <=4)
+                        if (_state.Value.Saves.TutorialStage <=5)
                         {
                             GameObject.Destroy(tutorComp.TutorialCursor);
-                            tutorComp.TutorialStage = 5;
-                            _state.Value.Saves.TutorialStage = 5;
-                            _state.Value.Saves.SaveTutorial(5);
+                            tutorComp.TutorialStage = 6;
+                            _state.Value.Saves.TutorialStage = 6;
+                            _state.Value.Saves.SaveTutorial(6);
                         }
                     }
 

@@ -36,6 +36,7 @@ namespace Client
             _delHereSystems = new EcsSystems(_world, _gameState);
             
             _systems
+                .Add(new CountdownWaveSystem())
                 .Add(new CheckWinSystem())
                 .Add(new WinSystem())
                 //.Add(new CheckLoseSystem())
