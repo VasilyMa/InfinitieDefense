@@ -154,12 +154,26 @@ namespace Client
                 LVL = Save.LVL;
                 AllCoin = Save.AllCoin;
                 SceneNumber = Save.SceneNumber;
-                TutorialStage = Save.TutorialStage;
+                
                 PlayerID = Save.PlayerID;
                 CurrentWave = Save.CurrentWave;
                 Rock = Save.Rock;
                 Coin = Save.Coin;
                 PlayerUpgrade = Save.PlayerUpgrade;
+
+                if (Save.TutorialStage == 5)
+                    TutorialStage = Save.TutorialStage - 1;
+                else if (Save.TutorialStage == 7)
+                    TutorialStage = Save.TutorialStage - 1;
+                else if (Save.TutorialStage == 9)
+                    TutorialStage = Save.TutorialStage - 1;
+                else if (Save.TutorialStage == 11)
+                    TutorialStage = Save.TutorialStage - 1;
+                else
+                    TutorialStage = Save.TutorialStage;
+
+
+
 
                 TowerID = new string[Save.TowerID.Length];
                 TowersUpgrade = new int[Save.TowersUpgrade.Length];

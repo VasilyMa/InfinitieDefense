@@ -50,6 +50,7 @@ namespace Client {
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the coin";
                         break;
                     case 4:
+                        tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the tower upgrade point";
                         var cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(5f, 4.5f, -12f), Quaternion.identity);
                         tutorialComp.TutorialCursor = cursor;
@@ -58,6 +59,7 @@ namespace Client {
                         _state.Value.Saves.SaveTutorial(5);
                         break;
                     case 6:
+                        tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the main upgrade point";
                         cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(0f, 4.5f, -2.5f), Quaternion.identity);
                         tutorialComp.TutorialCursor = cursor;
@@ -66,6 +68,7 @@ namespace Client {
                         _state.Value.Saves.SaveTutorial(7);
                         break;
                     case 8:
+                        tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the player upgrade point";
                         cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(0f, 4.5f, -8f), Quaternion.identity);
                         tutorialComp.TutorialCursor = cursor;
@@ -74,6 +77,7 @@ namespace Client {
                         _state.Value.Saves.SaveTutorial(9);
                         break;
                     case 10:
+                        tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Wait of the enemy's wave";
                         _world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
                         interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(10);
