@@ -86,7 +86,6 @@ namespace Client
                     targetableComponent.TargetEntity = targetableComponent.AllEntityInDamageZone[0];
                     targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
                     viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
-                    Debug.Log("Попытались записать новую цель");
                 }
             }
         }

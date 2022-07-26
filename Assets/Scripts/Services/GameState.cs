@@ -13,6 +13,7 @@ namespace Client
         public EcsWorld World;
         public int EntityInterface;
         public int EntityPlayer;
+        public int EntityMainTower;
         public int EntityCamera;
         public int EntityPlayerUpgradePoint;
 

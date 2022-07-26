@@ -23,6 +23,7 @@ namespace Client
         public void Init (EcsSystems systems)
         {
             var mainTowerEntity = _world.Value.NewEntity();
+            _state.Value.EntityMainTower = mainTowerEntity;
             string towerID = _state.Value.DefenseTowers[0];
             //_state.Value.CurrentTowerID = towerID;
             

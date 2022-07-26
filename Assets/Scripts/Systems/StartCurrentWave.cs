@@ -155,7 +155,7 @@ namespace Client {
 
                             enemy.transform.localPosition = new Vector3(ex, 0, ez);
 
-                            unitTargetableComponent.TargetEntity = _state.Value.TowersEntity[0];
+                            unitTargetableComponent.TargetEntity = _state.Value.EntityMainTower;
                             unitTargetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
 
                             unitTargetableComponent.AllEntityInDetectedZone = new List<int>();

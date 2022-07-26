@@ -27,6 +27,7 @@ namespace Client
 
                 foreach (var entityInDamageZone in targetableComponent.AllEntityInDamageZone)
                 {
+                    Debug.Log(entityInDamageZone);
                     if (_viewPool.Value.Get(entityInDamageZone).GameObject == targetableComponent.TargetObject)
                     {
                         targetObjectInDamageZone = true;
