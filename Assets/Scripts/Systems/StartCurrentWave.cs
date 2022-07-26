@@ -200,15 +200,15 @@ namespace Client {
                             unitViewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                             unitViewComponent.DamagePopups = new List<GameObject>();
 
-                            foreach (var item in _tutorialPool.Value)
+                            /*foreach (var item in _tutorialPool.Value)
                             {
-                                if (_state.Value.Saves.TutorialStage == 11)
+                                if (_tutorialPool.Pools.Inc1.Get(item).TutorialStage == 11)
                                 {
                                     _state.Value.Saves.TutorialStage = 12;
                                     _state.Value.Saves.SaveTutorial(12);
                                     _tutorialPool.Pools.Inc1.Get(item).TutorialStage = 12;
                                 }
-                            }
+                            }*/
 
                             for (int y = 0; y < unitViewComponent.Transform.GetChild(0).transform.childCount; y++)
                             {

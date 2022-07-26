@@ -42,14 +42,13 @@ namespace Client {
             resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
             //tutorial there
             ref var tutorialComp = ref world.GetPool<TutorialComponent>().Add(world.NewEntity());
-            tutorialComp.TutorialStage = state.Saves.TutorialStage;
             tutorialComp.Tutorial = GameObject.Find("Tutorial");
             tutorialComp.TextHolder = GameObject.Find("TextHolder");
             tutorialComp.HandObject = GameObject.Find("Hand");
             tutorialComp.HoleObject = GameObject.Find("Hole");
             tutorialComp.TutorialStage = state.Saves.TutorialStage;
             tutorialComp.Animator = tutorialComp.Tutorial.GetComponent<Animator>();
-            if (state.Saves.TutorialStage > 0)
+            if (state.Saves.TutorialStage == 12)
             {
                 tutorialComp.TextHolder.SetActive(false);
                 tutorialComp.HandObject.SetActive(false);

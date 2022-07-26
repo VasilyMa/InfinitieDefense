@@ -43,13 +43,20 @@ namespace Client {
                         _state.Value.Saves.SaveTutorial(2);
                         break;
                     case 2:
+                        tutorialComp.HandObject.SetActive(false);
+                        tutorialComp.HoleObject.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the ore";
                         break;
                     case 3:
+                        tutorialComp.HandObject.SetActive(false);
+                        tutorialComp.HoleObject.SetActive(false);
+                        tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the coin";
                         break;
                     case 4:
+                        tutorialComp.HandObject.SetActive(false);
+                        tutorialComp.HoleObject.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the tower upgrade point";
                         var cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(5f, 4.5f, -12f), Quaternion.identity);
@@ -59,6 +66,8 @@ namespace Client {
                         _state.Value.Saves.SaveTutorial(5);
                         break;
                     case 6:
+                        tutorialComp.HandObject.SetActive(false);
+                        tutorialComp.HoleObject.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the main upgrade point";
                         cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(0f, 4.5f, -2.5f), Quaternion.identity);
@@ -68,6 +77,8 @@ namespace Client {
                         _state.Value.Saves.SaveTutorial(7);
                         break;
                     case 8:
+                        tutorialComp.HandObject.SetActive(false);
+                        tutorialComp.HoleObject.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the player upgrade point";
                         cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(0f, 4.5f, -8f), Quaternion.identity);
@@ -77,6 +88,8 @@ namespace Client {
                         _state.Value.Saves.SaveTutorial(9);
                         break;
                     case 10:
+                        tutorialComp.HandObject.SetActive(false);
+                        tutorialComp.HoleObject.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Wait of the enemy's wave";
                         _world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
@@ -87,6 +100,8 @@ namespace Client {
                         _state.Value.Saves.SaveTutorial(11);
                         break;
                     case 12:
+                        tutorialComp.HandObject.SetActive(false);
+                        tutorialComp.HoleObject.SetActive(false);
                         tutorialComp.TextHolder.SetActive(false);
                         _tutorialPool.Value.Del(entity);
                         break;
