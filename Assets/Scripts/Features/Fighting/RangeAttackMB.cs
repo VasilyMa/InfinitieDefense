@@ -22,6 +22,8 @@ namespace Client
         private string _friendlyTag = "Friendly";
         private string _targetTag;
 
+        private int _enemyInZone;
+
         private ContextToolComponent.Tool _thisTool = ContextToolComponent.Tool.bow;
 
         void Start()
@@ -29,8 +31,6 @@ namespace Client
             if (_mainGameObject == null) _mainGameObject = transform.parent.gameObject;
             if (_ecsInfoMB == null) _ecsInfoMB = _mainGameObject.GetComponent<EcsInfoMB>();
             if (_animator == null) _animator = _mainGameObject.GetComponent<Animator>();
-
-            _animator.SetBool("Range", true);
 
             if (_mainGameObject.CompareTag(_enemyTag))
             {
@@ -41,8 +41,6 @@ namespace Client
                 _targetTag = _enemyTag;
             }
         }
-
-        // to do ay realize method ActivateContextToolPool() in EcsInfo
 
         private void OnTriggerEnter(Collider other)
         {
@@ -56,34 +54,18 @@ namespace Client
                 return;
             }
 
+            _animator.SetLayerWeight(1, 1);
+            _animator.SetBool("Range", true);
+
             _world = _ecsInfoMB.GetWorld();
             var thisObjectEntity = _ecsInfoMB.GetEntity();
             _targetablePool = _world.Value.GetPool<Targetable>();
-            _activateContextToolPool = _world.Value.GetPool<ActivateContextToolEvent>();
-            _contextToolPool = _world.Value.GetPool<ContextToolComponent>();
 
             ref var targetableComponent = ref _targetablePool.Get(thisObjectEntity);
             targetableComponent.AllEntityInDamageZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
+            _enemyInZone++;
 
-            if (!_contextToolPool.Has(thisObjectEntity))
-            {
-                return;
-            }
-
-            ref var contextToolComponent = ref _contextToolPool.Get(thisObjectEntity);
-
-            if (contextToolComponent.CurrentActiveTool == _thisTool)
-            {
-                return;
-            }
-
-            if (!_activateContextToolPool.Has(thisObjectEntity))
-            {
-                _activateContextToolPool.Add(thisObjectEntity);
-            }
-
-            ref var activateContextToolEvent = ref _activateContextToolPool.Get(thisObjectEntity);
-            activateContextToolEvent.ActiveTool = _thisTool;
+            _ecsInfoMB.ActivateContextTool(_thisTool);
         }
 
         private void OnTriggerExit(Collider other)
@@ -103,29 +85,20 @@ namespace Client
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
             targetableComponent.AllEntityInDamageZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
 
+            _enemyInZone--;
+
+            if (_enemyInZone <= 0)
+            {
+                _animator.SetBool("Range", false);
+            }
+
             if (targetableComponent.AllEntityInDamageZone.Count > 0)
             {
                 return;
             }
 
-            // deactivate Bow
-            _activateContextToolPool = _world.Value.GetPool<ActivateContextToolEvent>();
-            _contextToolPool = _world.Value.GetPool<ContextToolComponent>();
-
-            if (!_contextToolPool.Has(_ecsInfoMB.GetEntity()))
-            {
-                return;
-            }
-
-            ref var contextToolComponent = ref _contextToolPool.Get(_ecsInfoMB.GetEntity());
-
-            if (contextToolComponent.CurrentActiveTool != _thisTool)
-            {
-                return;
-            }
-
-            ref var activateContextToolEvent = ref _activateContextToolPool.Add(_ecsInfoMB.GetEntity());
-            activateContextToolEvent.ActiveTool = ContextToolComponent.Tool.empty;
+            _animator.SetLayerWeight(1, 0);
+            _ecsInfoMB.DeactivateContextTool(_thisTool);
         }
     }
 }

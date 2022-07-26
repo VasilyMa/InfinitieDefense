@@ -106,13 +106,13 @@ namespace Client
                 .Add(new UserDropSystem())
                 .Add(new DropResourcesSystem())
                 .Add(new DroppedGoldSystem())
-                .Add(new DropEventSystem()) // AnyWeaponDrop
 
-                .Add(new PickUpNewWeaponEventSystem())
+                //.Add(new DropEventSystem()) // AnyWeaponDrop
+                //.Add(new PickUpNewWeaponEventSystem())
 
                 //.Add(new RespawnDefender())
                 .Add(new RespawnEventSystem())
-                //.Add(new OreRespawnSystem())
+                .Add(new OreRespawnSystem())
                 .Add(new UpgradeCanvasSystem())
                 .Add(new CanvasShipPointerSystem())
                 .Add(new CanvasPointerSystem())

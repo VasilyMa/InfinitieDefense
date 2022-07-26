@@ -17,6 +17,7 @@ namespace Client
         private EcsPool<ViewComponent> _viewPool;
         private EcsPool<Projectile> _projectilePool;
         private EcsPool<ContextToolComponent> _contextToolPool;
+        private EcsPool<ActivateContextToolEvent> _activateContextToolPool;
 
         private EcsPool<OreEventComponent> _oreEventPool;
 
@@ -44,7 +45,49 @@ namespace Client
             _viewPool = world.Value.GetPool<ViewComponent>();
             _projectilePool = world.Value.GetPool<Projectile>();
             _contextToolPool = world.Value.GetPool<ContextToolComponent>();
+            _activateContextToolPool = world.Value.GetPool<ActivateContextToolEvent>();
             _oreEventPool = world.Value.GetPool<OreEventComponent>();
+        }
+
+        public void ActivateContextTool(ContextToolComponent.Tool tool)
+        {
+            if (!_contextToolPool.Has(_gameObjectEntity))
+            {
+                return;
+            }
+
+            ref var contextToolComponent = ref _contextToolPool.Get(_gameObjectEntity);
+
+            if (contextToolComponent.CurrentActiveTool == tool)
+            {
+                return;
+            }
+
+            if (!_activateContextToolPool.Has(_gameObjectEntity))
+            {
+                _activateContextToolPool.Add(_gameObjectEntity);
+            }
+
+            ref var activateContextToolEvent = ref _activateContextToolPool.Get(_gameObjectEntity);
+            activateContextToolEvent.ActiveTool = tool;
+        }
+
+        public void DeactivateContextTool(ContextToolComponent.Tool tool)
+        {
+            if (!_contextToolPool.Has(_gameObjectEntity))
+            {
+                return;
+            }
+
+            ref var contextToolComponent = ref _contextToolPool.Get(_gameObjectEntity);
+
+            if (contextToolComponent.CurrentActiveTool != tool)
+            {
+                return;
+            }
+
+            ref var activateContextToolEvent = ref _activateContextToolPool.Add(_gameObjectEntity);
+            activateContextToolEvent.ActiveTool = ContextToolComponent.Tool.empty;
         }
 
         public int GetToolCount()

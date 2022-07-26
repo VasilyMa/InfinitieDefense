@@ -2,25 +2,41 @@ using Leopotam.EcsLite;
 using UnityEngine;
 using Leopotam.EcsLite.Di;
 
-namespace Client {
-    sealed class CreateNewPlayer : IEcsRunSystem {
+namespace Client
+{
+    sealed class CreateNewPlayer : IEcsRunSystem
+    {
         readonly EcsWorldInject _world = default;
+
         readonly EcsSharedInject<GameState> _state = default;
+
         readonly EcsFilterInject<Inc<CreateNewPlayerEvent>> _filter = default;
+        readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
+
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<Player> _playerPool = default;
-        readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
         readonly EcsPoolInject<LevelUpEvent> _levelUpPool = default;
-        public void Run (EcsSystems systems) {
+        readonly EcsPoolInject<HealthComponent> _healthPool = default;
+        readonly EcsPoolInject<DamageComponent> _damagePool = default;
+
+        public void Run (EcsSystems systems)
+        {
             foreach(var entity in _filter.Value)
             {
                 ref var viewComp = ref _viewPool.Value.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
+                ref var damageComponent = ref _damagePool.Value.Get(entity);
+                ref var healthComponent = ref _healthPool.Value.Get(entity);
 
                 _state.Value.CurrentPlayerID = _state.Value.PlayerStorage.GetNextIdByID(_state.Value.CurrentPlayerID);
                 //Debug.Log("dfdfdfdfd " + _state.Value.CurrentPlayerID);
-                playerComp.damage = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
-                playerComp.health = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
+                damageComponent.Value = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
+
+                healthComponent.MaxValue = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
+                healthComponent.CurrentValue = healthComponent.MaxValue;
+                viewComp.Healthbar.SetMaxHealth(healthComponent.MaxValue);
+                viewComp.Healthbar.SetHealth(healthComponent.CurrentValue);
+
                 viewComp.UpgradeParticleSystem.Play();
                 //viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
                 foreach (var item in _filterPoint.Value)

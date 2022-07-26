@@ -35,7 +35,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
                 CannonBallPrefab = CannonBallPrefabs[0],
-                Upgrade = 4,
+                Upgrade = 5,
                 IsLast = false,
                 NextID = "2tower",
                 ImageResource = ImageResources
@@ -50,7 +50,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
                 CannonBallPrefab = CannonBallPrefabs[1],
-                Upgrade = 8,
+                Upgrade = 10,
                 IsLast = false,
                 NextID = "3tower",
                 ImageResource = ImageResources
@@ -65,7 +65,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[2],
                 TowerMesh = TowerMeshs[2],
                 CannonBallPrefab = CannonBallPrefabs[2],
-                Upgrade = 12,
+                Upgrade = 14,
                 IsLast = false,
                 NextID = "4tower",
                 ImageResource = ImageResources
@@ -80,7 +80,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[3],
                 TowerMesh = TowerMeshs[3],
                 CannonBallPrefab = CannonBallPrefabs[3],
-                Upgrade = 16,
+                Upgrade = 18,
                 IsLast = false,
                 NextID = "5tower",
                 ImageResource = ImageResources
@@ -95,7 +95,7 @@ public class DefenseTowerStorage : ScriptableObject
                 TowerPrefab = TowerPrefabs[4],
                 TowerMesh = TowerMeshs[4],
                 CannonBallPrefab = CannonBallPrefabs[4],
-                Upgrade = 1,
+                Upgrade = 99999,
                 IsLast = true,
                 ImageResource = ImageResources
             },

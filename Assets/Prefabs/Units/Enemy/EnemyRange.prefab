@@ -786,6 +786,8 @@ MonoBehaviour:
   _targetEntity: 0
   _targetObject: {fileID: 0}
   _arrowFirePoint: {fileID: 6471011736200399054}
+  OreMining: {fileID: 0}
+  ResHolderTransform: {fileID: 0}
   _contextTools:
   - {fileID: 0}
   - {fileID: 0}
@@ -1201,7 +1203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 927839352783695196, guid: c3bc552107429a64e80aebd2a6f5b5e8, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1407072258479135646, guid: c3bc552107429a64e80aebd2a6f5b5e8, type: 3}
       propertyPath: m_RootOrder

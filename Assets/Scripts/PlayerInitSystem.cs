@@ -166,6 +166,7 @@ namespace Client
                 _state.Value.CoinTransformList.Add(coinTransform);
             }
 
+            SetMeleeSetup(playerEntity);
             SetRangeSetup(playerEntity);
         }
 
@@ -175,10 +176,8 @@ namespace Client
             ref var playerWeaponComponent = ref _playerWeaponPool.Value.Get(playerEntity);
 
             playerWeaponComponent.MeleeAttackMB.gameObject.SetActive(true);
-            viewComponent.Animator.SetBool("Melee", true);
 
             playerWeaponComponent.RangeAttackMB.gameObject.SetActive(false);
-            viewComponent.Animator.SetBool("Range", false);
         }
 
         private void SetRangeSetup(int playerEntity)
@@ -186,11 +185,7 @@ namespace Client
             ref var viewComponent = ref _viewPool.Value.Get(playerEntity);
             ref var playerWeaponComponent = ref _playerWeaponPool.Value.Get(playerEntity);
 
-            playerWeaponComponent.MeleeAttackMB.gameObject.SetActive(false);
-            viewComponent.Animator.SetBool("Melee", false);
-
             playerWeaponComponent.RangeAttackMB.gameObject.SetActive(true);
-            viewComponent.Animator.SetBool("Range", true);
         }
 
         private void InitializePlayerWeapon(int playerEntity)

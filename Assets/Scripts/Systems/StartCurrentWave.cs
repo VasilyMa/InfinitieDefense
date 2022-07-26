@@ -19,7 +19,6 @@ namespace Client {
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
-        readonly EcsPoolInject<DropableItem> _dropableItemPool = default;
         private float _angle = 0f;
         private float _shipAngle = 0f;
         private int _encounter = 0;
@@ -60,7 +59,7 @@ namespace Client {
                         targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
 
                         ref var movableComponent = ref _world.Value.GetPool<Movable>().Add(shipEntity);
-                        movableComponent.Speed = 15f;
+                        movableComponent.Speed = 10f;
 
                         ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
                         shipComponent.Encounter = _encounter;
@@ -130,13 +129,6 @@ namespace Client {
                                         unitViewComponent.GameObject = enemy;
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
                                         unitViewComponent.Animator.SetBool("Melee", true);
-
-                                        // 10% chanse on drop weapon
-                                        if (Random.Range(1, 10) > 1)
-                                        {
-                                            ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
-                                            dropableItemComponent.Item = DropableItem.ItemType.Sword;
-                                        }
                                         
                                         unitDamageComponent.Value = 10f;
 
@@ -149,13 +141,6 @@ namespace Client {
                                         unitViewComponent.GameObject = enemy;
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
                                         unitViewComponent.Animator.SetBool("Range", true);
-
-                                        // 10% chanse on drop weapon
-                                        if (Random.Range(1, 10) > 1)
-                                        {
-                                            ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
-                                            dropableItemComponent.Item = DropableItem.ItemType.Bow;
-                                        }
 
                                         unitDamageComponent.Value = 7f;
 

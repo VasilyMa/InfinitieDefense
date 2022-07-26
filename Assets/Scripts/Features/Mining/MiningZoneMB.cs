@@ -14,12 +14,11 @@ namespace Client
 
         private EcsWorldInject _world;
 
-        private EcsPool<Player> _playerPool;
-        private EcsPool<ActivateContextToolEvent> _activateContextToolPool;
-        private EcsPool<ContextToolComponent> _contextToolPool;
         private EcsPool<OreComponent> _orePool;
 
         private string Ore;
+
+        private int _oreInZone;
 
         private ContextToolComponent.Tool _thisTool = ContextToolComponent.Tool.pickaxe;
 
@@ -52,24 +51,10 @@ namespace Client
 
             _ecsInfoMB.SetCurrentMiningOre(-1);
 
-            // deactivate pickaxe
-            _activateContextToolPool = _world.Value.GetPool<ActivateContextToolEvent>();
-            _contextToolPool = _world.Value.GetPool<ContextToolComponent>();
-
-            if (!_contextToolPool.Has(_ecsInfoMB.GetEntity()))
+            if (!_animator.GetBool("Attack"))
             {
-                return;
+                _ecsInfoMB.DeactivateContextTool(_thisTool);
             }
-
-            ref var contextToolComponent = ref _contextToolPool.Get(_ecsInfoMB.GetEntity());
-
-            if (contextToolComponent.CurrentActiveTool != _thisTool)
-            {
-                return;
-            }
-
-            ref var activateContextToolEvent = ref _activateContextToolPool.Add(_ecsInfoMB.GetEntity());
-            activateContextToolEvent.ActiveTool = ContextToolComponent.Tool.empty;
         }
 
         // to do ay realize method ActivateContextToolPool() in EcsInfo
@@ -93,25 +78,12 @@ namespace Client
             var oreEcsInfo = other.gameObject.GetComponent<EcsInfoMB>();
 
             _ecsInfoMB.SetCurrentMiningOre(oreEcsInfo.GetEntity());
+            _oreInZone++;
 
-            // activate pickaxe
-            _activateContextToolPool = _world.Value.GetPool<ActivateContextToolEvent>();
-            _contextToolPool = _world.Value.GetPool<ContextToolComponent>();
-
-            if (!_contextToolPool.Has(_ecsInfoMB.GetEntity()))
+            if (!_animator.GetBool("Attack"))
             {
-                return;
+                _ecsInfoMB.ActivateContextTool(_thisTool);
             }
-
-            ref var contextToolComponent = ref _contextToolPool.Get(_ecsInfoMB.GetEntity());
-
-            if (contextToolComponent.CurrentActiveTool == _thisTool)
-            {
-                return;
-            }
-
-            ref var activateContextToolEvent = ref _activateContextToolPool.Add(_ecsInfoMB.GetEntity());
-            activateContextToolEvent.ActiveTool = _thisTool;
         }
 
         private void OnTriggerExit(Collider other)
@@ -131,25 +103,12 @@ namespace Client
             _world = _ecsInfoMB.GetWorld();
 
             _ecsInfoMB.SetCurrentMiningOre(-1);
+            _oreInZone--;
 
-            // deactivate pickaxe
-            _activateContextToolPool = _world.Value.GetPool<ActivateContextToolEvent>();
-            _contextToolPool = _world.Value.GetPool<ContextToolComponent>();
-
-            if (!_contextToolPool.Has(_ecsInfoMB.GetEntity()))
+            if (!_animator.GetBool("Attack"))
             {
-                return;
+                _ecsInfoMB.DeactivateContextTool(_thisTool);
             }
-
-            ref var contextToolComponent = ref _contextToolPool.Get(_ecsInfoMB.GetEntity());
-
-            if (contextToolComponent.CurrentActiveTool != _thisTool)
-            {
-                return;
-            }
-
-            ref var activateContextToolEvent = ref _activateContextToolPool.Add(_ecsInfoMB.GetEntity());
-            activateContextToolEvent.ActiveTool = ContextToolComponent.Tool.empty;
         }
     }
 }

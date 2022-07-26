@@ -20,6 +20,8 @@ namespace Client
         readonly EcsPoolInject<RespawnEvent> _respawnEventPool = default;
         readonly EcsPoolInject<DropByDie> _dropPool = default;
         readonly EcsPoolInject<DropableItem> _dropableItemPool = default;
+        readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
+        readonly EcsPoolInject<ActivateContextToolEvent> _activateContextToolPool = default;
 
         readonly EcsPoolInject<DropEvent> _dropEventPool = default;
         readonly EcsPoolInject<LoseEvent> _losePool = default;
@@ -34,7 +36,7 @@ namespace Client
                 }
 
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
-                ref var interfaceComponent = ref _interfacePool.Value.Get(_state.Value.EntityInterface); ;
+                ref var interfaceComponent = ref _interfacePool.Value.Get(_state.Value.EntityInterface);
                 if (viewComponent.GameObject) viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
                 if (viewComponent.Rigidbody) viewComponent.Rigidbody.velocity = Vector3.zero;
                 if (viewComponent.Animator)
@@ -78,7 +80,22 @@ namespace Client
                     dropEvent.Point = viewComponent.Transform.position;
                     dropEvent.Item = dropableItem.Item;
                 }
+
+                DeactivateTool(entity);
             }
+        }
+
+        private void DeactivateTool(int entity)
+        {
+            if (!_contextToolPool.Value.Has(entity))
+            {
+                return;
+            }
+
+            ref var contextToolComponent = ref _contextToolPool.Value.Get(entity);
+            ref var activateContextToolEvent = ref _activateContextToolPool.Value.Add(entity);
+
+            activateContextToolEvent.ActiveTool = ContextToolComponent.Tool.empty;
         }
     }
 }
