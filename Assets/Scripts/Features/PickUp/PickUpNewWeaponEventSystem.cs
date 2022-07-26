@@ -15,6 +15,8 @@ namespace Client
         readonly EcsPoolInject<PickUpNewWeaponEvent> _pickUpNewWeaponEventPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<PlayerWeapon> _playerWeaponPool = default;
+        readonly EcsPoolInject<Targetable> _targetablePool = default;
+        readonly EcsPoolInject<ActivateContextToolEvent> _activateContextToolEventPool = default;
 
         public void Run(EcsSystems systems)
         {
@@ -25,6 +27,9 @@ namespace Client
                 var playerEntity = _state.Value.EntityPlayer;
                 ref var viewComponent = ref _viewPool.Value.Get(playerEntity);
                 ref var playerWeaponComponent = ref _playerWeaponPool.Value.Get(playerEntity);
+                ref var targetableComponent = ref _targetablePool.Value.Get(playerEntity);
+                ref var activateContextToolEventComponent = ref _activateContextToolEventPool.Value.Add(playerEntity);
+                targetableComponent.AllEntityInDamageZone.Clear();
 
                 // to do ay clear AllEnemyInDamageZone if weapon was changed
 
@@ -54,6 +59,8 @@ namespace Client
                         }
                         break;
                 }
+
+                activateContextToolEventComponent.ActiveTool = ContextToolComponent.Tool.empty;
 
                 _pickUpNewWeaponEventPool.Value.Del(eventEntity);
             }

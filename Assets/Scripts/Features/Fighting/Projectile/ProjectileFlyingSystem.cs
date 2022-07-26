@@ -28,7 +28,7 @@ namespace Client
                 if (!projectileComponent.TargetObject) projectileComponent.TargetObject = _viewPool.Value.Get(projectileComponent.TargetEntity).GameObject;
 
                 float distanceOverall = Vector3.Distance(projectileComponent.StartPosition, projectileComponent.TargetObject.transform.position);
-                Debug.Log(viewComponent.GameObject.name);
+
                 float distanceCovered = Vector3.Distance(projectileComponent.StartPosition, viewComponent.GameObject.transform.position);
 
                 float distanceLeft = Vector3.Distance(viewComponent.GameObject.transform.position, projectileComponent.TargetObject.transform.position);

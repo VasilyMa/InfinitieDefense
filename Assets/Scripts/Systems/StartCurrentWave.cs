@@ -132,7 +132,7 @@ namespace Client {
                                         unitViewComponent.Animator.SetBool("Melee", true);
 
                                         // 10% chanse on drop weapon
-                                        if (Random.Range(1, 10) > 5)
+                                        if (Random.Range(1, 10) > 1)
                                         {
                                             ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
                                             dropableItemComponent.Item = DropableItem.ItemType.Sword;
@@ -151,7 +151,7 @@ namespace Client {
                                         unitViewComponent.Animator.SetBool("Range", true);
 
                                         // 10% chanse on drop weapon
-                                        if (Random.Range(1, 10) > 5)
+                                        if (Random.Range(1, 10) > 1)
                                         {
                                             ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
                                             dropableItemComponent.Item = DropableItem.ItemType.Bow;

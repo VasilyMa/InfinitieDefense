@@ -277,7 +277,7 @@ namespace Client
                 //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);
                 //radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius * 2, radiusComp.Radius * 2, 1);
 
-                Mesh mesh = new Mesh();
+                /*Mesh mesh = new Mesh();
                 viewComp.MeshFilter = viewComp.GameObject.GetComponent<MeshFilter>();
                 viewComp.MeshFilter.mesh = mesh;
 
@@ -291,7 +291,6 @@ namespace Client
                 float viewDistence = radiusComp.Radius;
 
                 Vector3[] vertices = new Vector3[triangelesCount + 1 + 1];
-                //Vector2[] uv = new Vector2[vertices.Length];
                 int[] trianglesVertices = new int[triangelesCount * 3];
                 Vector3[] circleVerticesv = new Vector3[triangelesCount];
                 if (viewComp.LineRenderer) viewComp.LineRenderer.positionCount = triangelesCount;
@@ -329,14 +328,13 @@ namespace Client
                 }
 
                 mesh.vertices = vertices;
-                //mesh.uv = uv;
                 mesh.triangles = trianglesVertices;
 
                 if (viewComp.LineRenderer)
                 {
                     viewComp.LineRenderer.SetPositions(circleVerticesv);
                     viewComp.LineRenderer.loop = true;
-                }
+                }*/
 
                 _CreateNextTowerFilter.Pools.Inc1.Del(eventEntity);
 
