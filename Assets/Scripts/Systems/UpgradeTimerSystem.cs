@@ -32,7 +32,6 @@ namespace Client {
                     _canvasPool.Value.Get(timerComp.Entity).timerResources.ResourcesDrop(0);
                 }
             }
-
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Client
         readonly EcsFilterInject<Inc<UpgradeTimerEvent>> _timerPool = default;
         readonly EcsPoolInject<UpgradeComponent> _upgradePool = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePoint = default;
+        readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
         private string Model;
 
         public void Run(EcsSystems systems)
@@ -93,9 +94,19 @@ namespace Client
                     levelPop.Text = levelPop.LevelPopUp.GetComponent<LevelPopupMB>().GetText();
                     levelPop.target = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 10f, viewComp.GameObject.transform.position.z);
                     levelPop.TimeOut = 2f;
-                    levelPop.LevelPopUp.SetActive(true); 
-                    
-                    
+                    levelPop.LevelPopUp.SetActive(true);
+
+                    foreach (var item in _tutorPool.Value)
+                    {
+                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                        if (_state.Value.Saves.TutorialStage <= 7)
+                        {
+                            GameObject.Destroy(tutorComp.TutorialCursor);
+                            tutorComp.TutorialStage = 8;
+                            _state.Value.Saves.TutorialStage = 8;
+                            _state.Value.Saves.SaveTutorial(8);
+                        }
+                    }
 
                     /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
@@ -193,11 +204,17 @@ namespace Client
                     levelPop.TimeOut = 2f;
                     levelPop.LevelPopUp.SetActive(true);
 
-                    /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
-                    viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
-                    viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    viewComp.ResourcesTimer.SetActive(true);
-                    */
+                    foreach (var item in _tutorPool.Value)
+                    {
+                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                        if (_state.Value.Saves.TutorialStage <=5)
+                        {
+                            GameObject.Destroy(tutorComp.TutorialCursor);
+                            tutorComp.TutorialStage = 6;
+                            _state.Value.Saves.TutorialStage = 6;
+                            _state.Value.Saves.SaveTutorial(6);
+                        }
+                    }
 
                     viewComp.DamagePopups = new List<GameObject>();
                     for (int y = 0; y < viewComp.GameObject.transform.GetChild(6).transform.childCount; y++)
