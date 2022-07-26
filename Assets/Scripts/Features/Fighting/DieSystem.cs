@@ -9,7 +9,6 @@ namespace Client
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<HealthComponent, ViewComponent>, Exc<DeadTag, InactiveTag>> _unitsFilter = default;
-
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
@@ -26,6 +25,9 @@ namespace Client
         readonly EcsPoolInject<DropEvent> _dropEventPool = default;
         readonly EcsPoolInject<LoseEvent> _losePool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
+        readonly EcsPoolInject<Player> _playerPool = default;
+
+        readonly EcsPoolInject<CorpseRemove> _corpsePool = default;
         public void Run (EcsSystems systems)
         {
             foreach (var entity in _unitsFilter.Value)
@@ -49,6 +51,8 @@ namespace Client
                 {
                     ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
                     if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
+                    ref var corpseComp = ref _corpsePool.Value.Add(entity);
+                    corpseComp.timer = 5f;
                 }
 
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
@@ -70,7 +74,7 @@ namespace Client
                 {
                     _dropPool.Value.Add(_state.Value.EntityPlayer);
                 }
-
+                
                 // Drop item
                 if (_dropableItemPool.Value.Has(entity))
                 {

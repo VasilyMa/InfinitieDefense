@@ -19,6 +19,8 @@ namespace Client {
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<TargetWeightComponent> _targetWeightPool = default;
+        readonly EcsPoolInject<DropableItem> _dropableItemPool = default;
+        readonly EcsFilterInject<Inc<TutorialComponent>> _tutorialPool = default;
         private float _angle = 0f;
         private float _shipAngle = 0f;
         private int _encounter = 0;
@@ -171,6 +173,7 @@ namespace Client {
                             unitViewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();
                             unitViewComponent.NavMeshAgent = enemy.GetComponent<NavMeshAgent>();
                             unitViewComponent.NavMeshAgent.speed = unitTargetWeightComponent.Value;
+                            unitViewComponent.BodyCollider = enemy.GetComponent<CapsuleCollider>();
                             unitViewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
                             unitViewComponent.EcsInfoMB.Init(_world);
                             unitViewComponent.EcsInfoMB.SetEntity(enemyEntity);
@@ -182,6 +185,17 @@ namespace Client {
                             unitViewComponent.Healthbar.ToggleSwitcher();
                             unitViewComponent.Healthbar.Init(systems.GetWorld(), systems.GetShared<GameState>());
                             unitViewComponent.DamagePopups = new List<GameObject>();
+
+                            foreach (var item in _tutorialPool.Value)
+                            {
+                                if (_state.Value.Saves.TutorialStage == 11)
+                                {
+                                    _state.Value.Saves.TutorialStage = 12;
+                                    _state.Value.Saves.SaveTutorial(12);
+                                    _tutorialPool.Pools.Inc1.Get(item).TutorialStage = 12;
+                                }
+                            }
+
                             for (int y = 0; y < unitViewComponent.Transform.GetChild(0).transform.childCount; y++)
                             {
                                 var popup = unitViewComponent.Transform.GetChild(0).transform.GetChild(y).gameObject;

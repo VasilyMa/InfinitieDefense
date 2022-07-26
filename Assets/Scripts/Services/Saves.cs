@@ -16,7 +16,6 @@ namespace Client
         public int LVL;
         public ulong AllCoin;
         public int SceneNumber;
-        public int TutorialState;
         public string PlayerID;
         public int PlayerUpgrade;
         public string[] TowerID;
@@ -24,7 +23,7 @@ namespace Client
         public int CurrentWave;
         public int Rock;
         public int Coin;
-
+        public int TutorialStage;
         public SaveSettings Save = new SaveSettings();
         public string path;
         //методы сохранений...
@@ -71,8 +70,8 @@ namespace Client
         }
         public void SaveTutorial(int value)
         {
-            Save.TutorialState = value;
-            TutorialState = value;
+            Save.TutorialStage = value;
+            TutorialStage = value;
 
             File.WriteAllText(path, JsonUtility.ToJson(Save));
         }
@@ -155,12 +154,26 @@ namespace Client
                 LVL = Save.LVL;
                 AllCoin = Save.AllCoin;
                 SceneNumber = Save.SceneNumber;
-                TutorialState = Save.TutorialState;
+                
                 PlayerID = Save.PlayerID;
                 CurrentWave = Save.CurrentWave;
                 Rock = Save.Rock;
                 Coin = Save.Coin;
                 PlayerUpgrade = Save.PlayerUpgrade;
+
+                if (Save.TutorialStage == 5)
+                    TutorialStage = Save.TutorialStage - 1;
+                else if (Save.TutorialStage == 7)
+                    TutorialStage = Save.TutorialStage - 1;
+                else if (Save.TutorialStage == 9)
+                    TutorialStage = Save.TutorialStage - 1;
+                else if (Save.TutorialStage == 11)
+                    TutorialStage = Save.TutorialStage - 1;
+                else
+                    TutorialStage = Save.TutorialStage;
+
+
+
 
                 TowerID = new string[Save.TowerID.Length];
                 TowersUpgrade = new int[Save.TowersUpgrade.Length];
@@ -179,12 +192,13 @@ namespace Client
                 LVL = 1;
                 AllCoin = 900;
                 SceneNumber = 1;
-                TutorialState = 1;
+                TutorialStage = 1;
                 PlayerID = "1level";
                 CurrentWave = -1;
                 Rock = 0;
                 Coin = 0;
                 PlayerUpgrade = 0;
+                TutorialStage = 0;
 
 
                 Save.Sounds = Sounds;
@@ -193,13 +207,12 @@ namespace Client
                 Save.LVL = LVL;
                 Save.AllCoin = AllCoin;
                 Save.SceneNumber = SceneNumber;
-                Save.TutorialState = TutorialState;
                 Save.PlayerID = PlayerID;
                 Save.PlayerUpgrade = PlayerUpgrade;
                 Save.CurrentWave = CurrentWave;
                 Save.Rock = Rock;
                 Save.Coin = Coin;
-
+                Save.TutorialStage = TutorialStage;
                 CreateTowerID();
 
                 File.WriteAllText(path, JsonUtility.ToJson(Save));
@@ -257,7 +270,6 @@ namespace Client
             public int LVL;
             public ulong AllCoin;
             public int SceneNumber;
-            public int TutorialState;
             public string PlayerID;
             public int PlayerUpgrade;
             public string[] TowerID;
@@ -266,6 +278,7 @@ namespace Client
             public int Circle;
             public int Rock;
             public int Coin;
+            public int TutorialStage;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Client {
         readonly EcsPoolInject<InMiningTag> _miningPool = default;
 
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
-
+        readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
         public void Run (EcsSystems systems) {
             foreach (var entity in _filter.Value)
             {
@@ -44,9 +44,16 @@ namespace Client {
                     oreComp.respawnTime = 5f;
                     foreach (var entityPlayer in _filterPlayer.Value)
                     {
-                        ref var player = ref _filterPlayer.Pools.Inc1.Get(entityPlayer);
-                        player.animator.SetBool("isMining", false);
-                        //player.animator.SetBool("isIdle", true);
+                        foreach (var item in _tutorPool.Value)
+                        {
+                            if (_tutorPool.Pools.Inc1.Get(item).TutorialStage == 2)
+                            {
+                                _tutorPool.Pools.Inc1.Get(item).TutorialStage = 3;
+                                _state.Value.Saves.TutorialStage = 3;
+                                _state.Value.Saves.SaveTutorial(3);
+                            }
+                                
+                        }
                         _miningPool.Value.Del(entityPlayer);
                     }
                 }
