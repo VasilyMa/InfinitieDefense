@@ -24,15 +24,15 @@ namespace Client
                     contextToolComponent.ToolsPool[((int)contextToolComponent.CurrentActiveTool)].SetActive(false);
                 }
 
-                if (activateContextToolComponent.ActiveTool != ContextToolComponent.Tool.empty)
+                if (activateContextToolComponent.ActiveTool == ContextToolComponent.Tool.empty)
+                {
+                    viewComponent.Animator.SetLayerWeight(1, 0);
+                }
+                else
                 {
                     contextToolComponent.ToolsPool[((int)activateContextToolComponent.ActiveTool)].SetActive(true);
 
                     viewComponent.Animator.SetLayerWeight(1, 1);
-                }
-                else
-                {
-                    viewComponent.Animator.SetLayerWeight(1, 0);
                 }
 
                 contextToolComponent.CurrentActiveTool = activateContextToolComponent.ActiveTool;

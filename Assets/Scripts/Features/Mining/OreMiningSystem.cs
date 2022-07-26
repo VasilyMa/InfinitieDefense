@@ -21,7 +21,6 @@ namespace Client {
                 ref var oreComp = ref _filter.Pools.Inc2.Get(entity);
                 ref var oreViewComp = ref _viewPool.Value.Get(entity);
                 ref var moveComp = ref _movePool.Value.Add(_world.Value.NewEntity());
-                ref var viewComp = ref _viewPool.Value.Get(_state.Value.EntityPlayer);
                 
                 var stone = (GameObject)GameObject.Instantiate(Resources.Load("Stone"), new Vector3(oreComp.prefab.transform.position.x, oreComp.prefab.transform.position.y + Random.Range(0.5f, 1.2f), oreComp.prefab.transform.position.z), Quaternion.identity);
 
@@ -45,10 +44,6 @@ namespace Client {
                     oreComp.respawnTime = 5f;
                     foreach (var entityPlayer in _filterPlayer.Value)
                     {
-                        ref var player = ref _filterPlayer.Pools.Inc1.Get(entityPlayer);
-                        player.animator.SetBool("isMining", false);
-                        //player.animator.SetBool("isIdle", true);
-                        viewComp.isMining = false;
                         foreach (var item in _tutorPool.Value)
                         {
                             if (_tutorPool.Pools.Inc1.Get(item).TutorialStage == 2)

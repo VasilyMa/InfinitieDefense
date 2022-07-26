@@ -111,14 +111,6 @@ namespace Client
                         }
                         break;
                     }
-                case "Enemy":
-                    {
-                        ref var player = ref _state.EntityPlayer;
-                        ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
-                        ref var playerComponent = ref _playerPool.Get(player);
-                        playerComponent.animator.SetBool("isMining", false);
-                        break;
-                    }
             }
         }
         private void OnTriggerExit(Collider other)
@@ -151,12 +143,6 @@ namespace Client
                         {
                             _upgradePool.Del(_state.EntityPlayer);
                         }
-                        break;
-                    }
-                case "Enemy":
-                    {
-                        ref var viewComp = ref _viewPool.Get(_state.EntityPlayer);
-                        if (!_fightPool.Has(_state.EntityPlayer)) viewComp.isFight = false;
                         break;
                     }
             }

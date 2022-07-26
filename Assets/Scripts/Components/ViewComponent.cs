@@ -21,8 +21,6 @@ namespace Client
         public float MoveSpeed;
         public float RotateSpeed;
         public bool CanMining;
-        public bool isFight;
-        public bool isMining;
         public Outline Outline;
         public MeshFilter MeshFilter;
         public MeshFilter ModelMeshFilter;

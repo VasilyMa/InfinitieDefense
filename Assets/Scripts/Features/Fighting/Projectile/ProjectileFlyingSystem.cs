@@ -13,7 +13,9 @@ namespace Client
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
         readonly EcsPoolInject<Projectile> _projectilePool = default;
+
         readonly EcsPoolInject<DamagingEvent> _damagingEventPool = default;
+        readonly EcsPoolInject<ExplosionEvent> _explosionEventPool = default;
 
         public void Run(EcsSystems systems)
         {
@@ -26,7 +28,7 @@ namespace Client
                 if (!projectileComponent.TargetObject) projectileComponent.TargetObject = _viewPool.Value.Get(projectileComponent.TargetEntity).GameObject;
 
                 float distanceOverall = Vector3.Distance(projectileComponent.StartPosition, projectileComponent.TargetObject.transform.position);
-                Debug.Log(viewComponent.GameObject.name);
+
                 float distanceCovered = Vector3.Distance(projectileComponent.StartPosition, viewComponent.GameObject.transform.position);
 
                 float distanceLeft = Vector3.Distance(viewComponent.GameObject.transform.position, projectileComponent.TargetObject.transform.position);
@@ -66,11 +68,20 @@ namespace Client
                     damagingEventComponent.DamageValue = damageComponent.Value;
                     damagingEventComponent.DamagingEntity = projectileComponent.OwnerEntity;
 
+                    if (projectileComponent.IsExploding) ActivateExplosion(projectileComponent.ExplosionValue, viewComponent.GameObject.transform.position);
+
                     viewComponent.GameObject.SetActive(false);
 
                     _world.Value.DelEntity(projectileEntity);
                 }
             }
+        }
+
+        private void ActivateExplosion(ExplosionEvent.Size Value, Vector3 Point)
+        {
+            ref var explosionEventComponent = ref _explosionEventPool.Value.Add(_world.Value.NewEntity());
+            explosionEventComponent.Value = Value;
+            explosionEventComponent.Point = Point;
         }
     }
 }

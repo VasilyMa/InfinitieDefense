@@ -1,7 +1,5 @@
 fileFormatVersion: 2
-guid: 292cd82930cc17541b20ee84a648ea6b
-timeCreated: 1519807936
-licenseType: Store
+guid: 71414fb5c346add4c836797eacbc1ae8
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -10,7 +8,6 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Passion One
   fontNames:
   - Passion One
   fallbackFontReferences: []
@@ -18,6 +15,7 @@ TrueTypeFontImporter:
   fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

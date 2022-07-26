@@ -34,8 +34,8 @@ namespace Client
 
             for (int d = 0; d < mainTowerComp.DefendersPositions.Length;d++)
             {
-                var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 7;
-                var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 7;
+                var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * 5;
+                var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * 5;
                 
                 Angle += 360 / 10;
 
@@ -166,7 +166,7 @@ namespace Client
                     upgradeTowerComponent.Index = upgradePointMB.TowerIndex;
                     viewComp.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
                     
-                    Angle += 360 / 6;
+                    Angle += 360 / 4;
                     towerCount++;
 
                     if(_state.Value.DefenseTowers[i] != "empty")
@@ -179,7 +179,7 @@ namespace Client
             }
 
 
-            Mesh mesh = new Mesh();
+            /*Mesh mesh = new Mesh();
             viewComponent.MeshFilter = viewComponent.GameObject.GetComponent<MeshFilter>();
             viewComponent.MeshFilter.mesh = mesh;
 
@@ -236,7 +236,7 @@ namespace Client
             //mesh.uv = uv;
             mesh.triangles = trianglesVertices;
 
-            viewComponent.LineRenderer.SetPositions(circleVerticesv);
+            viewComponent.LineRenderer.SetPositions(circleVerticesv);*/
         }
     }
 }

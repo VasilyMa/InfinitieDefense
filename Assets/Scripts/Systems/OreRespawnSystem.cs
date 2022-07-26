@@ -18,7 +18,7 @@ namespace Client {
                     oreComp.respawnTime = 0;
                     oreComp.prefab.SetActive(true);
                     oreComp.prefab.GetComponent<SphereCollider>().enabled = true;
-                    oreComp.CurrentAmount = Random.Range(2,7);
+                    oreComp.CurrentAmount = 4;
                     _filter.Pools.Inc1.Del(entity);
                 }
             }

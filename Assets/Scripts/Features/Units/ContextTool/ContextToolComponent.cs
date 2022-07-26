@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Client
 {
-    struct ContextToolComponent
+    public struct ContextToolComponent
     {
         /// <summary>
         /// 0-pickaxe, 1-sword, 2-bow, 3-empty

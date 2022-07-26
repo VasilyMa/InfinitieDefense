@@ -12,5 +12,8 @@ namespace Client
         public Vector3 StartPosition;
         public Vector3 SupportPosition;
         public GameObject TargetObject;
+
+        public bool IsExploding;
+        public ExplosionEvent.Size ExplosionValue;
     }
 }

@@ -61,7 +61,7 @@ namespace Client {
                         targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
 
                         ref var movableComponent = ref _world.Value.GetPool<Movable>().Add(shipEntity);
-                        movableComponent.Speed = 15f;
+                        movableComponent.Speed = 10f;
 
                         ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
                         shipComponent.Encounter = _encounter;
@@ -131,13 +131,6 @@ namespace Client {
                                         unitViewComponent.GameObject = enemy;
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
                                         unitViewComponent.Animator.SetBool("Melee", true);
-
-                                        // 10% chanse on drop weapon
-                                        if (Random.Range(1, 10) > 5)
-                                        {
-                                            ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
-                                            dropableItemComponent.Item = DropableItem.ItemType.Sword;
-                                        }
                                         
                                         unitDamageComponent.Value = 10f;
 
@@ -150,13 +143,6 @@ namespace Client {
                                         unitViewComponent.GameObject = enemy;
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
                                         unitViewComponent.Animator.SetBool("Range", true);
-
-                                        // 10% chanse on drop weapon
-                                        if (Random.Range(1, 10) > 5)
-                                        {
-                                            ref var dropableItemComponent = ref _dropableItemPool.Value.Add(enemyEntity);
-                                            dropableItemComponent.Item = DropableItem.ItemType.Bow;
-                                        }
 
                                         unitDamageComponent.Value = 7f;
 
