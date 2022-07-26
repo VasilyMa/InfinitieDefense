@@ -12,7 +12,6 @@ namespace Client {
         readonly EcsPoolInject<OreMinedTag> _minedPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<InMiningTag> _miningPool = default;
-
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
         public void Run (EcsSystems systems) {
@@ -37,25 +36,26 @@ namespace Client {
                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.LightImpact;
 
                 if (oreComp.CurrentAmount <= 0) 
-                { 
-                    oreComp.prefab.GetComponent<SphereCollider>().enabled = false;
-                    oreComp.prefab.gameObject.SetActive(false);
-                    _minedPool.Value.Add(entity);
-                    oreComp.respawnTime = 5f;
+                {
                     foreach (var entityPlayer in _filterPlayer.Value)
                     {
                         foreach (var item in _tutorPool.Value)
                         {
                             if (_tutorPool.Pools.Inc1.Get(item).TutorialStage == 2)
                             {
+                                GameObject.Destroy(_tutorPool.Pools.Inc1.Get(item).TutorialCursor.gameObject);
                                 _tutorPool.Pools.Inc1.Get(item).TutorialStage = 3;
                                 _state.Value.Saves.TutorialStage = 3;
                                 _state.Value.Saves.SaveTutorial(3);
                             }
-                                
+
                         }
                         _miningPool.Value.Del(entityPlayer);
                     }
+                    oreComp.prefab.GetComponent<SphereCollider>().enabled = false;
+                    oreComp.prefab.gameObject.SetActive(false);
+                    _minedPool.Value.Add(entity);
+                    oreComp.respawnTime = 5f;
                 }
                 _filter.Pools.Inc1.Del(entity);
             }

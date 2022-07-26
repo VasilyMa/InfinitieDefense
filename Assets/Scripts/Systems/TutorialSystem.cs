@@ -37,7 +37,9 @@ namespace Client {
                         }
                         break;
                     case 1:
-                        ref var cursorComp = ref _cursorPool.Value.Add(_world.Value.NewEntity());
+                        //ref var cursorComp = ref _cursorPool.Value.Add(_world.Value.NewEntity());
+                        var cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(1.25f, 4.5f, -16.5f), Quaternion.identity);
+                        tutorialComp.TutorialCursor = cursor;
                         tutorialComp.TutorialStage = 2;
                         _state.Value.Saves.TutorialStage = 2;
                         _state.Value.Saves.SaveTutorial(2);
@@ -59,7 +61,7 @@ namespace Client {
                         tutorialComp.HoleObject.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the tower upgrade point";
-                        var cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(5f, 4.5f, -12f), Quaternion.identity);
+                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(1f, 4.5f, -12.5f), Quaternion.identity);
                         tutorialComp.TutorialCursor = cursor;
                         tutorialComp.TutorialStage = 5;
                         _state.Value.Saves.TutorialStage = 5;

@@ -29,7 +29,7 @@ namespace Client {
                     foreach (var item in _tutorPool.Value)
                     {
                         ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                        if (_state.Value.Saves.TutorialStage <= 3)
+                        if (_state.Value.Saves.TutorialStage == 3)
                         {
                             tutorComp.TutorialStage = 4;
                             _state.Value.Saves.TutorialStage = 4;

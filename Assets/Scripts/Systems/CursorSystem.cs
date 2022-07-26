@@ -28,14 +28,15 @@ namespace Client {
                         min = allDistance[i];
                     }
                 }
-                foreach (var item in _orePool.Value)
+                /*foreach (var item in _orePool.Value)
                 {
                     ref var viewComp = ref _viewPool.Value.Get(_state.Value.EntityPlayer);
                     ref var oreComp = ref _orePool.Pools.Inc1.Get(item);
                     var dis = Vector3.Distance(viewComp.GameObject.transform.position, oreComp.prefab.transform.position);
                     if (dis <= min)
                         oreComp.cursor.SetActive(true);
-                }
+                        
+                }*/
             }
         }
     }

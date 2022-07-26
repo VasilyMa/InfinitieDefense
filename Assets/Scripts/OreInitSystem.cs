@@ -40,8 +40,8 @@ namespace Client
                 orePool.MaxAmount = _amount;
                 orePool.CurrentAmount = _amount;
                 orePool.IsEnable = false;
-                orePool.cursor = orePool.prefab.transform.GetChild(1).gameObject;
-                orePool.cursor.SetActive(false);
+                //orePool.cursor = orePool.prefab.transform.GetChild(1).gameObject;
+                //orePool.cursor.SetActive(false);
                 GameObject oreModel = ore.transform.GetChild(0).gameObject;
                 orePool.OreParts = new GameObject[oreModel.transform.childCount];
                 for (int i = 0; i < oreModel.transform.childCount; i++)
