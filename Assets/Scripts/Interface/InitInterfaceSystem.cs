@@ -41,6 +41,12 @@ namespace Client {
             tutorialComp.HoleObject = GameObject.Find("Hole");
             tutorialComp.TutorialStage = state.Saves.TutorialStage;
             tutorialComp.Animator = tutorialComp.Tutorial.GetComponent<Animator>();
+            if (state.Saves.TutorialStage > 0)
+            {
+                tutorialComp.TextHolder.SetActive(false);
+                tutorialComp.HandObject.SetActive(false);
+                tutorialComp.HoleObject.SetActive(false);
+            }
         }
     }
 }

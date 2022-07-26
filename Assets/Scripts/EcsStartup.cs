@@ -42,7 +42,7 @@ namespace Client
                 .Add(new LoseSystem())
                 .Add(new InitInterfaceSystem())
                 .Add(new InitMainTower())
-
+                .Add(new TutorialSystem())
                 .Add(new StartWaveSystem())
                 .Add(new StartCurrentWave())
 
