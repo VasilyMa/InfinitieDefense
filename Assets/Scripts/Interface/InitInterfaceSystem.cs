@@ -53,6 +53,9 @@ namespace Client {
                 tutorialComp.TextHolder.SetActive(false);
                 tutorialComp.HandObject.SetActive(false);
                 tutorialComp.HoleObject.SetActive(false);
+                ref var countdown = ref world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
+                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(20);
+                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
             }
         }
     }
