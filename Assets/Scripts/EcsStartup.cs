@@ -36,20 +36,21 @@ namespace Client
             _delHereSystems = new EcsSystems(_world, _gameState);
             
             _systems
+                .Add(new CountdownWaveSystem())
                 .Add(new CheckWinSystem())
                 .Add(new WinSystem())
                 //.Add(new CheckLoseSystem())
                 .Add(new LoseSystem())
-                
+                .Add(new InitInterfaceSystem())
                 .Add(new InitMainTower())
-
+                .Add(new TutorialSystem())
                 .Add(new StartWaveSystem())
                 .Add(new StartCurrentWave())
 
                 .Add(new InitCamera())
                 .Add(new PlayerInitSystem())
                 .Add(new OreInitSystem())
-                .Add(new InitInterfaceSystem())
+                
                 //.Add(new RadiusInitSystem())
 
                 .Add(new HPRegenerationSystem())
@@ -116,6 +117,7 @@ namespace Client
                 .Add(new CanvasPointerSystem())
                 .Add(new CoinPickupSystem())
                 .Add(new NewTowersCircleSystem())
+                .Add(new CursorSystem())
                 .Add(new SavesSystem())
                 .Add(new VibrationEventSystem())
 

@@ -10,5 +10,6 @@ namespace Client
         public float respawnTime;
         public GameObject prefab;
         public GameObject[] OreParts;
+        public GameObject cursor;
     }
 }

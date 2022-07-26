@@ -8,6 +8,7 @@ namespace Client {
         public GameObject progressbar;
         public GameObject gamePanel;
         public GameObject waveCounter;
+        public GameObject countdownWave;
         public FloatingJoystick _joystick;
         public Transform _joystickPoint;
         public Transform _joysticKCenter;

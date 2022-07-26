@@ -54,7 +54,7 @@ namespace Client
             PlayerStorage.Init();
             TowerStorage.Init();
             DefenseTowerStorage.Init();
-
+            Saves.InitSave();
             CurrentPlayerID = "1level";
 
             //InitSaves();

@@ -12,6 +12,8 @@ namespace Client {
             state.EntityInterface = entity;
 
             ref var interfaceComp = ref world.GetPool<InterfaceComponent>().Add(entity);
+            
+            
             interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
             interfaceComp.winPanel = GameObject.Find("WinPanel");
             interfaceComp.winPanel.SetActive(false);
@@ -30,8 +32,29 @@ namespace Client {
             interfaceComp.progressbar.SetActive(true);
             interfaceComp.waveCounter.GetComponent<WaveCounterMB>().SetMaxAmount(state.WaveStorage.Waves.Count);
             interfaceComp.waveCounter.GetComponent<WaveCounterMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            interfaceComp.countdownWave = GameObject.Find("WaveTimer");
+            interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(0);
+            interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(false);
+            interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+
+            //world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
             var resourcePanel = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            //tutorial there
+            ref var tutorialComp = ref world.GetPool<TutorialComponent>().Add(world.NewEntity());
+            tutorialComp.TutorialStage = state.Saves.TutorialStage;
+            tutorialComp.Tutorial = GameObject.Find("Tutorial");
+            tutorialComp.TextHolder = GameObject.Find("TextHolder");
+            tutorialComp.HandObject = GameObject.Find("Hand");
+            tutorialComp.HoleObject = GameObject.Find("Hole");
+            tutorialComp.TutorialStage = state.Saves.TutorialStage;
+            tutorialComp.Animator = tutorialComp.Tutorial.GetComponent<Animator>();
+            if (state.Saves.TutorialStage > 0)
+            {
+                tutorialComp.TextHolder.SetActive(false);
+                tutorialComp.HandObject.SetActive(false);
+                tutorialComp.HoleObject.SetActive(false);
             }
+        }
     }
 }

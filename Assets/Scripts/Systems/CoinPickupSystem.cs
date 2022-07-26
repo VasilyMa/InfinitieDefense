@@ -9,7 +9,7 @@ namespace Client {
         readonly EcsPoolInject<CoinPickupEvent> _coinPool = default;
         readonly EcsPoolInject<CameraComponent> _cameraPool = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
-
+        readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
         public void Run(EcsSystems systems)
         {
             foreach (var entity in _filterCoinPickup.Value)
@@ -25,6 +25,18 @@ namespace Client {
                     _state.Value.CoinCount++;
                     interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                     GameObject.Destroy(coinComp.CoinObject);
+
+                    foreach (var item in _tutorPool.Value)
+                    {
+                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                        if (_state.Value.Saves.TutorialStage <= 3)
+                        {
+                            tutorComp.TutorialStage = 4;
+                            _state.Value.Saves.TutorialStage = 4;
+                            _state.Value.Saves.SaveTutorial(4);
+                        }
+                    }
+                    
                     _filterCoinPickup.Pools.Inc1.Del(entity);
                 }
             }
