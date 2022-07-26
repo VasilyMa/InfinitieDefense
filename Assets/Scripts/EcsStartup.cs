@@ -116,6 +116,7 @@ namespace Client
                 .Add(new CanvasPointerSystem())
                 .Add(new CoinPickupSystem())
                 .Add(new NewTowersCircleSystem())
+                .Add(new CursorSystem())
                 .Add(new SavesSystem())
                 .Add(new VibrationEventSystem())
 
