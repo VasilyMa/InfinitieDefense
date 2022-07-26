@@ -39,16 +39,10 @@ namespace Client
                         {
                             playerWeaponComponent.MeleeAttackMB.gameObject.SetActive(true);
                             viewComponent.Animator.SetBool("Melee", true);
-
-                            playerWeaponComponent.RangeAttackMB.gameObject.SetActive(false);
-                            viewComponent.Animator.SetBool("Range", false);
                         }
                         break;
                     case DropableItem.ItemType.Bow:
                         {
-                            playerWeaponComponent.MeleeAttackMB.gameObject.SetActive(false);
-                            viewComponent.Animator.SetBool("Melee", false);
-
                             playerWeaponComponent.RangeAttackMB.gameObject.SetActive(true);
                             viewComponent.Animator.SetBool("Range", true);
                         }
