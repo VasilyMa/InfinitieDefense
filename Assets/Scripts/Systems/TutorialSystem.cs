@@ -86,6 +86,10 @@ namespace Client {
                         _state.Value.Saves.TutorialStage = 11;
                         _state.Value.Saves.SaveTutorial(11);
                         break;
+                    case 12:
+                        tutorialComp.TextHolder.SetActive(false);
+                        _tutorialPool.Value.Del(entity);
+                        break;
                     default:
                         break;
                 }

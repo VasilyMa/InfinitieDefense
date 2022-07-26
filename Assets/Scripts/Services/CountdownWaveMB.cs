@@ -47,8 +47,11 @@ namespace Client
                         var tutorFilter = _world.Filter<TutorialComponent>().End();
                         foreach (var entity in tutorFilter)
                         {
-                            _tutorialnPool.Get(entity).TextHolder.SetActive(false);
-                            _countdownPool.Del(entity);
+                            if (_tutorialnPool.Has(entity))
+                            {
+                                _tutorialnPool.Get(entity).TextHolder.SetActive(false);
+                                _countdownPool.Del(entity);
+                            }
                         }
                     }
                     var filter = _world.Filter<CountdownWaveComponent>().End();
