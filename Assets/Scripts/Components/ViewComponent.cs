@@ -35,6 +35,7 @@ namespace Client
 
         public GameObject TowerWeapon;
         public GameObject TowerFirePoint;
+        public ParticleSystem FieryExplosion;
         public SphereCollider DetectedZone;
         public SphereCollider DamageZone;
         public CapsuleCollider BodyCollider;

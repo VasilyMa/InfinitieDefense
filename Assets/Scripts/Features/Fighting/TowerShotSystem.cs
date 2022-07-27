@@ -76,6 +76,12 @@ namespace Client
                 cannonBallDamageComponent.Value = damageComponent.Value;
 
                 cooldownComponent.CurrentValue = cooldownComponent.MaxValue;
+
+                if (viewComponent.FieryExplosion.transform.parent != null)
+                {
+                    viewComponent.FieryExplosion.transform.SetParent(null);
+                }
+                viewComponent.FieryExplosion.Play();
             }
         }
     }

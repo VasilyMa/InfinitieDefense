@@ -14,11 +14,11 @@ namespace Client {
 
                 if (canvasComp.Index == 0)
                 {
-                    canvasComp.upgrade.UpdateUpgradePoint(_state.Value.TowersUpgrade[canvasComp.Index], _state.Value.TowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[canvasComp.Index]), _state.Value.TowerStorage.GetImageByID(_state.Value.DefenseTowers[canvasComp.Index]));
+                    canvasComp.upgrade.UpdateUpgradePoint(_state.Value.TowersUpgrade[canvasComp.Index], _state.Value.TowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[canvasComp.Index]));
                 }
                 else
                 {
-                    canvasComp.upgrade.UpdateUpgradePoint(_state.Value.TowersUpgrade[canvasComp.Index], _state.Value.DefenseTowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[canvasComp.Index]), _state.Value.DefenseTowerStorage.GetImageByID(_state.Value.DefenseTowers[canvasComp.Index]));
+                    canvasComp.upgrade.UpdateUpgradePoint(_state.Value.TowersUpgrade[canvasComp.Index], _state.Value.DefenseTowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[canvasComp.Index]));
                 }
             }
             

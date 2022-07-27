@@ -27,6 +27,8 @@ namespace Client
         readonly EcsPoolInject<UpgradeComponent> _upgradePool = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePoint = default;
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
+        readonly EcsPoolInject<DrawingDetectionZone> _drawingDetectionZonePool = default;
+        readonly EcsPoolInject<DrawDetectionZoneEvent> _drawDetectionZoneEventPool = default;
         private string Model;
 
         public void Run(EcsSystems systems)
@@ -160,10 +162,16 @@ namespace Client
                         _cooldownPool.Value.Add(eventEntity);
                     }
 
+                    if (!_drawingDetectionZonePool.Value.Has(eventEntity))
+                    {
+                        _drawingDetectionZonePool.Value.Add(eventEntity);
+                    }
+
                     ref var targetableComponent = ref _targetablePool.Value.Get(eventEntity);
                     ref var damageComponent = ref _damagePool.Value.Get(eventEntity);
                     ref var cooldownComponent = ref _cooldownPool.Value.Get(eventEntity);
                     ref var healthComponent = ref _healthWeightPool.Value.Get(eventEntity);
+                    ref var drawingDetectionZoneComponent = ref _drawingDetectionZonePool.Value.Get(eventEntity);
 
                     if (filterComp.Change)
                     {
@@ -175,6 +183,8 @@ namespace Client
                         viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
                         viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
                         viewComp.Transform = viewComp.GameObject.transform;
+
+                        drawingDetectionZoneComponent.LineRenderer = viewComp.GameObject.GetComponent<LineRenderer>();
                     }
                     else
                     {
@@ -272,6 +282,11 @@ namespace Client
                         }
                     }
 
+                    if (viewComp.FieryExplosion == null)
+                    {
+                        viewComp.FieryExplosion = viewComp.TowerFirePoint.GetComponentInChildren<ParticleSystem>();
+                    }
+
                     targetableComponent.TargetEntity = -1;
                     targetableComponent.TargetObject = null;
                     targetableComponent.AllEntityInDetectedZone = new List<int>();
@@ -294,70 +309,9 @@ namespace Client
                     {
                         upgradePointComp.point.SetActive(false);
                     }
+
+                    _drawDetectionZoneEventPool.Value.Add(eventEntity);
                 }
-                
-
-                //radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.CurrentTowerID);
-                //radiusComp.RadiusTransform.localScale = new Vector3(radiusComp.Radius * 2, radiusComp.Radius * 2, 1);
-
-                /*Mesh mesh = new Mesh();
-                viewComp.MeshFilter = viewComp.GameObject.GetComponent<MeshFilter>();
-                viewComp.MeshFilter.mesh = mesh;
-
-                viewComp.LineRenderer = viewComp.GameObject.GetComponent<LineRenderer>();
-
-                float fov = 360f;
-                Vector3 origin = Vector3.zero;
-                int triangelesCount = 45;
-                float angle = 0f;
-                float angleIncrease = fov / triangelesCount;
-                float viewDistence = radiusComp.Radius;
-
-                Vector3[] vertices = new Vector3[triangelesCount + 1 + 1];
-                int[] trianglesVertices = new int[triangelesCount * 3];
-                Vector3[] circleVerticesv = new Vector3[triangelesCount];
-                if (viewComp.LineRenderer) viewComp.LineRenderer.positionCount = triangelesCount;
-
-                vertices[0] = origin;
-
-                int vertexIndex = 1;
-                int triangleIndex = 0;
-                int circleIndex = 0;
-                for (int i = 0; i <= triangelesCount; i++)
-                {
-                    float angleRad = angle * (Mathf.PI / 180f);
-                    Vector3 VectorFromAngle = new Vector3(Mathf.Cos(angleRad), 0, Mathf.Sin(angleRad));
-
-                    Vector3 vertex = origin + VectorFromAngle * viewDistence;
-                    vertices[vertexIndex] = vertex;
-
-                    if (i > 0 && i <= circleVerticesv.Length)
-                    {
-                        circleVerticesv[circleIndex] = vertices[vertexIndex];
-                        circleIndex++;
-                    }
-
-                    if (i > 0)
-                    {
-                        trianglesVertices[triangleIndex + 0] = 0;
-                        trianglesVertices[triangleIndex + 1] = vertexIndex - 1;
-                        trianglesVertices[triangleIndex + 2] = vertexIndex;
-
-                        triangleIndex += 3;
-                    }
-
-                    vertexIndex++;
-                    angle -= angleIncrease;
-                }
-
-                mesh.vertices = vertices;
-                mesh.triangles = trianglesVertices;
-
-                if (viewComp.LineRenderer)
-                {
-                    viewComp.LineRenderer.SetPositions(circleVerticesv);
-                    viewComp.LineRenderer.loop = true;
-                }*/
 
                 _CreateNextTowerFilter.Pools.Inc1.Del(eventEntity);
 

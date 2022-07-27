@@ -64,7 +64,7 @@ namespace Client
             upgradeComponent.upgrade = upgradeInfo;
             upgradeComponent.Index = 0;
             upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
-            upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("1tower"), _state.Value.DefenseTowerStorage.GetImageByID("1tower"));
+            upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("1tower"));
             upgradeInfo.SetMaxAmount(_state.Value.DefenseTowerStorage.GetUpgradeByID("1tower"));
 
             resourcesTimer.Init(systems.GetWorld(), systems.GetShared<GameState>());
@@ -152,8 +152,8 @@ namespace Client
                     }
 
                     upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
-                    upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
-                    var resourcesTimerTower = upgradePoint.transform.GetChild(3).GetComponent<TimerResourcesMB>();
+                    upgradeInfo = upgradePoint.transform.GetComponentInChildren<UpgradeCanvasMB>();
+                    var resourcesTimerTower = upgradePoint.transform.GetComponentInChildren<TimerResourcesMB>();
                     upgradeTowerComponent.timerResources = resourcesTimerTower;
                     upgradeTowerComponent.point = upgradePoint.gameObject;
                     upgradeTowerComponent.upgrade = upgradeInfo;
@@ -163,7 +163,7 @@ namespace Client
                     
 
                     upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID), _state.Value.DefenseTowerStorage.GetImageByID(towerID));
+                    upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
                     upgradeInfo.SetMaxAmount(_state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
                     upgradePointMB.TowerIndex = i;
                     upgradeTowerComponent.Index = upgradePointMB.TowerIndex;
@@ -182,11 +182,7 @@ namespace Client
             }
 
 
-            /*Mesh mesh = new Mesh();
-            viewComponent.MeshFilter = viewComponent.GameObject.GetComponent<MeshFilter>();
-            viewComponent.MeshFilter.mesh = mesh;
-
-            viewComponent.LineRenderer = viewComponent.GameObject.GetComponent<LineRenderer>();
+            /*viewComponent.LineRenderer = viewComponent.GameObject.GetComponent<LineRenderer>();
             viewComponent.LineRenderer.loop = true;
 
             float fov = 360f;
@@ -197,7 +193,6 @@ namespace Client
             float viewDistence = radiusComp.Radius;
 
             Vector3[] vertices = new Vector3[triangelesCount + 1 + 1];
-            //Vector2[] uv = new Vector2[vertices.Length];
             int[] trianglesVertices = new int[triangelesCount * 3];
             Vector3[] circleVerticesv = new Vector3[triangelesCount];
             viewComponent.LineRenderer.positionCount = triangelesCount;
@@ -235,11 +230,12 @@ namespace Client
             }
             ref var circleComp = ref _circlePool.Value.Add(_world.Value.NewEntity());
             circleComp.maxDistance = radiusComp.Radius;
-            mesh.vertices = vertices;
-            //mesh.uv = uv;
-            mesh.triangles = trianglesVertices;
 
             viewComponent.LineRenderer.SetPositions(circleVerticesv);*/
+
+            //Debug.Log(animationCurve.length) ;
+
+            //viewComponent.LineRenderer.widthCurve = 0.5f; //to do ay animCurve for dottedline
         }
     }
 }

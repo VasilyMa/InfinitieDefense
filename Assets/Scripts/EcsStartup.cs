@@ -93,6 +93,7 @@ namespace Client
                 .Add(new UpgradeSystems())
                 .Add(new UpgradeTimerSystem())
                 .Add(new CreateNextTowerSystem())
+                .Add(new DrawDetectionZoneEventSystem())
                 .Add(new CreateNewPlayer())
                 .Add(new CreateDefenders())
                 .Add(new LevelPopupSystem())
