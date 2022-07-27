@@ -19,6 +19,16 @@ namespace Client
                 ref var activateContextToolComponent = ref _activateContextToolPool.Value.Get(playerEntity);
                 ref var viewComponent = ref _viewPool.Value.Get(playerEntity);
 
+
+                if (contextToolComponent.CurrentActiveTool == ContextToolComponent.Tool.sword && activateContextToolComponent.ActiveTool == ContextToolComponent.Tool.empty)
+                {
+                    if (viewComponent.Animator.GetBool("Range"))
+                    {
+                        activateContextToolComponent.ActiveTool = ContextToolComponent.Tool.bow;
+                    }
+                }
+
+
                 if (contextToolComponent.CurrentActiveTool != ContextToolComponent.Tool.empty)
                 {
                     contextToolComponent.ToolsPool[((int)contextToolComponent.CurrentActiveTool)].SetActive(false);
