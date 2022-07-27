@@ -16,14 +16,14 @@ namespace Client {
                 ref var _viewComp = ref _viewPool.Value.Get(_state.Value.EntityPlayer);
                 ref var _playerComp = ref _playerPool.Value.Get(_state.Value.EntityPlayer);
                 ref var _interfaceComp = ref _interfacePool.Value.Get(_state.Value.EntityInterface);
-                for (int i = 0; i < _state.Value.CoinTransformList.Count; i++)
-                {
-                    _state.Value.CoinTransformList[i].gameObject.tag = "Coin";
+                //for (int i = 0; i < _state.Value.CoinTransformList.Count; i++)
+                //{
+                //    _state.Value.CoinTransformList[i].gameObject.tag = "Coin";
                     
-                }
-                _state.Value.CoinTransformList.Clear();
-                _state.Value.CoinCount = 0;
-                _interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
+                //}
+                //_state.Value.CoinTransformList.Clear();
+                //_state.Value.CoinCount = 0;
+                //_interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                 for (int i = 0; i < _state.Value.StoneTransformList.Count; i++)
                 {
                     _state.Value.StoneTransformList[i].gameObject.tag = "Stone";

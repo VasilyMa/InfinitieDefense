@@ -53,6 +53,7 @@ namespace Client {
                 tutorialComp.TextHolder.SetActive(false);
                 tutorialComp.HandObject.SetActive(false);
                 tutorialComp.HoleObject.SetActive(false);
+                state.EnemiesWave = -1;
                 ref var countdown = ref world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
                 interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(5);
                 interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);

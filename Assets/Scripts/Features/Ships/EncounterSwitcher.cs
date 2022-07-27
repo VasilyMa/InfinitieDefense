@@ -51,6 +51,7 @@ namespace Client
                 _state.Value.SetNextEncounter();
                 _encounterNeedChange = false;
             }
+
         }
     }
 }
