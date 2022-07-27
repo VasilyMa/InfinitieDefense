@@ -29,7 +29,8 @@ namespace Client {
                 oreViewComp.Animator.SetTrigger("Extract");
 
                 moveComp.stone = stone;
-                moveComp.TargetPosition = new Vector3(oreComp.prefab.transform.position.x + Random.Range(-4, 4), oreComp.prefab.transform.position.y, oreComp.prefab.transform.position.z + Random.Range(-4, 4));
+                //moveComp.TargetPosition = new Vector3(oreComp.prefab.transform.position.x + Random.Range(-4, 4), oreComp.prefab.transform.position.y, oreComp.prefab.transform.position.z + Random.Range(-4, 4));
+                moveComp.TargetPosition = _viewPool.Value.Get(_state.Value.EntityPlayer).Transform.position;
                 moveComp.Speed = 10f;
                 moveComp.outTime = 0.5f;
 

@@ -107,7 +107,7 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.5
-    agentHeight: 2
+    agentHeight: 1
     agentSlope: 25
     agentClimb: 0.4
     ledgeDropHeight: 0
@@ -4411,6 +4411,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83aae995a2ccbcf4e87c158d463d1747, type: 3}
+--- !u!1 &881942862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2027127381885521445, guid: 78f48c007d2ac76448f36b9288f0d38a, type: 3}
+  m_PrefabInstance: {fileID: 8923160709099671680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &882534850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11692,12 +11697,96 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].Encounters.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].Encounters.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].Encounters.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].Encounters.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].Encounters.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].RangeEnemyInShip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.data[4]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[0]
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].RangeEnemyInShip.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].RangeEnemyInShip.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].RangeEnemyInShip.Array.data[2]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6524960714590515784, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: _towerCount
@@ -12031,7 +12120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3693140831500781195, guid: 78f48c007d2ac76448f36b9288f0d38a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 3693140831500781195, guid: 78f48c007d2ac76448f36b9288f0d38a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12065,6 +12154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradePlayerPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8001982743971540675, guid: 78f48c007d2ac76448f36b9288f0d38a, type: 3}
+      propertyPath: _levelObject
+      value: 
+      objectReference: {fileID: 881942862}
     - target: {fileID: 8431299833064253114, guid: 78f48c007d2ac76448f36b9288f0d38a, type: 3}
       propertyPath: m_Color.b
       value: 0

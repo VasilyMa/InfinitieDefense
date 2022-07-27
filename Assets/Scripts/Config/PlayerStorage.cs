@@ -21,7 +21,7 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "2level",
-                UpgradeValue = 1,
+                UpgradeValue = 4,
                 Mesh = PlayerMeshes[0]
             },
             ["2level"] = new PlayerData
@@ -33,7 +33,7 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "3level",
-                UpgradeValue = 1,
+                UpgradeValue = 8,
                 Mesh = PlayerMeshes[1]
             },
             ["3level"] = new PlayerData
@@ -45,7 +45,7 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "4level",
-                UpgradeValue = 1,
+                UpgradeValue = 12,
                 Mesh = PlayerMeshes[2]
             },
             ["4level"] = new PlayerData
@@ -57,7 +57,7 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "5level",
-                UpgradeValue = 1,
+                UpgradeValue = 16,
                 Mesh = PlayerMeshes[3]
             },
             ["5level"] = new PlayerData
@@ -68,7 +68,7 @@ public class PlayerStorage : ScriptableObject
                 Health = 130,
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = true,
-                UpgradeValue = 1,
+                UpgradeValue = 99999,
                 Mesh = PlayerMeshes[4]
             }
         };
