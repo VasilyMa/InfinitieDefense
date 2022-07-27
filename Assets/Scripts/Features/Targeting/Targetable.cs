@@ -9,6 +9,7 @@ namespace Client
         public int TargetEntity;
         public List<int> AllEntityInDetectedZone;
         public List<int> AllEntityInDamageZone;
+        public List<int> EntitysInRangeZone;
 
         public float DistanceToTarget;
     }

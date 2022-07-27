@@ -15,8 +15,6 @@ namespace Client
         private EcsWorldInject _world;
 
         private EcsPool<Targetable> _targetablePool;
-        private EcsPool<ActivateContextToolEvent> _activateContextToolPool;
-        private EcsPool<ContextToolComponent> _contextToolPool;
 
         private string _enemyTag = "Enemy";
         private string _friendlyTag = "Friendly";
@@ -62,7 +60,7 @@ namespace Client
             _targetablePool = _world.Value.GetPool<Targetable>();
 
             ref var targetableComponent = ref _targetablePool.Get(thisObjectEntity);
-            targetableComponent.AllEntityInDamageZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
+            targetableComponent.EntitysInRangeZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
             _enemyInZone++;
 
             _ecsInfoMB.ActivateContextTool(_thisTool);
@@ -83,7 +81,7 @@ namespace Client
             _world = _ecsInfoMB.GetWorld();
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
-            targetableComponent.AllEntityInDamageZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
+            targetableComponent.EntitysInRangeZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
 
             _enemyInZone--;
 
@@ -92,7 +90,7 @@ namespace Client
                 _animator.SetBool("Range", false);
             }
 
-            if (targetableComponent.AllEntityInDamageZone.Count > 0)
+            if (targetableComponent.EntitysInRangeZone.Count > 0)
             {
                 return;
             }

@@ -49,7 +49,7 @@ namespace Client
             _world = _ecsInfoMB.GetWorld();
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
-            targetableComponent.AllEntityInDamageZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
+            targetableComponent.EntitysInRangeZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
         }
 
         private void OnTriggerExit(Collider other)
@@ -67,7 +67,7 @@ namespace Client
             _world = _ecsInfoMB.GetWorld();
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
-            targetableComponent.AllEntityInDamageZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
+            targetableComponent.EntitysInRangeZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
         }
     }
 }

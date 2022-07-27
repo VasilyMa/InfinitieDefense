@@ -15,8 +15,6 @@ namespace Client
         private EcsWorldInject _world;
 
         private EcsPool<Targetable> _targetablePool;
-        private EcsPool<ActivateContextToolEvent> _activateContextToolPool;
-        private EcsPool<ContextToolComponent> _contextToolPool;
 
         private string _enemyTag = "Enemy";
         private string _friendlyTag = "Friendly";

@@ -160,6 +160,7 @@ namespace Client {
 
                             unitTargetableComponent.AllEntityInDetectedZone = new List<int>();
                             unitTargetableComponent.AllEntityInDamageZone = new List<int>();
+                            unitTargetableComponent.EntitysInRangeZone = new List<int>();
 
                             unitTargetWeightComponent.Value = 5;
 

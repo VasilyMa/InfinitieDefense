@@ -276,6 +276,7 @@ namespace Client
                     targetableComponent.TargetObject = null;
                     targetableComponent.AllEntityInDetectedZone = new List<int>();
                     targetableComponent.AllEntityInDamageZone = new List<int>();
+                    targetableComponent.EntitysInRangeZone = new List<int>();
 
                     targetWeightComponent.Value = 10;
 

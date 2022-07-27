@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Client
 {
@@ -22,6 +23,8 @@ namespace Client
                 _miningPool.Value.Del(_state.Value.EntityPlayer);
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
+
+                var entitysInDamageZone = new int[targetableComponent.AllEntityInDamageZone.Count + targetableComponent.EntitysInRangeZone.Count]; // to do ay finish pls
 
                 bool targetObjectInDamageZone = false;
 
