@@ -9,6 +9,7 @@ namespace Client
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<HealthComponent, ViewComponent>, Exc<DeadTag, InactiveTag>> _unitsFilter = default;
+        readonly EcsFilterInject<Inc<HealthComponent, ViewComponent, EnemyTag>, Exc<DeadTag, InactiveTag>> _unitsEnemiesFilter = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
@@ -26,6 +27,7 @@ namespace Client
         readonly EcsPoolInject<LoseEvent> _losePool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
         readonly EcsPoolInject<Player> _playerPool = default;
+        readonly EcsPoolInject<CountdownWaveComponent> _countdownPool = default;
 
         readonly EcsPoolInject<CorpseRemove> _corpsePool = default;
         public void Run (EcsSystems systems)
@@ -49,6 +51,7 @@ namespace Client
 
                 if (_enemyPool.Value.Has(entity))
                 {
+                    _state.Value.EnemiesWave--;
                     ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
                     if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
                     ref var corpseComp = ref _corpsePool.Value.Add(entity);
@@ -84,7 +87,13 @@ namespace Client
                     dropEvent.Point = viewComponent.Transform.position;
                     dropEvent.Item = dropableItem.Item;
                 }
-
+                //start next wave 
+                if (_state.Value.EnemiesWave == 0)
+                {
+                    _countdownPool.Value.Add(_world.Value.NewEntity());
+                    interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(20);
+                    interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
+                }
                 DeactivateTool(entity);
             }
         }

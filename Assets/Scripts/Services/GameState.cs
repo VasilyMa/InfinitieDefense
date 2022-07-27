@@ -42,6 +42,7 @@ namespace Client
         public string CurrentPlayerID;
         public int PlayerExperience;
         public int AllEnemies;
+        public int EnemiesWave;
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, DropableItemStorage dropableItemStorage,
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, WaveStorage waveStorage,
         EnemyConfig enemyConfig, ExplosionStorage explosionStorage)
@@ -172,11 +173,31 @@ namespace Client
             CurrentWave++;
             World.GetPool<ActivateWaveShipsEvent>().Add(World.NewEntity());
             CurrentEncounter = 0;
+            CalculateAllEnemies();
         }
 
         public int GetCurrentWave()
         {
             return CurrentWave;
+        }
+        private void CalculateAllEnemies()
+        {
+            EnemiesWave = 0;
+            for (int i = 0; i < WaveStorage.Waves[CurrentWave].Encounters.Length; i++)
+            {
+                for (int y = 0; y < WaveStorage.Waves[CurrentWave].Encounters[i]; y++)
+                {
+                    for (int x = 0; x < WaveStorage.Waves[CurrentWave].MeleeEnemyInShip[y]; x++)
+                    {
+                        EnemiesWave++;
+                    }
+                    for (int z = 0; z < WaveStorage.Waves[CurrentWave].RangeEnemyInShip[y]; z++)
+                    {
+                        EnemiesWave++;
+                    }
+                }
+            }
+            Debug.Log($"Вражеские пидоры {EnemiesWave}");
         }
     }
 }
