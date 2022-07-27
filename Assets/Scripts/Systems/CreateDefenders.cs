@@ -71,7 +71,6 @@ namespace Client {
                         viewComponent.Transform = viewComponent.GameObject.transform;
                         viewComponent.Rigidbody = viewComponent.GameObject.GetComponent<Rigidbody>();
                         viewComponent.Animator = viewComponent.GameObject.GetComponent<Animator>();
-                        viewComponent.Animator.SetBool("Melee", true);
 
                         viewComponent.BaseLayer = viewComponent.GameObject.layer;
 

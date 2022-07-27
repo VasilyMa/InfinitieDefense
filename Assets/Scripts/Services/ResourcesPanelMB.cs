@@ -18,7 +18,7 @@ namespace Client
         }
         public void UpdateStone()
         {
-            _stoneAmount.text = ($"{_state.RockCount}/0");
+            _stoneAmount.text = ($"{_state.RockCount}");
         }
         public void UpdateGold()
         {

@@ -130,7 +130,6 @@ namespace Client {
                                         enemy = GameObject.Instantiate(_state.Value.EnemyConfig.EnemyPrefab, ship.transform);
                                         unitViewComponent.GameObject = enemy;
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
-                                        unitViewComponent.Animator.SetBool("Melee", true);
                                         
                                         unitDamageComponent.Value = 10f;
 
@@ -142,7 +141,6 @@ namespace Client {
                                         enemy = GameObject.Instantiate(_state.Value.EnemyConfig.RangeEnemyPrefab, ship.transform);
                                         unitViewComponent.GameObject = enemy;
                                         unitViewComponent.Animator = enemy.GetComponent<Animator>();
-                                        unitViewComponent.Animator.SetBool("Range", true);
 
                                         unitDamageComponent.Value = 7f;
 

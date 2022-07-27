@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3402339551144899426}
   - component: {fileID: 4498999742524349726}
   - component: {fileID: 4426905014343548951}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: EnemyDetecter
   m_TagString: DetectedZone
   m_Icon: {fileID: 0}

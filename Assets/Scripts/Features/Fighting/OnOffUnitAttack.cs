@@ -15,6 +15,7 @@ namespace Client
         readonly EcsPoolInject<IsNotMovableTag> _isNotMovablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<InMiningTag> _miningPool  = default;
+        readonly EcsPoolInject<Player> _playerPool = default;
 
         public void Run (EcsSystems systems)
         {
@@ -24,30 +25,67 @@ namespace Client
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                var entitysInDamageZone = new int[targetableComponent.AllEntityInDamageZone.Count + targetableComponent.EntitysInRangeZone.Count]; // to do ay finish pls
+                bool targetObjectInDetecionZone = false;
 
-                bool targetObjectInDamageZone = false;
-
-                foreach (var entityInDamageZone in targetableComponent.AllEntityInDamageZone)
+                foreach (var entityInDetecionZone in targetableComponent.AllEntityInDetectedZone)
                 {
-                    Debug.Log(entityInDamageZone);
-                    if (_viewPool.Value.Get(entityInDamageZone).GameObject == targetableComponent.TargetObject)
+                    if (_viewPool.Value.Get(entityInDetecionZone).GameObject == targetableComponent.TargetObject)
                     {
-                        targetObjectInDamageZone = true;
+                        targetObjectInDetecionZone = true;
                     }
                 }
 
-                if (targetObjectInDamageZone)
+                var entitysInDamageZone = new List<List<int>>();
+                entitysInDamageZone.Add(targetableComponent.AllEntityInDamageZone);
+                entitysInDamageZone.Add(targetableComponent.EntitysInRangeZone);
+
+                bool targetInDamageZone = false;
+
+                foreach (var entitysArray in entitysInDamageZone)
+                {
+                    foreach (var entityInDamageZone in entitysArray)
+                    {
+                        if (_viewPool.Value.Get(entityInDamageZone).GameObject == targetableComponent.TargetObject)
+                        {
+                            targetInDamageZone = true;
+                        }
+                    }
+                }
+
+                if (targetInDamageZone)
+                {
+                    if (!_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Add(entity);
+                }
+                else
+                {
+                    if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
+                }
+
+                if (targetObjectInDetecionZone)
                 {
                     if (!_inFightPool.Value.Has(entity)) _inFightPool.Value.Add(entity);
-                    if (!_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Add(entity);
                     viewComponent.Animator.SetBool("Attack", true);
                 }
                 else
                 {
                     if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
-                    if (_isNotMovablePool.Value.Has(entity)) _isNotMovablePool.Value.Del(entity);
                     viewComponent.Animator.SetBool("Attack", false);
+                }
+
+                // this is very stupid kostil'. Im sry
+
+                if (_playerPool.Value.Has(entity))
+                {
+                    if (targetableComponent.AllEntityInDetectedZone.Count > 0)
+                    {
+                        if (!_inFightPool.Value.Has(entity)) _inFightPool.Value.Add(entity);
+                        viewComponent.Animator.SetBool("Attack", true);
+                    }
+                    else
+                    {
+                        if (_inFightPool.Value.Has(entity)) _inFightPool.Value.Del(entity);
+                        viewComponent.Animator.SetBool("Attack", false);
+                    }
                 }
             }
         }

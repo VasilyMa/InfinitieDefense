@@ -1,11 +1,12 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using UnityEngine;
 
 namespace Client
 {
     sealed class UnitMovingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<UnitTag, ViewComponent, Movable, Targetable>, Exc<InFightTag, InactiveTag, DeadTag, IsNotMovableTag>> _allUnitsFilter = default;
+        readonly EcsFilterInject<Inc<UnitTag, ViewComponent, Movable, Targetable>, Exc<InactiveTag, DeadTag, IsNotMovableTag>> _allUnitsFilter = default;
 
         readonly EcsPoolInject<Movable> _movablePool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
@@ -26,6 +27,7 @@ namespace Client
 
                 if (movableComponent.Destination == null)
                 {
+                    Debug.Log("Остановили чела");
                     viewComponent.Animator.SetBool("Run", false);
                     viewComponent.NavMeshAgent.ResetPath();
                     continue;

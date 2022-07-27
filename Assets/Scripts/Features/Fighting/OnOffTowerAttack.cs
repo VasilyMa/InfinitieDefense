@@ -19,7 +19,7 @@ namespace Client
                 ref var targetableComponent = ref _targetablePool.Value.Get(towerEntity);
                 ref var viewComponent = ref _viewPool.Value.Get(towerEntity);
 
-                if (targetableComponent.AllEntityInDamageZone.Count == 0)
+                if (targetableComponent.EntitysInRangeZone.Count == 0)
                 {
                     if (_inFightPool.Value.Has(towerEntity)) _inFightPool.Value.Del(towerEntity);
                     //здесь башня должна уйти в своё стандартное положение
