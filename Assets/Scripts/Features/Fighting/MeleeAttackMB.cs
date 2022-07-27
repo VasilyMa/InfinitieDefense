@@ -98,7 +98,6 @@ namespace Client
                 return;
             }
 
-            _animator.SetLayerWeight(1, 0);
             _ecsInfoMB.DeactivateContextTool(_thisTool);
         }
     }

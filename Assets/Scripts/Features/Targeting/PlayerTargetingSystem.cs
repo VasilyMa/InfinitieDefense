@@ -7,7 +7,7 @@ namespace Client
 {
     sealed class PlayerTargetingSystem : IEcsRunSystem
     {
-        readonly EcsFilterInject<Inc<Targetable, Player>, Exc<DeadTag>> _playerFilter = default;
+        readonly EcsFilterInject<Inc<Targetable, Player, InFightTag>, Exc<DeadTag>> _playerFilter = default;
 
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
@@ -24,9 +24,7 @@ namespace Client
                 {
                     if (_deadPool.Value.Has(targetableComponent.TargetEntity))
                     {
-                        targetableComponent.TargetEntity = -1;
-                        targetableComponent.TargetObject = null;
-                        viewComponent.EcsInfoMB.ResetTarget();
+                        ResetTarget(ref targetableComponent, ref viewComponent);
                     }
                 }
 
@@ -37,23 +35,31 @@ namespace Client
 
                 if (targetableComponent.AllEntityInDetectedZone.Count == 0)
                 {
-                    targetableComponent.TargetEntity = -1;
-                    targetableComponent.TargetObject = null;
-                    viewComponent.EcsInfoMB.ResetTarget();
+                    ResetTarget(ref targetableComponent, ref viewComponent);
                     continue;
+                }
+
+                if (targetableComponent.AllEntityInDamageZone.Count > 0)
+                {
+                    if (targetableComponent.TargetEntity != targetableComponent.AllEntityInDamageZone[0])
+                    {
+                        targetableComponent.TargetEntity = targetableComponent.AllEntityInDamageZone[0];
+                        targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
+                        viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
+                    }
                 }
 
                 var allDeadEntitys = new List<int>();
 
-                var entitysInDamageZone = new List<List<int>>();
-                entitysInDamageZone.Add(targetableComponent.AllEntityInDamageZone);
-                entitysInDamageZone.Add(targetableComponent.EntitysInRangeZone);
+                var DamageZones = new List<List<int>>();
+                DamageZones.Add(targetableComponent.AllEntityInDamageZone);
+                DamageZones.Add(targetableComponent.EntitysInRangeZone);
 
-                bool targetInDamageZone = false;
+                bool targetInAnyDamageZone = false;
 
-                foreach (var entitysArray in entitysInDamageZone)
+                foreach (var zoneType in DamageZones)
                 {
-                    foreach (var entityInDamageZone in entitysArray)
+                    foreach (var entityInDamageZone in zoneType)
                     {
                         if (_deadPool.Value.Has(entityInDamageZone))
                         {
@@ -63,7 +69,7 @@ namespace Client
 
                         if (_viewPool.Value.Get(entityInDamageZone).GameObject == targetableComponent.TargetObject)
                         {
-                            targetInDamageZone = true;
+                            targetInAnyDamageZone = true;
                         }
                     }
                 }
@@ -75,10 +81,9 @@ namespace Client
                         allDeadEntitys.Add(entityInDamageZone);
                         Debug.Log("Энтити находилась в пуле мертвых");
                     }
-
-                    if (_viewPool.Value.Get(entityInDamageZone).GameObject == targetableComponent.TargetObject)
+                    else if (_viewPool.Value.Get(entityInDamageZone).GameObject == targetableComponent.TargetObject)
                     {
-                        targetInDamageZone = true;
+                        targetInAnyDamageZone = true;
                     }
                 }
 
@@ -90,13 +95,11 @@ namespace Client
 
                 if (targetableComponent.EntitysInRangeZone.Count == 0 && targetableComponent.AllEntityInDamageZone.Count == 0)
                 {
-                    targetableComponent.TargetEntity = -1;
-                    targetableComponent.TargetObject = null;
-                    viewComponent.EcsInfoMB.ResetTarget();
+                    ResetTarget(ref targetableComponent, ref viewComponent);
                     continue;
                 }
 
-                if (!targetInDamageZone)
+                if (!targetInAnyDamageZone)
                 {
                     if (targetableComponent.AllEntityInDamageZone.Count > 0)
                     {
@@ -126,6 +129,13 @@ namespace Client
                     viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
                 }
             }
+        }
+
+        private void ResetTarget(ref Targetable targetableComponent, ref ViewComponent viewComponent)
+        {
+            targetableComponent.TargetEntity = -1;
+            targetableComponent.TargetObject = null;
+            viewComponent.EcsInfoMB.ResetTarget();
         }
     }
 }
