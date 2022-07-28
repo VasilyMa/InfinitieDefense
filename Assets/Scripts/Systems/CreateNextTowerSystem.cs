@@ -124,17 +124,17 @@ namespace Client
                     destroyEffectsComponent.DestroyFire.Stop();
                     destroyEffectsComponent.DestroyFire.startSize = 0;
 
-                    foreach (var item in _tutorPool.Value)
-                    {
-                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                        if (_state.Value.Saves.TutorialStage <= 7)
-                        {
-                            GameObject.Destroy(tutorComp.TutorialCursor);
-                            tutorComp.TutorialStage = 8;
-                            _state.Value.Saves.TutorialStage = 8;
-                            _state.Value.Saves.SaveTutorial(8);
-                        }
-                    }
+                    //foreach (var item in _tutorPool.Value)
+                    //{
+                    //    ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                    //    if (_state.Value.Saves.TutorialStage <= 7)
+                    //    {
+                    //        GameObject.Destroy(tutorComp.TutorialCursor);
+                    //        tutorComp.TutorialStage = 8;
+                    //        _state.Value.Saves.TutorialStage = 8;
+                    //        _state.Value.Saves.SaveTutorial(8);
+                    //    }
+                    //}
 
                     /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
