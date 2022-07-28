@@ -36,7 +36,7 @@ namespace Client {
                 filterComp.StoneTransform.SetParent(playerComp.ResHolderTransform);
                 //todo target
                 moveToBagComp.StartPosition = moveToBagComp.Transform.localPosition;
-                moveToBagComp.TargetPosition = new Vector3(0, _state.Value.RockCount * 0.6f, 0);
+                moveToBagComp.TargetPosition = new Vector3(0, _state.Value.RockCount * 0.36f, 0);
                 moveToBagComp.TargetRotation = new Quaternion(0, 0, 0, 0);
                 moveToBagComp.Coin = false;
 

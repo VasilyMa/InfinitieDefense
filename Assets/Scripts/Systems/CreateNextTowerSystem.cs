@@ -29,6 +29,7 @@ namespace Client
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
         readonly EcsPoolInject<DrawingDetectionZone> _drawingDetectionZonePool = default;
         readonly EcsPoolInject<DrawDetectionZoneEvent> _drawDetectionZoneEventPool = default;
+        readonly EcsPoolInject<DestroyEffects> _destroyEffectsPool = default;
         private string Model;
 
         public void Run(EcsSystems systems)
@@ -41,12 +42,21 @@ namespace Client
                 ref var radiusComp = ref _radiusPool.Value.Get(eventEntity);
                 ref var viewComp = ref _viewPool.Value.Get(eventEntity);
                 ref var upgradePointComp = ref _upgradePoint.Value.Get(_state.Value.TowersEntity[towerIndex]);
+                ref var healthComponent = ref _healthWeightPool.Value.Get(eventEntity);
+
                 if (!_targetWeightPool.Value.Has(eventEntity))
                 {
                     _targetWeightPool.Value.Add(eventEntity);
                 }
 
                 ref var targetWeightComponent = ref _targetWeightPool.Value.Get(eventEntity);
+
+                if (!_destroyEffectsPool.Value.Has(eventEntity))
+                {
+                    _destroyEffectsPool.Value.Add(eventEntity);
+                }
+
+                ref var destroyEffectsComponent = ref _destroyEffectsPool.Value.Get(eventEntity);
 
                 viewComp.UpgradeParticleSystem.Play();
                 
@@ -66,6 +76,9 @@ namespace Client
                     {
                         viewComp.ModelMeshFilter.mesh = _state.Value.TowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
                     }
+
+                    healthComponent.MaxValue = _state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
+                    healthComponent.CurrentValue = _state.Value.TowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
 
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
                     radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
@@ -97,6 +110,18 @@ namespace Client
                     levelPop.target = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 10f, viewComp.GameObject.transform.position.z);
                     levelPop.TimeOut = 2f;
                     levelPop.LevelPopUp.SetActive(true);
+
+                    if (destroyEffectsComponent.DestroyEffectsMB == null)
+                    {
+                        destroyEffectsComponent.DestroyEffectsMB = viewComp.GameObject.GetComponentInChildren<DestroyEffectsMB>();
+                        destroyEffectsComponent.DestroyExplosion = destroyEffectsComponent.DestroyEffectsMB.GetDestroyExplosion();
+                        destroyEffectsComponent.DestroyFire = destroyEffectsComponent.DestroyEffectsMB.GetDestroyFire();
+
+                        destroyEffectsComponent.DestroyExplosion.Stop();
+                        destroyEffectsComponent.DestroyFire.Stop();
+                    }
+
+                    destroyEffectsComponent.DestroyFire.startSize = 0;
 
                     foreach (var item in _tutorPool.Value)
                     {
@@ -170,7 +195,6 @@ namespace Client
                     ref var targetableComponent = ref _targetablePool.Value.Get(eventEntity);
                     ref var damageComponent = ref _damagePool.Value.Get(eventEntity);
                     ref var cooldownComponent = ref _cooldownPool.Value.Get(eventEntity);
-                    ref var healthComponent = ref _healthWeightPool.Value.Get(eventEntity);
                     ref var drawingDetectionZoneComponent = ref _drawingDetectionZonePool.Value.Get(eventEntity);
 
                     if (filterComp.Change)
@@ -190,6 +214,18 @@ namespace Client
                     {
                         viewComp.ModelMeshFilter.mesh = _state.Value.DefenseTowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
                     }
+
+                    if (destroyEffectsComponent.DestroyEffectsMB == null)
+                    {
+                        destroyEffectsComponent.DestroyEffectsMB = viewComp.GameObject.GetComponentInChildren<DestroyEffectsMB>();
+                        destroyEffectsComponent.DestroyExplosion = destroyEffectsComponent.DestroyEffectsMB.GetDestroyExplosion();
+                        destroyEffectsComponent.DestroyFire = destroyEffectsComponent.DestroyEffectsMB.GetDestroyFire();
+
+                        destroyEffectsComponent.DestroyExplosion.Stop();
+                        destroyEffectsComponent.DestroyFire.Stop();
+                    }
+
+                    destroyEffectsComponent.DestroyFire.startSize = 0;
 
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
                     //radiusComp.RadiusTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.RadiusPrefab, viewComp.GameObject.transform).GetComponent<Transform>();
@@ -257,29 +293,38 @@ namespace Client
                     viewComp.DamageZone = viewComp.TowerAttackMB.GetComponent<SphereCollider>();
                     viewComp.DamageZone.radius = radiusComp.Radius - 1;
 
-                    Transform[] allChildren = viewComp.GameObject.GetComponentsInChildren<Transform>();
-                    foreach (var child in allChildren)
+                    if (viewComp.TowerFirePoint == null && viewComp.TowerWeapon == null) // initialize Tower Weapon
                     {
-                        if (child.CompareTag("Weapon"))
+
+                        Transform[] allChildren = viewComp.GameObject.GetComponentsInChildren<Transform>();
+                        foreach (var child in allChildren)
                         {
-                            viewComp.TowerWeapon = child.gameObject;
-
-                            Transform[] allWeaponChildren = viewComp.TowerWeapon.GetComponentsInChildren<Transform>();
-
-                            foreach (var weaponChild in allWeaponChildren)
+                            if (child.CompareTag("Weapon"))
                             {
-                                if (weaponChild.CompareTag("Fire Point"))
+                                viewComp.TowerWeapon = child.gameObject;
+
+                                Transform[] allWeaponChildren = viewComp.TowerWeapon.GetComponentsInChildren<Transform>();
+
+                                foreach (var weaponChild in allWeaponChildren)
                                 {
-                                    viewComp.TowerFirePoint = weaponChild.gameObject;
+                                    if (weaponChild.CompareTag("Fire Point"))
+                                    {
+                                        viewComp.TowerFirePoint = weaponChild.gameObject;
+                                    }
                                 }
                             }
-                        }
 
-                        if (child.CompareTag("DetectedZone"))
-                        {
-                            viewComp.DetectedZone = child.GetComponent<SphereCollider>();
-                            viewComp.DetectedZone.radius = radiusComp.Radius;
+                            if (child.CompareTag("DetectedZone"))
+                            {
+                                viewComp.DetectedZone = child.GetComponent<SphereCollider>();
+                                viewComp.DetectedZone.radius = radiusComp.Radius;
+                            }
                         }
+                    }
+                    else
+                    {
+                        if (!viewComp.TowerWeapon.activeSelf) viewComp.TowerWeapon.SetActive(true);
+                        if (!viewComp.TowerFirePoint.activeSelf) viewComp.TowerFirePoint.SetActive(true);
                     }
 
                     if (viewComp.FieryExplosion == null)
@@ -296,7 +341,7 @@ namespace Client
                     targetWeightComponent.Value = 10;
 
                     cooldownComponent.MaxValue = _state.Value.DefenseTowerStorage.GetCooldownByID(_state.Value.DefenseTowers[towerIndex]);
-                    cooldownComponent.CurrentValue = 0;
+                    cooldownComponent.CurrentValue = cooldownComponent.MaxValue / 2;
 
                     healthComponent.MaxValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);
                     healthComponent.CurrentValue = _state.Value.DefenseTowerStorage.GetHealthByID(_state.Value.DefenseTowers[towerIndex]);

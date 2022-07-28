@@ -21,8 +21,9 @@ namespace Client
         readonly EcsPoolInject<DropByDie> _dropPool = default;
         readonly EcsPoolInject<DropableItem> _dropableItemPool = default;
         readonly EcsPoolInject<ContextToolComponent> _contextToolPool = default;
-        readonly EcsPoolInject<ActivateContextToolEvent> _activateContextToolPool = default;
+        readonly EcsPoolInject<DestroyEffects> _destroyEffectsPool = default;
 
+        readonly EcsPoolInject<ActivateContextToolEvent> _activateContextToolPool = default;
         readonly EcsPoolInject<DropEvent> _dropEventPool = default;
         readonly EcsPoolInject<LoseEvent> _losePool = default;
         readonly EcsPoolInject<DroppedGoldEvent> _goldPool = default;
@@ -41,7 +42,11 @@ namespace Client
 
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
                 ref var interfaceComponent = ref _interfacePool.Value.Get(_state.Value.EntityInterface);
-                if (viewComponent.GameObject) viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
+                if (viewComponent.GameObject)
+                {
+                    viewComponent.BaseLayer = viewComponent.GameObject.layer;
+                    viewComponent.GameObject.layer = LayerMask.NameToLayer("Dead");
+                }
                 if (viewComponent.Rigidbody) viewComponent.Rigidbody.velocity = Vector3.zero;
                 if (viewComponent.Animator)
                 {
@@ -95,10 +100,27 @@ namespace Client
                     interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
                 }
                 DeactivateTool(entity);
+
+                ActivateDestroyExplosion(entity);
             }
         }
 
-        private void DeactivateTool(int entity)
+        private void ActivateDestroyExplosion(in int entity)
+        {
+            if (!_destroyEffectsPool.Value.Has(entity)) return;
+
+            ref var destroyEffectsComponent = ref _destroyEffectsPool.Value.Get(entity);
+            destroyEffectsComponent.DestroyExplosion.Play();
+
+            ref var viewComponent = ref _viewPool.Value.Get(entity);
+
+            if (viewComponent.TowerWeapon == null) return;
+
+            viewComponent.TowerWeapon.SetActive(false);
+            viewComponent.TowerFirePoint.SetActive(false);
+        }
+
+        private void DeactivateTool(in int entity)
         {
             if (!_contextToolPool.Value.Has(entity))
             {

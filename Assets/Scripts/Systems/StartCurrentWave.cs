@@ -25,7 +25,7 @@ namespace Client {
         private float _shipAngle = 0f;
         private int _encounter = 0;
         private int _enemyCountInEncounter = 0;
-        private int _enemySpawnRadius = 60;
+        private int _enemySpawnRadius = 90;
 
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
@@ -61,7 +61,7 @@ namespace Client {
                         targetableComponent.TargetObject = _viewMainTowerComponent.GameObject;
 
                         ref var movableComponent = ref _world.Value.GetPool<Movable>().Add(shipEntity);
-                        movableComponent.Speed = 10f;
+                        movableComponent.Speed = 8f;
 
                         ref var shipComponent = ref _shipPool.Value.Add(shipEntity);
                         shipComponent.Encounter = _encounter;

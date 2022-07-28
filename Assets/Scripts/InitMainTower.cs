@@ -18,6 +18,7 @@ namespace Client
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradeCanvasPool = default;
         readonly EcsPoolInject<CircleComponent> _circlePool = default;
         readonly EcsPoolInject<CreateNextTowerEvent> _createNextTowerPool = default;
+        readonly EcsPoolInject<DestroyEffects> _destroyEffectsPool = default;
         private float Angle = 0;
 
         public void Init (EcsSystems systems)
@@ -30,6 +31,7 @@ namespace Client
             ref var mainTowerComp = ref _mainTowerPool.Value.Add(mainTowerEntity);
             ref var upgradeComponent = ref _upgradeCanvasPool.Value.Add(mainTowerEntity);
             ref var towerComp = ref _towerPool.Value.Add(mainTowerEntity);
+            ref var destroyEffectsComponent = ref _destroyEffectsPool.Value.Add(mainTowerEntity);
             towerComp.Level = 1;
             mainTowerComp.DefendersPositions = new Vector3[10];
 
@@ -114,6 +116,13 @@ namespace Client
             }
             targetWeightComponent.Value = 0;
 
+            destroyEffectsComponent.DestroyEffectsMB = viewComponent.GameObject.GetComponentInChildren<DestroyEffectsMB>();
+            destroyEffectsComponent.DestroyExplosion = destroyEffectsComponent.DestroyEffectsMB.GetDestroyExplosion();
+            destroyEffectsComponent.DestroyFire = destroyEffectsComponent.DestroyEffectsMB.GetDestroyFire();
+
+            destroyEffectsComponent.DestroyExplosion.Stop();
+            destroyEffectsComponent.DestroyFire.Stop();
+
             int circleRadiusLevel = 0;
             int angleOffset = 90;
             int towerCount = 0;
@@ -180,62 +189,6 @@ namespace Client
                     }
                 }
             }
-
-
-            /*viewComponent.LineRenderer = viewComponent.GameObject.GetComponent<LineRenderer>();
-            viewComponent.LineRenderer.loop = true;
-
-            float fov = 360f;
-            Vector3 origin = Vector3.zero;
-            int triangelesCount = 45;
-            float angle = 0f;
-            float angleIncrease = fov / triangelesCount;
-            float viewDistence = radiusComp.Radius;
-
-            Vector3[] vertices = new Vector3[triangelesCount + 1 + 1];
-            int[] trianglesVertices = new int[triangelesCount * 3];
-            Vector3[] circleVerticesv = new Vector3[triangelesCount];
-            viewComponent.LineRenderer.positionCount = triangelesCount;
-
-            vertices[0] = origin;
-
-            int vertexIndex = 1;
-            int triangleIndex = 0;
-            int circleIndex = 0;
-            for (int i = 0; i <= triangelesCount; i++)
-            {
-                float angleRad = angle * (Mathf.PI / 180f);
-                Vector3 VectorFromAngle = new Vector3(Mathf.Cos(angleRad), 0, Mathf.Sin(angleRad));
-
-                Vector3 vertex = origin + VectorFromAngle * viewDistence;
-                vertices[vertexIndex] = vertex;
-
-                if (i > 0 && i <= circleVerticesv.Length)
-                {
-                    circleVerticesv[circleIndex] = vertices[vertexIndex];
-                    circleIndex++;
-                }
-
-                if (i > 0)
-                {
-                    trianglesVertices[triangleIndex + 0] = 0;
-                    trianglesVertices[triangleIndex + 1] = vertexIndex - 1;
-                    trianglesVertices[triangleIndex + 2] = vertexIndex;
-
-                    triangleIndex += 3;
-                }
-
-                vertexIndex++;
-                angle -= angleIncrease;
-            }
-            ref var circleComp = ref _circlePool.Value.Add(_world.Value.NewEntity());
-            circleComp.maxDistance = radiusComp.Radius;
-
-            viewComponent.LineRenderer.SetPositions(circleVerticesv);*/
-
-            //Debug.Log(animationCurve.length) ;
-
-            //viewComponent.LineRenderer.widthCurve = 0.5f; //to do ay animCurve for dottedline
         }
     }
 }

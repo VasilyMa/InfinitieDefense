@@ -20,7 +20,7 @@ namespace Client
 
         readonly EcsSharedInject<GameState> _state;
 
-        public void Run (EcsSystems systems)
+        public void Run (EcsSystems systems) // to do ay if unit is not in fight do retarget on any object in hes DetectedZone
         {
             foreach(var entity in _targetableFilter.Value)
             {

@@ -40,6 +40,7 @@ namespace Client
                 orePool.MaxAmount = _amount;
                 orePool.CurrentAmount = _amount;
                 orePool.IsEnable = false;
+                orePool.respawnTime = 10;
                 //orePool.cursor = orePool.prefab.transform.GetChild(1).gameObject;
                 //orePool.cursor.SetActive(false);
                 GameObject oreModel = ore.transform.GetChild(0).gameObject;

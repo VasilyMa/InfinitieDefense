@@ -15,6 +15,7 @@ namespace Client
         readonly EcsPoolInject<DamagingEvent> _damagingEventPool = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
+        readonly EcsPoolInject<DestroyEffects> _destroyEffectsPool = default;
 
         readonly EcsPoolInject<TargetingEvent> _targetingEventPool = default;
         readonly EcsPoolInject<Targetable> _targetablePool = default;
@@ -79,7 +80,6 @@ namespace Client
                     vibrationEvent.Vibration = VibrationEvent.VibrationType.MediumImpact;
                 }
 
-
                 if (_targetablePool.Value.Has(damagingEventComponent.TargetEntity))
                 {
                     ref var targetingEvent = ref _targetingEventPool.Value.Add(_world.Value.NewEntity());
@@ -87,6 +87,22 @@ namespace Client
                     targetingEvent.TargetingEntity = damagingEventComponent.TargetEntity;
                 }
 
+                IncreaseFireEffect(damagingEventComponent.TargetEntity, healthPointComponent.CurrentValue, healthPointComponent.MaxValue);
+            }
+        }
+
+        private void IncreaseFireEffect(in int entity, in float currentHP, in float maxHP)
+        {
+            if (_destroyEffectsPool.Value.Has(entity))
+            {
+                ref var destroyEffectsComponent = ref _destroyEffectsPool.Value.Get(entity);
+
+                if (destroyEffectsComponent.DestroyFire.isStopped) destroyEffectsComponent.DestroyFire.Play();
+
+                float maxFireValue = 3;
+                float fireMultiply = 1 - (currentHP / maxHP);
+
+                destroyEffectsComponent.DestroyFire.startSize = maxFireValue * fireMultiply;
             }
         }
     }
