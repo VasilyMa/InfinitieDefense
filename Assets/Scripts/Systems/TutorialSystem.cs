@@ -27,7 +27,7 @@ namespace Client {
                         player = _player.Value.Get(_state.Value.EntityPlayer).GameObject;
                         player.transform.GetChild(5).GetComponent<BoxCollider>().enabled = false;
                         tutorialComp.HandObject.SetActive(true);
-                        tutorialComp.Background.SetActive(true);
+                        //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.DragToMove.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Drag to move";
@@ -39,7 +39,7 @@ namespace Client {
                             _state.Value.Saves.SaveTutorial(1);
                             tutorialComp.Animator.SetBool("isSwipe", false);
                             tutorialComp.HandObject.SetActive(false);
-                            tutorialComp.Background.SetActive(false);
+                            //tutorialComp.Background.SetActive(false);
                             tutorialComp.TextHolder.SetActive(false);
                             tutorialComp.DragToMove.SetActive(false);
                         }
@@ -47,7 +47,7 @@ namespace Client {
                     case 1:
                         tutorialComp.DragToMove.SetActive(false);
                         tutorialComp.HandObject.SetActive(false);
-                        tutorialComp.Background.SetActive(false);
+                        //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Wait of the enemy's wave";
                         _world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
@@ -61,14 +61,14 @@ namespace Client {
                     case 3:
                         tutorialComp.DragToMove.SetActive(false);
                         tutorialComp.HandObject.SetActive(false);
-                        tutorialComp.Background.SetActive(false);
+                        //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Pick up the coins";
                         break;
                     case 4:
                         tutorialComp.DragToMove.SetActive(false);
                         tutorialComp.HandObject.SetActive(false);
-                        tutorialComp.Background.SetActive(false);
+                        //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the main upgrade point";
                         var cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(0f, 4.5f, -2.5f), Quaternion.identity);
@@ -82,7 +82,7 @@ namespace Client {
                     case 6:
                         tutorialComp.DragToMove.SetActive(false);
                         tutorialComp.HandObject.SetActive(false);
-                        tutorialComp.Background.SetActive(false);
+                        //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the player upgrade point";
                         cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(-4.5f, 4.5f, -6.5f), Quaternion.identity);
@@ -94,7 +94,7 @@ namespace Client {
                     case 8:
                         tutorialComp.DragToMove.SetActive(false);
                         tutorialComp.HandObject.SetActive(false);
-                        tutorialComp.Background.SetActive(false);
+                        //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the ore";
                         player.transform.GetChild(5).GetComponent<BoxCollider>().enabled = true;
@@ -107,7 +107,7 @@ namespace Client {
                     case 10:
                         tutorialComp.DragToMove.SetActive(false);
                         tutorialComp.HandObject.SetActive(false);
-                        tutorialComp.Background.SetActive(false);
+                        //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the tower upgrade point";
                         cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(1f, 4.5f, -12.5f), Quaternion.identity);
@@ -119,7 +119,7 @@ namespace Client {
                     case 12:
                         tutorialComp.DragToMove.SetActive(false);
                         tutorialComp.HandObject.SetActive(false);
-                        tutorialComp.Background.SetActive(false);
+                        //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(false);
                         _world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
                         interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(30);

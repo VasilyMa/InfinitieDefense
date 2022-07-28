@@ -45,7 +45,7 @@ namespace Client {
             tutorialComp.Tutorial = GameObject.Find("Tutorial");
             tutorialComp.TextHolder = GameObject.Find("TextHolder");
             tutorialComp.HandObject = GameObject.Find("Hand");
-            tutorialComp.Background = GameObject.Find("Background");
+            //tutorialComp.Background = GameObject.Find("Background");
             tutorialComp.DragToMove = GameObject.Find("DragToMove");
             tutorialComp.TutorialStage = state.Saves.TutorialStage;
             tutorialComp.Animator = tutorialComp.Tutorial.GetComponent<Animator>();
@@ -53,7 +53,7 @@ namespace Client {
             {
                 tutorialComp.TextHolder.SetActive(false);
                 tutorialComp.HandObject.SetActive(false);
-                tutorialComp.Background.SetActive(false);
+                //tutorialComp.Background.SetActive(false);
                 tutorialComp.DragToMove.SetActive(false);
                 state.EnemiesWave = -1;
                 ref var countdown = ref world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
