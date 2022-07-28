@@ -116,11 +116,11 @@ namespace Client
                         destroyEffectsComponent.DestroyEffectsMB = viewComp.GameObject.GetComponentInChildren<DestroyEffectsMB>();
                         destroyEffectsComponent.DestroyExplosion = destroyEffectsComponent.DestroyEffectsMB.GetDestroyExplosion();
                         destroyEffectsComponent.DestroyFire = destroyEffectsComponent.DestroyEffectsMB.GetDestroyFire();
-
-                        destroyEffectsComponent.DestroyExplosion.Stop();
-                        destroyEffectsComponent.DestroyFire.Stop();
                     }
 
+
+                    destroyEffectsComponent.DestroyExplosion.Stop();
+                    destroyEffectsComponent.DestroyFire.Stop();
                     destroyEffectsComponent.DestroyFire.startSize = 0;
 
                     foreach (var item in _tutorPool.Value)
@@ -215,16 +215,20 @@ namespace Client
                         viewComp.ModelMeshFilter.mesh = _state.Value.DefenseTowerStorage.GetTowerMeshByID(_state.Value.DefenseTowers[towerIndex]);
                     }
 
+                    if (viewComp.GameObject.layer == LayerMask.NameToLayer("Dead"))
+                    {
+                        viewComp.GameObject.layer = viewComp.BaseLayer;
+                    }
+
                     if (destroyEffectsComponent.DestroyEffectsMB == null)
                     {
                         destroyEffectsComponent.DestroyEffectsMB = viewComp.GameObject.GetComponentInChildren<DestroyEffectsMB>();
                         destroyEffectsComponent.DestroyExplosion = destroyEffectsComponent.DestroyEffectsMB.GetDestroyExplosion();
                         destroyEffectsComponent.DestroyFire = destroyEffectsComponent.DestroyEffectsMB.GetDestroyFire();
-
-                        destroyEffectsComponent.DestroyExplosion.Stop();
-                        destroyEffectsComponent.DestroyFire.Stop();
                     }
 
+                    destroyEffectsComponent.DestroyExplosion.Stop();
+                    destroyEffectsComponent.DestroyFire.Stop();
                     destroyEffectsComponent.DestroyFire.startSize = 0;
 
                     radiusComp.Radius = _state.Value.DefenseTowerStorage.GetRadiusByID(_state.Value.DefenseTowers[towerIndex]);
