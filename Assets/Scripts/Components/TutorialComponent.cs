@@ -5,9 +5,10 @@ namespace Client {
         public int TutorialStage;
         public GameObject Tutorial;
         public GameObject HandObject;
-        public GameObject HoleObject;
+        public GameObject Background;
         public GameObject TextHolder;
         public GameObject TutorialCursor;
+        public GameObject DragToMove;
         public Animator Animator;
     }
 }

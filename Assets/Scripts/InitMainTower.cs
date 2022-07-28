@@ -76,6 +76,9 @@ namespace Client
             var upgradePointMB = upgradePoint.GetComponent<UpgradePointMB>();
             upgradePointMB.TowerIndex = 0;
 
+            if (_state.Value.Saves.TutorialStage <= 11)
+                upgradeComponent.point.SetActive(false);
+
             ref var viewComponent = ref _viewPool.Value.Add(mainTowerEntity);
             viewComponent.GameObject = mainTower;
             viewComponent.ModelMeshFilter = viewComponent.GameObject.transform.GetChild(2).GetComponent<MeshFilter>();

@@ -20,6 +20,7 @@ namespace Client
         private EcsPool<CanvasUpgradeComponent> _upgradeCanvasPool;
         private EcsPool<UpgradeTimerEvent> _timerPool;
         private EcsPool<UpgradePlayerPointComponent> _playerUpgradePool;
+        private EcsPool<TutorialComponent> _tutorPool;
 
         public void Init(EcsWorld world, GameState state)
         {
@@ -36,6 +37,7 @@ namespace Client
             _coinPickupEventPool = world.GetPool<CoinPickupEvent>();
             _timerPool = world.GetPool<UpgradeTimerEvent>();
             _playerUpgradePool = world.GetPool<UpgradePlayerPointComponent>();
+            _tutorPool = world.GetPool<TutorialComponent>();
             _world = world;
         }
 
@@ -46,6 +48,10 @@ namespace Client
                 case "Coin":
                     {
                         if (_deadPool.Has(_state.EntityPlayer))
+                        {
+                            break;
+                        }
+                        if(_state.Saves.TutorialStage < 3)
                         {
                             break;
                         }

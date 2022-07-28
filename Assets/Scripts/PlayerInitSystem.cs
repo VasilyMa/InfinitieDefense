@@ -69,6 +69,8 @@ namespace Client
             upgradePlayerPointComponent.Point = GameObject.FindGameObjectWithTag("UpgradePlayerPoint");
             upgradePlayerPointComponent.Point.GetComponent<PlayerUpgradePointMB>().UpdateLevelInfo(_state.Value.PlayerStorage.GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
             upgradePlayerPointComponent.Point.GetComponent<PlayerUpgradePointMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            if(_state.Value.Saves.TutorialStage <= 11)
+                upgradePlayerPointComponent.Point.SetActive(false);
             upgradeComponent.timerResources = upgradePlayerPointComponent.Point.transform.GetChild(2).GetComponent<TimerResourcesMB>();
             upgradeComponent.timerResources.ResourcesDrop(0);
             upgradeComponent.timerResources.Init(systems.GetWorld(), systems.GetShared<GameState>());
