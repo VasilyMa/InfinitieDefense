@@ -8,6 +8,7 @@ namespace Client {
         public GameObject HoleObject;
         public GameObject TextHolder;
         public GameObject TutorialCursor;
+        public GameObject DragToMove;
         public Animator Animator;
     }
 }

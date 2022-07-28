@@ -29,6 +29,7 @@ namespace Client
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
         readonly EcsPoolInject<DrawingDetectionZone> _drawingDetectionZonePool = default;
         readonly EcsPoolInject<DrawDetectionZoneEvent> _drawDetectionZoneEventPool = default;
+        readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
         private string Model;
 
         public void Run(EcsSystems systems)
@@ -98,17 +99,7 @@ namespace Client
                     levelPop.TimeOut = 2f;
                     levelPop.LevelPopUp.SetActive(true);
 
-                    foreach (var item in _tutorPool.Value)
-                    {
-                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                        if (_state.Value.Saves.TutorialStage <= 7)
-                        {
-                            GameObject.Destroy(tutorComp.TutorialCursor);
-                            tutorComp.TutorialStage = 8;
-                            _state.Value.Saves.TutorialStage = 8;
-                            _state.Value.Saves.SaveTutorial(8);
-                        }
-                    }
+                    
 
                     /*viewComp.ResourcesTimer = viewComp.GameObject.transform.GetChild(0).transform.GetChild(3).transform.gameObject;
                     viewComp.ResourcesTimer.GetComponent<TimerResourcesMB>().ResourcesDrop(0);
@@ -139,6 +130,24 @@ namespace Client
                     if (_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]) == 9)
                     {
                         upgradePointComp.point.SetActive(false);
+                    }
+
+                    foreach (var item in _tutorPool.Value)
+                    {
+                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                        if (_state.Value.Saves.TutorialStage <= 5)
+                        {
+                            GameObject.Destroy(tutorComp.TutorialCursor);
+                            tutorComp.TutorialStage = 6;
+                            _state.Value.Saves.TutorialStage = 6;
+                            _state.Value.Saves.SaveTutorial(6);
+                            upgradePointComp.point.SetActive(false);
+                            _upgradePool.Value.Del(_state.Value.EntityPlayer);
+                            foreach (var point in _filterPoint.Value)
+                            {
+                                _filterPoint.Pools.Inc1.Get(point).Point.SetActive(true);
+                            }
+                        }
                     }
                     _circlePool.Value.Add(_world.Value.NewEntity());
                 }
@@ -217,12 +226,12 @@ namespace Client
                     foreach (var item in _tutorPool.Value)
                     {
                         ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                        if (_state.Value.Saves.TutorialStage <=5)
+                        if (_state.Value.Saves.TutorialStage <= 11)
                         {
                             GameObject.Destroy(tutorComp.TutorialCursor);
-                            tutorComp.TutorialStage = 6;
-                            _state.Value.Saves.TutorialStage = 6;
-                            _state.Value.Saves.SaveTutorial(6);
+                            tutorComp.TutorialStage = 12;
+                            _state.Value.Saves.TutorialStage = 12;
+                            _state.Value.Saves.SaveTutorial(12);
                         }
                     }
 

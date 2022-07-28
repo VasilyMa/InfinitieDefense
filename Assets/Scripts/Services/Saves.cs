@@ -160,18 +160,13 @@ namespace Client
                 Rock = Save.Rock;
                 Coin = Save.Coin;
                 PlayerUpgrade = Save.PlayerUpgrade;
-                if(Save.TutorialStage == 2)
-                    TutorialStage = Save.TutorialStage -1;
-                else if (Save.TutorialStage == 5)
-                    TutorialStage = Save.TutorialStage - 1;
-                else if (Save.TutorialStage == 7)
-                    TutorialStage = Save.TutorialStage - 1;
-                else if (Save.TutorialStage == 9)
-                    TutorialStage = Save.TutorialStage - 1;
-                else if (Save.TutorialStage == 11)
-                    TutorialStage = Save.TutorialStage - 1;
-                else
+                if (Save.TutorialStage == 12)
                     TutorialStage = Save.TutorialStage;
+                else
+                {
+                    TutorialStage = 0;
+                    Save.TutorialStage = 0;
+                }
 
 
 

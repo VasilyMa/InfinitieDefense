@@ -42,12 +42,12 @@ namespace Client {
                     {
                         foreach (var item in _tutorPool.Value)
                         {
-                            if (_tutorPool.Pools.Inc1.Get(item).TutorialStage == 2)
+                            if (_tutorPool.Pools.Inc1.Get(item).TutorialStage == 9)
                             {
                                 GameObject.Destroy(_tutorPool.Pools.Inc1.Get(item).TutorialCursor.gameObject);
-                                _tutorPool.Pools.Inc1.Get(item).TutorialStage = 3;
-                                _state.Value.Saves.TutorialStage = 3;
-                                _state.Value.Saves.SaveTutorial(3);
+                                _tutorPool.Pools.Inc1.Get(item).TutorialStage = 10;
+                                _state.Value.Saves.TutorialStage = 10;
+                                _state.Value.Saves.SaveTutorial(10);
                             }
 
                         }

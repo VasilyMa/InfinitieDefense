@@ -29,6 +29,8 @@ namespace Client
         readonly EcsPoolInject<Player> _playerPool = default;
         readonly EcsPoolInject<CountdownWaveComponent> _countdownPool = default;
 
+        readonly EcsFilterInject<Inc<TutorialComponent>> _filterTutor = default;
+
         readonly EcsPoolInject<CorpseRemove> _corpsePool = default;
         public void Run (EcsSystems systems)
         {
@@ -56,6 +58,12 @@ namespace Client
                     if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
                     ref var corpseComp = ref _corpsePool.Value.Add(entity);
                     corpseComp.timer = 5f;
+                    if (_state.Value.EnemiesWave ==0 && _state.Value.Saves.TutorialStage == 12)
+                    {
+                        _world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
+                        interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(30);
+                        interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
+                    }
                 }
 
                 if (viewComponent.Outline) viewComponent.Outline.enabled = false;
@@ -88,11 +96,15 @@ namespace Client
                     dropEvent.Item = dropableItem.Item;
                 }
                 //start next wave 
-                if (_state.Value.EnemiesWave == 0 && _state.Value.Saves.TutorialStage == 12)
+                if (_state.Value.EnemiesWave == 0 && _state.Value.Saves.TutorialStage == 2)
                 {
-                    _countdownPool.Value.Add(_world.Value.NewEntity());
-                    interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(20);
-                    interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
+                    foreach (var tutor in _filterTutor.Value)
+                    {
+                        ref var tutorComp = ref _filterTutor.Pools.Inc1.Get(tutor);
+                        tutorComp.TutorialStage = 3;
+                        _state.Value.Saves.TutorialStage = 3;
+                        _state.Value.Saves.SaveTutorial(3);
+                    }
                 }
                 DeactivateTool(entity);
             }
