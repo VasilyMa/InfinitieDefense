@@ -88,7 +88,7 @@ namespace Client
                     dropEvent.Item = dropableItem.Item;
                 }
                 //start next wave 
-                if (_state.Value.EnemiesWave == 0)
+                if (_state.Value.EnemiesWave == 0 && _state.Value.Saves.TutorialStage == 12)
                 {
                     _countdownPool.Value.Add(_world.Value.NewEntity());
                     interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(20);

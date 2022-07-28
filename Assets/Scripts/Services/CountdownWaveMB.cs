@@ -42,14 +42,14 @@ namespace Client
                     _state.SetNextWave();
                     _time = 0;
                     _timerOn = false;
-                    _state.Saves.TutorialStage = 12;
-                    _state.Saves.SaveTutorial(12);
-                    if (_state.Saves.TutorialStage == 12)
+                    if (_state.Saves.TutorialStage == 11)
                     {
                         var tutorFilter = _world.Filter<TutorialComponent>().End();
                         foreach (var entity in tutorFilter)
                         {
                             _tutorialnPool.Get(entity).TutorialStage = 12;
+                            _state.Saves.TutorialStage = 12;
+                            _state.Saves.SaveTutorial(12);
                             if (_tutorialnPool.Has(entity))
                             {
                                 _tutorialnPool.Get(entity).TextHolder.SetActive(false);

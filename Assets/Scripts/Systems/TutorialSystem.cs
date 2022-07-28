@@ -83,7 +83,7 @@ namespace Client {
                         tutorialComp.HoleObject.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the player upgrade point";
-                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(0f, 4.5f, -8f), Quaternion.identity);
+                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(-4.5f, 4.5f, -6.5f), Quaternion.identity);
                         tutorialComp.TutorialCursor = cursor;
                         tutorialComp.TutorialStage = 9;
                         _state.Value.Saves.TutorialStage = 9;
