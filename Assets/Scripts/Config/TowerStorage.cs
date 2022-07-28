@@ -18,15 +18,14 @@ public class TowerStorage : ScriptableObject
     {
         Towers = new Dictionary<string, Tower>
         {
-            //MELEE
             ["1tower"] = new Tower
             {
                 TowerLevel = 1,
                 Radius = 10,
-                TowerHealth = 2500,
+                TowerHealth = 450,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
-                Upgrade = 1,
+                Upgrade = 7,
                 IsLast = false,
                 NextID = "2tower",
                 DefenderCount = 0,
@@ -36,10 +35,10 @@ public class TowerStorage : ScriptableObject
             {
                 TowerLevel = 2,
                 Radius = 15,
-                TowerHealth = 2900,
+                TowerHealth = 500,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
-                Upgrade = 2,
+                Upgrade = 13,
                 IsLast = false,
                 NextID = "3tower",
                 DefenderCount = 1,
@@ -49,10 +48,10 @@ public class TowerStorage : ScriptableObject
             {
                 TowerLevel = 3,
                 Radius = 20,
-                TowerHealth = 3300,
+                TowerHealth = 550,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
-                Upgrade = 3,
+                Upgrade = 20,
                 IsLast = false,
                 NextID = "4tower",
                 DefenderCount = 2,
@@ -62,10 +61,10 @@ public class TowerStorage : ScriptableObject
             {
                 TowerLevel = 4,
                 Radius = 55,
-                TowerHealth = 3600,
+                TowerHealth = 600,
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
-                Upgrade = 4,
+                Upgrade = 30,
                 NextID = "5tower",
                 IsLast = false,
                 DefenderCount = 3,
@@ -75,10 +74,10 @@ public class TowerStorage : ScriptableObject
             {
                 TowerLevel = 5,
                 Radius = 65,
-                TowerHealth = 3900,
+                TowerHealth = 650,
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
-                Upgrade = 5,
+                Upgrade = 45,
                 NextID = "6tower",
                 IsLast = false,
                 DefenderCount = 4,
@@ -88,10 +87,10 @@ public class TowerStorage : ScriptableObject
             {
                 TowerLevel = 6,
                 Radius = 70,
-                TowerHealth = 4200,
+                TowerHealth = 700,
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
-                Upgrade = 6,
+                Upgrade = 60,
                 NextID = "7tower",
                 IsLast = false,
                 DefenderCount = 5,
@@ -101,10 +100,10 @@ public class TowerStorage : ScriptableObject
             {
                 TowerLevel = 7,
                 Radius = 75,
-                TowerHealth = 4500,
+                TowerHealth = 750,
                 TowerPrefab = TowerPrefabs[2],
                 TowerMesh = TowerMeshs[2],
-                Upgrade = 7,
+                Upgrade = 75,
                 NextID = "8tower",
                 IsLast = false,
                 DefenderCount = 6,
@@ -115,10 +114,10 @@ public class TowerStorage : ScriptableObject
             {
                 TowerLevel = 8,
                 Radius = 80,
-                TowerHealth = 4800,
+                TowerHealth = 800,
                 TowerPrefab = TowerPrefabs[2],
                 TowerMesh = TowerMeshs[2],
-                Upgrade = 8,
+                Upgrade = 100,
                 NextID = "9tower",
                 IsLast = false,
                 DefenderCount = 7,
@@ -128,7 +127,7 @@ public class TowerStorage : ScriptableObject
             {
                 TowerLevel = 9,
                 Radius = 85,
-                TowerHealth = 5100,
+                TowerHealth = 850,
                 TowerPrefab = TowerPrefabs[2],
                 TowerMesh = TowerMeshs[2],
                 Upgrade = 999999,

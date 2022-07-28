@@ -10,7 +10,7 @@ namespace Client
 
         readonly EcsPoolInject<DrawDetectionZoneEvent> _drawDetectionZoneEventPool = default;
         readonly EcsPoolInject<RadiusComponent> _radiusPool = default;
-        readonly EcsPoolInject<DrawingDetectionZone> _drawingDetectionZonePool = default;
+        readonly EcsPoolInject<DetectionZone> _drawingDetectionZonePool = default;
 
         public void Run (EcsSystems systems)
         {

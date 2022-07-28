@@ -27,7 +27,7 @@ namespace Client
         readonly EcsPoolInject<UpgradeComponent> _upgradePool = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _upgradePoint = default;
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
-        readonly EcsPoolInject<DrawingDetectionZone> _drawingDetectionZonePool = default;
+        readonly EcsPoolInject<DetectionZone> _DetectionZonePool = default;
         readonly EcsPoolInject<DrawDetectionZoneEvent> _drawDetectionZoneEventPool = default;
         readonly EcsPoolInject<DestroyEffects> _destroyEffectsPool = default;
         readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
@@ -206,15 +206,15 @@ namespace Client
                         _cooldownPool.Value.Add(eventEntity);
                     }
 
-                    if (!_drawingDetectionZonePool.Value.Has(eventEntity))
+                    if (!_DetectionZonePool.Value.Has(eventEntity))
                     {
-                        _drawingDetectionZonePool.Value.Add(eventEntity);
+                        _DetectionZonePool.Value.Add(eventEntity);
                     }
 
                     ref var targetableComponent = ref _targetablePool.Value.Get(eventEntity);
                     ref var damageComponent = ref _damagePool.Value.Get(eventEntity);
                     ref var cooldownComponent = ref _cooldownPool.Value.Get(eventEntity);
-                    ref var drawingDetectionZoneComponent = ref _drawingDetectionZonePool.Value.Get(eventEntity);
+                    ref var DetectionZoneComponent = ref _DetectionZonePool.Value.Get(eventEntity);
 
                     if (filterComp.Change)
                     {
@@ -227,7 +227,9 @@ namespace Client
                         viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
                         viewComp.Transform = viewComp.GameObject.transform;
 
-                        drawingDetectionZoneComponent.LineRenderer = viewComp.GameObject.GetComponent<LineRenderer>();
+                        DetectionZoneComponent.DetectedZoneMB = viewComp.GameObject.GetComponentInChildren<DetectedZoneMB>();
+                        DetectionZoneComponent.DetectedZoneSphere = DetectionZoneComponent.DetectedZoneMB.GetComponent<SphereCollider>();
+                        DetectionZoneComponent.LineRenderer = viewComp.GameObject.GetComponent<LineRenderer>();
                     }
                     else
                     {
@@ -312,9 +314,14 @@ namespace Client
                     viewComp.EcsInfoMB.Init(_world);
                     viewComp.EcsInfoMB.SetEntity(eventEntity);
 
-                    viewComp.TowerAttackMB = viewComp.GameObject.GetComponentInChildren<TowerAttackMB>();
-                    viewComp.DamageZone = viewComp.TowerAttackMB.GetComponent<SphereCollider>();
-                    viewComp.DamageZone.radius = radiusComp.Radius - 1;
+                    if (viewComp.TowerAttackMB == null)
+                    {
+                        viewComp.TowerAttackMB = viewComp.GameObject.GetComponentInChildren<TowerAttackMB>();
+                        viewComp.DamageZone = viewComp.TowerAttackMB.GetComponent<SphereCollider>();
+                    }
+                    viewComp.DamageZone.radius = radiusComp.Radius;
+
+                    DetectionZoneComponent.DetectedZoneSphere.radius = radiusComp.Radius;
 
                     if (viewComp.TowerFirePoint == null && viewComp.TowerWeapon == null) // initialize Tower Weapon
                     {

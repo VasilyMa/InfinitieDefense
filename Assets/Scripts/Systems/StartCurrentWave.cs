@@ -133,7 +133,10 @@ namespace Client {
                                         
                                         unitDamageComponent.Value = 10f;
 
-                                        unitHealthComponent.MaxValue = 20;
+                                        unitHealthComponent.MaxValue = 50;
+
+                                        unitTargetWeightComponent.Value = 3;
+
                                         break;
                                     }
                                 case "Range":
@@ -144,8 +147,9 @@ namespace Client {
 
                                         unitDamageComponent.Value = 7f;
 
-                                        unitHealthComponent.MaxValue = 10;
+                                        unitHealthComponent.MaxValue = 30;
 
+                                        unitTargetWeightComponent.Value = 5;
 
                                         break;
                                     }
@@ -160,18 +164,16 @@ namespace Client {
                             unitTargetableComponent.AllEntityInDamageZone = new List<int>();
                             unitTargetableComponent.EntitysInRangeZone = new List<int>();
 
-                            unitTargetWeightComponent.Value = 5;
-
                             unitHealthComponent.CurrentValue = unitHealthComponent.MaxValue;
 
-                            unitMovableComponent.Speed = 1f;
+                            unitMovableComponent.Speed = 5f;
 
                             unitViewComponent.Rigidbody = enemy.GetComponent<Rigidbody>();
                             unitViewComponent.Transform = enemy.GetComponent<Transform>();
                             unitViewComponent.Outline = enemy.GetComponent<Outline>();
                             unitViewComponent.AttackMB = enemy.GetComponent<MeleeAttackMB>();
                             unitViewComponent.NavMeshAgent = enemy.GetComponent<NavMeshAgent>();
-                            unitViewComponent.NavMeshAgent.speed = unitTargetWeightComponent.Value;
+                            unitViewComponent.NavMeshAgent.speed = unitMovableComponent.Speed;
                             unitViewComponent.BodyCollider = enemy.GetComponent<CapsuleCollider>();
                             unitViewComponent.EcsInfoMB = enemy.GetComponent<EcsInfoMB>();
                             unitViewComponent.EcsInfoMB.Init(_world);

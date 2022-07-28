@@ -2,8 +2,10 @@ using UnityEngine;
 
 namespace Client
 {
-    struct DrawingDetectionZone
+    struct DetectionZone
     {
+        public DetectedZoneMB DetectedZoneMB;
+        public SphereCollider DetectedZoneSphere;
         public LineRenderer LineRenderer;
     }
 }

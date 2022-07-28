@@ -21,49 +21,49 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "2level",
-                UpgradeValue = 1,
+                UpgradeValue = 10,
                 Mesh = PlayerMeshes[0]
             },
             ["2level"] = new PlayerData
             {
                 LVL = 2,
-                Damage = 7,
+                Damage = 10,
                 Speed = 6f,
                 Health = 70,
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "3level",
-                UpgradeValue = 8,
+                UpgradeValue = 20,
                 Mesh = PlayerMeshes[1]
             },
             ["3level"] = new PlayerData
             {
                 LVL = 3,
-                Damage = 10,
+                Damage = 20,
                 Speed = 6f,
                 Health = 90,
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "4level",
-                UpgradeValue = 12,
+                UpgradeValue = 40,
                 Mesh = PlayerMeshes[2]
             },
             ["4level"] = new PlayerData
             {
                 LVL = 4,
-                Damage = 15,
+                Damage = 25,
                 Speed = 6f,
                 Health = 110,
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "5level",
-                UpgradeValue = 16,
+                UpgradeValue = 80,
                 Mesh = PlayerMeshes[3]
             },
             ["5level"] = new PlayerData
             {
                 LVL = 5,
-                Damage = 20,
+                Damage = 30,
                 Speed = 6f,
                 Health = 130,
                 PlayerPrefab = PlayerPrefabs[0],

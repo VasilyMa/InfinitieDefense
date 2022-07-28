@@ -11,7 +11,7 @@ namespace Client
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<InFightTag> _inFightPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
-        readonly EcsPoolInject<DrawingDetectionZone> _drawingDetectionZonePool = default;
+        readonly EcsPoolInject<DetectionZone> _drawingDetectionZonePool = default;
 
         public void Run (EcsSystems systems)
         {

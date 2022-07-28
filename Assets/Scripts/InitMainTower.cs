@@ -134,7 +134,7 @@ namespace Client
                 if(i == 0) _state.Value.TowersEntity[i] = mainTowerEntity;
                 else
                 {
-                    if(towerCount == 6)
+                    if(towerCount == _state.Value.TowersInRow)
                     {
                         circleRadiusLevel++;
                         towerCount = 0;
@@ -150,8 +150,8 @@ namespace Client
 
                     var radius = _state.Value.TowerStorage.GetRadiusByID((circleRadiusLevel + 1).ToString() + "tower");
 
-                    var x = Mathf.Cos(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;//переделать постановку
-                    var z = Mathf.Sin(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;
+                    var z = Mathf.Cos(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;//переделать постановку
+                    var x = Mathf.Sin(Angle * Mathf.Deg2Rad) * radius;//radiusComp.Radius;
                     tComp.Position = new Vector3(x, 0, z);
                     tComp.CircleRadiusLevel = circleRadiusLevel;
                     
@@ -181,7 +181,7 @@ namespace Client
                     upgradeTowerComponent.Index = upgradePointMB.TowerIndex;
                     viewComp.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
                     
-                    Angle += 360 / 4;
+                    Angle += 360 / _state.Value.TowersInRow;
                     towerCount++;
 
                     if(_state.Value.DefenseTowers[i] != "empty")
