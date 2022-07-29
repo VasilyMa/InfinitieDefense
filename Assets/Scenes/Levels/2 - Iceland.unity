@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: a3763bb3dd723634fa3c13f93f0a6eda, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 15a62eea0e9853a4f832549ad7e048c7, type: 2}
 --- !u!4 &123097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2411364184968210345, guid: f67cf4740258b91429edadeb35cd8e9e, type: 3}
@@ -5046,7 +5046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7869104043701649955, guid: 032c4c651f590424eb10276975aaef79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.360001
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7869104043701649955, guid: 032c4c651f590424eb10276975aaef79, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5054,7 +5054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7869104043701649955, guid: 032c4c651f590424eb10276975aaef79, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.06
+      value: -6.37
       objectReference: {fileID: 0}
     - target: {fileID: 7869104043701649955, guid: 032c4c651f590424eb10276975aaef79, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11697,8 +11697,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].Encounters.Array.size
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].Encounters.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].Encounters.Array.data[0]
@@ -11721,12 +11729,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.size
+      propertyPath: Waves.Array.data[2].Encounters.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.size
+      propertyPath: Waves.Array.data[2].Encounters.Array.data[1]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].Encounters.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.size
@@ -11737,8 +11757,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].MeleeEnemyInShip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].RangeEnemyInShip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.data[0]
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.data[1]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].MeleeEnemyInShip.Array.data[2]
@@ -11754,11 +11786,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[0]
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[1]
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[0].RangeEnemyInShip.Array.data[2]
@@ -11774,35 +11806,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.data[2]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
-      propertyPath: Waves.Array.data[1].RangeEnemyInShip.Array.data[0]
+      propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].MeleeEnemyInShip.Array.data[2]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[1].RangeEnemyInShip.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[1].RangeEnemyInShip.Array.data[1]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: Waves.Array.data[1].RangeEnemyInShip.Array.data[2]
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].MeleeEnemyInShip.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].MeleeEnemyInShip.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].MeleeEnemyInShip.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].RangeEnemyInShip.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].RangeEnemyInShip.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135641420, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: Waves.Array.data[2].RangeEnemyInShip.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6524960714590515784, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: _towerCount
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6524960714590515784, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: _towersInRow
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6524960714590515784, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: _uguiEmitter

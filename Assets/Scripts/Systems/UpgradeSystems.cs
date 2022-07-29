@@ -60,9 +60,9 @@ namespace Client {
                         neededResource = _state.Value.CoinCount;
                     }
 
-                    if (filterComp.DelayTime < 4f)
+                    if (filterComp.DelayTime < _state.Value.DelayBeforUpgrade)
                     {
-                        filterComp.DelayTime += Time.deltaTime * 2f;
+                        filterComp.DelayTime += Time.deltaTime;
                         return;
                     }
                     if (filterComp.Time == 0)
@@ -115,8 +115,8 @@ namespace Client {
                             _filter.Pools.Inc1.Del(entity);
                         }
                     }
-                    filterComp.Time += Time.deltaTime * 2f;
-                    if (filterComp.Time >= 1f)
+                    filterComp.Time += Time.deltaTime;
+                    if (filterComp.Time >= _state.Value.DelayAfterUpgrade)
                     {
                         filterComp.Time = 0f;
                     }

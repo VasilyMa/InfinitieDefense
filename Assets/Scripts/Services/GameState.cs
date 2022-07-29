@@ -44,6 +44,10 @@ namespace Client
         public int PlayerExperience;
         public int AllEnemies;
         public int EnemiesWave;
+
+        public float DelayBeforUpgrade = 1f;
+        public float DelayAfterUpgrade = 0.1f;
+
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, DropableItemStorage dropableItemStorage,
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, int towersInRow, WaveStorage waveStorage,
         EnemyConfig enemyConfig, ExplosionStorage explosionStorage)

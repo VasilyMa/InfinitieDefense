@@ -16,12 +16,14 @@ namespace Client {
                 ref var timerComp = ref _filterTimer.Pools.Inc1.Get(entity);
                 if (interfaceComp._joystick.Horizontal == 0 || interfaceComp._joystick.Vertical == 0)
                 {
-                    if (timerComp.TimeToUpgrade < 4f)
+                    if (timerComp.TimeToUpgrade < _state.Value.DelayBeforUpgrade)
                     {
-                        _canvasPool.Value.Get(timerComp.Entity).timerResources.ResourcesDrop(timerComp.TimeToUpgrade / 2);
-                        timerComp.TimeToUpgrade += Time.deltaTime * 2f;
+                        float timerFilling = timerComp.TimeToUpgrade / _state.Value.DelayBeforUpgrade;
+
+                        _canvasPool.Value.Get(timerComp.Entity).timerResources.ResourcesDrop(timerFilling);
+                        timerComp.TimeToUpgrade += Time.deltaTime;
                     }
-                    else if (timerComp.TimeToUpgrade >= 4f)
+                    else if (timerComp.TimeToUpgrade >= _state.Value.DelayBeforUpgrade)
                     {
                         _canvasPool.Value.Get(timerComp.Entity).timerResources.ResourcesDrop(0);
                     }

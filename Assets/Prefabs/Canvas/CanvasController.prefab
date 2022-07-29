@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 1903875865641317037}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: -11.4}
-  m_SizeDelta: {x: 239.5289, y: 128.1424}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -121.900024, y: 0}
+  m_SizeDelta: {x: 60.80004, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8044394481534743203
 CanvasRenderer:
@@ -59,22 +59,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7015f2d2ce595844e9fe6e0c3bd8d27b, type: 3}
-    m_FontSize: 80
+    m_Font: {fileID: 12800000, guid: 26a32e627fb084948ad18b8af0f356b7, type: 3}
+    m_FontSize: 64
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 97
-    m_Alignment: 4
+    m_Alignment: 5
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
@@ -1413,10 +1413,10 @@ RectTransform:
   m_Father: {fileID: 4301592916186077674}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 188, y: -15.699333}
-  m_SizeDelta: {x: 186.924, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -152.34479, y: 0.000049591064}
+  m_SizeDelta: {x: 80.359985, y: 26}
   m_Pivot: {x: 0.4730613, y: 0.50000185}
 --- !u!222 &3365717966895625114
 CanvasRenderer:
@@ -1440,22 +1440,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7015f2d2ce595844e9fe6e0c3bd8d27b, type: 3}
-    m_FontSize: 80
+    m_Font: {fileID: 12800000, guid: 26a32e627fb084948ad18b8af0f356b7, type: 3}
+    m_FontSize: 64
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 4
-    m_MaxSize: 109
-    m_Alignment: 4
+    m_MaxSize: 262
+    m_Alignment: 5
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
@@ -4511,10 +4511,10 @@ RectTransform:
   m_Father: {fileID: 6698753575409005734}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -256.1, y: -52.4}
-  m_SizeDelta: {x: 44.8492, y: 44.8492}
+  m_AnchorMin: {x: 0.085, y: 0.575}
+  m_AnchorMax: {x: 0.82400006, y: 0.92700005}
+  m_AnchoredPosition: {x: 120, y: 2.5}
+  m_SizeDelta: {x: -160, y: -5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1238473543318699402
 CanvasRenderer:
@@ -4587,10 +4587,10 @@ RectTransform:
   m_Father: {fileID: 6698753575409005734}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -201, y: -138.1}
-  m_SizeDelta: {x: 45.154, y: 45.154}
+  m_AnchorMin: {x: 0.224, y: 0.23661874}
+  m_AnchorMax: {x: 0.82400006, y: 0.5336188}
+  m_AnchoredPosition: {x: 95.4, y: 1}
+  m_SizeDelta: {x: -142.59999, y: -8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1935920643669909952
 CanvasRenderer:
@@ -4689,9 +4689,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4704,11 +4704,11 @@ MonoBehaviour:
     m_MaxSize: 155
     m_Alignment: 4
     m_AlignByGeometry: 1
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You lose!
+  m_Text: YOU LOSE!
 --- !u!1 &8565627739171222057
 GameObject:
   m_ObjectHideFlags: 0

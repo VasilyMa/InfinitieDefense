@@ -20,7 +20,7 @@ namespace Client {
         }
         public void ResourcesDrop(float resourcesTimer)
         {
-            _image.fillAmount = resourcesTimer / 2;
+            _image.fillAmount = resourcesTimer;
             //_image.fillAmount = Mathf.Lerp(_image.fillAmount, resourcesTimer, Time.deltaTime * 5);
         }
         private void CameraFollow()
