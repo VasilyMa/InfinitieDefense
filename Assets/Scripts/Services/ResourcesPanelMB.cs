@@ -41,6 +41,7 @@ namespace Client
             if (!_stonePanel.activeSelf)
             {
                 _stonePanel.SetActive(true);
+                Debug.Log("Test");
                 _stoneAnimator.SetTrigger("Enable");
             }
         }
