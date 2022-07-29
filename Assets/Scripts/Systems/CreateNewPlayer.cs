@@ -20,8 +20,9 @@ namespace Client
         readonly EcsPoolInject<LevelUpEvent> _levelUpPool = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<DamageComponent> _damagePool = default;
-
+        readonly EcsFilterInject<Inc<UpgradeTimerEvent>> _timerPool = default;
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
+        readonly EcsPoolInject<UpgradeComponent> _upgradePool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -75,7 +76,12 @@ namespace Client
                 }
 
                 viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
-
+                foreach (var item in _timerPool.Value)
+                {
+                    _timerPool.Pools.Inc1.Get(item).TimeToUpgrade = 0;
+                    _timerPool.Pools.Inc1.Del(item);
+                }
+                _upgradePool.Value.Del(_state.Value.EntityPlayer);
                 _filter.Pools.Inc1.Del(entity);
             }
         }
