@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6729537480797783043}
   - component: {fileID: 7414342097912444855}
   - component: {fileID: 1200031006888547036}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: CanvasTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 7621214259837230891}
   - component: {fileID: 5507512314229880946}
   - component: {fileID: 8906079515851918461}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
