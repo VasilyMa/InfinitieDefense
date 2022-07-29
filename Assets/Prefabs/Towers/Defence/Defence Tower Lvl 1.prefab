@@ -884,61 +884,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8019736736535158305}
     m_Modifications:
-    - target: {fileID: 3534213544033462990, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534409106098318994, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534584566663438104, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534681986570981200, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534681986570981200, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: autoRandomSeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534681986570981200, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: UVModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534681986570981200, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: ColorModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534681986570981200, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: ShapeModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534681986570981200, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: EmissionModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3534804185001133500, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3535128025389432394, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3732128246317638176, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3732128246317638176, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
       propertyPath: m_Name
       value: FireExplosion
-      objectReference: {fileID: 0}
-    - target: {fileID: 3733040112678689586, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3736924654444629830, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
       propertyPath: m_RootOrder
@@ -984,8 +932,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3628370795414577508, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca73458bd66f9114c9c38d6e487986ae, type: 3}
 --- !u!1001 &4359952777712679433
 PrefabInstance:
