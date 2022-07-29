@@ -2671,10 +2671,10 @@ RectTransform:
   m_Father: {fileID: 5232209640980735635}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -540, y: 0}
-  m_SizeDelta: {x: 1080, y: 0}
+  m_AnchoredPosition: {x: 0, y: -10}
+  m_SizeDelta: {x: 0, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1403882826700357357
 CanvasRenderer:
@@ -2696,9 +2696,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478e52e2152770f47981db60d4e91a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stonePanel: {fileID: 0}
+  _stonePanel: {fileID: 6954744243361766060}
   _stoneAmount: {fileID: 1912707176114881873}
-  _goldPanel: {fileID: 0}
+  _goldPanel: {fileID: 8292496238634871244}
   _goldAmount: {fileID: 7986254906417800366}
 --- !u!114 &4085825411444718226
 MonoBehaviour:
@@ -2718,7 +2718,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 2
-  m_Spacing: 0
+  m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -3643,6 +3643,7 @@ GameObject:
   - component: {fileID: 4015785661948726319}
   - component: {fileID: 3707264119853377003}
   - component: {fileID: 6398781096664569923}
+  - component: {fileID: 1380560231825466079}
   m_Layer: 5
   m_Name: StonePanel
   m_TagString: Untagged
@@ -3709,6 +3710,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &1380560231825466079
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954744243361766060}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ad4d88ebf0b301344a0d01e813ab1848, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7100543437973746215
 GameObject:
   m_ObjectHideFlags: 0
@@ -4563,6 +4583,7 @@ GameObject:
   - component: {fileID: 1957356900846599654}
   - component: {fileID: 4662630570014997087}
   - component: {fileID: 7534131034088881528}
+  - component: {fileID: 7635246706134950967}
   m_Layer: 5
   m_Name: GoldPanel
   m_TagString: Untagged
@@ -4613,9 +4634,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.14901961, g: 0.14901961, b: 0.14901961, a: 0.39215687}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4629,6 +4650,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &7635246706134950967
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8292496238634871244}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ad4d88ebf0b301344a0d01e813ab1848, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8397701966211548471
 GameObject:
   m_ObjectHideFlags: 0

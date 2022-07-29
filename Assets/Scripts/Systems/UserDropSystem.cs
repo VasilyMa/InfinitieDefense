@@ -31,6 +31,16 @@ namespace Client {
                 }
                 _state.Value.StoneTransformList.Clear();
                 _state.Value.RockCount = 0;
+
+                if (_state.Value.RockCount > 0)
+                {
+                    _interfaceComp.resourcePanelMB.EnableStonePanel();
+                }
+                else
+                {
+                    _interfaceComp.resourcePanelMB.DisableStonePanel();
+                }
+
                 _interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                 for (int i = 0; i < _playerComp.ResHolderTransform.childCount; i++)
                 {

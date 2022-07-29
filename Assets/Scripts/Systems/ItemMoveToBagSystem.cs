@@ -24,6 +24,16 @@ namespace Client {
                     if(filterComp.Coin)
                     {
                         _state.Value.CoinTransformList.Add(filterComp.Transform);
+
+                        if (_state.Value.CoinCount > 0)
+                        {
+                            interComp.resourcePanelMB.EnableGoldPanel();
+                        }
+                        else
+                        {
+                            interComp.resourcePanelMB.DisableGoldPanel();
+                        }
+
                         interComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                     }
                     else
@@ -34,7 +44,17 @@ namespace Client {
                             item.localRotation = new Quaternion(0, 0, 0, 0);
                         }
                         _state.Value.StoneTransformList.Add(filterComp.Transform);
-                        interComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
+
+                        if (_state.Value.RockCount > 0)
+                        {
+                            interComp.resourcePanelMB.EnableStonePanel();
+                        }
+                        else
+                        {
+                            interComp.resourcePanelMB.DisableStonePanel();
+                        }
+
+                        interComp.resourcePanelMB.UpdateStone();
                     }
                     filterComp.Transform.localPosition = filterComp.TargetPosition;
                     _filter.Pools.Inc1.Del(entity);

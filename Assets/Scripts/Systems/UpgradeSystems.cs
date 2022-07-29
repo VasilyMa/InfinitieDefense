@@ -77,6 +77,16 @@ namespace Client {
                                     //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                                     _state.Value.CoinCount--;
                                     _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+
+                                    if (_state.Value.CoinCount > 0)
+                                    {
+                                        intComp.resourcePanelMB.EnableGoldPanel();
+                                    }
+                                    else
+                                    {
+                                        intComp.resourcePanelMB.DisableGoldPanel();
+                                    }
+
                                     intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                                 }
                                 else
@@ -85,6 +95,15 @@ namespace Client {
                                     _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                                     _state.Value.RockCount--;
                                     _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+
+                                    if (_state.Value.RockCount > 0)
+                                    {
+                                        intComp.resourcePanelMB.EnableStonePanel();
+                                    }
+                                    else
+                                    {
+                                        intComp.resourcePanelMB.DisableStonePanel();
+                                    }
 
                                     intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                                     RelocateCoinInResourceHolder();
@@ -97,6 +116,16 @@ namespace Client {
                                 //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                                 _state.Value.CoinCount--;
                                 _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+
+                                if (_state.Value.CoinCount > 0)
+                                {
+                                    intComp.resourcePanelMB.EnableGoldPanel();
+                                }
+                                else
+                                {
+                                    intComp.resourcePanelMB.DisableGoldPanel();
+                                }
+
                                 intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                                 _state.Value.UpgradePlayer();
                                 //viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));

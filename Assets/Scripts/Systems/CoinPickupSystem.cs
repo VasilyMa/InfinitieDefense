@@ -23,6 +23,16 @@ namespace Client {
                 if (coinComp.CoinObject.transform.position.y >= camerComp.HolderTransform.position.y + 7)
                 {
                     _state.Value.CoinCount++;
+
+                    if (_state.Value.CoinCount > 0)
+                    {
+                        interfaceComp.resourcePanelMB.EnableGoldPanel();
+                    }
+                    else
+                    {
+                        interfaceComp.resourcePanelMB.DisableGoldPanel();
+                    }
+
                     interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                     GameObject.Destroy(coinComp.CoinObject);
 

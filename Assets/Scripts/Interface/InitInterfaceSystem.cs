@@ -15,6 +15,7 @@ namespace Client {
             
             
             interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
+            interfaceComp.resourcePanelMB = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             interfaceComp.winPanel = GameObject.Find("WinPanel");
             interfaceComp.winPanel.SetActive(false);
             interfaceComp.losePanel = GameObject.Find("LosePanel");
@@ -38,8 +39,10 @@ namespace Client {
             interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
 
             //world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
-            var resourcePanel = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
+            var resourcePanel = interfaceComp.resourcePanelMB;
             resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
+            resourcePanel.DisableGoldPanel();
+            resourcePanel.DisableStonePanel();
             //tutorial there
             ref var tutorialComp = ref world.GetPool<TutorialComponent>().Add(world.NewEntity());
             tutorialComp.Tutorial = GameObject.Find("Tutorial");
