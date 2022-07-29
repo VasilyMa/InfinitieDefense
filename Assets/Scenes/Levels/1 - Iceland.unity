@@ -7583,6 +7583,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3163795107829958734, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163795107829958734, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163795107829958734, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4208259350060337247, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7719,6 +7731,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasController
       objectReference: {fileID: 0}
+    - target: {fileID: 5541703906765036250, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.6795186
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541703906765036250, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.88927084
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541703906765036250, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 734
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541703906765036250, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1708
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541703906765036250, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -367
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541703906765036250, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -854
+      objectReference: {fileID: 0}
     - target: {fileID: 6265458943291844984, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7791,7 +7827,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3163795107829958734, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
 --- !u!4 &1439834366 stripped
 Transform:

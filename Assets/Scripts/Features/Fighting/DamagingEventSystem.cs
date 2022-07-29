@@ -97,10 +97,21 @@ namespace Client
             {
                 ref var destroyEffectsComponent = ref _destroyEffectsPool.Value.Get(entity);
 
-                if (destroyEffectsComponent.DestroyFire.isStopped) destroyEffectsComponent.DestroyFire.Play();
-
                 float maxFireValue = 3;
                 float fireMultiply = 1 - (currentHP / maxHP);
+
+                // 4 stage of fire: 25%, 50%, 75%, 100%
+
+                if (fireMultiply < 0.25f) fireMultiply = 0f;
+                else if (fireMultiply > 0.25f && fireMultiply < 0.5f) fireMultiply = 0.25f;
+                else if (fireMultiply > 0.5f && fireMultiply < 0.75f) fireMultiply = 0.5f;
+                else if (fireMultiply > 0.75f && fireMultiply < 1f) fireMultiply = 0.75f;
+                else fireMultiply = 1f;
+
+                if (fireMultiply != 0)
+                {
+                    if (destroyEffectsComponent.DestroyFire.isStopped) destroyEffectsComponent.DestroyFire.Play();
+                }
 
                 destroyEffectsComponent.DestroyFire.startSize = maxFireValue * fireMultiply;
             }

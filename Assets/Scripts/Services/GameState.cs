@@ -45,7 +45,7 @@ namespace Client
         public int AllEnemies;
         public int EnemiesWave;
 
-        public float DelayBeforUpgrade = 1f;
+        public float DelayBeforUpgrade = 0.8f;
         public float DelayAfterUpgrade = 0.1f;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, DropableItemStorage dropableItemStorage,

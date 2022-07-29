@@ -9,7 +9,9 @@ namespace Client
     {
         private EcsWorld _world;
         private GameState _state;
+        [SerializeField] private Text _stonePanel;
         [SerializeField] private Text _stoneAmount;
+        [SerializeField] private Text _goldPanel;
         [SerializeField] private Text _goldAmount;
         public void Init(EcsWorld world, GameState state)
         {
