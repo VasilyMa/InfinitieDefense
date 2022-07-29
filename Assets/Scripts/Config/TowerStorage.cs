@@ -25,7 +25,7 @@ public class TowerStorage : ScriptableObject
                 TowerHealth = 450,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
-                Upgrade = 1, // to do ay up to 7
+                Upgrade = 17,
                 IsLast = false,
                 NextID = "2tower",
                 DefenderCount = 0,
