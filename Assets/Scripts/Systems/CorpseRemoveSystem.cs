@@ -20,7 +20,7 @@ namespace Client {
                 {
                     viewComp.BodyCollider.enabled = false;
                 }
-                else if (corpse.timer <= 0)
+                if (corpse.timer <= 0)
                 {
                     corpse.timer = 0;
                     GameObject.Destroy(viewComp.GameObject);
