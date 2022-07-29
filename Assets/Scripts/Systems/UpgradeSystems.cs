@@ -16,7 +16,7 @@ namespace Client {
         readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _canvasFilter = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
-        
+
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -78,6 +78,7 @@ namespace Client {
                                     _state.Value.CoinCount--;
                                     _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
                                     intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
+                                    
                                 }
                                 else
                                 {
