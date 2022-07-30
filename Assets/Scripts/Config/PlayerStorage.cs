@@ -21,7 +21,7 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "2level",
-                UpgradeValue = 1,
+                UpgradeValue = 8,
                 Mesh = PlayerMeshes[0]
             },
             ["2level"] = new PlayerData

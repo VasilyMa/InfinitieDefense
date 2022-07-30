@@ -16,7 +16,7 @@ namespace Client {
         readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _canvasFilter = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
-
+        readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -25,6 +25,7 @@ namespace Client {
                 ref var playerComp = ref _playerPool.Value.Get(entity);
                 ref var intComp = ref _intPool.Value.Get(_state.Value.EntityInterface);
                 ref var viewComp = ref _viewPool.Value.Get(entity);
+                
                 if (intComp._joystick.Horizontal == 0 && intComp._joystick.Vertical == 0)
                 {
                     int neededResource = 0;
@@ -88,7 +89,26 @@ namespace Client {
                                     }
 
                                     intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
-                                    
+
+                                    foreach (var item in _tutorPool.Value) //этап тутора
+                                    {
+                                        ref var upgradePointComp = ref _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]);
+                                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                                        if (_state.Value.Saves.TutorialStage <= 5)
+                                        {
+                                            GameObject.Destroy(tutorComp.TutorialCursor);
+                                            tutorComp.TutorialStage = 6;
+                                            _state.Value.Saves.TutorialStage = 6;
+                                            _state.Value.Saves.SaveTutorial(6);
+                                            upgradePointComp.point.SetActive(false);
+                                            _filter.Pools.Inc1.Del(_state.Value.EntityPlayer);
+                                            foreach (var point in _filterPoint.Value)
+                                            {
+                                                _filterPoint.Pools.Inc1.Get(point).Point.SetActive(true);
+                                            }
+                                        }
+                                    }
+
                                 }
                                 else
                                 {
@@ -108,6 +128,19 @@ namespace Client {
 
                                     intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
                                     RelocateCoinInResourceHolder();
+
+                                    foreach (var item in _tutorPool.Value)
+                                    {
+                                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                                        if (_state.Value.Saves.TutorialStage <= 11)
+                                        {
+                                            GameObject.Destroy(tutorComp.TutorialCursor);
+                                            tutorComp.TutorialStage = 12;
+                                            _state.Value.Saves.TutorialStage = 12;
+                                            _state.Value.Saves.SaveTutorial(12);
+                                        }
+                                    }
+
                                 }
                                 _state.Value.UpgradeTower(filterComp.TowerIndex);
                             }
@@ -135,6 +168,20 @@ namespace Client {
                                     _filterPoint.Pools.Inc1.Get(item).Point.GetComponent<PlayerUpgradePointMB>().
                                         UpdateLevelInfo(_state.Value.PlayerStorage.
                                         GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
+                                }
+
+                                ref var upgradePointComp = ref _canvasFilter.Value.Get(_state.Value.TowersEntity[0]);
+                                foreach (var item in _tutorPool.Value)
+                                {
+                                    ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                                    GameObject.Destroy(tutorComp.TutorialCursor);
+                                    if (tutorComp.TutorialStage <= 7)
+                                    {
+                                        tutorComp.TutorialStage = 8;
+                                        _state.Value.Saves.TutorialStage = 8;
+                                        _state.Value.Saves.SaveTutorial(8);
+                                        upgradePointComp.point.SetActive(true);
+                                    }
                                 }
                             }
                             //viewComp.DropItemParticleSystem.Stop();
