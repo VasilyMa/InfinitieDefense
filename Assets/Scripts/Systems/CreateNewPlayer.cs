@@ -40,10 +40,16 @@ namespace Client
                         upgradePointComp.point.SetActive(true);
                     }
                 }
-
-                if (_state.Value.Saves.TutorialStage == 12)
+                if (_state.Value.Saves.TutorialStage < 12)
                 {
-                    continue;
+                    foreach (var item in _timerPool.Value)
+                    {
+                        _timerPool.Pools.Inc1.Get(item).TimeToUpgrade = 0;
+                        _timerPool.Pools.Inc1.Del(item);
+                    }
+                    _upgradePool.Value.Del(_state.Value.EntityPlayer);
+                    _filter.Pools.Inc1.Del(entity);
+                    return;
                 }
 
                 ref var viewComp = ref _viewPool.Value.Get(entity);

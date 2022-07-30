@@ -15,13 +15,13 @@ public class PlayerStorage : ScriptableObject
             ["1level"] = new PlayerData
             {
                 LVL = 1,
-                Damage = 50,
+                Damage = 5,
                 Speed = 6f,
                 Health = 50,
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "2level",
-                UpgradeValue = 10,
+                UpgradeValue = 1,
                 Mesh = PlayerMeshes[0]
             },
             ["2level"] = new PlayerData

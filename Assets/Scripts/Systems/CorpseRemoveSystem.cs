@@ -15,15 +15,16 @@ namespace Client {
                 if (corpse.timer > 0)
                 {
                     corpse.timer -= Time.deltaTime;
-                }
-                else if (corpse.timer < 2)
-                {
-                    viewComp.BodyCollider.enabled = false;
+                    if (corpse.timer < 2)
+                    {
+                        viewComp.BodyCollider.enabled = false;
+                    }
                 }
                 if (corpse.timer <= 0)
                 {
                     corpse.timer = 0;
-                    GameObject.Destroy(viewComp.GameObject);
+                    viewComp.GameObject.SetActive(false);
+                    //GameObject.Destroy(viewComp.GameObject);
                     _filterCorpse.Pools.Inc1.Del(entity);
                 }
             }
