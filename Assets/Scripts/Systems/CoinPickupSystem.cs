@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace Client {
     sealed class CoinPickupSystem : IEcsRunSystem {
+        readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsFilterInject<Inc<CoinPickupEvent>> _filterCoinPickup = default;
         readonly EcsPoolInject<CoinPickupEvent> _coinPool = default;
         readonly EcsPoolInject<CameraComponent> _cameraPool = default;
         readonly EcsPoolInject<InterfaceComponent> _interfacePool = default;
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
+        readonly EcsPoolInject<SavesEvent> _savePool = default;
         public void Run(EcsSystems systems)
         {
             foreach (var entity in _filterCoinPickup.Value)
@@ -46,7 +48,7 @@ namespace Client {
                             _state.Value.Saves.SaveTutorial(4);
                         }
                     }
-                    
+                    _savePool.Value.Add(_world.Value.NewEntity());
                     _filterCoinPickup.Pools.Inc1.Del(entity);
                 }
             }

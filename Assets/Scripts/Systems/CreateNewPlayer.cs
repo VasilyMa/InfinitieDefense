@@ -23,14 +23,34 @@ namespace Client
         readonly EcsFilterInject<Inc<UpgradeTimerEvent>> _timerPool = default;
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
         readonly EcsPoolInject<UpgradeComponent> _upgradePool = default;
+        readonly EcsPoolInject<SavesEvent> _savePool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
+                ref var upgradePointComp = ref _upgradePoint.Value.Get(_state.Value.TowersEntity[0]);
+                foreach (var item in _tutorPool.Value)
+                {
+                    ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                    GameObject.Destroy(tutorComp.TutorialCursor);
+                    if (tutorComp.TutorialStage <= 7)
+                    {
+                        tutorComp.TutorialStage = 8;
+                        _state.Value.Saves.TutorialStage = 8;
+                        _state.Value.Saves.SaveTutorial(8);
+                        upgradePointComp.point.SetActive(true);
+                    }
+                }
+
+                if (_state.Value.Saves.TutorialStage == 12)
+                {
+                    continue;
+                }
+
                 ref var viewComp = ref _viewPool.Value.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
                 ref var damageComponent = ref _damagePool.Value.Get(entity);
                 ref var healthComponent = ref _healthPool.Value.Get(entity);
-                ref var upgradePointComp = ref _upgradePoint.Value.Get(_state.Value.TowersEntity[0]);
+                
                 _state.Value.CurrentPlayerID = _state.Value.PlayerStorage.GetNextIdByID(_state.Value.CurrentPlayerID);
                 //Debug.Log("dfdfdfdfd " + _state.Value.CurrentPlayerID);
                 damageComponent.Value = _state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID);
@@ -62,18 +82,7 @@ namespace Client
                 levelPop.TimeOut = 2f;
                 levelPop.LevelPopUp.SetActive(true);
 
-                foreach (var item in _tutorPool.Value)
-                {
-                    ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                    GameObject.Destroy(tutorComp.TutorialCursor);
-                    if (tutorComp.TutorialStage <= 7)
-                    {
-                        tutorComp.TutorialStage = 8;
-                        _state.Value.Saves.TutorialStage = 8;
-                        _state.Value.Saves.SaveTutorial(8);
-                        upgradePointComp.point.SetActive(true);
-                    }
-                }
+                
 
                 viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
                 foreach (var item in _timerPool.Value)
@@ -81,6 +90,7 @@ namespace Client
                     _timerPool.Pools.Inc1.Get(item).TimeToUpgrade = 0;
                     _timerPool.Pools.Inc1.Del(item);
                 }
+                _savePool.Value.Add(_world.Value.NewEntity());
                 _upgradePool.Value.Del(_state.Value.EntityPlayer);
                 _filter.Pools.Inc1.Del(entity);
             }
