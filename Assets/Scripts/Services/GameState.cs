@@ -40,6 +40,7 @@ namespace Client
         public int[] TowersEntity;
         public int TowerCount;
         public int TowersInRow;
+        public float TimeToNextWave;
         public string CurrentPlayerID;
         public int PlayerExperience;
         public int AllEnemies;
@@ -49,7 +50,7 @@ namespace Client
         public float DelayAfterUpgrade = 0.1f;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, DropableItemStorage dropableItemStorage,
-        PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, int towersInRow, WaveStorage waveStorage,
+        PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, int towersInRow, float timeToNextWave, WaveStorage waveStorage,
         EnemyConfig enemyConfig, ExplosionStorage explosionStorage)
         {
             World = world;
@@ -60,6 +61,7 @@ namespace Client
             DefenseTowerStorage = defenseTowerStorage;
             TowerCount = towerCount;
             TowersInRow = towersInRow;
+            TimeToNextWave = timeToNextWave;
             WaveStorage = waveStorage;
             EnemyConfig = enemyConfig;
             ExplosionStorage = explosionStorage;

@@ -15,7 +15,7 @@ namespace Client
             foreach(var entity in _entitysFilter.Value)
             {
                 ref var targetableComponent = ref _targetablePool.Value.Get(entity);
-                if (!targetableComponent.TargetObject)
+                if (targetableComponent.TargetObject == null)
                 {
                     continue;
                 }
