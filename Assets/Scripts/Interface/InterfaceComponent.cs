@@ -13,5 +13,6 @@ namespace Client {
         public FloatingJoystick _joystick;
         public Transform _joystickPoint;
         public Transform _joysticKCenter;
+        public Transform _waveCounter;
     }
 }

@@ -22,7 +22,7 @@ namespace Client {
                     _state.Value.isWave = false;
                     _countdownPool.Value.Add(_world.Value.NewEntity());
                     interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(30);
-                    interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().TextPlacer("Next lvl!");
+                    interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetText("Next lvl!");
                 }
             }
         }

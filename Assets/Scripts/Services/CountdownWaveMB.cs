@@ -90,7 +90,7 @@ namespace Client
             _timerOn = value;
         }
         #endregion Get/Set
-        public void TextPlacer(string value)
+        public void SetText(string value)
         {
             _textAmount.text = value;
         }

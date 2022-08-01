@@ -27,16 +27,24 @@ namespace Client {
             interfaceComp._joysticKCenter = joystick.transform.GetChild(0).transform;
             interfaceComp.gamePanel = GameObject.Find("GamePanel");
             interfaceComp.gamePanel.SetActive(true);
-            interfaceComp.progressbar = GameObject.Find("LevelProgress");
-            interfaceComp.progressbar.GetComponent<ProgressBarMB>().SetMaxAmount(state.WaveStorage.GetAllEnemies());
-            interfaceComp.progressbar.GetComponent<ProgressBarMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
-            interfaceComp.progressbar.SetActive(true);
-            interfaceComp.waveCounter.GetComponent<WaveCounterMB>().SetMaxAmount(state.WaveStorage.Waves.Count);
-            interfaceComp.waveCounter.GetComponent<WaveCounterMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            //interfaceComp.progressbar = GameObject.Find("LevelProgress");
+            //interfaceComp.progressbar.GetComponent<ProgressBarMB>().SetMaxAmount(state.WaveStorage.GetAllEnemies());
+            //interfaceComp.progressbar.GetComponent<ProgressBarMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            //interfaceComp.progressbar.SetActive(true);
+            //interfaceComp.waveCounter.GetComponent<WaveCounterMB>().SetMaxAmount(state.WaveStorage.Waves.Count);
+            //interfaceComp.waveCounter.GetComponent<WaveCounterMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             interfaceComp.countdownWave = GameObject.Find("WaveTimer");
             interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(0);
             interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(false);
             interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+            interfaceComp._waveCounter = GameObject.Find("Counter").transform;
+            interfaceComp._waveCounter.GetComponent<CounterMB>().points = new System.Collections.Generic.List<Image>();
+            for (int i = 0; i < state.WaveStorage.Waves.Count; i++)
+            {
+                var point = GameObject.Instantiate(state.InterfaceStorage.Point, interfaceComp._waveCounter);
+                interfaceComp._waveCounter.GetComponent<CounterMB>().points.Add(point.GetComponent<Image>());
+            }
+            interfaceComp._waveCounter.GetComponent<CounterMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             
             //world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
             var resourcePanel = interfaceComp.resourcePanelMB;
@@ -67,7 +75,7 @@ namespace Client {
                 state.EnemiesWave = -1;
                 ref var countdown = ref world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
                 interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(state.TimeToNextWave);
-                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().TextPlacer("Next wave!");
+                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetText("Next wave!");
                 interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
             }
         }
