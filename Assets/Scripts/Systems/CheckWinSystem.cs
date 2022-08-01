@@ -12,7 +12,7 @@ namespace Client {
             foreach (var item in _filterEnemies.Value)
             {
                 ref var interfaceComponent = ref _interfacePool.Value.Get(_state.Value.EntityInterface);
-                if (_filterEnemies.Value.GetEntitiesCount() == _state.Value.WaveStorage.GetAllEnemies())
+                if (_filterEnemies.Value.GetEntitiesCount() == _state.Value.WaveStorage.GetAllEnemies() && _state.Value.isWave)
                 {
                     _state.Value.isWave = false;
                     _countdownPool.Value.Add(_world.Value.NewEntity());
