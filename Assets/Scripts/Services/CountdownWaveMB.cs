@@ -14,18 +14,25 @@ namespace Client
         [SerializeField] private float _time;
         [SerializeField] private Text _timer;
         [SerializeField] private bool _timerOn = false;
+        [SerializeField] private Text _textAmount;
         private EcsPool<CountdownWaveComponent> _countdownPool = default;
         private EcsPool<TutorialComponent> _tutorialnPool = default;
+
+        private EcsPool<WinEvent> _winPool = default;
         public void Init(EcsWorld world, GameState state)
         {
             _world = world;
             _state = state;
             _countdownPool = _world.GetPool<CountdownWaveComponent>();
             _tutorialnPool = _world.GetPool<TutorialComponent>();
+            _winPool = _world.GetPool<WinEvent>();
         }
         private void Update()
         {
-            _timerObject.SetActive(_timerOn);
+            if (_time == 0)
+                _timerObject.SetActive(false);
+            else
+                _timerObject.SetActive(true);
         }
         public void Countdown()
         {
@@ -39,9 +46,14 @@ namespace Client
                 else
                 {
                     //to do start wave
-                    _state.SetNextWave();
+                    if(_state.isWave)
+                        _state.SetNextWave();
                     _time = 0;
                     _timerOn = false;
+                    if (!_state.isWave)
+                    {
+                        _winPool.Add(_world.NewEntity());
+                    }
                     if (_state.Saves.TutorialStage == 2)
                     {
                         var tutorFilter = _world.Filter<TutorialComponent>().End();
@@ -78,5 +90,9 @@ namespace Client
             _timerOn = value;
         }
         #endregion Get/Set
+        public void TextPlacer(string value)
+        {
+            _textAmount.text = value;
+        }
     }
 }

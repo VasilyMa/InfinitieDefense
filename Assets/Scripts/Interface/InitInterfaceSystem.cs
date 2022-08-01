@@ -66,7 +66,8 @@ namespace Client {
                 tutorialComp.DragToMove.SetActive(false);
                 state.EnemiesWave = -1;
                 ref var countdown = ref world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
-                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(30);
+                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(state.TimeToNextWave);
+                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().TextPlacer("Next wave!");
                 interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
             }
         }

@@ -45,6 +45,7 @@ namespace Client
         public int PlayerExperience;
         public int AllEnemies;
         public int EnemiesWave;
+        public bool isWave;
 
         public float DelayBeforUpgrade = 0.8f;
         public float DelayAfterUpgrade = 0.1f;
@@ -71,6 +72,7 @@ namespace Client
             Saves.InitSave();
             CurrentPlayerID = Saves.PlayerID;
             CoinCount = Saves.Coin;
+            isWave = true;
             //InitSaves();
             InitDefenseTowers();
             InitDefenders();

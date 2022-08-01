@@ -2696,6 +2696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478e52e2152770f47981db60d4e91a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stoneAnimator: {fileID: 1380560231825466079}
+  _goldAnimator: {fileID: 7635246706134950967}
   _stonePanel: {fileID: 6954744243361766060}
   _stoneAmount: {fileID: 1912707176114881873}
   _goldPanel: {fileID: 8292496238634871244}
