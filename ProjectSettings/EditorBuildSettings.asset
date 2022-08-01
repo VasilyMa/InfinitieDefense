@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Levels/1 - Tutorial - Iceland.unity
+    path: Assets/Scenes/Levels/0 - Tutorial - Iceland.unity
     guid: 2c69a111c29e5774ebc5da6d49894be8
   - enabled: 1
-    path: Assets/Scenes/Levels/2 - Iceland.unity
+    path: Assets/Scenes/Levels/1 - Iceland.unity
     guid: 480b81385874a05418d7bd9fb826a0fa
   - enabled: 0
-    path: Assets/Scenes/Levels/2 - Oasis.unity
+    path: Assets/Scenes/Levels/20 - Oasis.unity
     guid: a320125f3778dc84aa4c8afd7a6da1b2
   - enabled: 0
-    path: Assets/Scenes/Levels/3 - Wasteland.unity
+    path: Assets/Scenes/Levels/30 - Wasteland.unity
     guid: 741274a5c97b60e47852c339bf1ebd92
   m_configObjects: {}

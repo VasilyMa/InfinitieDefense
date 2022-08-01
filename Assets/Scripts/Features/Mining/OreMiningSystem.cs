@@ -56,7 +56,6 @@ namespace Client {
                     oreComp.prefab.GetComponent<SphereCollider>().enabled = false;
                     oreComp.prefab.gameObject.SetActive(false);
                     _minedPool.Value.Add(entity);
-                    oreComp.respawnTime = 5f;
                 }
                 _filter.Pools.Inc1.Del(entity);
             }

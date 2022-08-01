@@ -22,7 +22,9 @@ namespace Client
 
                 int explosionSize = (int)explosionEventComponent.Value;
 
-                GameObject.Instantiate(_state.Value.ExplosionStorage.ExplosionPrefab[explosionSize], explosionEventComponent.Point, Quaternion.identity);
+                var explosion = GameObject.Instantiate(_state.Value.ExplosionStorage.ExplosionPrefab[explosionSize], explosionEventComponent.Point, Quaternion.identity);
+
+                explosion.GetComponent<ParticleSystem>().Play();
 
                 _world.Value.DelEntity(eventEntity);
             }

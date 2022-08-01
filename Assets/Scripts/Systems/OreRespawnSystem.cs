@@ -13,11 +13,12 @@ namespace Client {
                 ref var oreComp = ref _orePool.Value.Get(entity);
                 ref var viewComponent = ref _viewPool.Value.Get(entity);
 
-                if (oreComp.respawnTime > 0)
-                    oreComp.respawnTime -= Time.deltaTime;
-                else if(oreComp.respawnTime <= 0)
+                if (oreComp.currentRespawnTime > 0)
+                    oreComp.currentRespawnTime -= Time.deltaTime;
+                else if(oreComp.currentRespawnTime <= 0)
                 {
-                    oreComp.respawnTime = 0;
+                    oreComp.currentRespawnTime = 0;
+                    oreComp.currentRespawnTime = oreComp.respawnTime;
                     oreComp.prefab.SetActive(true);
                     for (int i = 0; i < oreComp.OreParts.Length; i++)
                     {
