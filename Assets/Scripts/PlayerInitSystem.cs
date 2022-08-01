@@ -162,12 +162,12 @@ namespace Client
                 rockTransform.localPosition = new Vector3(0, i * 0.6f, 0);
                 _state.Value.StoneTransformList.Add(rockTransform);
             }
-            for (int i = 0; i < _state.Value.CoinCount;i++)
+            /*for (int i = 0; i < _state.Value.CoinCount;i++)
             {
                 var coinTransform = GameObject.Instantiate(_state.Value.InterfaceStorage.GoldPrefab, new Vector3(0, _state.Value.RockCount * 0.6f + i * 0.3f, 0), Quaternion.identity, player.ResHolderTransform).GetComponent<Transform>();
                 coinTransform.localPosition = new Vector3(0, _state.Value.RockCount * 0.6f + i * 0.3f, 0);
                 _state.Value.CoinTransformList.Add(coinTransform);
-            }
+            }*/
 
 
 

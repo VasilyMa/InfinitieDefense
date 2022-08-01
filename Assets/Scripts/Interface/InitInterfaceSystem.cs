@@ -43,11 +43,11 @@ namespace Client {
             resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
             resourcePanel.DisableGoldPanel();
             resourcePanel.DisableStonePanel();
-            /*if (state.CoinCount > 0)
+            if (state.CoinCount > 0)
             {
                 resourcePanel.EnableGoldPanel();
                 resourcePanel.UpdateGold();
-            }*/
+            }
 
             //tutorial there
             ref var tutorialComp = ref world.GetPool<TutorialComponent>().Add(world.NewEntity());
