@@ -156,23 +156,23 @@ namespace Client
                         upgradePointComp.point.SetActive(false);
                     }
 
-                    //foreach (var item in _tutorPool.Value)
-                    //{
-                    //    ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                    //    if (_state.Value.Saves.TutorialStage <= 5)
-                    //    {
-                    //        GameObject.Destroy(tutorComp.TutorialCursor);
-                    //        tutorComp.TutorialStage = 6;
-                    //        _state.Value.Saves.TutorialStage = 6;
-                    //        _state.Value.Saves.SaveTutorial(6);
-                    //        upgradePointComp.point.SetActive(false);
-                    //        upgradePool.Value.Del(_state.Value.EntityPlayer);
-                    //        foreach (var point in _filterPoint.Value)
-                    //        {
-                    //            _filterPoint.Pools.Inc1.Get(point).Point.SetActive(true);
-                    //        }
-                    //    }
-                    //}
+                    foreach (var item in _tutorPool.Value)
+                    {
+                        ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                        if (_state.Value.Saves.TutorialStage <= 5)
+                        {
+                            GameObject.Destroy(tutorComp.TutorialCursor);
+                            tutorComp.TutorialStage = 6;
+                            _state.Value.Saves.TutorialStage = 6;
+                            _state.Value.Saves.SaveTutorial(6);
+                            upgradePointComp.point.SetActive(false);
+                            _upgradePool.Value.Del(_state.Value.EntityPlayer);
+                            foreach (var point in _filterPoint.Value)
+                            {
+                                _filterPoint.Pools.Inc1.Get(point).Point.SetActive(true);
+                            }
+                        }
+                    }
                     _circlePool.Value.Add(_world.Value.NewEntity());
                 }
                 else // defence towers

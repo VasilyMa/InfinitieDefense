@@ -85,7 +85,7 @@ namespace Client {
                         //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the player upgrade point";
-                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(-4.5f, 4.5f, -6.5f), Quaternion.identity);
+                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(-5.5f, 4.5f, -6.5f), Quaternion.identity);
                         tutorialComp.TutorialCursor = cursor;
                         tutorialComp.TutorialStage = 7;
                         _state.Value.Saves.TutorialStage = 7;
@@ -98,7 +98,7 @@ namespace Client {
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the ore";
                         player.transform.GetChild(5).GetComponent<BoxCollider>().enabled = true;
-                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(1.25f, 4.5f, -16.5f), Quaternion.identity);
+                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(-6.5f, 4.5f, 2.25f), Quaternion.identity);
                         tutorialComp.TutorialCursor = cursor;
                         tutorialComp.TutorialStage = 9;
                         _state.Value.Saves.TutorialStage = 9;
@@ -110,7 +110,7 @@ namespace Client {
                         //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(true);
                         tutorialComp.TextHolder.GetComponentInChildren<Text>().text = "Go to the tower upgrade point";
-                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(1f, 4.5f, -12.5f), Quaternion.identity);
+                        cursor = (GameObject)GameObject.Instantiate(Resources.Load("CursorHolder"), new Vector3(0f, 4.5f, 7.5f), Quaternion.identity);
                         tutorialComp.TutorialCursor = cursor;
                         tutorialComp.TutorialStage = 11;
                         _state.Value.Saves.TutorialStage = 11;
