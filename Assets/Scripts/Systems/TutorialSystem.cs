@@ -59,6 +59,7 @@ namespace Client {
                         break;
                         
                     case 3:
+                        interfaceComp._waveCounter.GetComponent<CounterMB>().ChangeCount(_state.Value.GetCurrentWave());
                         tutorialComp.DragToMove.SetActive(false);
                         tutorialComp.HandObject.SetActive(false);
                         //tutorialComp.Background.SetActive(false);
@@ -121,9 +122,9 @@ namespace Client {
                         tutorialComp.HandObject.SetActive(false);
                         //tutorialComp.Background.SetActive(false);
                         tutorialComp.TextHolder.SetActive(false);
-                        //_world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
-                        //interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(_state.Value.TimeToNextWave);
-                        //interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
+                        _world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
+                        interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(_state.Value.TimeToNextWave);
+                        interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
                         _tutorialPool.Value.Del(entity);
                         break;
                     default:

@@ -1369,6 +1369,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1957356900846599654, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1957356900846599654, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1957356900846599654, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1957356900846599654, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2061506779492061594, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1414,6 +1430,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2096807151265254105, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015785661948726319, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015785661948726319, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015785661948726319, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015785661948726319, guid: 584a35acc4b251c4e94573e8e627e16e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -2301,6 +2333,10 @@ PrefabInstance:
       propertyPath: _uguiEmitter
       value: 
       objectReference: {fileID: 1698714584}
+    - target: {fileID: 6524960714590515784, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
+      propertyPath: _timeToNextWave
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8760066942237610673, guid: 019506b9fc1462543bd5334e35b0deb4, type: 3}
       propertyPath: m_Name
       value: ECS
