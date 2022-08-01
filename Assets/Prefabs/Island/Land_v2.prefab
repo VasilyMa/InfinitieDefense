@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 87239669019685907}
   m_Layer: 8
-  m_Name: Land_2
+  m_Name: Land_v2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &87239669019685907
 Transform:
@@ -50,7 +50,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8287579687733214678
 Transform:
@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LandTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 4441171940239019254, guid: 3c0936f99eb878149912e978d11e3de9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c0936f99eb878149912e978d11e3de9, type: 3}
 --- !u!4 &7795467141089760557 stripped
@@ -232,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InvinsibleWall
       objectReference: {fileID: 0}
+    - target: {fileID: 2009463440247405709, guid: 2997d545a29ab0940b5e7fb0b0f822a5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2997d545a29ab0940b5e7fb0b0f822a5, type: 3}
 --- !u!4 &7318688944990125943 stripped
@@ -252,7 +260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 120d92490c60c0149b95d5a95d2d4142, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.39775085
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 120d92490c60c0149b95d5a95d2d4142, type: 3}
       propertyPath: m_LocalPosition.y
@@ -260,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 120d92490c60c0149b95d5a95d2d4142, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.63791275
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 120d92490c60c0149b95d5a95d2d4142, type: 3}
       propertyPath: m_LocalRotation.w
@@ -294,6 +302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: island4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 120d92490c60c0149b95d5a95d2d4142, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 120d92490c60c0149b95d5a95d2d4142, type: 3}
 --- !u!1 &8080095853806498912 stripped
@@ -317,6 +329,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5252236339084322551, guid: 120d92490c60c0149b95d5a95d2d4142, type: 3}

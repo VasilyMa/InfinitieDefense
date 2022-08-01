@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &87239669019685907
 Transform:
@@ -50,7 +50,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8287579687733214678
 Transform:
@@ -166,6 +166,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e57325827fe150440958c4e03db82610, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1acc449e22881934bbf193b73364926c, type: 2}
+    - target: {fileID: -7511558181221131132, guid: e57325827fe150440958c4e03db82610, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18f4ee51a6f241e4ca90035fe8591ef9, type: 2}
     - target: {fileID: 919132149155446097, guid: e57325827fe150440958c4e03db82610, type: 3}
       propertyPath: m_Name
       value: island
@@ -173,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e57325827fe150440958c4e03db82610, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e57325827fe150440958c4e03db82610, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e57325827fe150440958c4e03db82610, type: 3}
@@ -255,6 +267,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LandTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 4441171940239019254, guid: 3c0936f99eb878149912e978d11e3de9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c0936f99eb878149912e978d11e3de9, type: 3}
 --- !u!4 &7795467141089760557 stripped
@@ -316,6 +332,10 @@ PrefabInstance:
     - target: {fileID: 2009463440247405709, guid: 2997d545a29ab0940b5e7fb0b0f822a5, type: 3}
       propertyPath: m_Name
       value: InvinsibleWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009463440247405709, guid: 2997d545a29ab0940b5e7fb0b0f822a5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2997d545a29ab0940b5e7fb0b0f822a5, type: 3}

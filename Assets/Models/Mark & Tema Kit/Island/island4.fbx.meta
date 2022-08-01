@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: dirt.005
-    second: {fileID: 2100000, guid: d9dfdf420973efb4496d7f4a7bea5b25, type: 2}
+    second: {fileID: 2100000, guid: 18f4ee51a6f241e4ca90035fe8591ef9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
