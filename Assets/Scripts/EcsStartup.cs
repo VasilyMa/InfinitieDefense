@@ -21,6 +21,7 @@ namespace Client
         [Header("1 = always is MainTower")]
         [SerializeField] private int _towerCount;
         [SerializeField] private int _towersInRow;
+        [SerializeField] private float _timeToNextWave;
         private WaveStorage _waveStorage;
         EcsSystems _systems;
         EcsSystems _delHereSystems;
@@ -33,7 +34,7 @@ namespace Client
             _waveStorage = gameObject.GetComponent<WaveStorage>();
             _world = new EcsWorld();
             _gameState = new GameState(_world, _towerStorage, _interfaceStorage, _dropableItemStorage,
-            _playerStorage, _defenseTowerStorage, _towerCount, _towersInRow, _waveStorage, _enemyConfig, _explosionStorage);
+            _playerStorage, _defenseTowerStorage, _towerCount, _towersInRow, _timeToNextWave, _waveStorage, _enemyConfig, _explosionStorage);
             _systems = new EcsSystems (_world, _gameState);
             _systemsFixed = new EcsSystems(_world, _gameState);
             _delHereSystems = new EcsSystems(_world, _gameState);
