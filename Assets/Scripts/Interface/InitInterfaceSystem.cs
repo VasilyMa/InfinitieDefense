@@ -4,16 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace Client {
     sealed class InitInterfaceSystem : IEcsInitSystem {
-        
-        public void Init (EcsSystems systems) {
+
+        public void Init(EcsSystems systems) {
             var world = systems.GetWorld();
             var state = systems.GetShared<GameState>();
             int entity = world.NewEntity();
             state.EntityInterface = entity;
 
             ref var interfaceComp = ref world.GetPool<InterfaceComponent>().Add(entity);
-            
-            
+
+
             interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
             interfaceComp.resourcePanelMB = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             interfaceComp.winPanel = GameObject.Find("WinPanel");
@@ -37,12 +37,18 @@ namespace Client {
             interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(0);
             interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(false);
             interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
-
+            
             //world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
             var resourcePanel = interfaceComp.resourcePanelMB;
             resourcePanel.Init(systems.GetWorld(), systems.GetShared<GameState>());
             resourcePanel.DisableGoldPanel();
             resourcePanel.DisableStonePanel();
+            /*if (state.CoinCount > 0)
+            {
+                resourcePanel.EnableGoldPanel();
+                resourcePanel.UpdateGold();
+            }*/
+
             //tutorial there
             ref var tutorialComp = ref world.GetPool<TutorialComponent>().Add(world.NewEntity());
             tutorialComp.Tutorial = GameObject.Find("Tutorial");

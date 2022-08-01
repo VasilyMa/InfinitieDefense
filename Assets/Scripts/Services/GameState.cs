@@ -67,8 +67,8 @@ namespace Client
             TowerStorage.Init();
             DefenseTowerStorage.Init();
             Saves.InitSave();
-            CurrentPlayerID = "1level";
-
+            CurrentPlayerID = Saves.PlayerID;
+            CoinCount = Saves.Coin;
             //InitSaves();
             InitDefenseTowers();
             InitDefenders();

@@ -125,7 +125,7 @@ namespace Client
                 viewComponent.DamagePopups.Add(popup);
                 viewComponent.DamagePopups[y].SetActive(false);
             }
-
+            viewComponent.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
             pointerComponent.player = PlayerGo;
 
             targetWeightComponent.Value = 5;
@@ -168,6 +168,9 @@ namespace Client
                 coinTransform.localPosition = new Vector3(0, _state.Value.RockCount * 0.6f + i * 0.3f, 0);
                 _state.Value.CoinTransformList.Add(coinTransform);
             }
+
+
+
 
             SetMeleeSetup(playerEntity);
             SetRangeSetup(playerEntity);
