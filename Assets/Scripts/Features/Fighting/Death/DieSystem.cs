@@ -63,11 +63,14 @@ namespace Client
                     if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
                     ref var corpseComp = ref _corpsePool.Value.Add(entity);
                     corpseComp.timer = 5f;
-                    if (_state.Value.EnemiesWave ==0 && _state.Value.Saves.TutorialStage == 12)
+                    if (_state.Value.EnemiesWave == 0 && _state.Value.Saves.TutorialStage == 12)
                     {
+                        interfaceComponent._waveCounter.GetComponent<CounterMB>().ChangeCount(_state.Value.GetCurrentWave());
                         _world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
-                        interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(30);
+                        interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(_state.Value.TimeToNextWave);
                         interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
+                        if (_state.Value.GetCurrentWave() == _state.Value.WaveStorage.Waves.Count - 2)
+                            interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetText("Last wave!");
                     }
                 }
 
@@ -77,7 +80,7 @@ namespace Client
 
                 _deadPool.Value.Add(entity);
 
-                if (_enemyPool.Value.Has(entity)) interfaceComponent.progressbar.GetComponent<ProgressBarMB>().UpdateProgressBar();
+                //if (_enemyPool.Value.Has(entity)) interfaceComponent.progressbar.GetComponent<ProgressBarMB>().UpdateProgressBar();
 
                 if (_mainTowerPool.Value.Has(entity)) _losePool.Value.Add(_world.Value.NewEntity());
 

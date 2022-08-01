@@ -41,7 +41,6 @@ namespace Client
             
             _systems
                 .Add(new CountdownWaveSystem())
-                .Add(new CheckWinSystem())
                 .Add(new WinSystem())
                 //.Add(new CheckLoseSystem())
                 .Add(new LoseSystem())
@@ -126,6 +125,7 @@ namespace Client
                 .Add(new NewTowersCircleSystem())
                 .Add(new SavesSystem())
                 .Add(new VibrationEventSystem())
+                .Add(new CheckWinSystem())
 
                 .AddWorld(new EcsWorld(), Idents.Worlds.Events)
                 .DelHere<ShipArrivalEvent>()

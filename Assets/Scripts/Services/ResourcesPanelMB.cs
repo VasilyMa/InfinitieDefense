@@ -9,8 +9,8 @@ namespace Client
     {
         private EcsWorld _world;
         private GameState _state;
-        private Animator _stoneAnimator;
-        private Animator _goldAnimator;
+        [SerializeField] private Animator _stoneAnimator;
+        [SerializeField] private Animator _goldAnimator;
         [SerializeField] private GameObject _stonePanel;
         [SerializeField] private Text _stoneAmount;
         [SerializeField] private GameObject _goldPanel;

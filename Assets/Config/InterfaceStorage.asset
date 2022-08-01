@@ -17,3 +17,4 @@ MonoBehaviour:
   DefenceTowerUpgradePointPrefab: {fileID: 5850403646004358388, guid: 1131b66019f9516408cc8146f6ada018, type: 3}
   GoldPrefab: {fileID: 8399164091446850438, guid: 3944bf0270bd13441904e4638c69bbae, type: 3}
   RockPrefab: {fileID: 5450163464563837820, guid: 69150853be2712d44986ac890cf4aa85, type: 3}
+  Point: {fileID: 21300000, guid: 5a4feb2cb0f298f429df87ff845c6a93, type: 3}

@@ -45,6 +45,7 @@ namespace Client
         public int PlayerExperience;
         public int AllEnemies;
         public int EnemiesWave;
+        public bool isWave;
 
         public float DelayBeforUpgrade = 0.8f;
         public float DelayAfterUpgrade = 0.1f;
@@ -69,8 +70,9 @@ namespace Client
             TowerStorage.Init();
             DefenseTowerStorage.Init();
             Saves.InitSave();
-            CurrentPlayerID = "1level";
-
+            CurrentPlayerID = Saves.PlayerID;
+            CoinCount = Saves.Coin;
+            isWave = true;
             //InitSaves();
             InitDefenseTowers();
             InitDefenders();

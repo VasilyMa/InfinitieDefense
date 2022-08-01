@@ -186,7 +186,7 @@ namespace Client
                 Music = 1;
                 Vibration = 1;
                 LVL = 1;
-                AllCoin = 900;
+                AllCoin = 0;
                 SceneNumber = 1;
                 TutorialStage = 1;
                 PlayerID = "1level";
