@@ -29,6 +29,7 @@ namespace Client {
         private string path;
         public void Awake()
         {
+
             path = Path.Combine(Application.dataPath, "SaveSettings.json");
             if (File.Exists(path))
             {
@@ -39,7 +40,6 @@ namespace Client {
                 LVL = Save.LVL;
                 AllCoin = Save.AllCoin;
                 SceneNumber = Save.SceneNumber;
-
                 PlayerID = Save.PlayerID;
                 CurrentWave = Save.CurrentWave;
                 Rock = Save.Rock;
