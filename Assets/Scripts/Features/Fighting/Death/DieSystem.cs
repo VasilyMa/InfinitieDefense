@@ -63,7 +63,7 @@ namespace Client
                     if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
                     ref var corpseComp = ref _corpsePool.Value.Add(entity);
                     corpseComp.timer = 5f;
-                    if (_state.Value.EnemiesWave == 0 && _state.Value.Saves.TutorialStage == 12)
+                    if (_state.Value.EnemiesWave == 0 && _state.Value.Saves.TutorialStage == 12 && _state.Value.GetCurrentWave() > 0)
                     {
                         interfaceComponent._waveCounter.GetComponent<CounterMB>().ChangeCount(_state.Value.GetCurrentWave());
                         _world.Value.GetPool<CountdownWaveComponent>().Add(_world.Value.NewEntity());
