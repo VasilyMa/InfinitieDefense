@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 namespace Client {
     sealed class UserInputSystem : EcsUguiCallbackSystem
     {
+        readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsPoolInject<InterfaceComponent> _interface = default;
+        readonly EcsPoolInject<WinEvent> _winEvent = default;
 
         #region Old
         //Vector2 startPosition = Vector2.zero;
@@ -137,6 +139,13 @@ namespace Client {
             interfaceComponent.progressbar.SetActive(true);
             //interfaceComponent.gamePanel.SetActive(false);
             Debug.Log("Play!");
+        }
+
+        [Preserve]
+        [EcsUguiClickEvent(Idents.Ui.Continue, Idents.Worlds.Events)]
+        void OnContinueClick(in EcsUguiClickEvent evt)
+        {
+            ref var winEvent = ref _winEvent.Value.Add(_world.Value.NewEntity());
         }
     }
 }

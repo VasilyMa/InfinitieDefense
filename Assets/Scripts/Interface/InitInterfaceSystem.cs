@@ -13,7 +13,8 @@ namespace Client {
 
             ref var interfaceComp = ref world.GetPool<InterfaceComponent>().Add(entity);
 
-
+            interfaceComp.continueButton = GameObject.Find("Continue");
+            interfaceComp.continueButton.SetActive(false);
             interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
             interfaceComp.resourcePanelMB = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             interfaceComp.winPanel = GameObject.Find("WinPanel");
