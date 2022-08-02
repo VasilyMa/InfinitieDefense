@@ -17,6 +17,7 @@ namespace Client {
         readonly EcsPoolInject<CanvasUpgradeComponent> _canvasFilter = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
         readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
+        readonly EcsPoolInject<SavesEvent> _savePool = default;
         public void Run (EcsSystems systems) {
             foreach(var entity in _filter.Value)
             {
@@ -203,6 +204,7 @@ namespace Client {
                     filterComp.DelayTime = 0f;
                     filterComp.Time = 0f;
                 }
+                _savePool.Value.Add(_world.Value.NewEntity());
             }
             void RelocateCoinInResourceHolder()
             {

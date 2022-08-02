@@ -72,6 +72,7 @@ namespace Client
             Saves.InitSave();
             CurrentPlayerID = Saves.PlayerID;
             CoinCount = Saves.Coin;
+            PlayerExperience = Saves.PlayerUpgrade;
             isWave = true;
             //InitSaves();
             InitDefenseTowers();

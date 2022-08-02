@@ -40,7 +40,7 @@ namespace Client
                         upgradePointComp.point.SetActive(true);
                     }
                 }
-                if (_state.Value.Saves.TutorialStage < 12)
+                /*if (_state.Value.Saves.TutorialStage < 12)
                 {
                     foreach (var item in _timerPool.Value)
                     {
@@ -50,7 +50,7 @@ namespace Client
                     _upgradePool.Value.Del(_state.Value.EntityPlayer);
                     _filter.Pools.Inc1.Del(entity);
                     return;
-                }
+                }*/
 
                 ref var viewComp = ref _viewPool.Value.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
