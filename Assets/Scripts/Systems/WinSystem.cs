@@ -21,6 +21,7 @@ namespace Client {
                 interfaceComp.winPanel.SetActive(true);
                 interfaceComp.winPanel.GetComponent<Animator>().SetTrigger("Win");
                 interfaceComp.continueButton.SetActive(false);
+                _winFilter.Pools.Inc1.Del(entity);
             }
         }
     }
