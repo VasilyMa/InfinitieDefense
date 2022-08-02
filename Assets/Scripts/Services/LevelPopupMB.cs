@@ -30,6 +30,11 @@ namespace Client
             level = $"New Level {currentLevel}";
             _textAmount.text = level;
         }
+        public void UpdateInfoDamageHealth(int damage, int health)
+        {
+            string info = $"Damage up to {damage} Health up to {health}";
+            _textAmount.text = info;
+        }
         private void CameraFollow()
         {
             ref var cameraComp = ref _cameraPool.Get(_state.EntityCamera);

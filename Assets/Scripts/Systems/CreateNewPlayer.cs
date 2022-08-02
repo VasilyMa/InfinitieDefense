@@ -40,7 +40,7 @@ namespace Client
                         upgradePointComp.point.SetActive(true);
                     }
                 }
-                if (_state.Value.Saves.TutorialStage < 12)
+                /*if (_state.Value.Saves.TutorialStage < 12)
                 {
                     foreach (var item in _timerPool.Value)
                     {
@@ -50,7 +50,7 @@ namespace Client
                     _upgradePool.Value.Del(_state.Value.EntityPlayer);
                     _filter.Pools.Inc1.Del(entity);
                     return;
-                }
+                }*/
 
                 ref var viewComp = ref _viewPool.Value.Get(entity);
                 ref var playerComp = ref _playerPool.Value.Get(entity);
@@ -82,7 +82,7 @@ namespace Client
                 ref var levelPop = ref _levelUpPool.Value.Add(_world.Value.NewEntity());
                 levelPop.LevelPopUp = viewComp.LevelPopup;
                 levelPop.LevelPopUp.transform.position = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 2f, viewComp.GameObject.transform.position.z);
-                levelPop.LevelPopUp.GetComponent<LevelPopupMB>().UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
+                levelPop.LevelPopUp.GetComponent<LevelPopupMB>().UpdateInfoDamageHealth(_state.Value.PlayerStorage.GetDamageByID(_state.Value.CurrentPlayerID), _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID));
                 levelPop.Text = levelPop.LevelPopUp.GetComponent<LevelPopupMB>().GetText();
                 levelPop.target = new Vector3(viewComp.GameObject.transform.position.x, viewComp.GameObject.transform.position.y + 10f, viewComp.GameObject.transform.position.z);
                 levelPop.TimeOut = 2f;

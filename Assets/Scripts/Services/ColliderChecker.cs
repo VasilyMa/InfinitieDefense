@@ -51,10 +51,10 @@ namespace Client
                         {
                             break;
                         }
-                        if(_state.Saves.TutorialStage < 3)
-                        {
-                            break;
-                        }
+                        //if(_state.Saves.TutorialStage < 3)
+                        //{
+                        //    break;
+                        //}
                         other.gameObject.tag = "Untagged";
                         ref var coinComp = ref _coinPickupEventPool.Add(_world.NewEntity());
                         coinComp.CoinObject = other.gameObject;
