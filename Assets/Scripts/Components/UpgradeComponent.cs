@@ -1,9 +1,9 @@
 
 namespace Client {
     struct UpgradeComponent {
-        public float Time;
+        public float DelayAfterUpgrade;
         public int TowerIndex;
         public bool UpgradeTower;
-        public float DelayTime;
+        public float DelayBeforUpgrade;
     }
 }
