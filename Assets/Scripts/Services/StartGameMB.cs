@@ -49,7 +49,7 @@ namespace Client {
                     Coin = Save.Coin;
                     PlayerUpgrade = Save.PlayerUpgrade;
                     if (Save.TutorialStage == 12)
-                        SceneManager.LoadScene(2);
+                        SceneManager.LoadScene(Save.SceneNumber);
                     else
                     {
                         SceneManager.LoadScene(1);
@@ -96,7 +96,7 @@ namespace Client {
                     Save.TutorialStage = TutorialStage;
                     Save.PlayerUpgrade = PlayerUpgrade;
                     File.WriteAllText(path, JsonUtility.ToJson(Save));
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(Save.SceneNumber);
                 }
             }
             else
@@ -131,7 +131,7 @@ namespace Client {
                 Save.VersionGame = VersionGame;
 
                 File.WriteAllText(path, JsonUtility.ToJson(Save));
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(Save.SceneNumber);
             }    
         }
 

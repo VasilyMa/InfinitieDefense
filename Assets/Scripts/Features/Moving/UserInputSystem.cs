@@ -106,11 +106,10 @@ namespace Client {
         {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("Restart!", evt.Sender);
             int index = 0;
             if (SceneManager.GetActiveScene().buildIndex + 1 > SceneManager.sceneCountInBuildSettings - 1)
             {
-                index = 1;
+                index = 2;
             }
             else
             {
@@ -119,7 +118,6 @@ namespace Client {
             _state.Value.Saves.SaveSceneNumber(index);
             _state.Value.Saves.SaveLevel(_state.Value.Saves.LVL + 1);
             SceneManager.LoadScene(index);
-            Debug.Log("NextLevel");
         }
         [Preserve]
         [EcsUguiClickEvent(Idents.Ui.Retry, Idents.Worlds.Events)]
