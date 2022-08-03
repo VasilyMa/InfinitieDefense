@@ -28,7 +28,7 @@ namespace Client {
         public string VersionGame;
         public SaveSettings Save = new SaveSettings();
         private string path;
-        public void Awake()
+        public void Start()
         {
             VersionGame = Application.version;
             path = Path.Combine(Application.dataPath, "SaveSettings.json");
