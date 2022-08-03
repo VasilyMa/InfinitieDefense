@@ -21,8 +21,9 @@ namespace Client {
                     }
                     _state.Value.isWave = false;
                     _countdownPool.Value.Add(_world.Value.NewEntity());
-                    interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(30);
+                    interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(10);
                     interfaceComponent.countdownWave.GetComponent<CountdownWaveMB>().SetText("Next lvl!");
+                    interfaceComponent.continueButton.SetActive(true);
                 }
             }
         }

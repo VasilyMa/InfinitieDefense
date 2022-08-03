@@ -9,6 +9,7 @@ namespace Client
     public class CounterMB : MonoBehaviour
     {
         public List<Image> points;
+        public List<Slider> sliders;
         private EcsWorld _world;
         private GameState _state;
         public void Init(EcsWorld world, GameState state)

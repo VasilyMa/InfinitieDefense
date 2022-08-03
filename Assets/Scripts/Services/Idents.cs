@@ -23,6 +23,7 @@ namespace Client
             public const string Retry = "Retry";
             public const string TouchListener = "TouchListener";
             public const string Play = "Play";
+            public const string Continue = "Continue";
         }
     }
 }

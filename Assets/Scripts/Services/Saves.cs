@@ -26,6 +26,7 @@ namespace Client
         public int TutorialStage;
         public SaveSettings Save = new SaveSettings();
         public string path;
+        public string VersionGame;
         //методы сохранений...
         #region
         public void SaveSounds(int value)
@@ -167,10 +168,6 @@ namespace Client
                     TutorialStage = 0;
                     Save.TutorialStage = 0;
                 }
-
-
-
-
                 TowerID = new string[Save.TowerID.Length];
                 TowersUpgrade = new int[Save.TowersUpgrade.Length];
                 for (int i = 0; i < TowerID.Length;i++)
@@ -275,6 +272,7 @@ namespace Client
             public int Rock;
             public int Coin;
             public int TutorialStage;
+            public string VersionGame;
         }
     }
 }

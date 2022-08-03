@@ -45,6 +45,7 @@ namespace Client
         public int PlayerExperience;
         public int AllEnemies;
         public int EnemiesWave;
+        public int StaticEnemiesWave;
         public bool isWave;
 
         public float DelayBeforUpgrade = 0.8f;
@@ -72,6 +73,7 @@ namespace Client
             Saves.InitSave();
             CurrentPlayerID = Saves.PlayerID;
             CoinCount = Saves.Coin;
+            PlayerExperience = Saves.PlayerUpgrade;
             isWave = true;
             //InitSaves();
             InitDefenseTowers();
@@ -207,6 +209,7 @@ namespace Client
                     }
                 }
             }
+            StaticEnemiesWave = EnemiesWave;
             Debug.Log($"Вражеские пидоры {EnemiesWave}");
         }
     }

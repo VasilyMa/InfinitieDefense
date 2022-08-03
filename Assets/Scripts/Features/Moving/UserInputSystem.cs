@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 namespace Client {
     sealed class UserInputSystem : EcsUguiCallbackSystem
     {
+        readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
         readonly EcsPoolInject<InterfaceComponent> _interface = default;
+        readonly EcsPoolInject<WinEvent> _winEvent = default;
 
         #region Old
         //Vector2 startPosition = Vector2.zero;
@@ -106,11 +108,10 @@ namespace Client {
         {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("Restart!", evt.Sender);
             int index = 0;
             if (SceneManager.GetActiveScene().buildIndex + 1 > SceneManager.sceneCountInBuildSettings - 1)
             {
-                index = 1;
+                index = 2;
             }
             else
             {
@@ -119,7 +120,6 @@ namespace Client {
             _state.Value.Saves.SaveSceneNumber(index);
             _state.Value.Saves.SaveLevel(_state.Value.Saves.LVL + 1);
             SceneManager.LoadScene(index);
-            Debug.Log("NextLevel");
         }
         [Preserve]
         [EcsUguiClickEvent(Idents.Ui.Retry, Idents.Worlds.Events)]
@@ -139,6 +139,13 @@ namespace Client {
             interfaceComponent.progressbar.SetActive(true);
             //interfaceComponent.gamePanel.SetActive(false);
             Debug.Log("Play!");
+        }
+
+        [Preserve]
+        [EcsUguiClickEvent(Idents.Ui.Continue, Idents.Worlds.Events)]
+        void OnContinueClick(in EcsUguiClickEvent evt)
+        {
+            ref var winEvent = ref _winEvent.Value.Add(_world.Value.NewEntity());
         }
     }
 }

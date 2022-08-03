@@ -1,5 +1,7 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Client {
     sealed class SavesSystem : IEcsRunSystem {
@@ -12,9 +14,11 @@ namespace Client {
                 //_state.Value.Saves.SaveRock(_state.Value.RockCount);
                 //_state.Value.Saves.SaveTowerID(_state.Value.DefenseTowers);
                 //_state.Value.Saves.SaveUpgrades(_state.Value.TowersUpgrade);
-                _state.Value.Saves.SavePlayerID(_state.Value.CurrentPlayerID);
+                if (_state.Value.Saves.TutorialStage == 12)
+                    _state.Value.Saves.SavePlayerID(_state.Value.CurrentPlayerID);
                 _state.Value.Saves.SavePlayerUpgrade(_state.Value.PlayerExperience);
                 _state.Value.Saves.SaveCurrentWave(_state.Value.GetCurrentWave());
+                _state.Value.Saves.SaveSceneNumber(SceneManager.GetActiveScene().buildIndex);
                 
                 _filter.Pools.Inc1.Del(entity);
             }

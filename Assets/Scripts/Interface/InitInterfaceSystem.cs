@@ -13,7 +13,8 @@ namespace Client {
 
             ref var interfaceComp = ref world.GetPool<InterfaceComponent>().Add(entity);
 
-
+            interfaceComp.continueButton = GameObject.Find("Continue");
+            interfaceComp.continueButton.SetActive(false);
             interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
             interfaceComp.resourcePanelMB = interfaceComp.resourcePanel.GetComponent<ResourcesPanelMB>();
             interfaceComp.winPanel = GameObject.Find("WinPanel");
@@ -39,11 +40,21 @@ namespace Client {
             interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             interfaceComp._waveCounter = GameObject.Find("Counter").transform;
             interfaceComp._waveCounter.GetComponent<CounterMB>().points = new System.Collections.Generic.List<Image>();
-            for (int i = 0; i < state.WaveStorage.Waves.Count; i++)
+            interfaceComp._waveCounter.GetComponent<CounterMB>().sliders = new System.Collections.Generic.List<Slider>();
+            for (int i = 0; i < state.WaveStorage.Waves.Count + 1; i++)
             {
                 var point = GameObject.Instantiate(state.InterfaceStorage.Point, interfaceComp._waveCounter);
                 interfaceComp._waveCounter.GetComponent<CounterMB>().points.Add(point.GetComponent<Image>());
+                if (i < state.WaveStorage.Waves.Count)
+                {
+                    var slider = GameObject.Instantiate(state.InterfaceStorage.Slider, interfaceComp._waveCounter);
+                    slider.GetComponent<Slider>().maxValue = 1;
+                    slider.GetComponent<Slider>().value = 1;
+                    interfaceComp._waveCounter.GetComponent<CounterMB>().sliders.Add(slider.GetComponent<Slider>());
+                    slider.GetComponent<RectTransform>().sizeDelta = new Vector2(slider.GetComponent<RectTransform>().sizeDelta.x / state.WaveStorage.Waves.Count * 2, 60);
+                }
             }
+            //interfaceComp._waveCounter.localScale = interfaceComp._waveCounter.localScale / state.WaveStorage.Waves.Count;
             interfaceComp._waveCounter.GetComponent<CounterMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             
             //world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
@@ -73,10 +84,9 @@ namespace Client {
                 //tutorialComp.Background.SetActive(false);
                 tutorialComp.DragToMove.SetActive(false);
                 state.EnemiesWave = -1;
-                ref var countdown = ref world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
+                /*ref var countdown = ref world.GetPool<CountdownWaveComponent>().Add(world.NewEntity());
                 interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetTimer(state.TimeToNextWave);
-                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetText("Next wave!");
-                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SwitcherTurn(true);
+                interfaceComp.countdownWave.GetComponent<CountdownWaveMB>().SetText("Next wave!");*/
             }
         }
     }

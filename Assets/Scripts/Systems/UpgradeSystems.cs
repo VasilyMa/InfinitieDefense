@@ -22,6 +22,7 @@ namespace Client
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
         readonly EcsPoolInject<UpgradeComponent> _upgradeEventPool = default;
         readonly EcsPoolInject<TowerRecoveryEvent> _towerRecoveryPool = default;
+        readonly EcsPoolInject<SavesEvent> _savePool = default;
 
         private string MainTower;
         private string DefenceTower;
@@ -178,6 +179,7 @@ namespace Client
                 viewComp.DropItemParticleSystem.Play();
 
                 upgradeComponent.DelayAfterUpgrade = 0f;
+                _savePool.Value.Add(_world.Value.NewEntity());
             }
             void RelocateCoinInResourceHolder()
             {
