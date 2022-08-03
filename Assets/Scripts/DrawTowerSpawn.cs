@@ -30,8 +30,8 @@ public class DrawTowerSpawn : MonoBehaviour
             Gizmos.color = drawColor;
             for (int j = 0; j < _count; j++)
             {
-                var x = Mathf.Cos(_angle * Mathf.Deg2Rad) * _radiuses[i];
-                var z = Mathf.Sin(_angle * Mathf.Deg2Rad) * _radiuses[i];
+                var z = Mathf.Cos(_angle * Mathf.Deg2Rad) * _radiuses[i];
+                var x = Mathf.Sin(_angle * Mathf.Deg2Rad) * _radiuses[i];
 
                 _angle += 360 / _count;
 

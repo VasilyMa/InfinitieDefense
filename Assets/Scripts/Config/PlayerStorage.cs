@@ -45,7 +45,7 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "4level",
-                UpgradeValue = 40,
+                UpgradeValue = 50,
                 Mesh = PlayerMeshes[2]
             },
             ["4level"] = new PlayerData
@@ -57,7 +57,7 @@ public class PlayerStorage : ScriptableObject
                 PlayerPrefab = PlayerPrefabs[0],
                 IsLast = false,
                 NextID = "5level",
-                UpgradeValue = 80,
+                UpgradeValue = 100,
                 Mesh = PlayerMeshes[3]
             },
             ["5level"] = new PlayerData

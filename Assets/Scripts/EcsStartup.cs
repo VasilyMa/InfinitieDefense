@@ -98,7 +98,7 @@ namespace Client
                 .Add(new CreateNextTowerSystem())
                 .Add(new DrawDetectionZoneEventSystem())
                 .Add(new CreateNewPlayer())
-                //.Add(new CreateDefenders())
+                .Add(new CreateDefenders())
                 .Add(new LevelPopupSystem())
 
                 .Add(new DamagingEventSystem())
@@ -116,7 +116,7 @@ namespace Client
                 //.Add(new PickUpNewWeaponEventSystem())
 
                 .Add(new CorpseRemoveSystem())
-                //.Add(new RespawnDefender())
+                .Add(new RespawnDefender())
                 .Add(new RespawnEventSystem())
                 .Add(new OreRespawnSystem())
                 .Add(new UpgradeCanvasSystem())
