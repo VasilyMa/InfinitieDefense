@@ -57,7 +57,6 @@ namespace Client
                     _timerOn = false;
                     if (!_state.isWave)
                     {
-                        _interfacePool.Get(_state.EntityInterface)._waveCounter.GetComponent<CounterMB>().ChangeCount(_state.GetCurrentWave());
                         _winPool.Add(_world.NewEntity());
                     }
                     if (_state.Saves.TutorialStage == 2)
