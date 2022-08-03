@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
-    guid: 9a6f71a9578b90544b46b436bda82526
-  - enabled: 1
     path: Assets/Scenes/Levels/0 - Tutorial - Iceland.unity
     guid: 2c69a111c29e5774ebc5da6d49894be8
   - enabled: 1
@@ -26,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/5 - Oasis.unity
     guid: c1fb732a4e0e7094cb912b95189d2716
+  - enabled: 1
+    path: Assets/Scenes/Levels/6 - Oasis.unity
+    guid: 0d256d3445d856749a917b4928b3e63e
   m_configObjects: {}

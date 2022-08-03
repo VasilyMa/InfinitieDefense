@@ -149,8 +149,8 @@ namespace Client
                         }
                     }
                     ref var upgradeComp = ref _upgradePool.Value.Get(_state.Value.EntityPlayer);
-                    upgradeComp.DelayTime = 0f;
-                    upgradeComp.Time = 0f;
+                    upgradeComp.DelayBeforUpgrade = 0f;
+                    upgradeComp.DelayAfterUpgrade = 0f;
                     if (_state.Value.TowerStorage.GetLevelByID(_state.Value.DefenseTowers[towerIndex]) == 9)
                     {
                         upgradePointComp.point.SetActive(false);
@@ -294,8 +294,8 @@ namespace Client
                             timerComp.TimeToUpgrade = 0f;
                         }
                         ref var upgradeComp = ref _upgradePool.Value.Get(_state.Value.EntityPlayer);
-                        upgradeComp.DelayTime = 0f;
-                        upgradeComp.Time = 0f;
+                        upgradeComp.DelayBeforUpgrade = 0f;
+                        upgradeComp.DelayAfterUpgrade = 0f;
                     }
                     
 

@@ -84,7 +84,7 @@ namespace Client
                     continue;
                 }
 
-                if (targetableComponent.TargetEntity < 1)
+                if (targetableComponent.TargetEntity < 1 || targetableComponent.TargetEntity == _state.Value.EntityMainTower)
                 {
                     targetableComponent.TargetEntity = targetableComponent.AllEntityInDetectedZone[0];
                     targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;

@@ -31,13 +31,13 @@ public class DefenseTowerStorage : ScriptableObject
             {
                 LevelTower = 1,
                 Radius = 6,
-                Damage = 8,
+                Damage = 15,
                 Cooldown = _commonCD,
                 TowerHealth = 200,
                 TowerPrefab = TowerPrefabs[0],
                 TowerMesh = TowerMeshs[0],
                 CannonBallPrefab = CannonBallPrefabs[0],
-                Upgrade = 30,
+                Upgrade = 20,
                 IsLast = false,
                 NextID = "2tower",
                 ImageResource = ImageResources
@@ -46,13 +46,13 @@ public class DefenseTowerStorage : ScriptableObject
             {
                 LevelTower = 2,
                 Radius = 8,
-                Damage = 10,
+                Damage = 20,
                 Cooldown = _commonCD,
                 TowerHealth = 250,
                 TowerPrefab = TowerPrefabs[1],
                 TowerMesh = TowerMeshs[1],
                 CannonBallPrefab = CannonBallPrefabs[1],
-                Upgrade = 50,
+                Upgrade = 30,
                 IsLast = false,
                 NextID = "3tower",
                 ImageResource = ImageResources
@@ -61,13 +61,13 @@ public class DefenseTowerStorage : ScriptableObject
             {
                 LevelTower = 3,
                 Radius = 10,
-                Damage = 15,
+                Damage = 25,
                 Cooldown = _commonCD,
                 TowerHealth = 300,
                 TowerPrefab = TowerPrefabs[2],
                 TowerMesh = TowerMeshs[2],
                 CannonBallPrefab = CannonBallPrefabs[2],
-                Upgrade = 70,
+                Upgrade = 40,
                 IsLast = false,
                 NextID = "4tower",
                 ImageResource = ImageResources
@@ -76,13 +76,13 @@ public class DefenseTowerStorage : ScriptableObject
             {
                 LevelTower = 4,
                 Radius = 12,
-                Damage = 20,
+                Damage = 30,
                 Cooldown = _commonCD,
                 TowerHealth = 350,
                 TowerPrefab = TowerPrefabs[3],
                 TowerMesh = TowerMeshs[3],
                 CannonBallPrefab = CannonBallPrefabs[3],
-                Upgrade = 90,
+                Upgrade = 60,
                 IsLast = false,
                 NextID = "5tower",
                 ImageResource = ImageResources
@@ -91,7 +91,7 @@ public class DefenseTowerStorage : ScriptableObject
             {
                 LevelTower = 5,
                 Radius = 14,
-                Damage = 25,
+                Damage = 50,
                 Cooldown = _commonCD,
                 TowerHealth = 400,
                 TowerPrefab = TowerPrefabs[4],

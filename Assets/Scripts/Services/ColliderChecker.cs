@@ -82,7 +82,7 @@ namespace Client
                             {
                                 ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                                 upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
-                                upgradeComp.Time = 0f;
+                                upgradeComp.DelayAfterUpgrade = 0f;
                                 upgradeComp.UpgradeTower = true;
                                 ref var timerComp = ref _timerPool.Add(_world.NewEntity());
                                 timerComp.Entity = _state.TowersEntity[upgradeComp.TowerIndex];
@@ -95,7 +95,7 @@ namespace Client
                             {
                                 ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
                                 upgradeComp.TowerIndex = other.GetComponent<UpgradePointMB>().TowerIndex;
-                                upgradeComp.Time = 0f;
+                                upgradeComp.DelayAfterUpgrade = 0f;
                                 upgradeComp.UpgradeTower = true;
                                 ref var timerComp = ref _timerPool.Add(_world.NewEntity());
                                 timerComp.Entity = _state.TowersEntity[upgradeComp.TowerIndex];
@@ -109,7 +109,7 @@ namespace Client
                         if (!_upgradePool.Has(_state.EntityPlayer) && _state.CoinCount > 0)
                         {
                             ref var upgradeComp = ref _upgradePool.Add(_state.EntityPlayer);
-                            upgradeComp.Time = 0f;
+                            upgradeComp.DelayAfterUpgrade = 0f;
                             upgradeComp.UpgradeTower = false;
                             ref var timerComp = ref _timerPool.Add(_world.NewEntity());
                             timerComp.Entity = _state.EntityPlayer;

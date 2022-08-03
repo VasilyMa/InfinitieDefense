@@ -49,7 +49,7 @@ namespace Client
         public bool isWave;
 
         public float DelayBeforUpgrade = 0.8f;
-        public float DelayAfterUpgrade = 0.1f;
+        public float DelayAfterUpgrade = 0.5f;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, DropableItemStorage dropableItemStorage,
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, int towersInRow, float timeToNextWave, WaveStorage waveStorage,

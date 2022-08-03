@@ -41,7 +41,7 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 13,
                 IsLast = false,
                 NextID = "3tower",
-                DefenderCount = 1,
+                DefenderCount = 0,
                 ImageResource = ImageResoures
             },
             ["3tower"] = new Tower
@@ -49,12 +49,12 @@ public class TowerStorage : ScriptableObject
                 TowerLevel = 3,
                 Radius = 20,
                 TowerHealth = 550,
-                TowerPrefab = TowerPrefabs[0],
-                TowerMesh = TowerMeshs[0],
+                TowerPrefab = TowerPrefabs[1],
+                TowerMesh = TowerMeshs[1],
                 Upgrade = 20,
                 IsLast = false,
                 NextID = "4tower",
-                DefenderCount = 2,
+                DefenderCount = 1,
                 ImageResource = ImageResoures
             },
             ["4tower"] = new Tower
@@ -67,7 +67,7 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 30,
                 NextID = "5tower",
                 IsLast = false,
-                DefenderCount = 3,
+                DefenderCount = 1,
                 ImageResource = ImageResoures
             },
             ["5tower"] = new Tower
@@ -80,7 +80,7 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 45,
                 NextID = "6tower",
                 IsLast = false,
-                DefenderCount = 4,
+                DefenderCount = 1,
                 ImageResource = ImageResoures
             },
             ["6tower"] = new Tower
@@ -93,7 +93,7 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 60,
                 NextID = "7tower",
                 IsLast = false,
-                DefenderCount = 5,
+                DefenderCount = 1,
                 ImageResource = ImageResoures
             },
             ["7tower"] = new Tower
@@ -106,7 +106,7 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 75,
                 NextID = "8tower",
                 IsLast = false,
-                DefenderCount = 6,
+                DefenderCount = 2,
                 ImageResource = ImageResoures
 
             },
@@ -120,7 +120,7 @@ public class TowerStorage : ScriptableObject
                 Upgrade = 100,
                 NextID = "9tower",
                 IsLast = false,
-                DefenderCount = 7,
+                DefenderCount = 2,
                 ImageResource = ImageResoures
             },
             ["9tower"] = new Tower
@@ -132,7 +132,7 @@ public class TowerStorage : ScriptableObject
                 TowerMesh = TowerMeshs[2],
                 Upgrade = 999999,
                 IsLast = true,
-                DefenderCount = 8,
+                DefenderCount = 2,
                 ImageResource = ImageResoures
             }
         };
