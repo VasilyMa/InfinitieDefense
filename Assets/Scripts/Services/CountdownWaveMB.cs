@@ -17,6 +17,7 @@ namespace Client
         [SerializeField] private Text _textAmount;
         private EcsPool<CountdownWaveComponent> _countdownPool = default;
         private EcsPool<TutorialComponent> _tutorialnPool = default;
+        private EcsPool<InterfaceComponent> _interfacePool = default;
 
         private EcsPool<WinEvent> _winPool = default;
         public void Init(EcsWorld world, GameState state)
@@ -25,6 +26,7 @@ namespace Client
             _state = state;
             _countdownPool = _world.GetPool<CountdownWaveComponent>();
             _tutorialnPool = _world.GetPool<TutorialComponent>();
+            _interfacePool = _world.GetPool<InterfaceComponent>();
             _winPool = _world.GetPool<WinEvent>();
         }
         private void Update()
@@ -46,12 +48,16 @@ namespace Client
                 else
                 {
                     //to do start wave
-                    if(_state.isWave)
+                    if (_state.isWave)
+                    {
                         _state.SetNextWave();
+                        _interfacePool.Get(_state.EntityInterface)._waveCounter.GetComponent<CounterMB>().ChangeCount(_state.GetCurrentWave());
+                    }
                     _time = 0;
                     _timerOn = false;
                     if (!_state.isWave)
                     {
+                        _interfacePool.Get(_state.EntityInterface)._waveCounter.GetComponent<CounterMB>().ChangeCount(_state.GetCurrentWave());
                         _winPool.Add(_world.NewEntity());
                     }
                     if (_state.Saves.TutorialStage == 2)

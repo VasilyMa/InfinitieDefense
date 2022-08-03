@@ -45,6 +45,7 @@ namespace Client
         public int PlayerExperience;
         public int AllEnemies;
         public int EnemiesWave;
+        public int StaticEnemiesWave;
         public bool isWave;
 
         public float DelayBeforUpgrade = 0.8f;
@@ -208,6 +209,7 @@ namespace Client
                     }
                 }
             }
+            StaticEnemiesWave = EnemiesWave;
             Debug.Log($"Вражеские пидоры {EnemiesWave}");
         }
     }

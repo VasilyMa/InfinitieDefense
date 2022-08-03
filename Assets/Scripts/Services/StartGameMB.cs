@@ -30,8 +30,12 @@ namespace Client {
         private string path;
         public void Start()
         {
-            VersionGame = Application.version;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            path = Path.Combine(Application.persistentDataPath, "SaveSettings.json");
+#else
             path = Path.Combine(Application.dataPath, "SaveSettings.json");
+#endif
+            VersionGame = Application.version;
             if (File.Exists(path))
             {
                 Save = JsonUtility.FromJson<SaveSettings>(File.ReadAllText(path));

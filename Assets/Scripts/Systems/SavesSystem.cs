@@ -1,5 +1,7 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Client {
     sealed class SavesSystem : IEcsRunSystem {
@@ -16,6 +18,7 @@ namespace Client {
                     _state.Value.Saves.SavePlayerID(_state.Value.CurrentPlayerID);
                 _state.Value.Saves.SavePlayerUpgrade(_state.Value.PlayerExperience);
                 _state.Value.Saves.SaveCurrentWave(_state.Value.GetCurrentWave());
+                _state.Value.Saves.SaveSceneNumber(SceneManager.GetActiveScene().buildIndex);
                 
                 _filter.Pools.Inc1.Del(entity);
             }

@@ -18,3 +18,4 @@ MonoBehaviour:
   GoldPrefab: {fileID: 8399164091446850438, guid: 3944bf0270bd13441904e4638c69bbae, type: 3}
   RockPrefab: {fileID: 5450163464563837820, guid: 69150853be2712d44986ac890cf4aa85, type: 3}
   Point: {fileID: 6091333833254651919, guid: 057e4e3f19ef1e04290e45ed29f8e7b9, type: 3}
+  Slider: {fileID: 5988703224112411569, guid: a971a4678921bd742b458fb65dc5f2ba, type: 3}

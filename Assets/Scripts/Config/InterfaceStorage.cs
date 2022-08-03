@@ -11,4 +11,5 @@ public class InterfaceStorage : ScriptableObject
     public GameObject GoldPrefab;
     public GameObject RockPrefab;
     public GameObject Point;
+    public GameObject Slider;
 }
