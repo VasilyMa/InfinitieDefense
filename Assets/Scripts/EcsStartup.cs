@@ -57,6 +57,7 @@ namespace Client
                 //.Add(new RadiusInitSystem())
 
                 .Add(new HPRegenerationSystem())
+                .Add(new TowerRecoveryEventSystem())
                 .Add(new CooldownSystem())
 
                 .Add(new OnOffTowerAttack())

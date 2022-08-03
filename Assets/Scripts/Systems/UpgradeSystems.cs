@@ -11,15 +11,22 @@ namespace Client
         readonly EcsWorldInject _world = default;
 
         readonly EcsFilterInject<Inc<UpgradeComponent>> _upgradeEventFilter = default;
+        readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
+        readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
+
         readonly EcsPoolInject<Player> _playerPool = default;
         //readonly EcsPoolInject<CreateNextTowerEvent> _nextTowerPool = default;
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
-        readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _canvasFilter = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
         readonly EcsPoolInject<UpgradeComponent> _upgradeEventPool = default;
-        readonly EcsFilterInject<Inc<TutorialComponent>> _tutorPool = default;
+        readonly EcsPoolInject<TowerRecoveryEvent> _towerRecoveryPool = default;
+
+        private string MainTower;
+        private string DefenceTower;
+        private string Player;
+
         public void Run (EcsSystems systems)
         {
             foreach(var eventEntity in _upgradeEventFilter.Value)
@@ -36,113 +43,113 @@ namespace Client
                     continue;
                 }
 
-                int neededResource = 0;
+                int currentResource = 0;
+                int needToUpgrade = 0;
+                string upgradOf = "";
 
                 if (upgradeComponent.UpgradeTower) //если апгрейдим башни
                 {
                     if (upgradeComponent.TowerIndex == 0) //главная башня
                     {
-                        neededResource = _state.Value.CoinCount;
+                        currentResource = _state.Value.CoinCount;
+                        needToUpgrade = _state.Value.TowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[upgradeComponent.TowerIndex]);
+                        upgradOf = nameof(MainTower);
                     }
                     else //защитные башни
                     {
-                        neededResource = _state.Value.RockCount;
+                        currentResource = _state.Value.RockCount;
+                        needToUpgrade = _state.Value.DefenseTowerStorage.GetUpgradeByID(_state.Value.DefenseTowers[upgradeComponent.TowerIndex]);
+                        upgradOf = nameof(DefenceTower);
                     }
-
                 }
                 else // если апгрейдим игрока
                 {
-                    neededResource = _state.Value.CoinCount;
+                    currentResource = _state.Value.CoinCount;
+                    needToUpgrade = _state.Value.PlayerStorage.GetUpgradeByID(_state.Value.CurrentPlayerID);
+                    upgradOf = nameof(Player);
                 }
 
                 if (upgradeComponent.DelayBeforUpgrade < _state.Value.DelayBeforUpgrade)
                 {
                     upgradeComponent.DelayBeforUpgrade += Time.deltaTime;
-                    return;
+                    continue;
                 }
 
-                if (upgradeComponent.DelayAfterUpgrade == 0)
+                float delayPerResource = _state.Value.DelayAfterUpgrade / needToUpgrade;
+
+                if (upgradeComponent.DelayAfterUpgrade < delayPerResource)
                 {
-                    if (neededResource > 0)
-                    {
-                        if (upgradeComponent.UpgradeTower)
+                    upgradeComponent.DelayAfterUpgrade += Time.deltaTime;
+                    continue;
+                }
+
+                if (currentResource <= 0)
+                {
+                    _upgradeEventPool.Value.Del(eventEntity);
+                    continue;
+                }
+
+                switch (upgradOf)
+                {
+                    case nameof(MainTower):
                         {
-                            if (upgradeComponent.TowerIndex == 0)
+                            _state.Value.CoinCount--;
+                            _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+
+                            if (_state.Value.CoinCount > 0)
                             {
-                                //GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
-                                //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
-                                _state.Value.CoinCount--;
-                                _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
-
-                                if (_state.Value.CoinCount > 0)
-                                {
-                                    intComp.resourcePanelMB.EnableGoldPanel();
-                                }
-                                else
-                                {
-                                    intComp.resourcePanelMB.DisableGoldPanel();
-                                }
-
-                                intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
-
-                                //foreach (var item in _tutorPool.Value) //этап тутора
-                                //{
-                                //    ref var upgradePointComp = ref _canvasFilter.Value.Get(_state.Value.TowersEntity[filterComp.TowerIndex]);
-                                //    ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                                //    if (_state.Value.Saves.TutorialStage <= 5)
-                                //    {
-                                //        GameObject.Destroy(tutorComp.TutorialCursor);
-                                //        tutorComp.TutorialStage = 6;
-                                //        _state.Value.Saves.TutorialStage = 6;
-                                //        _state.Value.Saves.SaveTutorial(6);
-                                //        upgradePointComp.point.SetActive(false);
-                                //        _filter.Pools.Inc1.Del(_state.Value.EntityPlayer);
-                                //        foreach (var point in _filterPoint.Value)
-                                //        {
-                                //            _filterPoint.Pools.Inc1.Get(point).Point.SetActive(true);
-                                //        }
-                                //    }
-                                //}
-
+                                intComp.resourcePanelMB.EnableGoldPanel();
                             }
                             else
                             {
-                                GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
-                                _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
-                                _state.Value.RockCount--;
-                                _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+                                intComp.resourcePanelMB.DisableGoldPanel();
+                            }
 
-                                if (_state.Value.RockCount > 0)
+                            _towerRecoveryPool.Value.Add(_world.Value.NewEntity()).TowerEntity = _state.Value.TowersEntity[upgradeComponent.TowerIndex];
+
+                            intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
+                            _state.Value.UpgradeTower(upgradeComponent.TowerIndex);
+                            break;
+                        }
+
+                    case nameof(DefenceTower):
+                        {
+                            GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
+                            _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
+                            _state.Value.RockCount--;
+                            _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
+
+                            _towerRecoveryPool.Value.Add(_world.Value.NewEntity()).TowerEntity = _state.Value.TowersEntity[upgradeComponent.TowerIndex];
+
+                            if (_state.Value.RockCount > 0)
+                            {
+                                intComp.resourcePanelMB.EnableStonePanel();
+                            }
+                            else
+                            {
+                                intComp.resourcePanelMB.DisableStonePanel();
+                            }
+
+                            intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
+                            RelocateCoinInResourceHolder();
+
+                            foreach (var item in _tutorPool.Value)
+                            {
+                                ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
+                                if (_state.Value.Saves.TutorialStage <= 11)
                                 {
-                                    intComp.resourcePanelMB.EnableStonePanel();
+                                    GameObject.Destroy(tutorComp.TutorialCursor);
+                                    tutorComp.TutorialStage = 12;
+                                    _state.Value.Saves.TutorialStage = 12;
+                                    _state.Value.Saves.SaveTutorial(12);
                                 }
-                                else
-                                {
-                                    intComp.resourcePanelMB.DisableStonePanel();
-                                }
-
-                                intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateStone();
-                                RelocateCoinInResourceHolder();
-
-                                foreach (var item in _tutorPool.Value)
-                                {
-                                    ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                                    if (_state.Value.Saves.TutorialStage <= 11)
-                                    {
-                                        GameObject.Destroy(tutorComp.TutorialCursor);
-                                        tutorComp.TutorialStage = 12;
-                                        _state.Value.Saves.TutorialStage = 12;
-                                        _state.Value.Saves.SaveTutorial(12);
-                                    }
-                                }
-
                             }
                             _state.Value.UpgradeTower(upgradeComponent.TowerIndex);
+                            break;
                         }
-                        else
+
+                    case nameof(Player):
                         {
-                            //GameObject.Destroy(_state.Value.CoinTransformList[_state.Value.CoinCount - 1].gameObject);
-                            //_state.Value.CoinTransformList.Remove(_state.Value.CoinTransformList[_state.Value.CoinCount - 1]);
                             _state.Value.CoinCount--;
                             _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
 
@@ -157,41 +164,20 @@ namespace Client
 
                             intComp.resourcePanel.GetComponent<ResourcesPanelMB>().UpdateGold();
                             _state.Value.UpgradePlayer();
-                            //viewComp.Level.UpdateLevel(_state.Value.PlayerStorage.GetLevelByID(_state.Value.CurrentPlayerID));
+
                             foreach (var item in _filterPoint.Value)
                             {
                                 _filterPoint.Pools.Inc1.Get(item).Point.GetComponent<PlayerUpgradePointMB>().
                                     UpdateLevelInfo(_state.Value.PlayerStorage.
                                     GetUpgradeByID(_state.Value.CurrentPlayerID), _state.Value.PlayerExperience);
                             }
-
-                            //ref var upgradePointComp = ref _canvasFilter.Value.Get(_state.Value.TowersEntity[0]);
-                            //foreach (var item in _tutorPool.Value)
-                            //{
-                            //    ref var tutorComp = ref _tutorPool.Pools.Inc1.Get(item);
-                            //    GameObject.Destroy(tutorComp.TutorialCursor);
-                            //    if (tutorComp.TutorialStage <= 7)
-                            //    {
-                            //        tutorComp.TutorialStage = 8;
-                            //        _state.Value.Saves.TutorialStage = 8;
-                            //        _state.Value.Saves.SaveTutorial(8);
-                            //        upgradePointComp.point.SetActive(true);
-                            //    }
-                            //}
+                            break;
                         }
-                        //viewComp.DropItemParticleSystem.Stop();
-                        viewComp.DropItemParticleSystem.Play();
-                    }
-                    else
-                    {
-                        _upgradeEventFilter.Pools.Inc1.Del(eventEntity);
-                    }
                 }
-                upgradeComponent.DelayAfterUpgrade += Time.deltaTime;
-                if (upgradeComponent.DelayAfterUpgrade >= _state.Value.DelayAfterUpgrade)
-                {
-                    upgradeComponent.DelayAfterUpgrade = 0f;
-                }
+
+                viewComp.DropItemParticleSystem.Play();
+
+                upgradeComponent.DelayAfterUpgrade = 0f;
             }
             void RelocateCoinInResourceHolder()
             {
