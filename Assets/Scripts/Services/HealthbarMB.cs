@@ -35,9 +35,9 @@ namespace Client
             _slider.value = health;
             _curHp = health;
         }
-        public void UpdateHealth(float damage)
+        public void UpdateHealth(float currentHP)
         {
-            _curHp = damage;
+            _curHp = currentHP;
             _slider.value = _curHp;
             _image.color = _gradient.Evaluate(_slider.normalizedValue);
             if (_slider.value <= 0)

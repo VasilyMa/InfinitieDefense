@@ -7,10 +7,13 @@ namespace Client
     {
         readonly EcsFilterInject<Inc<TowerRecoveryEvent>> _towerRecoveryEventFilter = default;
 
-        readonly EcsPoolInject<TowerRecoveryEvent> _towerRecoveryPool = default;
         readonly EcsPoolInject<HealthComponent> _healthComponentPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<DeadTag> _deadPool = default;
+        readonly EcsPoolInject<DestroyEffects> _destroyEffectsPool = default;
+
+        readonly EcsPoolInject<TowerRecoveryEvent> _towerRecoveryPool = default;
+        readonly EcsPoolInject<FiringEvent> _firingEventPool = default;
 
         private float _healingPercentPerEvent = 0.05f;
 
@@ -37,7 +40,18 @@ namespace Client
                 }
 
                 viewComponent.Healthbar?.SetHealth(healthComponent.CurrentValue);
+                viewComponent.Healthbar?.UpdateHealth(healthComponent.CurrentValue);
+
+                DecreaseFireEffect(eventEntity);
+
                 _towerRecoveryPool.Value.Del(eventEntity);
+            }
+        }
+        private void DecreaseFireEffect(in int entity)
+        {
+            if (_destroyEffectsPool.Value.Has(entity))
+            {
+                _firingEventPool.Value.Add(entity);
             }
         }
     }

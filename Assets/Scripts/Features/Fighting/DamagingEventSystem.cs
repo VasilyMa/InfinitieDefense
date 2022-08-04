@@ -21,6 +21,7 @@ namespace Client
         readonly EcsPoolInject<Targetable> _targetablePool = default;
         readonly EcsPoolInject<DamagePopupEvent> _popupEvent = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationPool = default;
+        readonly EcsPoolInject<FiringEvent> _firingEventPool = default;
 
         public void Run (EcsSystems systems)
         {
@@ -87,33 +88,15 @@ namespace Client
                     targetingEvent.TargetingEntity = damagingEventComponent.TargetEntity;
                 }
 
-                IncreaseFireEffect(damagingEventComponent.TargetEntity, healthPointComponent.CurrentValue, healthPointComponent.MaxValue);
+                IncreaseFireEffect(damagingEventComponent.TargetEntity);
             }
         }
 
-        private void IncreaseFireEffect(in int entity, in float currentHP, in float maxHP)
+        private void IncreaseFireEffect(in int entity)
         {
             if (_destroyEffectsPool.Value.Has(entity))
             {
-                ref var destroyEffectsComponent = ref _destroyEffectsPool.Value.Get(entity);
-
-                float maxFireValue = 3;
-                float fireMultiply = 1 - (currentHP / maxHP);
-
-                // 4 stage of fire: 25%, 50%, 75%, 100%
-
-                if (fireMultiply < 0.25f) fireMultiply = 0f;
-                else if (fireMultiply > 0.25f && fireMultiply < 0.5f) fireMultiply = 0.25f;
-                else if (fireMultiply > 0.5f && fireMultiply < 0.75f) fireMultiply = 0.5f;
-                else if (fireMultiply > 0.75f && fireMultiply < 1f) fireMultiply = 0.75f;
-                else fireMultiply = 1f;
-
-                if (fireMultiply != 0)
-                {
-                    if (destroyEffectsComponent.DestroyFire.isStopped) destroyEffectsComponent.DestroyFire.Play();
-                }
-
-                destroyEffectsComponent.DestroyFire.startSize = maxFireValue * fireMultiply;
+                _firingEventPool.Value.Add(entity);
             }
         }
     }

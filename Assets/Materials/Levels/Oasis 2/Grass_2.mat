@@ -9,9 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Grass_2
   m_Shader: {fileID: -6465566751694194690, guid: edd7abf643fa4bc4e8561d4c280c97cf, type: 3}
-  m_ShaderKeywords: TCP2_OUTLINE_TEXTURED_VERTEX TCP2_RAMP_CRISP TCP2_REFLECTIONS_FRESNEL
-    TCP2_RIM_LIGHTING_LIGHTMASK TCP2_SHADOW_LIGHT_COLOR TCP2_SPECULAR_STYLIZED TCP2_UV_NORMALS_FULL
-    _EMISSION
+  m_ShaderKeywords: TCP2_RAMP_CRISP TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK
+    TCP2_SHADOW_LIGHT_COLOR TCP2_SPECULAR_STYLIZED TCP2_UV_NORMALS_FULL _EMISSION
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -114,8 +113,8 @@ Material:
     - _OutlineMinWidth: 1
     - _OutlinePixelSizeType: 0
     - _OutlineTextureLOD: 5
-    - _OutlineTextureType: 1
-    - _OutlineWidth: 7.69
+    - _OutlineTextureType: 0
+    - _OutlineWidth: 0
     - _Parallax: 0.02
     - _RampBands: 4
     - _RampBandsSmoothing: 0.1

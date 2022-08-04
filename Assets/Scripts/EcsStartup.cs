@@ -105,6 +105,8 @@ namespace Client
                 .Add(new TargetingEventSystem())
                 .Add(new DamagePopupSystem())
 
+                .Add(new FiringEventSystem())
+
                 .Add(new ReloadSystem())
 
                 .Add(new DieSystem())

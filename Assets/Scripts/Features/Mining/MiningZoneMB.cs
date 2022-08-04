@@ -51,10 +51,7 @@ namespace Client
 
             _ecsInfoMB.SetCurrentMiningOre(-1);
 
-            if (!_animator.GetBool("Attack"))
-            {
-                _ecsInfoMB.DeactivateContextTool(_thisTool);
-            }
+            _ecsInfoMB.DeactivateContextTool(_thisTool);
         }
 
         // to do ay realize method ActivateContextToolPool() in EcsInfo
@@ -80,10 +77,7 @@ namespace Client
             _ecsInfoMB.SetCurrentMiningOre(oreEcsInfo.GetEntity());
             _oreInZone++;
 
-            if (!_animator.GetBool("Attack"))
-            {
-                _ecsInfoMB.ActivateContextTool(_thisTool);
-            }
+            _ecsInfoMB.ActivateContextTool(_thisTool);
         }
 
         private void OnTriggerExit(Collider other)
@@ -105,10 +99,8 @@ namespace Client
             _ecsInfoMB.SetCurrentMiningOre(-1);
             _oreInZone--;
 
-            if (!_animator.GetBool("Attack"))
-            {
-                _ecsInfoMB.DeactivateContextTool(_thisTool);
-            }
+            
+            _ecsInfoMB.DeactivateContextTool(_thisTool);
         }
     }
 }

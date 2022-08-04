@@ -17,7 +17,7 @@ namespace Client {
                     _countdownFilter.Pools.Inc1.Del(item); 
                 }
                 
-                //Time.timeScale = 0;
+                Time.timeScale = 0;
                 interfaceComp.winPanel.SetActive(true);
                 interfaceComp.winPanel.GetComponent<Animator>().SetTrigger("Win");
                 interfaceComp.continueButton.SetActive(false);

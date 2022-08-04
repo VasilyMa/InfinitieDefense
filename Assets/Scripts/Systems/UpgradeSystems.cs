@@ -19,7 +19,6 @@ namespace Client
         readonly EcsPoolInject<InterfaceComponent> _intPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
         readonly EcsPoolInject<CanvasUpgradeComponent> _canvasFilter = default;
-        readonly EcsPoolInject<VibrationEvent> _vibrationEventPool = default;
         readonly EcsPoolInject<UpgradeComponent> _upgradeEventPool = default;
         readonly EcsPoolInject<TowerRecoveryEvent> _towerRecoveryPool = default;
         readonly EcsPoolInject<SavesEvent> _savePool = default;
@@ -95,7 +94,6 @@ namespace Client
                     case nameof(MainTower):
                         {
                             _state.Value.CoinCount--;
-                            _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
 
                             if (_state.Value.CoinCount > 0)
                             {
@@ -118,7 +116,6 @@ namespace Client
                             GameObject.Destroy(_state.Value.StoneTransformList[_state.Value.RockCount - 1].gameObject);
                             _state.Value.StoneTransformList.Remove(_state.Value.StoneTransformList[_state.Value.RockCount - 1]);
                             _state.Value.RockCount--;
-                            _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
 
                             _towerRecoveryPool.Value.Add(_world.Value.NewEntity()).TowerEntity = _state.Value.TowersEntity[upgradeComponent.TowerIndex];
 
@@ -152,7 +149,6 @@ namespace Client
                     case nameof(Player):
                         {
                             _state.Value.CoinCount--;
-                            _vibrationEventPool.Value.Add(_world.Value.NewEntity()).Vibration = VibrationEvent.VibrationType.SoftImpact;
 
                             if (_state.Value.CoinCount > 0)
                             {
