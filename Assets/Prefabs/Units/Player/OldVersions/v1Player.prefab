@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 1606457711503236964}
   - component: {fileID: 8809200389960835822}
   m_Layer: 15
-  m_Name: Level1_Player
+  m_Name: v1Player
   m_TagString: Friendly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

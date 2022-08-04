@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3064272450998986827}
   - component: {fileID: 5083898075739592129}
   m_Layer: 15
-  m_Name: PlayerV2
+  m_Name: v2Player
   m_TagString: Friendly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

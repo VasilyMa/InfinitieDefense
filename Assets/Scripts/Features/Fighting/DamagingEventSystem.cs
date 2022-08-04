@@ -94,9 +94,9 @@ namespace Client
 
         private void IncreaseFireEffect(in int entity)
         {
-            if (_destroyEffectsPool.Value.Has(entity))
+            if (_destroyEffectsPool.Value.Has(entity) && !_firingEventPool.Value.Has(entity))
             {
-                _firingEventPool.Value.Add(entity);
+               _firingEventPool.Value.Add(entity);
             }
         }
     }

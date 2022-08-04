@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Client
 {
@@ -17,8 +18,7 @@ namespace Client
         private EcsPool<OreComponent> _orePool;
 
         private string Ore;
-
-        private int _oreInZone;
+        private List<int> _oresEntityInZone;
 
         private ContextToolComponent.Tool _thisTool = ContextToolComponent.Tool.pickaxe;
 
@@ -28,6 +28,7 @@ namespace Client
             if (_ecsInfoMB == null) _ecsInfoMB = _mainGameObject.GetComponent<EcsInfoMB>();
             if (_animator == null) _animator = _mainGameObject.GetComponent<Animator>();
             _world = _ecsInfoMB.GetWorld();
+            _oresEntityInZone = new List<int>(); 
         }
 
         private void Update()
@@ -37,7 +38,7 @@ namespace Client
                 return;
             }
 
-            _orePool = _world.Value.GetPool<OreComponent>();
+            _orePool = _world.Value?.GetPool<OreComponent>();
             ref var oreComponent = ref _orePool.Get(_ecsInfoMB.GetCurrentMiningOre());
 
             if (oreComponent.prefab.gameObject.activeSelf)
@@ -45,13 +46,10 @@ namespace Client
                 return;
             }
 
-            _animator.SetBool("isMining", false);
+            _oresEntityInZone.Remove(_ecsInfoMB.GetCurrentMiningOre());
 
-            _world = _ecsInfoMB.GetWorld();
-
-            _ecsInfoMB.SetCurrentMiningOre(-1);
-
-            _ecsInfoMB.DeactivateContextTool(_thisTool);
+            RetargetOre();
+            SwitchMiningTool();
         }
 
         // to do ay realize method ActivateContextToolPool() in EcsInfo
@@ -68,16 +66,12 @@ namespace Client
                 return;
             }
 
-            _animator.SetBool("isMining", true);
-
-            _world = _ecsInfoMB.GetWorld();
-
             var oreEcsInfo = other.gameObject.GetComponent<EcsInfoMB>();
 
-            _ecsInfoMB.SetCurrentMiningOre(oreEcsInfo.GetEntity());
-            _oreInZone++;
+            _oresEntityInZone.Add(oreEcsInfo.GetEntity());
 
-            _ecsInfoMB.ActivateContextTool(_thisTool);
+            RetargetOre();
+            SwitchMiningTool();
         }
 
         private void OnTriggerExit(Collider other)
@@ -92,15 +86,36 @@ namespace Client
                 return;
             }
 
-            _animator.SetBool("isMining", false);
+            _oresEntityInZone.Remove(_ecsInfoMB.GetCurrentMiningOre());
 
-            _world = _ecsInfoMB.GetWorld();
+            RetargetOre();
+            SwitchMiningTool();
+        }
 
-            _ecsInfoMB.SetCurrentMiningOre(-1);
-            _oreInZone--;
+        private void SwitchMiningTool()
+        {
+            if (_oresEntityInZone.Count > 0)
+            {
+                _animator.SetBool("isMining", true);
+                _ecsInfoMB.ActivateContextTool(_thisTool);
+            }
+            else
+            {
+                _animator.SetBool("isMining", false);
+                _ecsInfoMB.DeactivateContextTool(_thisTool);
+            }
+        }
 
-            
-            _ecsInfoMB.DeactivateContextTool(_thisTool);
+        private void RetargetOre()
+        {
+            if (_oresEntityInZone.Count > 0)
+            {
+                _ecsInfoMB.SetCurrentMiningOre(_oresEntityInZone[0]);
+            }
+            else
+            {
+                _ecsInfoMB.SetCurrentMiningOre(-1);
+            }
         }
     }
 }
