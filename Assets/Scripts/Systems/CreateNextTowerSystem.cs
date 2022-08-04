@@ -177,6 +177,8 @@ namespace Client
                 }
                 else // defence towers
                 {
+                    bool firstCreating = false;
+
                     ref var towerComp = ref _towerPool.Value.Get(eventEntity);
                     towerComp.Level++;
 
@@ -212,6 +214,8 @@ namespace Client
                     
                     if (!viewComp.GameObject)
                     {
+                        firstCreating = true;
+
                         viewComp.GameObject = GameObject.Instantiate(_state.Value.DefenseTowerStorage.GetTowerPrefabByID(_state.Value.DefenseTowers[towerIndex]), towerComp.Position, Quaternion.identity);
                         viewComp.ModelMeshFilter = viewComp.GameObject.transform.GetChild(1).GetComponent<MeshFilter>();
                         viewComp.Transform = viewComp.GameObject.transform;
@@ -351,11 +355,14 @@ namespace Client
                         viewComp.FieryExplosion = viewComp.TowerFirePoint.GetComponentInChildren<ParticleSystem>();
                     }
 
-                    targetableComponent.TargetEntity = -1;
-                    targetableComponent.TargetObject = null;
-                    targetableComponent.AllEntityInDetectedZone = new List<int>();
-                    targetableComponent.AllEntityInDamageZone = new List<int>();
-                    targetableComponent.EntitysInRangeZone = new List<int>();
+                    if (firstCreating)
+                    {
+                        targetableComponent.TargetEntity = -1;
+                        targetableComponent.TargetObject = null;
+                        targetableComponent.AllEntityInDetectedZone = new List<int>();
+                        targetableComponent.EntitysInMeleeZone = new List<int>();
+                        targetableComponent.EntitysInRangeZone = new List<int>();
+                    }
 
                     targetWeightComponent.Value = 10;
 

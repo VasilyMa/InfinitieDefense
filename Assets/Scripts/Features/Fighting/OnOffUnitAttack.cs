@@ -36,7 +36,7 @@ namespace Client
                 }
 
                 var entitysInDamageZone = new List<List<int>>();
-                entitysInDamageZone.Add(targetableComponent.AllEntityInDamageZone);
+                entitysInDamageZone.Add(targetableComponent.EntitysInMeleeZone);
                 entitysInDamageZone.Add(targetableComponent.EntitysInRangeZone);
 
                 bool targetInDamageZone = false;

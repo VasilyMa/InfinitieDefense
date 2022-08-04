@@ -30,7 +30,7 @@ public class DefenseTowerStorage : ScriptableObject
             ["1tower"] = new DefenseTower
             {
                 LevelTower = 1,
-                Radius = 6,
+                Radius = 7,
                 Damage = 15,
                 Cooldown = _commonCD,
                 TowerHealth = 200,
@@ -45,7 +45,7 @@ public class DefenseTowerStorage : ScriptableObject
             ["2tower"] = new DefenseTower
             {
                 LevelTower = 2,
-                Radius = 8,
+                Radius = 9,
                 Damage = 20,
                 Cooldown = _commonCD,
                 TowerHealth = 250,
@@ -60,7 +60,7 @@ public class DefenseTowerStorage : ScriptableObject
             ["3tower"] = new DefenseTower
             {
                 LevelTower = 3,
-                Radius = 10,
+                Radius = 11,
                 Damage = 25,
                 Cooldown = _commonCD,
                 TowerHealth = 300,
@@ -75,7 +75,7 @@ public class DefenseTowerStorage : ScriptableObject
             ["4tower"] = new DefenseTower
             {
                 LevelTower = 4,
-                Radius = 12,
+                Radius = 13,
                 Damage = 30,
                 Cooldown = _commonCD,
                 TowerHealth = 350,
@@ -90,7 +90,7 @@ public class DefenseTowerStorage : ScriptableObject
             ["5tower"] = new DefenseTower
             {
                 LevelTower = 5,
-                Radius = 14,
+                Radius = 15,
                 Damage = 50,
                 Cooldown = _commonCD,
                 TowerHealth = 400,

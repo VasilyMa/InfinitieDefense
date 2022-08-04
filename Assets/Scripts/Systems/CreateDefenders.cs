@@ -58,7 +58,7 @@ namespace Client {
                         targetableComponent.TargetEntity = -1;
                         targetableComponent.TargetObject = null;
                         targetableComponent.AllEntityInDetectedZone = new List<int>();
-                        targetableComponent.AllEntityInDamageZone = new List<int>();
+                        targetableComponent.EntitysInMeleeZone = new List<int>();
                         targetableComponent.EntitysInRangeZone = new List<int>();
 
                         damageComponent.Value = 10;

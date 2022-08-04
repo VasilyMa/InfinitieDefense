@@ -14,8 +14,6 @@ namespace Client
         readonly EcsPoolInject<OreComponent> _orePool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
 
-        private int _amount = 4;
-
         private string Ore;
         public void Init (EcsSystems systems)
         {
@@ -37,8 +35,6 @@ namespace Client
                 viewComponent.EcsInfoMB.SetEntity(oresEntity);
 
                 orePool.prefab = ore;
-                orePool.MaxAmount = _amount;
-                orePool.CurrentAmount = _amount;
                 orePool.IsEnable = false;
                 orePool.respawnTime = Random.Range(8, 16);
                 orePool.currentRespawnTime = orePool.respawnTime;
@@ -46,10 +42,16 @@ namespace Client
                 //orePool.cursor.SetActive(false);
                 GameObject oreModel = ore.transform.GetChild(0).gameObject;
                 orePool.OreParts = new GameObject[oreModel.transform.childCount];
-                for (int i = 0; i < oreModel.transform.childCount; i++)
+
+                var amountPieces = oreModel.transform.childCount;
+
+                for (int i = 0; i < amountPieces; i++)
                 {
                     orePool.OreParts[i] = oreModel.transform.GetChild(i).gameObject;
                 }
+
+                orePool.MaxAmount = amountPieces;
+                orePool.CurrentAmount = amountPieces; // to do ay find oreMining code and rewrite it
             }
         }
     }

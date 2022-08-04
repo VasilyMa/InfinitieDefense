@@ -51,7 +51,7 @@ namespace Client
                 targetableComponent.TargetObject = _viewPool.Value.Get(_state.Value.TowersEntity[0]).GameObject;
 
                 targetableComponent.AllEntityInDetectedZone = new List<int>();
-                targetableComponent.AllEntityInDamageZone = new List<int>();
+                targetableComponent.EntitysInMeleeZone = new List<int>();
                 targetableComponent.EntitysInRangeZone = new List<int>();
 
                 targetWeightComponent.Value = 5;

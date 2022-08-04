@@ -25,7 +25,7 @@ namespace Client {
                         oreComp.OreParts[i].SetActive(true);
                     }
                     oreComp.prefab.GetComponent<SphereCollider>().enabled = true;
-                    oreComp.CurrentAmount = 4;
+                    oreComp.CurrentAmount = oreComp.MaxAmount;
                     viewComponent.Animator.SetTrigger("Extract");
 
                     _filter.Pools.Inc1.Del(entity);

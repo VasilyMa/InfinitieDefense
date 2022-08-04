@@ -1821,6 +1821,10 @@ PrefabInstance:
       propertyPath: SleepingMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 31d5d8a465febd44691dfd3faa69bdb1, type: 2}
+    - target: {fileID: 4498999742524349726, guid: 218cf10fa47fea84fa2116fba828fee2, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218cf10fa47fea84fa2116fba828fee2, type: 3}
 --- !u!4 &4900265142843999748 stripped

@@ -29,7 +29,7 @@ namespace Client
                 ref var playerWeaponComponent = ref _playerWeaponPool.Value.Get(playerEntity);
                 ref var targetableComponent = ref _targetablePool.Value.Get(playerEntity);
                 ref var activateContextToolEventComponent = ref _activateContextToolEventPool.Value.Add(playerEntity);
-                targetableComponent.AllEntityInDamageZone.Clear();
+                targetableComponent.EntitysInMeleeZone.Clear();
 
                 // to do ay clear AllEnemyInDamageZone if weapon was changed
 

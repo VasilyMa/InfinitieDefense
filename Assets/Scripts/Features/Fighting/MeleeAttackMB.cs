@@ -62,7 +62,7 @@ namespace Client
             _targetablePool = _world.Value.GetPool<Targetable>();
 
             ref var targetableComponent = ref _targetablePool.Get(thisObjectEntity);
-            targetableComponent.AllEntityInDamageZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
+            targetableComponent.EntitysInMeleeZone.Add(other.GetComponent<EcsInfoMB>().GetEntity());
             _enemyInZone++;
 
             _ecsInfoMB.ActivateContextTool(_thisTool);
@@ -83,7 +83,7 @@ namespace Client
             _world = _ecsInfoMB.GetWorld();
             _targetablePool = _world.Value.GetPool<Targetable>();
             ref var targetableComponent = ref _targetablePool.Get(_ecsInfoMB.GetEntity());
-            targetableComponent.AllEntityInDamageZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
+            targetableComponent.EntitysInMeleeZone.Remove(other.GetComponent<EcsInfoMB>().GetEntity());
 
             _enemyInZone--;
 
@@ -92,7 +92,7 @@ namespace Client
                 _animator.SetBool("Melee", false);
             }
 
-            if (targetableComponent.AllEntityInDamageZone.Count > 0)
+            if (targetableComponent.EntitysInMeleeZone.Count > 0)
             {
                 _ecsInfoMB.ActivateContextTool(ContextToolComponent.Tool.bow); // rewrite if will be more long-range weapons
                 return;

@@ -135,7 +135,7 @@ namespace Client
             healthComponent.MaxValue = _state.Value.PlayerStorage.GetHealthByID(_state.Value.CurrentPlayerID);
             healthComponent.CurrentValue = healthComponent.MaxValue;
 
-            targetableComponent.AllEntityInDamageZone = new List<int>();
+            targetableComponent.EntitysInMeleeZone = new List<int>();
             targetableComponent.AllEntityInDetectedZone = new List<int>();
             targetableComponent.EntitysInRangeZone = new List<int>();
             targetableComponent.TargetEntity = -1;

@@ -39,11 +39,11 @@ namespace Client
                     continue;
                 }
 
-                if (targetableComponent.AllEntityInDamageZone.Count > 0)
+                if (targetableComponent.EntitysInMeleeZone.Count > 0)
                 {
-                    if (targetableComponent.TargetEntity != targetableComponent.AllEntityInDamageZone[0])
+                    if (targetableComponent.TargetEntity != targetableComponent.EntitysInMeleeZone[0])
                     {
-                        targetableComponent.TargetEntity = targetableComponent.AllEntityInDamageZone[0];
+                        targetableComponent.TargetEntity = targetableComponent.EntitysInMeleeZone[0];
                         targetableComponent.TargetObject = _viewPool.Value.Get(targetableComponent.TargetEntity).GameObject;
                         viewComponent.EcsInfoMB.SetTarget(targetableComponent.TargetEntity, targetableComponent.TargetObject);
                     }
@@ -52,7 +52,7 @@ namespace Client
                 var allDeadEntitys = new List<int>();
 
                 var DamageZones = new List<List<int>>();
-                DamageZones.Add(targetableComponent.AllEntityInDamageZone);
+                DamageZones.Add(targetableComponent.EntitysInMeleeZone);
                 DamageZones.Add(targetableComponent.EntitysInRangeZone);
 
                 bool targetInAnyDamageZone = false;
@@ -74,7 +74,7 @@ namespace Client
                     }
                 }
 
-                foreach (var entityInDamageZone in targetableComponent.AllEntityInDamageZone)
+                foreach (var entityInDamageZone in targetableComponent.EntitysInMeleeZone)
                 {
                     if (_deadPool.Value.Has(entityInDamageZone))
                     {
@@ -89,11 +89,11 @@ namespace Client
 
                 foreach (var deadEntity in allDeadEntitys)
                 {
-                    targetableComponent.AllEntityInDamageZone.Remove(deadEntity);
+                    targetableComponent.EntitysInMeleeZone.Remove(deadEntity);
                     targetableComponent.EntitysInRangeZone.Remove(deadEntity);
                 }
 
-                if (targetableComponent.EntitysInRangeZone.Count == 0 && targetableComponent.AllEntityInDamageZone.Count == 0)
+                if (targetableComponent.EntitysInRangeZone.Count == 0 && targetableComponent.EntitysInMeleeZone.Count == 0)
                 {
                     ResetTarget(ref targetableComponent, ref viewComponent);
                     continue;
@@ -101,9 +101,9 @@ namespace Client
 
                 if (!targetInAnyDamageZone)
                 {
-                    if (targetableComponent.AllEntityInDamageZone.Count > 0)
+                    if (targetableComponent.EntitysInMeleeZone.Count > 0)
                     {
-                        targetableComponent.TargetEntity = targetableComponent.AllEntityInDamageZone[0];
+                        targetableComponent.TargetEntity = targetableComponent.EntitysInMeleeZone[0];
                     }
                     else
                     {
@@ -116,9 +116,9 @@ namespace Client
 
                 if (targetableComponent.TargetEntity < 1)
                 {
-                    if (targetableComponent.AllEntityInDamageZone.Count > 0)
+                    if (targetableComponent.EntitysInMeleeZone.Count > 0)
                     {
-                        targetableComponent.TargetEntity = targetableComponent.AllEntityInDamageZone[0];
+                        targetableComponent.TargetEntity = targetableComponent.EntitysInMeleeZone[0];
                     }
                     else
                     {

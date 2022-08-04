@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using UnityEngine;
 
 namespace Client
 {
@@ -23,14 +24,16 @@ namespace Client
             {
                 ref var towerRecoveryEvent = ref _towerRecoveryPool.Value.Get(eventEntity);
 
-                if (_deadPool.Value.Has(eventEntity))
+                int towerEntity = towerRecoveryEvent.TowerEntity;
+
+                ref var healthComponent = ref _healthComponentPool.Value.Get(towerEntity);
+                ref var viewComponent = ref _viewPool.Value.Get(towerEntity);
+
+                if (healthComponent.CurrentValue >= healthComponent.MaxValue)
                 {
                     _towerRecoveryPool.Value.Del(eventEntity);
                     continue;
                 }
-
-                ref var healthComponent = ref _healthComponentPool.Value.Get(towerRecoveryEvent.TowerEntity);
-                ref var viewComponent = ref _viewPool.Value.Get(towerRecoveryEvent.TowerEntity);
 
                 healthComponent.CurrentValue += healthComponent.MaxValue * _healingPercentPerEvent;
 
@@ -42,7 +45,9 @@ namespace Client
                 viewComponent.Healthbar?.SetHealth(healthComponent.CurrentValue);
                 viewComponent.Healthbar?.UpdateHealth(healthComponent.CurrentValue);
 
-                DecreaseFireEffect(eventEntity);
+                DecreaseFireEffect(towerEntity);
+
+                TowerResurrection(towerEntity);
 
                 _towerRecoveryPool.Value.Del(eventEntity);
             }
@@ -53,6 +58,23 @@ namespace Client
             {
                 _firingEventPool.Value.Add(entity);
             }
+        }
+
+        private void TowerResurrection(in int entity)
+        {
+            if (!_deadPool.Value.Has(entity))
+            {
+                return;
+            }
+
+            _deadPool.Value.Del(entity);
+
+            ref var viewComponent = ref _viewPool.Value.Get(entity);
+
+            viewComponent.GameObject.layer = viewComponent.BaseLayer;
+
+            viewComponent.TowerWeapon?.SetActive(true);
+            viewComponent.TowerFirePoint?.SetActive(true);
         }
     }
 }
