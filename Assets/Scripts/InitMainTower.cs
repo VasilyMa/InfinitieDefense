@@ -25,7 +25,9 @@ namespace Client
         {
             var mainTowerEntity = _world.Value.NewEntity();
             _state.Value.EntityMainTower = mainTowerEntity;
-            string towerID = _state.Value.DefenseTowers[0];
+            string towerID = _state.Value.Saves.MainTowerLevel;
+            _state.Value.DefenseTowers[0] = towerID;
+            //string towerID = _state.Value.DefenseTowers[0];
             //_state.Value.CurrentTowerID = towerID;
             
             ref var mainTowerComp = ref _mainTowerPool.Value.Add(mainTowerEntity);

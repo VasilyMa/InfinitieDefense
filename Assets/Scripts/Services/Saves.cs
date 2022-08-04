@@ -27,8 +27,22 @@ namespace Client
         public SaveSettings Save = new SaveSettings();
         public string path;
         public string VersionGame;
+        public string MainTowerLevel;
+        public int MainTowerUpgrade;
         //методы сохранений...
         #region
+        public void SaveMainTowerUpgrade(int value)
+        {
+            MainTowerUpgrade = value;
+            Save.MainTowerUpgrade = MainTowerUpgrade;
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
+        public void SaveMainTower(string value)
+        {
+            MainTowerLevel = value;
+            Save.MainTowerLevel = MainTowerLevel;
+            File.WriteAllText(path, JsonUtility.ToJson(Save));
+        }
         public void SaveSounds(int value)
         {
             Sounds = value;
@@ -155,6 +169,8 @@ namespace Client
                 LVL = Save.LVL;
                 AllCoin = Save.AllCoin;
                 SceneNumber = Save.SceneNumber;
+                MainTowerLevel = Save.MainTowerLevel;
+                MainTowerUpgrade = Save.MainTowerUpgrade;
                 
                 PlayerID = Save.PlayerID;
                 CurrentWave = Save.CurrentWave;
@@ -192,7 +208,8 @@ namespace Client
                 Coin = 0;
                 PlayerUpgrade = 0;
                 TutorialStage = 0;
-
+                MainTowerLevel = "1tower";
+                MainTowerUpgrade = 0;
 
                 Save.Sounds = Sounds;
                 Save.Music = Music;
@@ -206,6 +223,8 @@ namespace Client
                 Save.Rock = Rock;
                 Save.Coin = Coin;
                 Save.TutorialStage = TutorialStage;
+                Save.MainTowerLevel = MainTowerLevel;
+                Save.MainTowerUpgrade = MainTowerUpgrade;
                 CreateTowerID();
 
                 File.WriteAllText(path, JsonUtility.ToJson(Save));
@@ -273,6 +292,8 @@ namespace Client
             public int Coin;
             public int TutorialStage;
             public string VersionGame;
+            public string MainTowerLevel;
+            public int MainTowerUpgrade;
         }
     }
 }

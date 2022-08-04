@@ -31,6 +31,7 @@ namespace Client
         readonly EcsPoolInject<DrawDetectionZoneEvent> _drawDetectionZoneEventPool = default;
         readonly EcsPoolInject<DestroyEffects> _destroyEffectsPool = default;
         readonly EcsFilterInject<Inc<UpgradePlayerPointComponent>> _filterPoint = default;
+        readonly EcsPoolInject<SavesEvent> _savePool = default;
         private string Model;
 
         public void Run(EcsSystems systems)
@@ -174,6 +175,7 @@ namespace Client
                         }
                     }
                     _circlePool.Value.Add(_world.Value.NewEntity());
+                    _savePool.Value.Add(_world.Value.NewEntity());
                 }
                 else // defence towers
                 {

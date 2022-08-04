@@ -47,6 +47,7 @@ namespace Client
         public int EnemiesWave;
         public int StaticEnemiesWave;
         public bool isWave;
+        public int MainTowerUpgrade;
 
         public float DelayBeforUpgrade = 0.8f;
         public float DelayAfterUpgrade = 0.5f;
@@ -78,6 +79,7 @@ namespace Client
             //InitSaves();
             InitDefenseTowers();
             InitDefenders();
+            TowersUpgrade[0] = Saves.MainTowerUpgrade;
         }
         public void InitDefenders()
         {
@@ -135,6 +137,7 @@ namespace Client
             if(towerIndex == 0)
             {
                 neededUpgradeValue = TowerStorage.GetUpgradeByID(DefenseTowers[towerIndex]);
+                Saves.SaveMainTowerUpgrade(TowersUpgrade[towerIndex]);
             }
             else
             {
@@ -144,6 +147,7 @@ namespace Client
             if(TowersUpgrade[towerIndex] == neededUpgradeValue)
             {
                 TowersUpgrade[towerIndex] = 0;
+                Saves.SaveMainTowerUpgrade(TowersUpgrade[0]);
                 ref var createNextTowerComp = ref World.GetPool<CreateNextTowerEvent>().Add(TowersEntity[towerIndex]);
                 createNextTowerComp.TowerIndex = towerIndex;
                 createNextTowerComp.Change = true;

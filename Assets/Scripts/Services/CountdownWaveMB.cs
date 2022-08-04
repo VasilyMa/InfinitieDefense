@@ -64,7 +64,7 @@ namespace Client
                         var tutorFilter = _world.Filter<TutorialComponent>().End();
                         foreach (var entity in tutorFilter)
                         {
-                            _tutorialnPool.Get(entity).TextHolder.GetComponentInChildren<Text>().text = "Kill all enemies";
+                            _tutorialnPool.Get(entity).TextHolder.GetComponentInChildren<Text>().text = "Defend the main tower";
                         }
                     }
                     var filter = _world.Filter<CountdownWaveComponent>().End();
