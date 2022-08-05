@@ -34,8 +34,14 @@ namespace Client {
                 //Time.timeScale = 0;
                 interfaceComp.winPanel.SetActive(true);
                 interfaceComp.killsCounter.SetActive(true);
-                if(SceneManager.GetActiveScene().buildIndex >= 2)
+                if (SceneManager.GetActiveScene().buildIndex >= 2)
+                {
                     interfaceComp.biomPanel.SetActive(true);
+                    interfaceComp.biomPanel.GetComponent<BiomPointsMB>().SetBackground(true);
+
+                }
+                
+                    
                 interfaceComp.winPanel.GetComponent<Animator>().SetTrigger("Win");
                 interfaceComp.continueButton.SetActive(false);
                 _killsPool.Value.Add(_world.Value.NewEntity());

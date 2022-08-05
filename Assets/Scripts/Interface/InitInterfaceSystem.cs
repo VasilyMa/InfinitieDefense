@@ -17,6 +17,7 @@ namespace Client {
             interfaceComp.killsCounter.SetActive(false); 
             interfaceComp.biomPanel = GameObject.Find("BiomPanel"); 
             interfaceComp.biomPanel.SetActive(false);
+            interfaceComp.biomPanel.GetComponent<BiomPointsMB>().SetBackground(false);
             if (SceneManager.GetActiveScene().buildIndex >= 2)
             {
                 interfaceComp.biomPanel.GetComponent<BiomPointsMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());

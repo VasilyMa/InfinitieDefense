@@ -75,7 +75,7 @@ namespace Client
             upgradeComponent.timerResources.ResourcesDrop(0);
             upgradeComponent.timerResources.Init(systems.GetWorld(), systems.GetShared<GameState>());
             if (_state.Value.PlayerStorage.GetIsLastByID(_state.Value.CurrentPlayerID))
-                upgradeComponent.point.SetActive(false);
+                upgradePlayerPointComponent.Point.SetActive(false);
 
             viewComponent.GameObject = PlayerGo;
             viewComponent.Rigidbody = PlayerGo.GetComponent<Rigidbody>();

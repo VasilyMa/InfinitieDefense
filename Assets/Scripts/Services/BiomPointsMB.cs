@@ -15,7 +15,7 @@ namespace Client
         [SerializeField] private Image _nextBiomImage;
         [SerializeField] private Transform _biomPointHolder;
         [SerializeField] private GameObject _biomPointPrefab;
-
+        [SerializeField] private GameObject _background;
         public void Init(EcsWorld world, GameState state)
         {
             _world = world;
@@ -48,6 +48,10 @@ namespace Client
                     image.color = _state.LevelsStorage.CompletePointColor;
                 }
             }
+        }
+        public void SetBackground(bool value)
+        {
+            _background.SetActive(value);
         }
     }
 }

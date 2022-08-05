@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
   BiomsSprites:
-  - {fileID: 21300000, guid: f187f16859d593e40b93e37bcb122cd0, type: 3}
-  - {fileID: 21300000, guid: 327644926f5188a4db6f6feea8186853, type: 3}
-  - {fileID: 21300000, guid: 2c302cdd68c5e6b408202b8b55229877, type: 3}
+  - {fileID: 21300000, guid: 49c5ab69aebfdd742b5ffa0e09677817, type: 3}
+  - {fileID: 21300000, guid: fb10ee37a08f78644b06970e16080be9, type: 3}
+  - {fileID: 21300000, guid: d87723d67eb88e4419fe02ac28d205ae, type: 3}
   StartBiomTypes: 010000000200000003000000
   StartBiomLevels: 020000000500000008000000
   CyrrentPointColor: {r: 1, g: 0.9788041, b: 0.32549024, a: 1}

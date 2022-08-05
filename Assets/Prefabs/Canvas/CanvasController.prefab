@@ -96,6 +96,7 @@ MonoBehaviour:
   _nextBiomImage: {fileID: 6747686936059236502}
   _biomPointHolder: {fileID: 9063293503953316677}
   _biomPointPrefab: {fileID: 650004867403043525, guid: 0b9558fb5ac2c90468de4a74997522a8, type: 3}
+  _background: {fileID: 3935553638886142356}
 --- !u!114 &8978929018958615194
 MonoBehaviour:
   m_ObjectHideFlags: 0

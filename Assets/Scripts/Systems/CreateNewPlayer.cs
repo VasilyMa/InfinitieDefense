@@ -90,7 +90,7 @@ namespace Client
                 levelPop.LevelPopUp.SetActive(true);
 
                 if (_state.Value.PlayerStorage.GetIsLastByID(_state.Value.CurrentPlayerID))
-                    upgradePointComp.point.SetActive(false);
+                    _filterPoint.Pools.Inc1.Get(entity).Point.SetActive(false);
 
                 viewComp.SkinnedMeshRenderer.sharedMesh = _state.Value.PlayerStorage.GetMeshByID(_state.Value.CurrentPlayerID);
                 foreach (var item in _timerPool.Value)
