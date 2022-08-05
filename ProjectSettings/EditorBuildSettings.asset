@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 9a6f71a9578b90544b46b436bda82526
+  - enabled: 1
     path: Assets/Scenes/Levels/0 - Tutorial - Iceland.unity
     guid: 2c69a111c29e5774ebc5da6d49894be8
   - enabled: 1

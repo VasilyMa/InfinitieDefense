@@ -25,6 +25,7 @@ namespace Client
         public WaveStorage WaveStorage;
         public EnemyConfig EnemyConfig;
         public ExplosionStorage ExplosionStorage;
+        public LevelsStorage LevelsStorage;
 
         public int RockCount = 0;
         public int CoinCount = 0;
@@ -48,13 +49,14 @@ namespace Client
         public int StaticEnemiesWave;
         public bool isWave;
         public int MainTowerUpgrade;
-
+        public float KillsCount;
         public float DelayBeforUpgrade = 0.8f;
         public float DelayAfterUpgrade = 0.5f;
+        public Biom CurrentBiom;
 
         public GameState(EcsWorld world, TowerStorage towerStorage, InterfaceStorage interfaceStorage, DropableItemStorage dropableItemStorage,
         PlayerStorage playerStorage, DefenseTowerStorage defenseTowerStorage, int towerCount, int towersInRow, float timeToNextWave, WaveStorage waveStorage,
-        EnemyConfig enemyConfig, ExplosionStorage explosionStorage)
+        EnemyConfig enemyConfig, ExplosionStorage explosionStorage, LevelsStorage levelConfig)
         {
             World = world;
             TowerStorage = towerStorage;
@@ -68,6 +70,7 @@ namespace Client
             WaveStorage = waveStorage;
             EnemyConfig = enemyConfig;
             ExplosionStorage = explosionStorage;
+            LevelsStorage = levelConfig;
             PlayerStorage.Init();
             TowerStorage.Init();
             DefenseTowerStorage.Init();
@@ -77,9 +80,11 @@ namespace Client
             PlayerExperience = Saves.PlayerUpgrade;
             isWave = true;
             //InitSaves();
-            InitDefenseTowers();
+            InitDefenseTowers();    
             InitDefenders();
+            InitBiom();
             TowersUpgrade[0] = Saves.MainTowerUpgrade;
+            KillsCount = 0;
         }
         public void InitDefenders()
         {
@@ -215,6 +220,42 @@ namespace Client
             }
             StaticEnemiesWave = EnemiesWave;
             Debug.Log($"Вражеские пидоры {EnemiesWave}");
+        }
+        public void InitBiom()
+        {
+            for (int b = 0; b < LevelsStorage.StartBiomLevels.Length; b++)
+            {
+                var biom = new Biom();
+                biom.StartBiomLevel = LevelsStorage.StartBiomLevels[b];
+                biom.BiomType = LevelsStorage.StartBiomTypes[b];
+                biom.BiomSprite = LevelsStorage.BiomsSprites[b];
+                if (b + 1 < LevelsStorage.StartBiomLevels.Length)
+                {
+                    biom.NextBiomSprite = LevelsStorage.BiomsSprites[b + 1];
+                }
+                else
+                {
+                    biom.NextBiomSprite = LevelsStorage.BiomsSprites[0];
+                }
+                if (b == 0 || (b > 0 && b < LevelsStorage.StartBiomLevels.Length - 1))
+                {
+                    int length = LevelsStorage.StartBiomLevels[b + 1] - LevelsStorage.StartBiomLevels[b];
+                    biom.BiomLevels = new List<int>();
+                    for (int i = 0; i < length; i++) biom.BiomLevels.Add(LevelsStorage.StartBiomLevels[b] + i);
+                }
+                else if (b == LevelsStorage.StartBiomLevels.Length - 1)
+                {
+                    int length = (SceneManager.sceneCountInBuildSettings - 1) - (LevelsStorage.StartBiomLevels[b] - 1);
+                    biom.BiomLevels = new List<int>();
+                    for (int i = 0; i < length; i++) biom.BiomLevels.Add(LevelsStorage.StartBiomLevels[b] + i);
+                }
+
+                LevelsStorage.Bioms = new List<Biom>();
+                LevelsStorage.Bioms.Add(biom);
+
+                if (biom.BiomLevels.Contains(SceneManager.GetActiveScene().buildIndex))
+                    CurrentBiom = biom;
+            }
         }
     }
 }

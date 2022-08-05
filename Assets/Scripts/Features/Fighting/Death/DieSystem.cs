@@ -59,6 +59,7 @@ namespace Client
                 if (_enemyPool.Value.Has(entity))
                 {
                     _state.Value.EnemiesWave--;
+                    _state.Value.KillsCount++;
                     ref var goldComp = ref _goldPool.Value.Add(_world.Value.NewEntity());
                     if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
                     ref var corpseComp = ref _corpsePool.Value.Add(entity);

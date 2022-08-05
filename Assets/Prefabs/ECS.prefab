@@ -53,7 +53,10 @@ MonoBehaviour:
   _defenseTowerStorage: {fileID: 11400000, guid: 730ddd42c49ede7499913fdd53ce9c8d, type: 2}
   _enemyConfig: {fileID: 11400000, guid: c3870e1e49f27004ca7c4e903c8aa465, type: 2}
   _explosionStorage: {fileID: 11400000, guid: 15346a461d1394d43a5af22d6e47bf21, type: 2}
-  _towerCount: 31
+  _levelConfig: {fileID: 11400000, guid: 4019288f0b1378a49befcea1273cead3, type: 2}
+  _towerCount: 3
+  _towersInRow: 2
+  _timeToNextWave: 10
 --- !u!114 &2135641420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,12 +70,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Waves:
-  - Encounters: 010000000200000003000000
-    MeleeEnemyInShip: 010000000000000002000000020000000200000002000000
-    RangeEnemyInShip: 000000000100000002000000020000000200000002000000
-  - Encounters: 010000000200000003000000
-    MeleeEnemyInShip: 050000000000000005000000000000000500000005000000
-    RangeEnemyInShip: 000000000500000000000000050000000000000005000000
+  - Encounters: 0200000002000000
+    MeleeEnemyInShip: 01000000010000000000000000000000
+    RangeEnemyInShip: 00000000000000000100000001000000
+  - Encounters: 0100000001000000
+    MeleeEnemyInShip: 0100000002000000
+    RangeEnemyInShip: 0200000001000000
 --- !u!114 &465355375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,8 +90,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radiuses:
   - 10
-  - 15
-  - 20
-  _count: 6
+  _count: 4
   _boxSize: {x: 5, y: 2, z: 5}
   _angleOffset: 90
