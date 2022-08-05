@@ -13,7 +13,7 @@ namespace Client
         private EcsWorld _world;
         private GameState _state;
         private float curentKills;
-        private float _time = 2;
+        private float _time;
         public void Init(EcsWorld world, GameState state)
         {
             _world = world;
@@ -27,7 +27,7 @@ namespace Client
         }
         void Kills()
         {
-            curentKills += Time.deltaTime * 5;
+            curentKills += Time.deltaTime * 3;
             if (curentKills > _state.KillsCount + 1)
             {
                 var filter = _world.Filter<KillsCountComponent>();

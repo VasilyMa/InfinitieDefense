@@ -8,7 +8,7 @@ namespace Client
     {
         readonly EcsWorldInject _world = default;
         readonly EcsSharedInject<GameState> _state = default;
-        readonly EcsFilterInject<Inc<HealthComponent, ViewComponent>, Exc<DeadTag, InactiveTag>> _unitsFilter = default;
+        readonly EcsFilterInject<Inc<HealthComponent, ViewComponent, DieEvent>, Exc<DeadTag, InactiveTag>> _unitsFilter = default;
         readonly EcsFilterInject<Inc<HealthComponent, ViewComponent, EnemyTag>, Exc<DeadTag, InactiveTag>> _unitsEnemiesFilter = default;
         readonly EcsPoolInject<HealthComponent> _healthPool = default;
         readonly EcsPoolInject<ViewComponent> _viewPool = default;
@@ -123,6 +123,7 @@ namespace Client
                 DeactivateTool(entity);
 
                 ActivateDestroyExplosion(entity);
+                _unitsFilter.Pools.Inc3.Del(entity);
             }
         }
 

@@ -22,6 +22,7 @@ namespace Client
         readonly EcsPoolInject<DamagePopupEvent> _popupEvent = default;
         readonly EcsPoolInject<VibrationEvent> _vibrationPool = default;
         readonly EcsPoolInject<FiringEvent> _firingEventPool = default;
+        readonly EcsPoolInject<DieEvent> _diePool = default;
 
         public void Run (EcsSystems systems)
         {
@@ -50,6 +51,9 @@ namespace Client
 
                 healthPointComponent.CurrentValue -= damagingEventComponent.DamageValue;
                 viewComp.Healthbar.UpdateHealth(healthPointComponent.CurrentValue);
+
+                if (healthPointComponent.CurrentValue <= 0)
+                    DieEvent(damagingEventComponent.TargetEntity);
 
                 GameObject popup = null;
                 bool popupIsOver = true;
@@ -92,12 +96,16 @@ namespace Client
             }
         }
 
-        private void IncreaseFireEffect(in int entity)
+        private void IncreaseFireEffect(int entity)
         {
             if (_destroyEffectsPool.Value.Has(entity) && !_firingEventPool.Value.Has(entity))
             {
                _firingEventPool.Value.Add(entity);
             }
+        }
+        private void DieEvent(int entity)
+        {
+            _diePool.Value.Add(entity);
         }
     }
 }
