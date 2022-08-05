@@ -131,6 +131,7 @@ namespace Client
             int circleRadiusLevel = 0;
             int angleOffset = 90;
             int towerCount = 0;
+            _defenderPool.Value.Add(_world.Value.NewEntity());
             for (int i = 0; i < _state.Value.TowersEntity.Length;i++)
             {
                 if(i == 0) _state.Value.TowersEntity[i] = mainTowerEntity;
