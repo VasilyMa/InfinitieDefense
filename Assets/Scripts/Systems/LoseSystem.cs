@@ -16,10 +16,7 @@ namespace Client {
                 Time.timeScale = 0;
                 interfaceComp.losePanel.SetActive(true);
                 interfaceComp.losePanel.GetComponent<Animator>().SetTrigger("Lose");
-
-
-
-                _loseEventPool.Value.Del(entity);
+                _loseFilter.Pools.Inc1.Del(entity);
             }
         }
     }

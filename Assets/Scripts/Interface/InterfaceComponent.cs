@@ -11,6 +11,8 @@ namespace Client {
         public GameObject waveCounter;
         public GameObject countdownWave;
         public GameObject continueButton;
+        public GameObject killsCounter;
+        public GameObject biomPanel;
         public FloatingJoystick _joystick;
         public Transform _joystickPoint;
         public Transform _joysticKCenter;

@@ -107,19 +107,7 @@ namespace Client {
         void OnClickNextLevel(in EcsUguiClickEvent evt)
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            int index = 0;
-            if (SceneManager.GetActiveScene().buildIndex + 1 > SceneManager.sceneCountInBuildSettings - 1)
-            {
-                index = 2;
-            }
-            else
-            {
-                index = SceneManager.GetActiveScene().buildIndex + 1;
-            }
-            _state.Value.Saves.SaveSceneNumber(index);
-            _state.Value.Saves.SaveLevel(_state.Value.Saves.LVL + 1);
-            SceneManager.LoadScene(index);
+            SceneManager.LoadScene(_state.Value.Saves.SceneNumber);
         }
         [Preserve]
         [EcsUguiClickEvent(Idents.Ui.Retry, Idents.Worlds.Events)]

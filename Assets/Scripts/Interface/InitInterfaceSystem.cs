@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Unity.Ugui;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 namespace Client {
     sealed class InitInterfaceSystem : IEcsInitSystem {
 
@@ -12,7 +13,16 @@ namespace Client {
             state.EntityInterface = entity;
 
             ref var interfaceComp = ref world.GetPool<InterfaceComponent>().Add(entity);
-
+            interfaceComp.killsCounter = GameObject.FindObjectOfType<KillCounterMB>().gameObject;
+            interfaceComp.killsCounter.SetActive(false); 
+            interfaceComp.biomPanel = GameObject.Find("BiomPanel"); 
+            interfaceComp.biomPanel.SetActive(false);
+            if (SceneManager.GetActiveScene().buildIndex >= 2)
+            {
+                interfaceComp.biomPanel.GetComponent<BiomPointsMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
+                interfaceComp.biomPanel.GetComponent<BiomPointsMB>().InitBiomPoints();
+            }
+            interfaceComp.killsCounter.GetComponent<KillCounterMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());
             interfaceComp.continueButton = GameObject.Find("Continue");
             interfaceComp.continueButton.SetActive(false);
             interfaceComp.resourcePanel = GameObject.Find("ResourcesPanel");
@@ -28,6 +38,7 @@ namespace Client {
             interfaceComp._joysticKCenter = joystick.transform.GetChild(0).transform;
             interfaceComp.gamePanel = GameObject.Find("GamePanel");
             interfaceComp.gamePanel.SetActive(true);
+            
             //interfaceComp.progressbar = GameObject.Find("LevelProgress");
             //interfaceComp.progressbar.GetComponent<ProgressBarMB>().SetMaxAmount(state.WaveStorage.GetAllEnemies());
             //interfaceComp.progressbar.GetComponent<ProgressBarMB>().Init(systems.GetWorld(), systems.GetShared<GameState>());

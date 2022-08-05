@@ -26,8 +26,11 @@ namespace Client {
         public int Coin;
         public int TutorialStage;
         public string VersionGame;
+        public string MainTowerLevel;
+        public int MainTowerUpgrade;
         public SaveSettings Save = new SaveSettings();
         private string path;
+        
         public void Start()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -52,6 +55,8 @@ namespace Client {
                     Rock = Save.Rock;
                     Coin = Save.Coin;
                     PlayerUpgrade = Save.PlayerUpgrade;
+                    MainTowerLevel = Save.MainTowerLevel;
+                    MainTowerUpgrade = Save.MainTowerUpgrade;
                     if (Save.TutorialStage == 12)
                         SceneManager.LoadScene(Save.SceneNumber);
                     else
@@ -84,6 +89,8 @@ namespace Client {
                     Coin = Save.Coin;
                     PlayerUpgrade = 0;
                     TutorialStage = 0;
+                    MainTowerLevel = "1tower";
+                    MainTowerUpgrade = 0;
                     VersionGame = Application.version;
 
                     Save.Sounds = Sounds;
@@ -99,6 +106,8 @@ namespace Client {
                     Save.VersionGame = VersionGame;
                     Save.TutorialStage = TutorialStage;
                     Save.PlayerUpgrade = PlayerUpgrade;
+                    Save.MainTowerLevel = MainTowerLevel;
+                    Save.MainTowerUpgrade = MainTowerUpgrade;
                     File.WriteAllText(path, JsonUtility.ToJson(Save));
                     SceneManager.LoadScene(Save.SceneNumber);
                 }
@@ -118,6 +127,8 @@ namespace Client {
                 Coin = 0;
                 PlayerUpgrade = 0;
                 TutorialStage = 0;
+                MainTowerLevel = "1tower";
+                MainTowerUpgrade = 0;
                 VersionGame = Application.version;
 
                 Save.Sounds = Sounds;
@@ -133,7 +144,8 @@ namespace Client {
                 Save.Coin = Coin;
                 Save.TutorialStage = TutorialStage;
                 Save.VersionGame = VersionGame;
-
+                Save.MainTowerLevel = MainTowerLevel;
+                Save.MainTowerUpgrade = MainTowerUpgrade;
                 File.WriteAllText(path, JsonUtility.ToJson(Save));
                 SceneManager.LoadScene(Save.SceneNumber);
             }    
@@ -159,5 +171,7 @@ namespace Client {
         public int Coin;
         public int TutorialStage;
         public string VersionGame;
+        public string MainTowerLevel;
+        public int MainTowerUpgrade;
     }
 }
