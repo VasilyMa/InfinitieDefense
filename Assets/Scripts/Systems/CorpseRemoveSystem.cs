@@ -10,8 +10,8 @@ namespace Client {
         public void Run (EcsSystems systems) {
             foreach (var entity in _filterCorpse.Value)
             {
-                ref var viewComp = ref _viewPool.Value.Get(entity);
                 ref var corpse = ref _corpsePool.Value.Get(entity);
+                ref var viewComp = ref _viewPool.Value.Get(corpse.Entity);
                 if (corpse.timer > 0)
                 {
                     corpse.timer -= Time.deltaTime;
@@ -24,7 +24,6 @@ namespace Client {
                 {
                     corpse.timer = 0;
                     viewComp.GameObject.SetActive(false);
-                    //GameObject.Destroy(viewComp.GameObject);
                     _filterCorpse.Pools.Inc1.Del(entity);
                 }
             }

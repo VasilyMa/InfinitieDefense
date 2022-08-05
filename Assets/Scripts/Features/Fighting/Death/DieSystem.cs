@@ -55,7 +55,10 @@ namespace Client
                     viewComponent.Animator.SetTrigger("Die");
                     viewComponent.Animator.SetLayerWeight(1, 0);
                 }
-
+                if (_playerPool.Value.Has(entity))
+                {
+                    //_activateContextToolPool
+                }
                 if (_enemyPool.Value.Has(entity))
                 {
                     _state.Value.EnemiesWave--;
@@ -64,6 +67,7 @@ namespace Client
                     if (viewComponent.Transform) goldComp.Position = viewComponent.Transform.position;
                     ref var corpseComp = ref _corpsePool.Value.Add(entity);
                     corpseComp.timer = 5f;
+                    corpseComp.Entity = entity;
                     interfaceComponent._waveCounter.GetComponent<CounterMB>().sliders[_state.Value.GetCurrentWave()].value = (float)_state.Value.EnemiesWave / (float)_state.Value.StaticEnemiesWave; 
                     if (_state.Value.EnemiesWave == 0 && _state.Value.Saves.TutorialStage == 12 && _state.Value.GetCurrentWave() != _state.Value.WaveStorage.Waves.Count)
                     {
@@ -137,7 +141,7 @@ namespace Client
             viewComponent.TowerFirePoint.SetActive(false);
         }
 
-        private void DeactivateTool(in int entity)
+        private void DeactivateTool(int entity)
         {
             if (!_contextToolPool.Value.Has(entity))
             {

@@ -19,14 +19,15 @@ namespace Client
         readonly EcsPoolInject<CircleComponent> _circlePool = default;
         readonly EcsPoolInject<CreateNextTowerEvent> _createNextTowerPool = default;
         readonly EcsPoolInject<DestroyEffects> _destroyEffectsPool = default;
+        readonly EcsPoolInject<CreateDefenderEvent> _defenderEventPool = default;
         private float Angle = 0;
 
         public void Init (EcsSystems systems)
         {
             var mainTowerEntity = _world.Value.NewEntity();
             _state.Value.EntityMainTower = mainTowerEntity;
-            string towerID = _state.Value.Saves.MainTowerLevel;
-            _state.Value.DefenseTowers[0] = towerID;
+            string MainTowerID = _state.Value.Saves.MainTowerLevel;
+            _state.Value.DefenseTowers[0] = MainTowerID;
             //string towerID = _state.Value.DefenseTowers[0];
             //_state.Value.CurrentTowerID = towerID;
             
@@ -51,13 +52,13 @@ namespace Client
             }
 
             ref var radiusComp = ref _radiusPool.Value.Add(mainTowerEntity);
-            radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(towerID);
+            radiusComp.Radius = _state.Value.TowerStorage.GetRadiusByID(MainTowerID);
 
             ref var healthComponent = ref _healthPool.Value.Add(mainTowerEntity);
-            healthComponent.MaxValue = _state.Value.TowerStorage.GetHealthByID(towerID);
+            healthComponent.MaxValue = _state.Value.TowerStorage.GetHealthByID(MainTowerID);
             healthComponent.CurrentValue = healthComponent.MaxValue;
 
-            var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID(towerID), Vector3.zero, Quaternion.identity);
+            var mainTower = GameObject.Instantiate(_state.Value.TowerStorage.GetTowerPrefabByID("1tower"), Vector3.zero, Quaternion.identity);
             var upgradePoint = GameObject.Instantiate(_state.Value.InterfaceStorage.UpgradePointPrefab, new Vector3(0, 0.1f, -2.5f), Quaternion.identity); // to do del magic number
             var upgradeInfo = upgradePoint.transform.GetChild(0).gameObject.GetComponent<UpgradeCanvasMB>();
             var resourcesTimer = upgradePoint.transform.GetChild(3).GetComponent<TimerResourcesMB>();
@@ -84,6 +85,7 @@ namespace Client
             ref var viewComponent = ref _viewPool.Value.Add(mainTowerEntity);
             viewComponent.GameObject = mainTower;
             viewComponent.ModelMeshFilter = viewComponent.GameObject.transform.GetChild(2).GetComponent<MeshFilter>();
+            viewComponent.ModelMeshFilter.mesh = _state.Value.TowerStorage.GetTowerMeshByID(MainTowerID);
             viewComponent.Transform = mainTower.transform;
             Angle = 0;
 
@@ -131,7 +133,9 @@ namespace Client
             int circleRadiusLevel = 0;
             int angleOffset = 90;
             int towerCount = 0;
-            _defenderPool.Value.Add(_world.Value.NewEntity());
+            if(_state.Value.Saves.MainTowerLevel == "9tower")
+                upgradePoint.SetActive(false);
+            _defenderEventPool.Value.Add(_world.Value.NewEntity());
             for (int i = 0; i < _state.Value.TowersEntity.Length;i++)
             {
                 if(i == 0) _state.Value.TowersEntity[i] = mainTowerEntity;
@@ -178,8 +182,8 @@ namespace Client
                     
 
                     upgradeInfo.Init(systems.GetWorld(), systems.GetShared<GameState>());
-                    upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
-                    upgradeInfo.SetMaxAmount(_state.Value.DefenseTowerStorage.GetUpgradeByID(towerID));
+                    upgradeInfo.UpdateUpgradePoint(0, _state.Value.DefenseTowerStorage.GetUpgradeByID("1tower"));
+                    upgradeInfo.SetMaxAmount(_state.Value.DefenseTowerStorage.GetUpgradeByID("1tower"));
                     upgradePointMB.TowerIndex = i;
                     upgradeTowerComponent.Index = upgradePointMB.TowerIndex;
                     viewComp.UpgradeParticleSystem = upgradePoint.transform.GetChild(1).GetComponent<ParticleSystem>();
